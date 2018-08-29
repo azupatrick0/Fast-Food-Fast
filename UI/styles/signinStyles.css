@@ -1,0 +1,273 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+    color: rgba(243, 38, 38, 0.7);
+    cursor: pointer;
+}
+
+.app-description {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10% 5% 0 5%;
+    font-size: 25px;
+    color: black;
+    width: 80%;
+    margin: 0 auto; 
+    border-radius: 5px; 
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.app-description a {
+    font-size: 50px;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+body p {
+    color: white;
+    font-size: 40px;
+    font-family: cursive;
+}
+
+button {
+    background-color: red;
+    color: white;
+    border-radius: 5px;
+    width: 10%;
+    height: 45px;
+    margin-left: 38%;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(3px);
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.7;
+    border: 0;
+    color: white;
+}
+
+.feedback {
+    display: none;
+    background-color: plum;
+    padding: 0.3em 0 0 0.4em;
+    border-radius: 3px;
+    height: 5vh;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.feedback2 {
+    display: none;
+    background-color: rgb(236, 83, 236);
+    position: relative;
+    top: 1em;
+    padding: 0.3em 0 0 0.4em;
+    border-radius: 3px;
+    height: 5vh;
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.flex {
+    display: flex;
+}
+
+form {
+    margin-left: 10%;
+}
+
+input {
+    height: 47px;
+    width: 100%;
+    outline: none;
+    border: 1.5px solid rgba(0,0,255,0.3);
+    text-overflow: ellipsis;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    border-radius: 5px;
+}
+
+input:focus {
+    box-shadow: 1px 0px 6px 2px rgba(116, 116, 199, 0.5);
+}
+
+p {
+    font-size: 20px;
+}
+
+.slide-signin {
+    background: url('../images/fast-food-fast-1.png') no-repeat -330px -180px;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 100vh; 
+    width: 100%; 
+}
+
+.slide-signin p { 
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding: 12% 0 0 8%; 
+    margin: 0;
+}
+
+.signin-box {
+    background-color: rgb(255, 255, 255);
+    padding: 0 2em 0 0;
+    width: 80%;
+    margin: 0;  
+}
+
+.signin-box p {
+    color: black;
+}
+
+.signin-properties {
+    padding: 0;
+}
+
+.signin-properties p {
+    font-size: 23px; 
+}
+
+.signin-properties a:hover {
+    opacity: 0.8;
+}
+
+.signin {
+    margin-left: 10%;
+    height: 45px;
+    width: 90%;
+    outline: none;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;  
+}
+
+sup {
+    font-size: 18px;
+}
+
+
+/* High resolution tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+    .app-description a {
+        font-size: 40px;
+    }
+
+    .slide-signin {
+        background: url('../images/fast-food-fast-1.png') no-repeat -220px -130px;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100vh; 
+        width: 100%; 
+    }
+
+    sup {
+        font-size: 16px;
+    }
+    
+}
+/*Low resolution Tablets*/
+@media (min-width: 480px) and (max-width: 767px) {
+    
+    .app-description {
+        padding: 1% 5% 1% 5%;
+        font-size: 20px;
+        background-color: unset;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+    } 
+
+    .app-description a {
+        font-size: 30px;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .slide-signin {
+        background: url('../images/fast-food-fast-1.png') no-repeat center;
+        background-size: cover;
+        height: 100vh; 
+        width: 100%; 
+    }
+
+    .signin-box {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 0 2em 2em 0;
+        width: 80%;
+        margin: 0 auto; 
+        border-radius: 5px; 
+    }
+
+    sup {
+        font-size: 13px;
+    }
+    
+}
+/*SmartPhones*/
+@media (min-width: 1px) and (max-width: 479px) {
+    .app-description {
+        padding: 1% 5% 1% 5%;
+        font-size: 18px;
+        color: white;
+        background-color: unset;
+        font-family: Arial, Helvetica, sans-serif;
+        margin: 0;
+    } 
+
+    .app-description a {
+        font-size: 28px;
+    }
+
+    .feedback, .feedback2 {
+        height: 10vh;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .slide-signin {
+        background: url('../images/fast-food-fast-1.png') no-repeat center;
+        background-size: cover;
+        height: 100vh; 
+        width: 100%; 
+    }
+
+    .signin-box {
+        background-color: rgba(255, 255, 255, 0.5);
+        padding: 0 2em 1em 0;
+        width: 80%;
+        margin: 0 auto; 
+        border-radius: 5px;
+    }
+
+    .signin-properties p{
+        font-size: 20px;
+    }
+
+    sup {
+        font-size: 11px;
+    }
+    
+}
