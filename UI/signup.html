@@ -1,0 +1,58 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Fast-Food-Fast | Sign Up
+    </title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/signupStyles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="slide-signup flex">
+
+        <div class="app-description">
+            <a href="index.html">
+                <strong>Fast-Food-Fast<sup>TM</sup></strong>
+            </a>
+            <br/>
+            <br/> Fast-Food-Fast​ is a food delivery service app for a restaurant
+        </div>
+
+        <div class="signup-box">
+            <div class="signup-properties">
+                <p>Sign up to order for food easily, no matter where you are</p>
+            </div>
+            <br/>
+
+            <form action="#" method="POST" class="form">
+                <input type="text" class="signupName" name="signupName" placeholder="Name" />
+                <br/><br/>
+                <input type="email" class="signupEmail" name="signupEmail" placeholder="Email" />
+                <span class="feedback"></span>
+                <br/><br/>
+                <input type="password" class="signupPassword" name="signupPassword" placeholder="Password" />
+                <span class="feedback2"></span>
+                <br/><br/>
+            </form>
+            <button class="signup" onclick="redirect('dashboard.html')">Sign Up</button>
+
+            <div class="signup-properties">
+                <p> Already have an account?
+                    <a href="signin.html">Sign in</a>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="./scripts/signupScript.js"></script>
+
+</body>
+
+</html>
