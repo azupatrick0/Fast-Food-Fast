@@ -1,0 +1,124 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Fast-Food-Fast | A food delivery service app for a restaurant
+    </title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/indexStyles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h1>
+                <div class="nav-bar">
+                    <a href="index.html" class="site-name">
+                        <img src="images/ffflogo.png" alt="ffflogo" class="logo"/> <strong>Fast-Food-Fast</strong>
+                    </a>
+                    <a href="signup.html" class="order">Order a meal</a>
+                    <a href="signup.html" class="history">History</a>
+                    <button onclick="showLocation('signin.html')" class="login">LOGIN</button>
+                    <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
+                    <div class="tab-modal">
+                        <div class="tab-modal-link">
+                            <a href="orders.html">Order a meal</a>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <a href="history.html">History</a>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <a href="signin.html">Sign in</a>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+
+            </h1>
+        </nav>
+
+    </header>
+
+    <div class="slide0">
+        <div class="blur"></div>
+        <p>
+                Fast-Food-Fast​ is a <br/>food delivery service app<br/> for a restaurant
+        </p>
+        <br/>
+        <br/>
+        <button class="get-started" onclick="showLocation('signup.html')">
+            Get Started
+        </button><br/>
+        <button class="scroll-down-btn" onclick="scrollDown()">&#709</button>
+    </div>
+
+    <div class="slide1">
+        <p>
+            <span class="centre"><strong>How it Works</strong></span><br/><br/>
+            <div class="flex">
+                <div class="flex-items">
+                    <img src="images/place-order.png" alt="place-order"/><br/>
+                    <strong><span class="text-big">Place your order</strong></span><br/>
+                    <span class="text-small">With Fast-Food-Fast <br/> you can place your food order online,<br/> and receive it wherever you wish.</span>
+                </div>
+                <div class="flex-items">
+                    <img src="images/money.png" alt="money"/><br/>
+                    <span class="text-big"><strong>Pay on Delivery</h1></strong></span><br/>
+                    <span class="text-small">With Fast-Food-Fast <br/>you can pay on delivery,<br/> no debit card? no problem.</span>
+                </div>
+                <div class="flex-items">
+                    <img src="images/fruit.png" alt="fruit"/><br/>
+                    <span class="text-big"><strong>Enjoy your meal</strong></span><br/>
+                    <span class="text-small">With your meal delivered, <br/> you can now enjoy <br/> your meal.</span>
+                </div>
+            </div>
+        </p>
+        <br/>
+        <button class="get-started middle" onclick="showLocation('signup.html')">
+            Get Started
+        </button>
+    </div>
+
+    <div class="slide2">
+            <p>
+                <span class="centre"><strong>Our Popular Meals</strong></span><br/><br/>
+                <div class="flex">
+                    <div class="flex-items">
+                        <img src="images/food1.jpg" alt="place-order" class="img-big"/><br/>
+                        <strong><span class="text-big">Fruttie</strong></span><br/>
+                    </div>
+                    <div class="flex-items">
+                        <img src="images/food2.png" alt="money" class="img-big"/><br/>
+                        <span class="text-big"><strong>Sweet Burger</h1></strong></span><br/>
+                    </div>
+                    <div class="flex-items">
+                        <img src="images/food3.png" alt="fruit" class="img-big"/><br/>
+                        <span class="text-big"><strong>Veggie</strong></span><br/>
+                    </div>
+                </div>
+            </p>
+            <br/>
+            <button class="get-started middle" onclick="showLocation('signup.html')">
+                Get Started
+            </button>
+        </div>
+
+    <footer>
+        <strong>&copy; 2018 Fast-Food-Fast.</strong><a class="up-arrow" onclick="scrollToTop()">&#11014</a>
+    </footer>
+
+    <script src="./scripts/indexScript.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,594 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+    color: rgba(243, 38, 38, 0.7);
+    cursor: pointer;
+}
+
+.blur {
+    position: absolute;
+    z-index: -1;
+    background-color: rgba(0, 255, 255, 0.45);
+    height: 100vh;
+    width: 100%;
+    margin: -1.3em 0 0 0;
+    padding: 0;
+}
+
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: url('../images/fast-food-fast-1.png') no-repeat 0 -15em;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body p {
+    color: white;
+    font-size: 40px;
+    font-family: cursive;
+}
+
+button {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    border-radius: 5px;
+    width: 10%;
+    height: 45px;
+    margin-left: 38%;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    cursor: pointer;
+}
+
+button:active {
+    transform: translateY(3px);
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.7;
+    border: 0;
+    color: white;
+}
+
+.centre {
+    margin-left: 34%;
+    color: red;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-items {
+    margin-left: 8%;
+}
+
+.flex-items p {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+    background-color: white;
+    position: absolute;
+    left: 0;
+    height: 10vh;
+    width: 100%;
+    padding-top: 20px;
+}
+
+form {
+    margin-left: 10%;
+}
+
+.get-started {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    border-radius: 5px;
+    width: 20%;
+    height: 45px;
+    margin-left: 8%;
+    outline: none;
+    font-size: 20px;
+    border: 0;
+}
+
+.hamburger {
+    display: none;
+}
+
+.history {
+    font-size: 20px;
+    margin-left: 3%;
+    color: white;
+}
+
+.history:hover {
+    background-color: red;
+    padding: 0.3em;
+    color: white;
+}
+
+img {
+    height: 80px;
+    width: 6em;
+}
+
+.img-big {
+    height: 400px;
+    width: 17em;
+    border-radius: 5px;
+    transition: 0.5s;
+}
+
+.img-big:hover {
+    width: 19em;
+}
+
+.logo {
+    height: 25px;
+    width: 3%;
+}
+
+.middle {
+    margin-left: 39%;
+}
+
+.nav-bar {
+    font-size: 14px;
+    color: red;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 10vh;
+    width: 100%;
+    padding: 0.44em 0 1.25em 0.44em;
+}
+
+.nav-bar button{
+    margin-left: 3%;
+}
+
+.order {
+    margin-left: 35%;
+    font-size: 20px;
+    color: white;
+}
+
+.order:hover {
+    background-color: red;
+    color: white;
+    padding: 0.3em;
+}
+
+p {
+    font-size: 20px;
+}
+
+.scroll-down-btn {
+    background-color: rgb(255, 255, 255);
+    color: rgba(99, 87, 87, 0.7);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 35px;
+    width: 6%;
+    min-height: 10vh;
+    border-radius: 100%;
+    opacity: 0.9;
+    margin: 10% 0 0 80%;
+}
+
+.scroll-down-btn:hover {
+    color: black;
+}
+
+.site-name {
+    font-size: 24px;
+}
+
+.slide0 {
+    background: url('../images/site_image.png') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 90vh; 
+    width: 100%; 
+}
+
+.slide0 p { 
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding: 12% 0 0 8%; 
+    margin: 0;
+}
+
+.slide1 {
+    background-color: white;
+    height: 100vh; 
+    width: 100%;
+    margin-top: 2.8em; 
+}
+
+
+.slide1 .flex-items {
+    margin-left: 9%;
+}
+
+.slide1 p { 
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding: 8% 0 0 8%;
+    color:black; 
+    margin: 0;
+}
+
+.slide2 {
+    background-color: rgba(0, 255, 255, 0.9);
+    height: 50em; 
+    width: 100%;   
+}
+
+.slide2 .flex {
+    margin: 0 5% 0 1%;
+}
+
+.slide2 .flex-items {
+    margin-left: 5%;
+
+}
+
+.slide2 p { 
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding: 2% 0 0 8%;  
+    margin: 0; 
+    color:black; 
+}
+
+.tab-modal {
+    display: none;
+}
+
+.text-big {
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: red;
+}
+
+.text-small {
+    font-size: 17px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.up-arrow {
+    position: absolute;
+    right: 2em;
+    bottom: 0.1em;
+    font-size: 50px;
+    color: rgba(99, 87, 87, 0.7);
+}
+
+
+/* High resolution tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 29%;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    .history, .login, .order {
+        display: none;
+    }
+
+    .img-big {
+        height: 400px;
+        width: 13em;
+        border-radius: 5px;
+        transition: 0.5s;
+    }
+    
+    .img-big:hover {
+        width: 14em;
+    }
+    
+    .middle {
+        margin-left: 40%;
+    }
+
+    .scroll-down-btn {
+        display: none;
+    }
+
+    .slide1 {
+        margin-top: 0; 
+    }
+
+    .slide1 .flex-items {
+        margin-left: 3%;
+    }
+        
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        background-color: red;
+        padding: 0.2em;
+    }
+    
+}
+
+/*Low resolution Tablets*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 20%;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .get-started {
+        width: 40%;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    .history, .login, .order {
+        display: none;
+    }
+   
+    .logo {
+        width: 6%;
+    }
+        
+    .middle {
+        margin-left: 32%;
+    }
+
+    .scroll-down-btn {
+        display: none;
+    }
+
+    .slide0 p { 
+        padding: 30% 0 0 8%; 
+        font-size: 30px;
+    }
+
+    .slide1 {
+        height: 52em;
+        margin-top: 2.3em;
+    }
+
+    .slide1 .flex-items {
+        margin-left: 30%;
+    }
+
+    .slide2 {
+        height: 60em;
+    }
+
+    .slide2 .centre {
+        margin-left: 7%;
+    }
+
+    .slide2 .flex-items {
+        margin-left: 23%;
+    }
+
+    .slide2 .img-big {
+        height: 200px;
+    }
+  
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        background-color: red;
+        padding: 0.2em;
+    }
+
+    .up-arrow {
+        right: 1em;
+        bottom: 0;
+    }
+
+}
+/*SmartPhones*/
+@media (min-width: 1px) and (max-width: 480px) {
+
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 15%;
+        font-size: 30px;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .get-started {
+        width: 40%;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 25px;
+    }
+
+    .history, .login, .order {
+        display: none;
+    }
+   
+    .logo {
+        width: 8%;
+    }
+        
+    .middle {
+        margin-left: 32%;
+    }
+
+    .scroll-down-btn {
+        display: none;
+    }
+
+    .slide0 p { 
+        padding: 45% 0 0 8%; 
+        font-size: 25px;
+    }
+
+    .slide1 {
+        height: 52em;
+        margin-top: 2.3em;
+    }
+
+    .slide1 .flex-items {
+        margin-left: 13%;
+    }
+
+    .slide2 {
+        height: 60em;
+    }
+
+    .slide2 .centre {
+        margin-left: 1%;
+        font-size: 30px;
+    }
+
+    .slide2 .flex-items {
+        margin-left: 7%;
+    }
+
+    .slide2 .img-big {
+        height: 200px;
+    }
+
+    .slide2 .text-big {
+        font-size: 18px;
+    }
+
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        background-color: red;
+        padding: 0.2em;
+    }
+
+    .up-arrow {
+        right: 0.5em;
+        bottom: 0;
+    }
+
+}
