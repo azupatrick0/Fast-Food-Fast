@@ -8,7 +8,7 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
 Coming Soon.
 
 ***
-##UI Template Pages
+## UI Template Pages
     * /index.html
     * /signup.html
     * /signin.html
@@ -17,7 +17,7 @@ Coming Soon.
     * /admin.html
     * /history.html
 ***
-##Aknowlegement
+## Aknowlegement
  * Andela
  * Google
  * W3school
@@ -25,5 +25,5 @@ Coming Soon.
  * Fileformat
  * Stackoverflow
  ***
- ##Author
+ ## Author
  * Azu Patrick
