@@ -1,0 +1,149 @@
+<!Doctype html>
+<html lang="en">
+
+<head>
+    <title>
+        Fast-Food-Fast | A food delivery service app for a restaurant
+    </title>
+    <meta charset='utf-8' />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/orderStyles.css" />
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <header>
+        <nav>
+            <h1>
+                <div class="nav-bar">
+                    <a href="dashboard.html" class="site-name">
+                        <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
+                    </a>
+                    <a href="orders.html" class="order">Order a meal</a>
+                    <a href="history.html" class="history">History</a>
+                    <button onclick="showLocation('index.html')" class="signout">SIGN OUT</button>
+                    <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
+                    <div class="tab-modal">
+                        <div class="tab-modal-link">
+                            <a href="orders.html">Order a meal</a>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <a href="history.html">History</a>
+                            <br/>
+                            <br/>
+                            <hr/>
+                            <br/>
+                            <a href="index.html">Sign Out</a>
+                            <br/>
+                            <br/>
+                        </div>
+                    </div>
+                </div>
+
+            </h1>
+        </nav>
+
+    </header>
+    
+    <div class="slide0">
+        <div class="blur"></div>
+        <p>
+            <span class="centre"><strong>Make your order</strong></span><br/><br/>
+            <button class="toggle-cart" onclick="showCart('.cart')">Show Cart</button><br/><br/>
+            <div class="blur2">
+                <div class="flex">              
+                    <div class="flex-items cart">
+                        <p><strong>Cart</strong></p>
+                        <table cellpadding="10">
+                            <tr>
+                                <td>
+                                    <img src="images/food1.jpg" />Fruttie * 1 = #400.00
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="images/food2.png" />Burger * 1 = #200.00
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="images/food3.png" />Veggie * 2 = #700.00
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="flex-items">
+                        <p><strong>Delicious Meals</strong></p>
+                        <table cellpadding="15">
+                            <tr>
+                                <td>
+                                    <img src="images/food1.jpg" /><br/> Fruttie
+                                    <button class="meal-button">Add to cart</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="images/food2.png" /><br/> Burger
+                                    <button class="meal-button">Add to cart</button></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img src="images/food3.png" /><br/> Veggie
+                                    <button class="meal-button">Add to cart</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                <div class="flex-items">
+                    <p><strong>Checkout</strong></p>
+                    <table cellpadding="10">
+                        <tr>
+                            <td>
+                                Delivery Location <select>
+                                    <option>Abuja</option>
+                                    <option>Lagos</option>
+                                    <option>Port Harcourt</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Delivery Date &#10236 7<sup>th</sup> October, 2018
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio"> Pay on Delivery
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="radio"> Pay with debit card <img src="images/debit_card.png" class="debit-card"
+                                />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button class="order-button" onclick="orderResponse()">
+                                    Order
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="feedback"></div>
+                </div>
+            </div>
+    </div>
+    </p>
+    </div>
+
+    <script src="./scripts/orderScript.js"></script>
+
+</body>
+
+</html>
