@@ -1,0 +1,477 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+    color: rgba(243, 38, 38, 0.7);
+    cursor: pointer;
+}
+
+.blur {
+    position: absolute;
+    z-index: -1;
+    background-color: rgba(0, 255, 255, 0.45);
+    height: 51.5em;
+    width: 100%;
+    margin: -1.3em 0 0 0;
+    padding: 0;
+}
+
+.blur2 {
+    position: relative;
+    z-index: -1;
+    background-color: rgba(0, 255, 255, 0.45);
+    height: 27em;
+    width: 95%;
+    margin-left: 2em;
+    padding-right: 1.5em;
+}
+
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: url('../images/fast-food-fast-1.png') no-repeat 0 -15em;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body p {
+    color: red;
+}
+
+button {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    border-radius: 5px;
+    width: 10%;
+    height: 45px;
+    margin-left: 38%;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+}
+
+button:active {
+    transform: translateY(3px);
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.7;
+    border: 0;
+    color: white;
+    cursor: pointer;
+}
+
+.centre {
+    margin-left: 37%;
+    color: red;
+    font-size: 25px;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    border: 1px solid rgba(159, 76, 236, 0.5);
+    padding: 0.5em;
+}
+
+.debit-card {
+    border-radius: 0;
+}
+
+.feedback {
+    display: none;
+    background-color: plum;
+    padding: 0.5em 0 0.2em 0.5em;
+    color: white;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 20px;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-items {
+    margin-left: 3%; 
+    width: 31vw;
+}
+
+.flex-items p {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hamburger {
+    display: none;
+}
+
+.history {
+    font-size: 20px;
+    margin-left: 3%;
+    color: white;
+}
+
+.history:hover {
+    background-color: red;
+    padding: 0.3em;
+    color: white;
+}
+
+img {
+    height: 40px;
+    width: 3em;
+    border-radius: 100%;
+}
+
+.logo {
+    height: 25px;
+    width: 3%;
+}
+
+.meal-button, .order-button{
+    width: 100%;
+    margin-left: 0;
+}
+
+.nav-bar {
+    font-size: 14px;
+    color: red;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 10vh;
+    width: 100%;
+    padding: 0.44em 0 1.25em 0.44em;
+}
+
+.nav-bar button{
+    margin-left: 3%;
+}
+
+.order {
+    margin-left: 35%;
+    font-size: 20px;
+    color: white;
+}
+
+.order:hover {
+    background-color: red;
+    color: white;
+    padding: 0.3em;
+}
+
+p {
+    font-size: 20px;
+}
+
+.site-name {
+    font-size: 24px;
+}
+
+.slide0 {
+    background: url('../images/site_image.png') no-repeat center;
+    background-size: cover;
+    background-attachment: fixed;
+    height: 90vh; 
+    width: 100%; 
+}
+
+.slide0 p { 
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding-top: 3.5%; 
+    margin: 0;
+}
+
+.tab-modal {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: white;
+    color: rgba(99, 87, 87, 0.9);
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px; 
+    box-shadow: 1px 6px 6px 3px rgba(116, 116, 199, 0.5);
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(99, 87, 87, 0.2);
+}
+
+.toggle-cart {
+    display: none;
+}
+
+/* High resolution tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 40%;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    .history, .signout, .order {
+        display: none;
+    }
+
+    .meal-button {
+        width: 12vw;
+        margin-left: 0;
+    }
+        
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        background-color: red;
+        padding: 0.2em;
+    }
+
+    .toggle-cart {
+        display: none;
+    }
+    
+}
+
+/*Low resolution Tablets*/
+@media (min-width: 481px) and (max-width: 767px) {
+
+    .blur {
+        height: 118em;
+    }
+
+    .blur2 {
+        height: 88em;
+        margin-left: 0.8em;
+    }
+
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .cart {
+        display: none;
+    }
+
+    .centre {
+        margin-left: 20%;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .flex-items {
+        width: 90vw;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    .history, .signout, .order {
+        display: none;
+    }
+   
+    .logo {
+        width: 6%;
+    }
+
+    .slide0 p { 
+        padding: 30% 0 0 8%; 
+        font-size: 30px;
+    }
+
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        background-color: red;
+        padding: 0.2em;
+    }
+
+    .toggle-cart {
+        background-color: yellowgreen;
+        display: block;
+        border-radius: 0; 
+        margin-left: 20%;
+        color: white;
+        font-size: 25px;
+        font-family: 'Ubuntu Condensed', sans-serif;
+        width: 39vw;
+        padding: 0.5em;
+        height: 2.3em;
+    }
+
+}
+/*SmartPhones*/
+@media (min-width: 1px) and (max-width: 480px) {
+
+    .blur {
+        height: 118em;
+    }
+
+    .blur2 {
+        height: 88em;
+        margin-left: 0.8em;
+    }
+
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .cart {
+        display: none;
+    }
+
+    .centre {
+        margin-left: 20%;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .flex-items {
+        width: 90vw;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 25px;
+    }
+
+    .history, .signout, .order {
+        display: none;
+    }
+   
+    .logo {
+        width: 8%;
+    }
+
+    .slide0 p { 
+        padding: 30% 0 0 8%; 
+        font-size: 30px;
+    }
+
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        background-color: red;
+        padding: 0.2em;
+    }
+
+    .toggle-cart {
+        background-color: yellowgreen;
+        display: block;
+        border-radius: 0; 
+        margin-left: 20%;
+        color: white;
+        font-size: 25px;
+        font-family: 'Ubuntu Condensed', sans-serif;
+        width: 55vw;
+        padding: 0.5em;
+        height: 2.3em;
+    }
+
+}
