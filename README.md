@@ -5,7 +5,11 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
 
 ***
 ## Github Page
-Coming Soon.
+
+There are two ways to create links.
+
+[Link](https://azupatrick0.github.io/Fast-Food-Fast/UI/index.html) 
+
 
 ***
 ## UI Template Pages
