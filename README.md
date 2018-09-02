@@ -2,7 +2,9 @@
 ## Description
 Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela Cycle 36 Developer Challenge.
 ## Github Page
-[Link](https://azupatrick0.github.io/Fast-Food-Fast/UI/index.html) 
+[Link](https://azupatrick0.github.io/Fast-Food-Fast/UI/index.html)
+## Pivotal Tracker Page
+[Link](https://www.pivotaltracker.com/n/projects/2193822)
 ## UI Template Pages
   * [/index](https://azupatrick0.github.io/Fast-Food-Fast/UI/index.html)   
   * [/signup](https://azupatrick0.github.io/Fast-Food-Fast/UI/signup.html)  
