@@ -1,0 +1,48 @@
+{
+  "name": "fast-food-fast",
+  "version": "1.0.0",
+  "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
+  "scripts": {
+    "start": "npm run build && node ./Server/dist/index.js ",
+    "start:dev": "nodemon ./node_modules/babel-cli/bin/babel-node.js ./Server/src/index.js",
+    "test": "nyc mocha --exit ./Server/src/test/testSpec.js --require babel-register --timeout 20000",
+    "build": "npm run clean && node ./node_modules/babel-cli/bin/babel.js ./Server/src -d ./Server/dist",
+    "clean": "rimraf ./Server/dist",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/azupatrick0/Fast-Food-Fast.git"
+  },
+  "keywords": [
+    "Fast",
+    "food",
+    "restaurant",
+    "online"
+  ],
+  "author": "Azu Patrick",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/azupatrick0/Fast-Food-Fast/issues"
+  },
+  "homepage": "https://github.com/azupatrick0/Fast-Food-Fast#readme",
+  "dependencies": {
+    "bcrypt": "^3.0.0",
+    "body-parser": "^1.18.3",
+    "chai": "^4.1.2",
+    "chai-http": "^4.2.0",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "coveralls": "^3.0.1",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.12.0",
+    "mocha": "^5.2.0",
+    "nodemon": "^1.18.4",
+    "nyc": "^12.0.2",
+    "rimraf": "^2.6.2"
+  }
+}
