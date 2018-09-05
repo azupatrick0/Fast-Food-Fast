@@ -120,4 +120,27 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
+  
+  // ==== Get all orders ==== //
+  describe(' GET /orders', () => {
+    it('should list all orders', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200); 
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data'); 
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.orders.should.be.a('array');
+          res.body.data.message.should.equal('All orders returned, thank you.');
+          done();
+        });
+    });
+  });
+
 });
