@@ -28,7 +28,7 @@ a:hover {
     position: absolute;
     z-index: -1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 63.5em;
+    height: 68.5em;
     width: 100%;
     margin: -1.3em 0 0 0;
     padding: 0;
@@ -113,22 +113,6 @@ button:hover {
 .flex-items p {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
-}
-
-.food-items-not-laptop{
-    font-size: 20px;
-    background-color: transparent;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    width: 15%;
-    margin-left: 3%;
-    color:rgb(252, 227, 6);
-}
-
-.food-items-not-laptop:hover {
-    background-color: red;
-    padding: 0.3em;
-    color: white;
 }
 
 .hamburger {
@@ -352,7 +336,6 @@ tr:nth-child(even) {
 
     .tab-modal-link a:hover {
         color: white;
-        background-color: red;
         padding: 0.2em;
     }
     
@@ -455,7 +438,6 @@ tr:nth-child(even) {
 
     .tab-modal-link a:hover {
         color: white;
-        background-color: red;
         padding: 0.2em;
     }
 
@@ -566,7 +548,6 @@ tr:nth-child(even) {
 
     .tab-modal-link a:hover {
         color: white;
-        background-color: red;
         padding: 0.2em;
     }
 

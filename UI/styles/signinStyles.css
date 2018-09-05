@@ -17,7 +17,7 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.5);
     padding: 10% 5% 0 5%;
     font-size: 25px;
-    color: black;
+    color: rgb(122, 110, 110);
     width: 80%;
     margin: 0 auto; 
     border-radius: 5px; 
@@ -239,6 +239,10 @@ p {
 
     .flex {
         display: block;
+    }
+
+    .logo {
+        width: 8%;
     }
 
     .slide-signin {
