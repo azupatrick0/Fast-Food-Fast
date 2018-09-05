@@ -10,6 +10,9 @@
     "clean": "rimraf ./Server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
+  "engines": {
+    "node": "8.11.4"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/azupatrick0/Fast-Food-Fast.git"
