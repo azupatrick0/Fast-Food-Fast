@@ -36,6 +36,12 @@ const invalidEmail = {
   email: 'azzz@zssscom',
 }
 
+const statusToUpdateTo = {
+  status: 'completed',
+}
+
+const emptyStatus = '';
+
 describe('Fast-Food-Fast Test Suite', () => {
 
   // ==== Place a new order ==== //
@@ -181,6 +187,72 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.status.should.equal('fail');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
+          done();
+        });
+    });
+  });
+
+   // ==== Update the status of an order ==== //
+
+   describe(' PUT /orders', () => {
+    it('should update the status of an order', (done) => {
+      chai.request(app)
+        .put('/api/v1/orders/2')
+        .send(statusToUpdateTo)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data'); 
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.order.should.be.a('array');
+          res.body.data.message.should.equal('Status of order with id => 2, updated successfully.');
+          done();
+        });
+    });
+  });
+
+  
+  describe(' PUT /orders', () => {
+    it('should not update the status of an order', (done) => {
+      chai.request(app)
+        .put('/api/v1/orders/2000')
+        .send(statusToUpdateTo)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(404);
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data'); 
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
+          done();
+        });
+    });
+  });
+
+  describe(' PUT /orders', () => {
+    it('should fail on empty status field', (done) => {
+      chai.request(app)
+        .put('/api/v1/orders/2')
+        .send(emptyStatus)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(400);
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('status cannot be empty');
           done();
         });
     });

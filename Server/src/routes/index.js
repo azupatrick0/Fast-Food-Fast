@@ -2,7 +2,8 @@
 import express from 'express';
 import  checkInput from '../helpers/checkInput';
 import  validateEmail from '../helpers/validateEmail';
-import  { newOrder, allOrders, specificOrder } from '../controllers/index';
+import  checkStatusInput from '../helpers/checkStatusInput';
+import  { newOrder, allOrders, specificOrder, updateStatus } from '../controllers/index';
 
 // Express router
 const router = express.Router();
@@ -18,6 +19,11 @@ router.get('/orders', allOrders.ordersList);
 /* If the user makes a GET request to the /orders/<orderId> route, hand control over
 to the specificOrder controller */
 router.get('/orders/:orderId', specificOrder.oneOrder);
+
+
+/* If the user makes a PUT request to the /orders/<orderId> route, hand control over
+to the updateStatus controller */
+router.put('/orders/:orderId', checkStatusInput, updateStatus.orderStatus);
 
 // Export router
 export default router;
