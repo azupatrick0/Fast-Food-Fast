@@ -131,7 +131,7 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' GET /orders', () => {
     it('should list all orders', (done) => {
       chai.request(app)
-        .get('/api/v1/orders')
+        .get('/api/v1/orders?user_type=admin')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(200); 
@@ -149,12 +149,31 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
+  describe(' GET /orders', () => {
+    it('should fail on user not an admin', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders?user_type=user')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+  });
+
    // ==== Fetch a specific order ==== //
 
    describe(' GET /orders/<orderId>', () => {
     it('should fetch a specific order', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/2')
+        .get('/api/v1/orders/2?user_type=admin')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(200);
@@ -175,7 +194,7 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' GET /orders/<orderId>', () => {
     it('should not fetch a specific order', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/2000')
+        .get('/api/v1/orders/2000?user_type=admin')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(404);
@@ -197,7 +216,7 @@ describe('Fast-Food-Fast Test Suite', () => {
    describe(' PUT /orders', () => {
     it('should update the status of an order', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2')
+        .put('/api/v1/orders/2?user_type=admin')
         .send(statusToUpdateTo)
         .end((err, res) => {
           if (err) throw err;
@@ -220,7 +239,7 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' PUT /orders', () => {
     it('should not update the status of an order', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2000')
+        .put('/api/v1/orders/2000?user_type=admin')
         .send(statusToUpdateTo)
         .end((err, res) => {
           if (err) throw err;
@@ -241,7 +260,7 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' PUT /orders', () => {
     it('should fail on empty status field', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2')
+        .put('/api/v1/orders/2?user_type=admin')
         .send(emptyStatus)
         .end((err, res) => {
           if (err) throw err;
