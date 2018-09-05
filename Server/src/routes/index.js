@@ -3,7 +3,7 @@ import express from 'express';
 import  checkInput from '../helpers/checkInput';
 import  validateEmail from '../helpers/validateEmail';
 import  checkStatusInput from '../helpers/checkStatusInput';
-import  { newOrder, allOrders, specificOrder, updateStatus, homePage } from '../controllers/index';
+import  { newOrder, allOrders, specificOrder, updateStatus, homePage, notFoundPage } from '../controllers/index';
 
 // Express router
 const router = express.Router();
@@ -20,7 +20,6 @@ router.get('/orders', allOrders.ordersList);
 to the specificOrder controller */
 router.get('/orders/:orderId', specificOrder.oneOrder);
 
-
 /* If the user makes a PUT request to the /orders/<orderId> route, hand control over
 to the updateStatus controller */
 router.put('/orders/:orderId', checkStatusInput, updateStatus.orderStatus);
@@ -28,6 +27,10 @@ router.put('/orders/:orderId', checkStatusInput, updateStatus.orderStatus);
 /* If the user makes a request to the /api/v1/ route, hand control
 to the homePage controller */
 router.get('/', homePage.home);
+
+/* If the user makes a request to the /api/v1/* route, hand control
+to the notFound controller */
+router.get('*', notFoundPage.notFound);
 
 // Export router
 export default router;
