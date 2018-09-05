@@ -1,5 +1,6 @@
-// Import newOrder controller
+// Import controllers
 import newOrder from './newOrderController';
+import allOrders from './allOrdersController';
 
-// Export newOrder controller
-export default newOrder;
+// Export controllers
+export { newOrder, allOrders };
