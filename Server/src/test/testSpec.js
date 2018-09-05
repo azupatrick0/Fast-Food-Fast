@@ -143,4 +143,47 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
+   // ==== Fetch a specific order ==== //
+
+   describe(' GET /orders/<orderId>', () => {
+    it('should fetch a specific order', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders/2')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data'); 
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.order.should.be.a('object');
+          res.body.data.message.should.equal('specific order returned, thank you.');
+          done();
+        });
+    });
+  });
+
+  describe(' GET /orders/<orderId>', () => {
+    it('should not fetch a specific order', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders/2000')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(404);
+          res.body.should.be.a('object'); 
+          res.body.should.have.property('status'); 
+          res.body.should.have.property('data'); 
+          res.body.status.should.be.a('string'); 
+          res.body.data.should.be.a('object'); 
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
+          done();
+        });
+    });
+  });
+
 });
