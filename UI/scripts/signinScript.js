@@ -8,6 +8,7 @@ form.addEventListener("keyup", function (event) {
         document.querySelector(".signin").click();
     }
 });
+
 // Redirect user to appropriate page
 function redirect(page) {
     var feedback = document.querySelector(".feedback");
@@ -26,4 +27,4 @@ function redirect(page) {
         // Appropriate page
         location.href = page;
     }
-};
+}

@@ -16,7 +16,8 @@ a:hover {
 .accept-btn {
     background-color: rgba(111, 50, 192, 0.5);
     color: white;
-    width: 50%;
+    width: 80%;
+    margin-left: 0;
     height: 2.8em;
     outline: none;
     font-size: 14px;
@@ -36,7 +37,7 @@ a:hover {
 
 .blur2 {
     position: relative;
-    z-index: -1;
+    z-index: 1;
     background-color: rgba(0, 255, 255, 0.45);
     height: 39em;
     width: 95%;
@@ -93,7 +94,8 @@ button:hover {
 .edit-btn {
     background-color: yellowgreen;
     color: white;
-    width: 50%;
+    width: 80%;
+    margin-left: 0;
     height: 2.8em;
     outline: none;
     font-size: 14px;
@@ -130,9 +132,8 @@ button:hover {
 }
 
 .history:hover {
-    background-color: red;
+    color: red;
     padding: 0.3em;
-    color: white;
 }
 
 img {
@@ -169,9 +170,7 @@ img {
 }
 
 .order:hover {
-    background-color: red;
-    color: white;
-    padding: 0.3em;
+    color: red;
 }
 
 p {
@@ -194,7 +193,8 @@ p {
 .reject-btn {
     background-color: rgb(230, 73, 73);
     color: white;
-    width: 50%;
+    width: 80%;
+    margin-left: 0;
     height: 2.8em;
     outline: none;
     font-size: 14px;
@@ -264,16 +264,27 @@ table {
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+td {
+    padding: 10px 10px 10px 30px;
+}
+
+th {
+    padding: 10px;
+}
+
 tr:nth-child(even) {
     background-color: rgba(99, 87, 87, 0.2);
 }
 
+.second-table td {
+    padding: 10px 10px 10px 60px;
+}
 
 /* High resolution tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
    
-    .accept-btn {
-        width: 81%;
+    .accept-btn,.reject-btn,.edit-btn {
+        width: 100%;
     }
 
     .blur {
@@ -298,8 +309,14 @@ tr:nth-child(even) {
     }
     
     .first-table .reject-btn {
-        width: 81%;
+        width: 100%;
     }
+
+    .flex-items {
+        width: 90vw;
+        overflow-x: auto;
+    }
+
 
     .hamburger {
         display: inline;
@@ -338,6 +355,10 @@ tr:nth-child(even) {
         color: white;
         padding: 0.2em;
     }
+       
+    .second-table td {
+        padding: 10px 10px 10px 30px;
+    }
     
     .quick-access button {
         display: flex;
@@ -349,9 +370,10 @@ tr:nth-child(even) {
 /*Low resolution Tablets*/
 @media (min-width: 481px) and (max-width: 767px) {
 
-     .accept-btn {
-        width: 88%;
+    .accept-btn,.reject-btn,.edit-btn {
+        width: 100%;
     }
+
     
     .blur {
         height: 86.5em;
@@ -374,11 +396,6 @@ tr:nth-child(even) {
     .centre {
         margin-left: 20%;
     }
-    
-    .edit-btn, .reject-btn {
-        width: 76%;
-    }
-
 
     .flex {
         display: block;
@@ -391,7 +408,7 @@ tr:nth-child(even) {
 
     
     .first-table .reject-btn {
-        width: 88%;
+        width: 100%;
     }
 
     .hamburger {
@@ -449,6 +466,10 @@ tr:nth-child(even) {
         width: 40%;
         margin-left: 40%;
     }
+    
+    .second-table td {
+        padding: 10px 10px 10px 20px;
+    }
 
     .quick-access button {
         display: flex;
@@ -459,8 +480,8 @@ tr:nth-child(even) {
 /*SmartPhones*/
 @media (min-width: 1px) and (max-width: 480px) {
 
-    .accept-btn {
-        width: 88%;
+    .accept-btn,.reject-btn,.edit-btn {
+        width: 100%;
     }
     
     .blur {
@@ -501,7 +522,7 @@ tr:nth-child(even) {
 
     
     .first-table .reject-btn {
-        width: 88%;
+        width: 100%;
     }
 
     .hamburger {
@@ -558,6 +579,10 @@ tr:nth-child(even) {
     .search-history {
         width: 40%;
         margin-left: 40%;
+    }
+
+    .second-table td {
+        padding: 10px 10px 10px 20px;
     }
 
     .quick-access button {
