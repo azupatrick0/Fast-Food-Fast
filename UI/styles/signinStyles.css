@@ -89,6 +89,10 @@ button:hover {
     display: flex;
 }
 
+.forgot-password {
+    float: right;
+}
+
 form {
     margin-left: 10%;
 }
@@ -205,7 +209,7 @@ p {
     .slide-signin {
         background: url('../images/fast-food-fast-1.png') no-repeat center;
         background-size: cover;
-        height: 100vh; 
+        height: 43em; 
         width: 100%; 
     }
 
@@ -248,7 +252,7 @@ p {
     .slide-signin {
         background: url('../images/fast-food-fast-1.png') no-repeat center;
         background-size: cover;
-        height: 100vh; 
+        height: 44em; 
         width: 100%; 
     }
 
