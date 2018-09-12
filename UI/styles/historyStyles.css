@@ -25,7 +25,7 @@ a:hover {
 
 .blur2 {
     position: relative;
-    z-index: -1;
+    z-index: 1;
     background-color: rgba(0, 255, 255, 0.45);
     height: 27em;
     width: 95%;
@@ -104,9 +104,7 @@ button:hover {
 }
 
 .history:hover {
-    background-color: red;
-    padding: 0.3em;
-    color: white;
+    color: red;
 }
 
 img {
@@ -143,9 +141,7 @@ img {
 }
 
 .order:hover {
-    background-color: red;
-    color: white;
-    padding: 0.3em;
+    color: red;
 }
 
 p {
@@ -214,6 +210,14 @@ table {
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+td {
+    padding: 10px 10px 10px 50px;
+}
+
+th {
+    padding: 10px;
+}
+
 tr:nth-child(even) {
     background-color: rgba(99, 87, 87, 0.2);
 }
@@ -271,7 +275,11 @@ tr:nth-child(even) {
         color: white;
         padding: 0.2em;
     }
-    
+     
+    td {
+        padding: 10px 10px 10px 30px;
+    }
+
 }
 
 /*Low resolution Tablets*/
@@ -364,6 +372,11 @@ tr:nth-child(even) {
         margin-left: 40%;
     }
 
+    td {
+        padding: 10px 10px 10px 25px;
+    }
+
+
 }
 /*SmartPhones*/
 @media (min-width: 1px) and (max-width: 480px) {
@@ -454,5 +467,10 @@ tr:nth-child(even) {
         width: 40%;
         margin-left: 40%;
     }
+
+    td {
+        padding: 10px 10px 10px 20px;
+    }
+
 
 }

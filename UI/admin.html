@@ -9,49 +9,46 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/adminStyles.css" />
     <link href="https://fonts.googleapis.com/css?family=Ubuntu+Condensed" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="images/ffflogo.png" />
 
 </head>
 
-<body class="bodyy">
+<body>
 
     <header>
         <nav>
-            <h1>
-                <div class="nav-bar">
-                    <a href="dashboard.html" class="site-name">
-                        <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
-                    </a>
-                    <a href="admin.html" class="order">Orders</a>
-                    <button onclick="scrollDown()" class="history">Food Items</button>
-                    <button onclick="showLocation('index.html')" class="signout">SIGN OUT</button>
-                    <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
-                    <div class="tab-modal">
-                        <div class="tab-modal-link">
-                            <a href="admin.html">Orders</a>
-                            <br/>
-                            <br/>
-                            <hr/>
-                            <br/>
-                            <a onclick="scrollDown()">Food Items</a>
-                            <br/>
-                            <br/>
-                            <hr/>
-                            <br/>
-                            <a href="index.html">Sign Out</a>
-                            <br/>
-                            <br/>
-                        </div>
+            <div class="nav-bar">
+                <a href="dashboard.html" class="site-name">
+                    <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
+                </a>
+                <a href="admin.html" class="order">Orders</a>
+                <button onclick="scrollDown()" class="history">Food Items</button>
+                <button onclick="showLocation('index.html')" class="signout">SIGN OUT</button>
+                <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
+                <div class="tab-modal">
+                    <div class="tab-modal-link">
+                        <a href="admin.html">Orders</a>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <a onclick="scrollDown()">Food Items</a>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <a href="index.html">Sign Out</a>
+                        <br/>
+                        <br/>
                     </div>
                 </div>
-
-            </h1>
+            </div>
         </nav>
-
     </header>
 
     <div class="slide0">
         <div class="blur"></div>
-        <p>
+        <p><br/>
             <span class="centre"><strong>Admin Dashboard</strong></span><br/><br/>
             <div class="quick-access">
                 <button onclick="scrollDown()">
@@ -69,11 +66,14 @@
                 <div class="flex">
                     <div class="flex-items">
                         <p><strong>List of Orders</strong></p>
-                        <table cellpadding="10" class="first-table">
+                        <table class="first-table">
                             <!-- START OF ORDERS HEADING -->
                             <tr>
                                 <th>
                                     S/N
+                                </th>
+                                <th>
+                                    Name
                                 </th>
                                 <th>
                                     Ordered Meal
@@ -104,7 +104,10 @@
                                     1
                                 </td>
                                 <td>
-                                    <img src="images/food1.jpg" />Fruttie
+                                    Azu Patrick
+                                </td>
+                                <td>
+                                    <img src="images/food1.jpg" alt="food" />Fruttie
                                 </td>
                                 <td>
                                     1
@@ -133,7 +136,10 @@
                                     2
                                 </td>
                                 <td>
-                                    <img src="images/food2.png" />Burger
+                                    John Doe
+                                </td>
+                                <td>
+                                    <img src="images/food2.png" alt="food" />Burger
                                 </td>
                                 <td>
                                     1
@@ -162,7 +168,10 @@
                                     3
                                 </td>
                                 <td>
-                                    <img src="images/food3.png" />Veggie
+                                    Ada Doe
+                                </td>
+                                <td>
+                                    <img src="images/food3.png" alt="food" />Veggie
                                 </td>
                                 <td>
                                     2
@@ -189,7 +198,7 @@
                         <br/>
                         <br/>
                         <p>List of Food Items</p>
-                        <table cellpadding="10">
+                        <table class="second-table">
                             <!-- START OF FOOD ITEMS HEADING -->
                             <tr>
                                 <th>
@@ -197,6 +206,9 @@
                                 </th>
                                 <th>
                                     Food Item
+                                </th>
+                                <th>
+                                    Price
                                 </th>
                                 <th>
                                     Add
@@ -215,19 +227,22 @@
                                     1
                                 </td>
                                 <td>
-                                    <img src="images/food1.jpg" />Fruttie
+                                    <img src="images/food1.jpg" alt="food" />Fruttie
                                 </td>
                                 <td>
-                                    
-                                        <button class="accept-btn">Add</button>
+                                    400
                                 </td>
                                 <td>
-                                    
-                                        <button class="edit-btn">Edit</button>
+
+                                    <button class="accept-btn">Add</button>
                                 </td>
                                 <td>
-                                    
-                                        <button class="reject-btn">Delete</button>
+
+                                    <button class="edit-btn">Edit</button>
+                                </td>
+                                <td>
+
+                                    <button class="reject-btn">Delete</button>
                                 </td>
                             </tr>
                             <!-- END OF FOOD ITEMS BODY-1 -->
@@ -237,19 +252,22 @@
                                     2
                                 </td>
                                 <td>
-                                    <img src="images/food2.png" /> Burger
+                                    <img src="images/food2.png" alt="food" /> Burger
                                 </td>
                                 <td>
-                                    
-                                        <button class="accept-btn">Add</button>
+                                    200
                                 </td>
                                 <td>
-                                    
-                                        <button class="edit-btn">Edit</button>
+
+                                    <button class="accept-btn">Add</button>
                                 </td>
                                 <td>
-                                    
-                                        <button class="reject-btn">Delete</button>
+
+                                    <button class="edit-btn">Edit</button>
+                                </td>
+                                <td>
+
+                                    <button class="reject-btn">Delete</button>
                             </tr>
                             <!-- END OF FOOD ITEMS BODY-2 -->
                             <!-- START OF FOOD ITEMS BODY-3 -->
@@ -258,26 +276,28 @@
                                     3
                                 </td>
                                 <td>
-                                    <img src="images/food2.png" /> Veggie
+                                    <img src="images/food3.png" alt="food" /> Veggie
                                 </td>
                                 <td>
-                                    
-                                        <button class="accept-btn">Add</button>
+                                    350
                                 </td>
                                 <td>
-                                    
-                                        <button class="edit-btn">Edit</button>
+
+                                    <button class="accept-btn">Add</button>
                                 </td>
                                 <td>
-                                    
-                                        <button class="reject-btn">Delete</button>
+
+                                    <button class="edit-btn">Edit</button>
+                                </td>
+                                <td>
+
+                                    <button class="reject-btn">Delete</button>
                             </tr>
                             <!-- END OF FOOD ITEMS BODY-3 -->
                         </table>
                     </div>
                 </div>
             </div>
-        </p>
     </div>
 
     <script src="./scripts/adminScript.js"></script>

@@ -62,20 +62,23 @@ button:hover {
     color: white;
 }
 
+.card-btn {
+    width: 100%;
+}
+
 .centre {
     margin-left: 34%;
     color: red;
 }
 
-.flex {
-    display: flex;
+.grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-left: 9%;
 }
 
-.flex-items {
-    margin-left: 8%;
-}
 
-.flex-items p {
+.grid-items p {
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -119,9 +122,7 @@ form {
 }
 
 .history:hover {
-    background-color: red;
-    padding: 0.3em;
-    color: white;
+    color: red;
 }
 
 img {
@@ -130,15 +131,11 @@ img {
 }
 
 .img-big {
-    height: 400px;
+    height: 200px;
     width: 17em;
-    border-radius: 5px;
-    transition: 0.5s;
+    border-radius: 5px 5px 0 0;
 }
 
-.img-big:hover {
-    width: 19em;
-}
 
 .logo {
     height: 25px;
@@ -172,9 +169,7 @@ img {
 }
 
 .order:hover {
-    background-color: red;
-    color: white;
-    padding: 0.3em;
+    color: red;
 }
 
 p {
@@ -190,12 +185,17 @@ p {
     min-height: 10vh;
     border-radius: 100%;
     opacity: 0.9;
-    margin: 10% 0 0 80%;
+    margin: 2% 0 0 80%;
 }
 
 .scroll-down-btn:hover {
     color: black;
 }
+
+.show-break {
+    display: none;
+}
+
 
 .site-name {
     font-size: 24px;
@@ -205,7 +205,7 @@ p {
     background: url('../images/site_image.png') no-repeat center;
     background-size: cover;
     background-attachment: fixed;
-    height: 90vh; 
+    height: 95vh; 
     width: 100%; 
 }
 
@@ -219,12 +219,7 @@ p {
     background-color: white;
     height: 100vh; 
     width: 100%;
-    margin-top: 0em; 
-}
-
-
-.slide1 .flex-items {
-    margin-left: 9%;
+    margin-top: 0; 
 }
 
 .slide1 p { 
@@ -236,22 +231,19 @@ p {
 
 .slide2 {
     background-color: rgba(0, 255, 255, 0.9);
-    height: 50em; 
+    height: 47em; 
     width: 100%;   
 }
 
-.slide2 .flex {
-    margin: 0 5% 0 1%;
-}
-
-.slide2 .flex-items {
+.slide2 .grid {
     margin-left: 5%;
-
+    grid-column-gap: 2em;
 }
+
 
 .slide2 p { 
     font-family: 'Ubuntu Condensed', sans-serif;
-    padding: 2% 0 0 8%;  
+    padding: 2% 5% 5% 5%;  
     margin: 0; 
     color:black; 
 }
@@ -260,10 +252,14 @@ p {
     display: none;
 }
 
-.text-big {
+.card {
     font-size: 25px;
     font-family: Arial, Helvetica, sans-serif;
-    color: red;
+    background-color: white;
+    color: gray;
+    margin-top: -0.2em;
+    width: 10.88em;
+    padding: 0.1em 0 0.2em 0.1em; 
 }
 
 .text-small {
@@ -296,6 +292,10 @@ p {
         margin-left: 29%;
     }
 
+    .card-btn {
+        width: 30%;
+    }
+
     .hamburger {
         display: inline;
         position: absolute;
@@ -309,14 +309,9 @@ p {
     }
 
     .img-big {
-        height: 400px;
-        width: 13em;
-        border-radius: 5px;
-        transition: 0.5s;
-    }
-    
-    .img-big:hover {
-        width: 14em;
+        height: 350px;
+        width: 35em;
+        border-radius: 5px 5px 0 0;
     }
     
     .middle {
@@ -327,12 +322,25 @@ p {
         display: none;
     }
 
+    .show-break {
+        display: block;
+    }
+
     .slide1 {
         margin-top: 0; 
     }
 
-    .slide1 .flex-items {
-        margin-left: 3%;
+    .slide1 .grid {
+        margin-left: 2%;
+    }
+
+    .slide2 {
+        height: 122em;
+    }
+
+    .slide2 .grid {
+        display: block;
+        margin-left: 15%;
     }
         
     .tab-modal {
@@ -360,6 +368,10 @@ p {
         color: white;
         padding: 0.2em;
     }
+
+    .card {
+        width: 22.4em;
+    }
     
 }
 
@@ -370,7 +382,7 @@ p {
         width: 100%;
         padding: 0;
         margin: 0;
-        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background: url('../images/fast-food-fast-1.png') no-repeat center;
         background-size: cover;
         background-attachment: fixed;
     }
@@ -379,7 +391,11 @@ p {
         margin-left: 20%;
     }
 
-    .flex {
+    .card-btn {
+        width: 40%;
+    }
+
+    .grid {
         display: block;
     }
 
@@ -421,20 +437,20 @@ p {
         margin-top: 2.3em;
     }
 
-    .slide1 .flex-items {
-        margin-left: 30%;
+    .slide1 .grid-items {
+        margin-left: 15%;
     }
 
     .slide2 {
-        height: 60em;
+        height: 101em;
     }
 
     .slide2 .centre {
         margin-left: 7%;
     }
 
-    .slide2 .flex-items {
-        margin-left: 23%;
+    .slide2 .grid-items {
+        margin-left: 18%;
     }
 
     .slide2 .img-big {
@@ -467,6 +483,10 @@ p {
         padding: 0.2em;
     }
 
+    .show-break {
+        display: block;
+    }
+
     .up-arrow {
         right: 1em;
         bottom: 0;
@@ -480,7 +500,7 @@ p {
         width: 100%;
         padding: 0;
         margin: 0;
-        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background: url('../images/fast-food-fast-1.png') no-repeat center;
         background-size: cover;
         background-attachment: fixed;
     }
@@ -490,7 +510,11 @@ p {
         font-size: 30px;
     }
 
-    .flex {
+    .card-btn {
+        width: 35%;
+    }
+
+    .grid {
         display: block;
     }
 
@@ -522,6 +546,10 @@ p {
         display: none;
     }
 
+    .show-break {
+        display: block;
+    }
+
     .slide0 p { 
         padding: 45% 0 0 8%; 
         font-size: 25px;
@@ -529,15 +557,15 @@ p {
 
     .slide1 {
         height: 52em;
-        margin-top: 2.3em;
+        margin-top: 0;
     }
 
-    .slide1 .flex-items {
-        margin-left: 13%;
+    .slide1 .grid-items {
+        margin-left: 8%;
     }
 
     .slide2 {
-        height: 60em;
+        height: 92em;
     }
 
     .slide2 .centre {
@@ -545,15 +573,15 @@ p {
         font-size: 30px;
     }
 
-    .slide2 .flex-items {
-        margin-left: 7%;
+    .slide2 .grid-items {
+        margin-left: 3%;
     }
 
     .slide2 .img-big {
         height: 200px;
     }
 
-    .slide2 .text-big {
+    .slide2 .card {
         font-size: 18px;
     }
 
@@ -586,6 +614,10 @@ p {
     .up-arrow {
         right: 0.5em;
         bottom: 0;
+    }
+
+    .card {
+        width: 15.1em;
     }
 
 }

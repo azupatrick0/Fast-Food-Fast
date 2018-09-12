@@ -25,7 +25,7 @@ a:hover {
 
 .blur2 {
     position: relative;
-    z-index: -1;
+    z-index: 1;
     background-color: rgba(0, 255, 255, 0.45);
     height: 27em;
     width: 95%;
@@ -117,9 +117,7 @@ button:hover {
 }
 
 .history:hover {
-    background-color: red;
-    padding: 0.3em;
-    color: white;
+    color: red;
 }
 
 img {
@@ -161,9 +159,7 @@ img {
 }
 
 .order:hover {
-    background-color: red;
-    color: white;
-    padding: 0.3em;
+    color: red;
 }
 
 p {
@@ -203,12 +199,20 @@ table {
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
+td,th {
+    padding: 10px;
+}
+
 tr:nth-child(even) {
     background-color: rgba(99, 87, 87, 0.2);
 }
 
 .toggle-cart {
     display: none;
+}
+
+.second-table td,th {
+    padding: 15px;
 }
 
 /* High resolution tablets */
@@ -247,6 +251,7 @@ tr:nth-child(even) {
     .tab-modal {
         background-color: rgba(93, 81, 134, 0.5);
         position: fixed;
+        z-index: 2;
         top: 4.5em;
         right: 0;
         height: 43vh;
@@ -280,7 +285,7 @@ tr:nth-child(even) {
 @media (min-width: 481px) and (max-width: 767px) {
 
     .blur {
-        height: 118em;
+        height: 130em;
     }
 
     .blur2 {

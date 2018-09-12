@@ -1,7 +1,7 @@
 // Scroll down
 function scrollDown() {
     window.scrollTo({
-        top: 660,
+        top: 550,
         behavior: "smooth"
     });
 }
@@ -19,16 +19,38 @@ function showLocation(link) {
     return location.href = link;
 }
 
+// Hamburger icon
+var hamburger = document.querySelector('.hamburger');
+
 //Toggle navbar
 function showNavbar(value) {
-    var navBtn = document.querySelector(value);
+    var navContainer = document.querySelector(value);
     /**
     * Create a toggle
     */
-    if (navBtn.style.display === "inline") {
-        navBtn.style.display = "none";
+    if (navContainer.style.display === "inline") {
+        hamburger.innerHTML = "&#9776";
+        navContainer.style.display = "none";
+
     } else {
-        navBtn.style.display = "inline";
+        navContainer.style.display = "inline";
+        hamburger.innerHTML = "&times";
     }
 
 }
+
+// Hide Tab modal on scroll or click 
+var tabModal = document.querySelector('.tab-modal');
+var tabModalLink = document.querySelector('.tab-modal-link');
+window.addEventListener('scroll', function(event) {
+    if (window.scrollY > 1) {
+        hamburger.innerHTML = "&#9776";
+        tabModal.style.display = 'none';
+    }
+});
+window.addEventListener('click', function(event) {
+    if (event.target === tabModal || event.target === tabModalLink) {
+        hamburger.innerHTML = "&#9776";
+        tabModal.style.display = 'none';
+    }
+});
