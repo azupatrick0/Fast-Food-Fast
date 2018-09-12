@@ -53,11 +53,54 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
     ``` 
     POST /orders  
     ```
+   ### req
+   
+  
+    * body: 
+    
+       {
+         name: 'Azu Patrick',
+         email: 'email@email.com',
+         meal: 'fruttie',
+         quantity: 1,
+         price: 400,
+         location: 'Lagos'
+       }
+
+      
+   ### res
+      
+      
+      {
+         success: true,
+         data: {
+             message: 'Your order has been processed, thank you.',
+         }
+      }
+      
 * Update the order status
 
     ``` 
     PUT /orders/<orderId>   
     ```
+    ### req
+    
+    * params: 1
+    
+    * body: 
+      
+      {
+        status: 'completed'
+      }
+      
+     ### res
+      
+      {
+         status: 'success',
+         data: {
+             message: 'Status of order with id => 1, updated successfully.',
+         }
+      }
 ## Installation
  * Ensure you have node 8.x.x installed.
  
