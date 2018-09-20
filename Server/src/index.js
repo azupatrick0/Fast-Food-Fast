@@ -1,7 +1,7 @@
 // Import modules
 import express from 'express';
 import bodyParser from 'body-parser';
-import apiRoutes from './routes/index.js';
+import apiRoutes from './routes/index';
 
 // Express app
 const app = express();
@@ -22,14 +22,15 @@ app.use((err, req, res, next) => {
   res.status(500).json({
     success: false,
     data: {
-        message: 'An error ocurred, please recheck your request parameters, then resend request!',
-    }
+      message: 'An error ocurred, please recheck your request parameters, then resend request!',
+    },
   });
+  next();
 });
 
 // Listen for requests to the specified port
 app.listen(port, () => {
-  console.log(`Server listening @ port => ${port}`)
+  console.log(`Server listening @ port => ${port}`);
 });
 
 // Export app
