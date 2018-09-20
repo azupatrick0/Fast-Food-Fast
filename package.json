@@ -5,8 +5,10 @@
   "scripts": {
     "start": "npm run build && node ./Server/dist/index.js ",
     "start:dev": "nodemon ./node_modules/babel-cli/bin/babel-node.js ./Server/src/index.js",
+    "pretest": "npm run lint",
     "test": "nyc mocha --exit ./Server/src/test/testSpec.js --require babel-register --timeout 20000",
     "build": "npm run clean && node ./node_modules/babel-cli/bin/babel.js ./Server/src -d ./Server/dist",
+    "lint": "./node_modules/.bin/eslint ./Server --fix --ignore-path .gitignore",
     "clean": "rimraf ./Server/dist",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },

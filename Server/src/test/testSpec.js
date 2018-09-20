@@ -1,27 +1,27 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../index.js';
+import app from '../index';
 
 chai.use(chaiHttp);
-const should = chai.should();
+chai.should();
 
 const newestOrder = {
-    name: 'Azu Patrick',
-    email: 'email@email.com',
-    meal: 'spicy chicken',
-    quantity: 1,
-    price: 800,
-    location: 'Lagos',
-}
+  name: 'Azu Patrick',
+  email: 'email@email.com',
+  meal: 'spicy chicken',
+  quantity: 1,
+  price: 800,
+  location: 'Lagos',
+};
 
 const invalidOrder = {
-    name: 'Lucy Doe',
-    email: 'unregisteredemail@email.com',
-    meal: 'spicy chicken',
-    quantity: 1,
-    price: 800,
-    location: 'Lagos',
-}
+  name: 'Lucy Doe',
+  email: 'unregisteredemail@email.com',
+  meal: 'spicy chicken',
+  quantity: 1,
+  price: 800,
+  location: 'Lagos',
+};
 
 const emptyInputs = {
   name: '',
@@ -30,20 +30,19 @@ const emptyInputs = {
   quantity: '',
   price: '',
   location: '',
-}
+};
 
 const invalidEmail = {
   email: 'azzz@zssscom',
-}
+};
 
 const statusToUpdateTo = {
   status: 'completed',
-}
+};
 
 const emptyStatus = '';
 
 describe('Fast-Food-Fast Test Suite', () => {
-
   // ==== Place a new order ==== //
 
   describe(' POST /orders', () => {
@@ -54,14 +53,14 @@ describe('Fast-Food-Fast Test Suite', () => {
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(201);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('success'); 
-          res.body.should.have.property('data'); 
-          res.body.success.should.be.a('boolean'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('success');
+          res.body.should.have.property('data');
+          res.body.success.should.be.a('boolean');
+          res.body.data.should.be.a('object');
           res.body.success.should.equal(true);
           res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Your order has been processed, thank you.'); 
+          res.body.data.message.should.equal('Your order has been processed, thank you.');
           done();
         });
     });
@@ -75,14 +74,14 @@ describe('Fast-Food-Fast Test Suite', () => {
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(404);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('success'); 
-          res.body.should.have.property('data'); 
-          res.body.success.should.be.a('boolean'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('success');
+          res.body.should.have.property('data');
+          res.body.success.should.be.a('boolean');
+          res.body.data.should.be.a('object');
           res.body.success.should.equal(false);
           res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Sorry, user not found, order not made'); 
+          res.body.data.message.should.equal('Sorry, user not found, order not made');
           done();
         });
     });
@@ -96,12 +95,12 @@ describe('Fast-Food-Fast Test Suite', () => {
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(400);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('success'); 
-          res.body.should.have.property('error'); 
-          res.body.success.should.be.a('boolean'); 
-          res.body.error.should.be.a('string'); 
-          res.body.success.should.equal(false); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('success');
+          res.body.should.have.property('error');
+          res.body.success.should.be.a('boolean');
+          res.body.error.should.be.a('string');
+          res.body.success.should.equal(false);
           done();
         });
     });
@@ -115,31 +114,31 @@ describe('Fast-Food-Fast Test Suite', () => {
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(400);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('success'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('success');
           res.body.should.have.property('error');
-          res.body.success.should.be.a('boolean'); 
-          res.body.error.should.be.a('string'); 
-          res.body.success.should.equal(false); 
+          res.body.success.should.be.a('boolean');
+          res.body.error.should.be.a('string');
+          res.body.success.should.equal(false);
           done();
         });
     });
   });
 
-  
+
   // ==== Get all orders ==== //
   describe(' GET /orders', () => {
     it('should list all orders', (done) => {
       chai.request(app)
-        .get('/api/v1/orders?user_type=admin')
+        .get('/api/v1/orders?userType=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(200); 
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.orders.should.be.a('array');
@@ -152,15 +151,15 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' GET /orders', () => {
     it('should fail on user not an admin', (done) => {
       chai.request(app)
-        .get('/api/v1/orders?user_type=user')
+        .get('/api/v1/orders?userType=user')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(403);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
           res.body.should.have.property('data');
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('fail');
           res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
           done();
@@ -168,20 +167,20 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
-   // ==== Fetch a specific order ==== //
+  // ==== Fetch a specific order ==== //
 
-   describe(' GET /orders/<orderId>', () => {
+  describe(' GET /orders/<orderId>', () => {
     it('should fetch a specific order', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/2?user_type=admin')
+        .get('/api/v1/orders/2?userType=admin')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(200);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.order.should.be.a('object');
@@ -194,15 +193,15 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' GET /orders/<orderId>', () => {
     it('should not fetch a specific order', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/2000?user_type=admin')
+        .get('/api/v1/orders/2000?userType=admin')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(404);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('fail');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
@@ -211,21 +210,21 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
-   // ==== Update the status of an order ==== //
+  // ==== Update the status of an order ==== //
 
-   describe(' PUT /orders', () => {
+  describe(' PUT /orders', () => {
     it('should update the status of an order', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2?user_type=admin')
+        .put('/api/v1/orders/2?userType=admin')
         .send(statusToUpdateTo)
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(200);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.order.should.be.a('array');
@@ -235,20 +234,20 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
-  
+
   describe(' PUT /orders', () => {
     it('should not update the status of an order', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2000?user_type=admin')
+        .put('/api/v1/orders/2000?userType=admin')
         .send(statusToUpdateTo)
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(404);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('fail');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
@@ -260,16 +259,16 @@ describe('Fast-Food-Fast Test Suite', () => {
   describe(' PUT /orders', () => {
     it('should fail on empty status field', (done) => {
       chai.request(app)
-        .put('/api/v1/orders/2?user_type=admin')
+        .put('/api/v1/orders/2?userType=admin')
         .send(emptyStatus)
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(400);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
           res.body.should.have.property('data');
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('fail');
           res.body.data.message.should.equal('status cannot be empty');
           done();
@@ -285,11 +284,11 @@ describe('Fast-Food-Fast Test Suite', () => {
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(200);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Welcome to Fast-Food-Fast API, the most delicious API in the world');
@@ -306,11 +305,11 @@ describe('Fast-Food-Fast Test Suite', () => {
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(404);
-          res.body.should.be.a('object'); 
-          res.body.should.have.property('status'); 
-          res.body.should.have.property('data'); 
-          res.body.status.should.be.a('string'); 
-          res.body.data.should.be.a('object'); 
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
           res.body.status.should.equal('fail');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('404, page not found');
@@ -318,5 +317,4 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
-
 });
