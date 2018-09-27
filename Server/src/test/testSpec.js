@@ -270,6 +270,47 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
+  // ==== Users order history ==== //
+  describe(' GET /users/orders', () => {
+    it('should not get orders is empty', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/orders?email=aasas@sss.ssss')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, orders not found');
+          done();
+        });
+    });
+  });
+
+  describe(' GET /users/orders', () => {
+    it('should get orders', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/orders?email=email@email.com')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Orders found');
+          done();
+        });
+    });
+  });
+
   // ==== Homepage ==== //
   describe(' GET /api/v1', () => {
     it('should return welcome page on visit to /api/v1', (done) => {
