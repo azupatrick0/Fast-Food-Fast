@@ -6,29 +6,23 @@ chai.use(chaiHttp);
 chai.should();
 
 const newestOrder = {
-  name: 'Azu Patrick',
   email: 'email@email.com',
   meal: 'spicy chicken',
   quantity: 1,
-  price: 800,
   location: 'Lagos',
 };
 
 const invalidOrder = {
-  name: 'Lucy Doe',
   email: 'unregisteredemail@email.com',
   meal: 'spicy chicken',
   quantity: 1,
-  price: 800,
   location: 'Lagos',
 };
 
 const emptyInputs = {
-  name: '',
   email: '',
   meal: '',
   quantity: '',
-  price: '',
   location: '',
 };
 
