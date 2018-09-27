@@ -14,7 +14,84 @@
 </head>
 
 <body>
+    <div class="modal">
+        <p>Are you sure you want to Accept this order? </p>
+        <button class="accept-btn" onclick="accepted()">Accept</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal')">Cancel</button>
+    </div>
+    <div class="modal modal1">
+        <p>Are you sure you want to Decline this order? </p>
+        <button class="accept-btn" onclick="declined()">Accept</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal1')">Cancel</button>
+    </div>
+    <div class="modal modal2">
+        <p>Are you sure you want to Complete this order? </p>
+        <button class="accept-btn" onclick="completed()">Accept</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal2')">Cancel</button>
+    </div>
+    <div class="modal modal3">
+        <p>Add food items </p>
+        <form action="#" method="POST" class="form">
+            <input type="text" class="sn" name="sn" placeholder="S/N" />
+            <br /><br />
+            <input type="text" class="food-item" name="food-item" placeholder="Food Item" />
+            <br /><br />
+            <input type="text" class="price" name="price" placeholder="Price" />
 
+            <br /><br />
+        </form>
+        <button class="accept-btn" onclick="addItem()">Add</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal3')">Cancel</button>
+    </div>
+    <div class="modal modal4">
+        <p>Edit food item </p>
+        <form action="#" method="POST" class="form">
+            <input type="text" class="eserial" name="sn" placeholder="S/N" />
+            <br /><br />
+            <input type="text" class="efood-item" name="food-item" placeholder="Food Item" />
+            <br /><br />
+            <input type="text" class="eprice" name="price" placeholder="Price" />
+            <br /><br />
+        </form>
+        <button class="accept-btn" onclick="editItem()">Edit</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal4')">Cancel</button>
+    </div>
+    <div class="modal modal5">
+        <p>Food Items </p>
+        <table class="first-table">
+            <th>
+                Ordered Meal
+            </th>
+            <th>
+                Quantity
+            </th>
+            <tr>
+                <td>
+                    <img src="images/food1.jpg" alt="food" class="img" />Fruttie
+                </td>
+                <td>
+                    1
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/food2.png" alt="food" class="img" />Burger
+                </td>
+                <td>
+                    1
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <img src="images/food3.png" alt="food" class="img" />Veggie
+                </td>
+                <td>
+                    2
+                </td>
+            </tr>
+        </table><br/><br/>
+        <button class="reject-btn" onclick="closeModal('.modal5')">Close</button>
+    </div>
     <header>
         <nav>
             <div class="nav-bar">
@@ -28,18 +105,18 @@
                 <div class="tab-modal">
                     <div class="tab-modal-link">
                         <a href="admin.html">Orders</a>
-                        <br/>
-                        <br/>
-                        <hr/>
-                        <br/>
+                        <br />
+                        <br />
+                        <hr />
+                        <br />
                         <a onclick="scrollDown()">Food Items</a>
-                        <br/>
-                        <br/>
-                        <hr/>
-                        <br/>
+                        <br />
+                        <br />
+                        <hr />
+                        <br />
                         <a href="index.html">Sign Out</a>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
                     </div>
                 </div>
             </div>
@@ -48,20 +125,20 @@
 
     <div class="slide0">
         <div class="blur"></div>
-        <p><br/>
-            <span class="centre"><strong>Admin Dashboard</strong></span><br/><br/>
+        <p><br />
+            <span class="centre"><strong>Admin Dashboard</strong></span><br /><br />
             <div class="quick-access">
-                <button onclick="scrollDown()">
-                    <img src="images/add.png" alt="add" /><br/> Add Food Items
+                <button onclick="showModalAdd()" class="brk">
+                    <img src="images/add.png" alt="add" /><br /> Add Food Items
                 </button>
                 <button onclick="scrollDown()">
-                    <img src="images/edit.png" alt="add" /><br/> Edit Food Items
+                    <img src="images/edit.png" alt="add" /><br /> Edit Food Items
                 </button>
                 <button onclick="scrollDown()">
-                    <img src="images/delete.png" alt="add" /><br/> Delete Food Items
+                    <img src="images/delete.png" alt="add" /><br /> Delete Food Items
                 </button>
             </div>
-            <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn">Search</button></div><br/>
+            <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn">Search</button></div><br />
             <div class="blur2">
                 <div class="flex">
                     <div class="flex-items">
@@ -76,10 +153,7 @@
                                     Name
                                 </th>
                                 <th>
-                                    Ordered Meal
-                                </th>
-                                <th>
-                                    Quantity
+                                    Orders
                                 </th>
                                 <th>
                                     Amount
@@ -107,10 +181,7 @@
                                     Azu Patrick
                                 </td>
                                 <td>
-                                    <img src="images/food1.jpg" alt="food" />Fruttie
-                                </td>
-                                <td>
-                                    1
+                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
                                 </td>
                                 <td>
                                     400
@@ -122,11 +193,11 @@
                                     Lagos
                                 </td>
                                 <td>
-                                    <button class="accept-btn">Accept</button>
-                                    <button class="reject-btn">Decline</button>
+                                    <button class="accept-btn accept1" onclick="showModalAccept('.accept1')">Accept</button>
+                                    <button class="reject-btn decline1" onclick="showModalDecline('.decline1')">Decline</button>
                                 </td>
                                 <td>
-                                    <input type="checkbox" />
+                                    <button class="accept-btn accept-btn-big completed1" onclick="showModalCompleted('.completed1')">Complete</button>
                                 </td>
                             </tr>
                             <!-- END OF ORDERS BODY-1 -->
@@ -139,10 +210,7 @@
                                     John Doe
                                 </td>
                                 <td>
-                                    <img src="images/food2.png" alt="food" />Burger
-                                </td>
-                                <td>
-                                    1
+                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
                                 </td>
                                 <td>
                                     200
@@ -154,11 +222,11 @@
                                     Abuja
                                 </td>
                                 <td>
-                                    <button class="accept-btn">Accept</button>
-                                    <button class="reject-btn">Decline</button>
+                                    <button class="accept-btn accept2" onclick="showModalAccept('.accept2')">Accept</button>
+                                    <button class="reject-btn decline2" onclick="showModalDecline('.decline2')">Decline</button>
                                 </td>
                                 <td>
-                                    <input type="checkbox" />
+                                    <button class="accept-btn accept-btn-big completed2" onclick="showModalCompleted('.completed2')">Complete</button>
                                 </td>
                             </tr>
                             <!-- END OF ORDERS BODY-2 -->
@@ -171,10 +239,7 @@
                                     Ada Doe
                                 </td>
                                 <td>
-                                    <img src="images/food3.png" alt="food" />Veggie
-                                </td>
-                                <td>
-                                    2
+                                    <button class="accept-btn accept2" onclick="showModalItems('.accept2')">View Items</button>
                                 </td>
                                 <td>
                                     700
@@ -186,17 +251,18 @@
                                     Lagos
                                 </td>
                                 <td>
-                                    <button class="accept-btn">Accept</button>
-                                    <button class="reject-btn">Decline</button>
+                                    <button class="accept-btn accept3" onclick="showModalAccept('.accept3')">Accept</button>
+                                    <button class="reject-btn decline3" onclick="showModalDecline('.decline3')">Decline</button>
                                 </td>
                                 <td>
-                                    <input type="checkbox" />
+                                    <button class="accept-btn accept-btn-big completed3" onclick="showModalCompleted('.completed3')">Complete</button>
                                 </td>
                             </tr>
                             <!-- END OF ORDERS BODY-3 -->
                         </table>
-                        <br/>
-                        <br/>
+                        <div class="modal"></div>
+                        <br />
+                        <br />
                         <p>List of Food Items</p>
                         <table class="second-table">
                             <!-- START OF FOOD ITEMS HEADING -->
@@ -209,9 +275,6 @@
                                 </th>
                                 <th>
                                     Price
-                                </th>
-                                <th>
-                                    Add
                                 </th>
                                 <th>
                                     Edit
@@ -227,22 +290,18 @@
                                     1
                                 </td>
                                 <td>
-                                    <img src="images/food1.jpg" alt="food" />Fruttie
+                                    <img src="images/food1.jpg" alt="food" class="img" />Fruttie
                                 </td>
                                 <td>
                                     400
                                 </td>
                                 <td>
 
-                                    <button class="accept-btn">Add</button>
+                                    <button class="edit-btn" onclick="showModalEdit(1)">Edit</button>
                                 </td>
                                 <td>
 
-                                    <button class="edit-btn">Edit</button>
-                                </td>
-                                <td>
-
-                                    <button class="reject-btn">Delete</button>
+                                    <button class="reject-btn" onclick="deleteItem(1)">Delete</button>
                                 </td>
                             </tr>
                             <!-- END OF FOOD ITEMS BODY-1 -->
@@ -252,22 +311,18 @@
                                     2
                                 </td>
                                 <td>
-                                    <img src="images/food2.png" alt="food" /> Burger
+                                    <img src="images/food2.png" alt="food" class="img" /> Burger
                                 </td>
                                 <td>
                                     200
                                 </td>
                                 <td>
 
-                                    <button class="accept-btn">Add</button>
+                                    <button class="edit-btn" onclick="showModalEdit(2)">Edit</button>
                                 </td>
                                 <td>
 
-                                    <button class="edit-btn">Edit</button>
-                                </td>
-                                <td>
-
-                                    <button class="reject-btn">Delete</button>
+                                    <button class="reject-btn" onclick="deleteItem(2)">Delete</button>
                             </tr>
                             <!-- END OF FOOD ITEMS BODY-2 -->
                             <!-- START OF FOOD ITEMS BODY-3 -->
@@ -276,22 +331,18 @@
                                     3
                                 </td>
                                 <td>
-                                    <img src="images/food3.png" alt="food" /> Veggie
+                                    <img src="images/food3.png" alt="food" class="img" /> Veggie
                                 </td>
                                 <td>
                                     350
                                 </td>
                                 <td>
 
-                                    <button class="accept-btn">Add</button>
+                                    <button class="edit-btn" onclick="showModalEdit(3)">Edit</button>
                                 </td>
                                 <td>
 
-                                    <button class="edit-btn">Edit</button>
-                                </td>
-                                <td>
-
-                                    <button class="reject-btn">Delete</button>
+                                    <button class="reject-btn" onclick="deleteItem(3)">Delete</button>
                             </tr>
                             <!-- END OF FOOD ITEMS BODY-3 -->
                         </table>
