@@ -17,7 +17,7 @@ a:hover {
     position: absolute;
     z-index: -1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 51.5em;
+    height: 66.5em;
     width: 100%;
     margin: -1.3em 0 0 0;
     padding: 0;
@@ -27,7 +27,7 @@ a:hover {
     position: relative;
     z-index: 1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 27em;
+    height: 30em;
     width: 95%;
     margin-left: 2em;
     padding-right: 1.5em;
@@ -50,7 +50,7 @@ button {
     background-color: rgb(230, 73, 73);
     color: white;
     border-radius: 5px;
-    width: 10%;
+    width: 13%;
     height: 45px;
     margin-left: 38%;
     outline: none;
@@ -71,11 +71,10 @@ button:hover {
 }
 
 .centre {
-    margin-left: 37%;
+    margin-left: 43%;
     color: red;
     font-size: 25px;
     font-family: 'Ubuntu Condensed', sans-serif;
-    border: 1px solid rgba(159, 76, 236, 0.5);
     padding: 0.5em;
 }
 
@@ -146,6 +145,7 @@ img {
     height: 10vh;
     width: 100%;
     padding: 0.44em 0 1.25em 0.44em;
+    text-align: center;
 }
 
 .nav-bar button{
@@ -168,6 +168,13 @@ p {
 
 .site-name {
     font-size: 24px;
+}
+
+select {
+    font-size: 18px;
+    border-radius: 5px;
+    color: plum;
+    box-shadow: 1px 0px 6px 2px rgba(116, 116, 199, 0.5);
 }
 
 .slide0 {
@@ -215,9 +222,14 @@ tr:nth-child(even) {
     padding: 15px;
 }
 
+
 /* High resolution tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
     
+    .blur2 {
+        margin-left: 1em;
+    }
+
     body {
         width: 100%;
         padding: 0;
@@ -246,6 +258,10 @@ tr:nth-child(even) {
     .meal-button {
         width: 12vw;
         margin-left: 0;
+    }
+
+    .nav-bar {
+        text-align: unset;
     }
         
     .tab-modal {
@@ -329,6 +345,11 @@ tr:nth-child(even) {
     .history, .signout, .order {
         display: none;
     }
+    
+    .nav-bar {
+        text-align: unset;
+    }
+        
    
     .logo {
         width: 6%;
@@ -388,7 +409,7 @@ tr:nth-child(even) {
 
     .blur2 {
         height: 88em;
-        margin-left: 0.8em;
+        margin-left: 0.5em;
     }
 
     body {
@@ -431,6 +452,11 @@ tr:nth-child(even) {
     .logo {
         width: 8%;
     }
+
+    .nav-bar {
+        text-align: unset;
+    }
+        
 
     .slide0 p { 
         padding: 30% 0 0 8%; 

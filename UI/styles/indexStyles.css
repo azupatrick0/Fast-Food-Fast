@@ -27,7 +27,7 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-    background: url('../images/fast-food-fast-1.png') no-repeat 0 -15em;
+    background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
     background-size: cover;
     background-attachment: fixed;
 }
@@ -156,6 +156,7 @@ img {
     height: 10vh;
     width: 100%;
     padding: 0.44em 0 1.25em 0.44em;
+    text-align: center;
 }
 
 .nav-bar button{
@@ -174,22 +175,6 @@ img {
 
 p {
     font-size: 20px;
-}
-
-.scroll-down-btn {
-    background-color: rgb(255, 255, 255);
-    color: rgba(99, 87, 87, 0.7);
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 35px;
-    width: 6%;
-    min-height: 10vh;
-    border-radius: 100%;
-    opacity: 0.9;
-    margin: 2% 0 0 80%;
-}
-
-.scroll-down-btn:hover {
-    color: black;
 }
 
 .show-break {
@@ -211,8 +196,10 @@ p {
 
 .slide0 p { 
     font-family: 'Ubuntu Condensed', sans-serif;
-    padding: 12% 0 0 8%; 
+    padding: 25% 0 0 0; 
     margin: 0;
+    text-align: center;
+    font-size: 50px;
 }
 
 .slide1 {
@@ -246,6 +233,17 @@ p {
     padding: 2% 5% 5% 5%;  
     margin: 0; 
     color:black; 
+}
+
+.sub-description {
+    font-size: 26px;
+    color: wheat;
+}
+
+.sub-description2 {
+    color: rgb(209, 138, 5);
+    font-weight: bold;
+    font-size: 30px;
 }
 
 .tab-modal {
@@ -283,7 +281,7 @@ p {
         width: 100%;
         padding: 0;
         margin: 0;
-        background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -8em;
         background-size: cover;
         background-attachment: fixed;
     }
@@ -318,12 +316,17 @@ p {
         margin-left: 40%;
     }
 
-    .scroll-down-btn {
-        display: none;
+    .nav-bar {
+        text-align: unset;
     }
 
     .show-break {
         display: block;
+    }
+
+    .slide0 p {
+        font-size: 40px;
+        padding-top: 23%;
     }
 
     .slide1 {
@@ -341,6 +344,14 @@ p {
     .slide2 .grid {
         display: block;
         margin-left: 15%;
+    }
+ 
+    .sub-description {
+        font-size: 21px;
+    }
+    
+    .sub-description2 {
+        font-size: 23px;
     }
         
     .tab-modal {
@@ -423,9 +434,10 @@ p {
         margin-left: 32%;
     }
 
-    .scroll-down-btn {
-        display: none;
+    .nav-bar {
+        text-align: unset;
     }
+
 
     .slide0 p { 
         padding: 30% 0 0 8%; 
@@ -486,6 +498,14 @@ p {
     .show-break {
         display: block;
     }
+    
+    .sub-description {
+        font-size: 19px;
+    }
+    
+    .sub-description2 {
+        font-size: 21px;
+    }
 
     .up-arrow {
         right: 1em;
@@ -542,8 +562,8 @@ p {
         margin-left: 32%;
     }
 
-    .scroll-down-btn {
-        display: none;
+    .nav-bar {
+        text-align: unset;
     }
 
     .show-break {
@@ -551,7 +571,7 @@ p {
     }
 
     .slide0 p { 
-        padding: 45% 0 0 8%; 
+        padding: 45% 0 0 0; 
         font-size: 25px;
     }
 
@@ -583,6 +603,14 @@ p {
 
     .slide2 .card {
         font-size: 18px;
+    }
+
+    .sub-description {
+        font-size: 17px;
+    }
+    
+    .sub-description2 {
+        font-size: 19px;
     }
 
     .tab-modal {
