@@ -6,11 +6,9 @@ class newOrder {
   static placeOrder(req, res) {
     // New Order Details
     const {
-      name,
       email,
       meal,
       quantity,
-      price,
       location,
     } = req.body;
 
@@ -32,11 +30,9 @@ class newOrder {
       // Insert new order into ordersArray
       const newestOrder = {
         id,
-        name,
         email,
         meal,
         quantity,
-        price,
         location,
         created,
         status,
