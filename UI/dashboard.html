@@ -26,15 +26,18 @@
 
         <div class="dashboard-box">
             <button class="signout" onclick="showLocation('index.html')">SIGN OUT</button>
+            <button class="signout primary" onclick="showLocation('admin.html')">ADMIN</button>
             <div class="dashboard-properties">
                 <p>Welcome to your Dashboard</p>
             </div>
             <br/>
             <img src="images/user.jpg" alt="user" /><br/><br/>
             <form action="#" method="POST" class="form">
-                <input type="text" class="dashboardEmail" name="dashboardEmail" placeholder="Azu Patrick" readonly/>
+                <input type="text" class="dashboardName" name="dashboardName" placeholder="Azu Patrick" readonly/>
                 <br/><br/>
-                <input type="email" class="dashboardPassword" name="dashboardPassword" placeholder="azupatrick0@gmail.com" readonly/>
+                <input type="email" class="dashboardEmail" name="dashboardEmail" placeholder="azupatrick0@gmail.com" readonly/>
+                <br/><br/>
+                <input type="password" class="dashboardPassword" name="dashboardPassword" placeholder="***********" readonly/>
                 <br/><br/>
             </form>
             <button class="update" onclick="redirect('dashboard.html')">Update</button>

@@ -137,6 +137,10 @@ p {
     font-size: 20px;
 }
 
+.primary {
+    background-color: rgba(0,0,255,0.5);
+}
+
 .slide-dashboard {
     background: url('../images/fast-food-fast-1.png') no-repeat -330px -180px;
     background-size: cover;
