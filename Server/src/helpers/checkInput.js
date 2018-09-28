@@ -2,8 +2,7 @@ const checkInput = (req, res, next) => {
   // New Order Details
   const {
     email,
-    meal,
-    quantity,
+    items,
     location,
   } = req.body;
 
@@ -13,17 +12,11 @@ const checkInput = (req, res, next) => {
       success: false,
       error: 'email cannot be empty',
     });
-  } else if (meal === '' || meal === null || meal === undefined) {
+  } else if (items === '' || items === null || items === undefined) {
     // Email field empty
     return res.status(400).json({
       success: false,
-      error: 'meal cannot be empty',
-    });
-  } else if (quantity === '' || quantity === null || quantity === undefined) {
-    // Quantity field empty
-    return res.status(400).json({
-      success: false,
-      error: 'quantity cannot be empty',
+      error: 'items cannot be empty',
     });
   } else if (location === '' || location === null || location === undefined) {
     // Location field empty

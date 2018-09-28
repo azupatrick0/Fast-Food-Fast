@@ -9,7 +9,7 @@ class ordersHistory {
       email,
     } = req.query;
 
-    // Order array
+    // Orders array
     const orders = [];
 
     // Loop through ordersArray, then find orders with the users email
