@@ -7,8 +7,7 @@ class newOrder {
     // New Order Details
     const {
       email,
-      meal,
-      quantity,
+      items,
       location,
     } = req.body;
 
@@ -17,22 +16,15 @@ class newOrder {
     const created = new Date().toDateString();
     const status = 'pending';
 
-    // All users email address
-    const emailArray = [];
-
-    // Loop through usersArray, then push in each user email
-    usersArray.forEach((obj) => {
-      emailArray.push(obj.email);
-    });
-
-    // User email in emailArray, make order
-    if (emailArray.includes(email)) {
+    // Find user
+    const found = usersArray.find(obj => obj.email === email);
+    // User found, make an order
+    if (found) {
       // Insert new order into ordersArray
       const newestOrder = {
         id,
         email,
-        meal,
-        quantity,
+        items,
         location,
         created,
         status,
@@ -40,15 +32,11 @@ class newOrder {
 
       // Push in new order to orders array
       ordersArray.push(newestOrder);
-
-      // Log updated orders array to the console
-      console.log(ordersArray);
-
-      // Order made
       return res.status(201).json({
         success: true,
         data: {
           message: 'Your order has been processed, thank you.',
+          newestOrder,
         },
       });
     }

@@ -5,26 +5,19 @@ import ordersArray from '../dummydata/orders';
 class updateStatus {
   static orderStatus(req, res) {
     // Request id
-    const requestId = req.params.orderId;
+    let requestId = req.params.orderId;
+    requestId = Number(requestId);
 
     // Status
     const statusToUpdateTo = req.body.status;
 
-    // Order id (based on array starting from zero)
-    const orderId = requestId - 1;
+    // Find order
+    const order = ordersArray.find(obj => obj.id === requestId);
 
-    // Order id's array
-    const idArray = [];
-
-    // Loop through ordersArray, then push in each id
-    ordersArray.forEach((obj) => {
-      idArray.push(obj.id);
-    });
-
-    // Request id in ordersArray, therefore order in ordersArray, proceed to update status
-    if (idArray.includes(orderId + 1)) {
+    // Order found, proceed to update status
+    if (order) {
       // Update status of order
-      ordersArray[orderId].status = statusToUpdateTo;
+      order.status = statusToUpdateTo;
 
       // Specific order found
       return res.status(200).json({

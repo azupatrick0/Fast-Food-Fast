@@ -7,15 +7,35 @@ chai.should();
 
 const newestOrder = {
   email: 'email@email.com',
-  meal: 'spicy chicken',
-  quantity: 1,
+  items: [{
+    meal: 'fruttie',
+    quantity: 1,
+  },
+  {
+    meal: 'burger',
+    quantity: 1,
+  },
+  {
+    meal: 'veggie',
+    quantity: 2,
+  }],
   location: 'Lagos',
 };
 
 const invalidOrder = {
   email: 'unregisteredemail@email.com',
-  meal: 'spicy chicken',
-  quantity: 1,
+  items: [{
+    meal: 'fruttie',
+    quantity: 1,
+  },
+  {
+    meal: 'burger',
+    quantity: 1,
+  },
+  {
+    meal: 'veggie',
+    quantity: 2,
+  }],
   location: 'Lagos',
 };
 
