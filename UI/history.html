@@ -14,6 +14,42 @@
 </head>
 
 <body>
+        <div class="modal modal1">
+                <p>Food Items </p>
+                <table class="first-table">
+                    <th>
+                        Ordered Meal
+                    </th>
+                    <th>
+                        Quantity
+                    </th>
+                    <tr>
+                        <td>
+                            <img src="images/food1.jpg" alt="food" class="img" />Fruttie
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/food2.png" alt="food" class="img" />Burger
+                        </td>
+                        <td>
+                            1
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <img src="images/food3.png" alt="food" class="img" />Veggie
+                        </td>
+                        <td>
+                            2
+                        </td>
+                    </tr>
+                </table><br/><br/>
+                <button class="reject-btn" onclick="closeModal('.modal1')">Close</button>
+            </div>
 
     <header>
         <nav>
@@ -22,7 +58,7 @@
                     <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
                 </a>
                 <a href="orders.html" class="order">Order a meal</a>
-                <a href="signout.html" class="history">Sign Out</a>
+                <a href="index.html" class="history">Sign Out</a>
                 <button onclick="showLocation('history.html')" class="signout">HISTORY</button>
                 <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
                 <div class="tab-modal">
@@ -65,9 +101,6 @@
                                     Ordered Meal
                                 </th>
                                 <th>
-                                    Quantity
-                                </th>
-                                <th>
                                     Amount
                                 </th>
                                 <th>
@@ -87,10 +120,7 @@
                                     1
                                 </td>
                                 <td>
-                                    <img src="images/food1.jpg" alt="food" />Fruttie
-                                </td>
-                                <td>
-                                    1
+                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
                                 </td>
                                 <td>
                                     400
@@ -112,10 +142,7 @@
                                     2
                                 </td>
                                 <td>
-                                    <img src="images/food2.png" alt="food" />Burger
-                                </td>
-                                <td>
-                                    1
+                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
                                 </td>
                                 <td>
                                     200
@@ -137,10 +164,7 @@
                                     3
                                 </td>
                                 <td>
-                                    <img src="images/food3.png" alt="food" />Veggie
-                                </td>
-                                <td>
-                                    2
+                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
                                 </td>
                                 <td>
                                     700
