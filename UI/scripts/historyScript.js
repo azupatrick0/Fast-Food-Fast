@@ -18,6 +18,18 @@ function showNavbar(value) {
 
 }
 
+var modal1 =document.querySelector('.modal1');
+function showModalItems() {
+    modal1.style.display = 'block';
+  }
+
+  
+// Close modal
+function closeModal(closeobj) {
+    var closeobj = document.querySelector(closeobj);
+    closeobj.style.display = 'none';
+  }
+  
 // Hide Tab modal on scroll or click 
 var tabModal = document.querySelector('.tab-modal');
 var tabModalLink = document.querySelector('.tab-modal-link');
