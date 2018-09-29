@@ -38,6 +38,7 @@ var modal2 = document.querySelector('.modal2');
 var modal3 = document.querySelector('.modal3');
 var modal4 = document.querySelector('.modal4');
 var modal5 = document.querySelector('.modal5');
+var modal6 = document.querySelector('.modal6');
 
 // Represent each button class in use
 var objInUse;
@@ -145,13 +146,23 @@ function addItem() {
   modal3.style.display = 'none';
 }
 
+// Each row in the items table
+var getValue; 
 // Delete an item
 function deleteItem(val) {
+  modal6.style.display = 'block';
+  getValue = val;
+}
+
+// Deletes an item
+function deleted() {
+  var val = getValue;
   // Table object
   var secondTable = document.querySelector('.second-table');
   var tableRows = secondTable.rows;
-  var firstRow = tableRows[val];
-  firstRow.style.display = 'none';
+  var eachRow = tableRows[val];
+  eachRow.style.display = 'none';
+  modal6.style.display = 'none';
 }
 
 // Accept an order
