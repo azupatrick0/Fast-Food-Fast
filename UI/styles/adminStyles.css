@@ -596,9 +596,9 @@ tr:nth-child(even) {
         width: 100%;
     }
 
-    .modal3 .accept-btn, .modal3 .reject-btn {
-        width: 20vw;
-        margin-left: 40%;
+    .modal .accept-btn, .modal .reject-btn {
+        width: 30vw;
+        margin-left: 35%;
     }
     
     .blur {
