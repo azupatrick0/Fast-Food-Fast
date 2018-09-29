@@ -92,6 +92,11 @@
         </table><br/><br/>
         <button class="reject-btn" onclick="closeModal('.modal5')">Close</button>
     </div>
+    <div class="modal modal6">
+        <p>Are you sure you want to Delete this order? </p>
+        <button class="accept-btn" onclick="deleted()">Accept</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal6')">Cancel</button>
+    </div>
     <header>
         <nav>
             <div class="nav-bar">
@@ -132,10 +137,7 @@
                     <img src="images/add.png" alt="add" /><br /> Add Food Items
                 </button>
                 <button onclick="scrollDown()">
-                    <img src="images/edit.png" alt="add" /><br /> Edit Food Items
-                </button>
-                <button onclick="scrollDown()">
-                    <img src="images/delete.png" alt="add" /><br /> Delete Food Items
+                    <img src="images/edit.png" alt="add" /><br /> Food Items
                 </button>
             </div>
             <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn">Search</button></div><br />

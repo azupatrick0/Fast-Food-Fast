@@ -43,11 +43,20 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
     ``` 
     GET /orders 
     ```
+    ### req
+    
+      * params
+      req.query: userType=admin
+      e.g /orders?userType=admin
 * Fetch a specific order
 
     ``` 
     GET /orders/<orderId>  
     ```
+  
+      * params
+      req.query: userType=admin
+      e.g /orders/2?userType=admin
 * Place a new order for food
 
     ``` 
@@ -58,26 +67,52 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
   
     * body: 
     
-       {
-         name: 'Azu Patrick',
-         email: 'email@email.com',
-         meal: 'fruttie',
-         quantity: 1,
-         price: 400,
-         location: 'Lagos'
-       }
-
-      
-   ### res
-      
-      
       {
-         success: true,
-         data: {
-             message: 'Your order has been processed, thank you.',
-         }
-      }
-      
+            "email": "email2@email.com",
+            "items": [
+                {
+                    "meal": "fruttie",
+                    "quantity": 1
+                },
+                {
+                    "meal": "burger",
+                    "quantity": 1
+                },
+                {
+                    "meal": "veggie",
+                    "quantity": 2
+                }
+            ],
+            "location": "Lagos"
+ }
+   ### res
+     {
+    "success": true,
+    "data": {
+        "message": "Your order has been processed, thank you.",
+        "newestOrder": {
+            "id": 4,
+            "email": "email2@email.com",
+            "items": [
+                {
+                    "meal": "fruttie",
+                    "quantity": 1
+                },
+                {
+                    "meal": "burger",
+                    "quantity": 1
+                },
+                {
+                    "meal": "veggie",
+                    "quantity": 2
+                }
+            ],
+            "location": "Lagos",
+            "created": "Fri Sep 28 2018",
+            "status": "pending"
+        }
+    }
+}
 * Update the order status
 
     ``` 
@@ -85,13 +120,15 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
     ```
     ### req
     
-    * params: 1
-    
     * body: 
       
       {
         status: 'completed'
       }
+      
+      * params
+      req.query: userType=admin
+      e.g /orders/2?userType=admin
       
      ### res
       
@@ -101,6 +138,13 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
              message: 'Status of order with id => 1, updated successfully.',
          }
       }
+
+* View orders history
+
+    ``` 
+    GET users/orders
+    ```
+    
 ## Installation
  * Ensure you have node 8.x.x installed.
  
@@ -128,6 +172,7 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
  * Fileformat
  * Stackoverflow
  * httpstatuses
+ * others ...
  ## Author
  * Azu Patrick
  ## License
