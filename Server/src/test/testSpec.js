@@ -67,6 +67,18 @@ const emptyInputs = {
   location: '',
 };
 
+// New food item
+const foodItem = {
+  meal: 'Fruttie',
+  price: 400,
+};
+
+// Empty food item
+const emptyFoodItem = {
+  meal: '',
+  price: '',
+};
+
 describe('Fast-Food-Fast Test Suite', () => {
   // ==== Register a new user ==== //
 
@@ -165,6 +177,104 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Welcome, Azu Patrick');
+          done();
+        });
+    });
+  });
+
+  // ==== Add a new food item ==== //
+
+  describe(' POST /users/items - add a new food item', () => {
+    it('should not add a new food item on empty inputs', (done) => {
+      chai.request(app)
+        .post(`/api/v1/menu?token=${userToken}&role=admin`)
+        .send(emptyFoodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          console.log(userToken);
+          res.status.should.equal(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('meal cannot be empty');
+          done();
+        });
+    });
+
+    it('should not add a new food item if no token is provided', (done) => {
+      chai.request(app)
+        .post('/api/v1/menu?role=admin')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not add a new food item if token is wrong', (done) => {
+      chai.request(app)
+        .post('/api/v1/menu?role=admin&token=wrongtoken')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+
+    it('should not add a new food item if role is not admin', (done) => {
+      chai.request(app)
+        .post(`/api/v1/menu?role=user&token=${userToken}`)
+        .send(foodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+
+    it('should add a new food item', (done) => {
+      chai.request(app)
+        .post(`/api/v1/menu?token=${userToken}&role=admin`)
+        .send(foodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('New food item added to menu successfully.');
           done();
         });
     });
