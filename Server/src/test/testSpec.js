@@ -29,6 +29,16 @@ const invalidEmail = {
   role: 'user',
 };
 
+const loginDetails = {
+  email: 'email@email.com',
+  password: 'password',
+};
+
+const invalidLogin = {
+  email: '',
+  password: 'dfd',
+};
+
 describe('Fast-Food-Fast Test Suite', () => {
   // ==== Register a new user ==== //
 
@@ -84,6 +94,49 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('New user created');
+          done();
+        });
+    });
+  });
+
+  // ==== Login a user ==== //
+
+  describe(' POST /auth/login - login a user', () => {
+    it('should not login a user on invalid inputs', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(invalidLogin)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('email cannot be empty');
+          done();
+        });
+    });
+
+    it('should login a user', (done) => {
+      chai.request(app)
+        .post('/api/v1/auth/login')
+        .send(loginDetails)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.data.should.have.property('token');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Welcome, Azu Patrick');
           done();
         });
     });
