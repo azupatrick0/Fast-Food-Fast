@@ -79,6 +79,17 @@ const emptyFoodItem = {
   price: '',
 };
 
+const statusToUpdateTo = {
+  status: 'complete',
+};
+
+const emptyStatus = '';
+
+const wrongStatus = {
+  status: 'wrongstatus',
+};
+
+
 describe('Fast-Food-Fast Test Suite', () => {
   // ==== Register a new user ==== //
 
@@ -182,9 +193,8 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
-  // ==== Add a new food item ==== //
-
-  describe(' POST /users/items - add a new food item', () => {
+  // ==== Add a new food item to menu==== //
+  describe(' POST /menu - add a new food item to menu', () => {
     it('should not add a new food item on empty inputs', (done) => {
       chai.request(app)
         .post(`/api/v1/menu?token=${userToken}&role=admin`)
@@ -418,6 +428,138 @@ describe('Fast-Food-Fast Test Suite', () => {
     it('should not get all orders if token is wrong', (done) => {
       chai.request(app)
         .post('/api/v1/orders?role=admin&token=wrongtoken')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+  });
+
+  // ==== Update the status of an order ==== //
+
+  describe(' PUT /orders - update the status of an order', () => {
+    it('should update the status of an order', (done) => {
+      chai.request(app)
+        .put(`/api/v1/orders/1?role=admin&token=${userToken}`)
+        .send(statusToUpdateTo)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Status of order with id => 1, updated successfully.');
+          done();
+        });
+    });
+
+    it('should not update the status of an order', (done) => {
+      chai.request(app)
+        .put(`/api/v1/orders/2000?role=admin&token=${userToken}`)
+        .send(statusToUpdateTo)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
+          done();
+        });
+    });
+
+    it('should fail on empty status field', (done) => {
+      chai.request(app)
+        .put(`/api/v1/orders/1?role=admin&token=${userToken}`)
+        .send(emptyStatus)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('status cannot be empty');
+          done();
+        });
+    });
+
+    it('should fail if status is not [completed,accepted,rejected]', (done) => {
+      chai.request(app)
+        .put(`/api/v1/orders/1?role=admin&token=${userToken}`)
+        .send(wrongStatus)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('status must be either complete, new, processing, or cancelled');
+          done();
+        });
+    });
+
+    it('should fail on user not an admin', (done) => {
+      chai.request(app)
+        .put(`/api/v1/orders/1?role=user&token=${userToken}`)
+        .send(statusToUpdateTo)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+
+    it('should not update the status of an order if there is no token', (done) => {
+      chai.request(app)
+        .put('/api/v1/orders/1?role=admin')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not update the status of an order if token is wrong', (done) => {
+      chai.request(app)
+        .put('/api/v1/orders/1?role=admin&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(500);

@@ -3,9 +3,9 @@ import express from 'express';
 import {
   checkSignUpInput, validateEmail, userInDatabase,
   checkSignInInput, isLoggedIn, checkInput, oneItemInDatabase,
-  checkFoodInput, isAdmin,
+  checkFoodInput, isAdmin, orderInDatabase, checkStatusInput,
 } from '../helpers/index';
-import { signUp, signIn, newOrder, add, allOrders } from '../controllers/index';
+import { signUp, signIn, newOrder, add, allOrders, updateStatus } from '../controllers/index';
 
 // Express router
 const router = express.Router();
@@ -29,6 +29,10 @@ router.post('/orders', isLoggedIn, checkInput, oneItemInDatabase, newOrder.place
 /* If the user makes a GET request to the /orders route, isLoggeIn, isAdmin, hand control over
 to the allOrders controller */
 router.get('/orders', isLoggedIn, isAdmin, allOrders.ordersList);
+
+/* If the user makes a PUT request to the /orders/<orderId> route, isLoggeIn, isAdmin,
+checkStatusInput, hand control over over to the updateStatus controller */
+router.put('/orders/:orderId', isLoggedIn, isAdmin, orderInDatabase, checkStatusInput, updateStatus.orderStatus);
 
 // Export router
 export default router;
