@@ -358,4 +358,79 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+  // ==== Get all orders ==== //
+  describe(' GET /orders - get all orders', () => {
+    it('should list all orders', (done) => {
+      chai.request(app)
+        .get(`/api/v1/orders?role=admin&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.orders.should.be.a('array');
+          res.body.data.message.should.equal('All orders returned, thank you.');
+          done();
+        });
+    });
+
+    it('should fail on user not an admin', (done) => {
+      chai.request(app)
+        .get(`/api/v1/orders?role=user&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+
+    it('should not get all orders if there is no token', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders?role=admin')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not get all orders if token is wrong', (done) => {
+      chai.request(app)
+        .post('/api/v1/orders?role=admin&token=wrongtoken')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+  });
 });
