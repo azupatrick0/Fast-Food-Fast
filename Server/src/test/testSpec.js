@@ -5,276 +5,56 @@ import app from '../index';
 chai.use(chaiHttp);
 chai.should();
 
-const newestOrder = {
+
+// User details
+const userDetails = {
+  name: 'Azu Patrick',
   email: 'email@email.com',
-  items: [{
-    meal: 'fruttie',
-    quantity: 1,
-  },
-  {
-    meal: 'burger',
-    quantity: 1,
-  },
-  {
-    meal: 'veggie',
-    quantity: 2,
-  }],
-  location: 'Lagos',
+  password: 'password',
+  role: 'admin',
 };
 
-const invalidOrder = {
-  email: 'unregisteredemail@email.com',
-  items: [{
-    meal: 'fruttie',
-    quantity: 1,
-  },
-  {
-    meal: 'burger',
-    quantity: 1,
-  },
-  {
-    meal: 'veggie',
-    quantity: 2,
-  }],
-  location: 'Lagos',
-};
-
-const emptyInputs = {
+// Empty User details
+const emptySignUpInputs = {
+  name: '',
   email: '',
-  meal: '',
-  quantity: '',
-  location: '',
+  password: '',
+  role: '',
 };
 
 const invalidEmail = {
-  email: 'azzz@zssscom',
+  name: 'John Doe',
+  email: 'email2email.com',
+  password: 'password',
+  role: 'user',
 };
-
-const statusToUpdateTo = {
-  status: 'completed',
-};
-
-const emptyStatus = '';
 
 describe('Fast-Food-Fast Test Suite', () => {
-  // ==== Place a new order ==== //
+  // ==== Register a new user ==== //
 
-  describe(' POST /orders', () => {
-    it('should place a new order', (done) => {
+  describe(' POST auth/signup - register a new user', () => {
+    it('should return error on invalid email and not register a user', (done) => {
       chai.request(app)
-        .post('/api/v1/orders')
-        .send(newestOrder)
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(201);
-          res.body.should.be.a('object');
-          res.body.should.have.property('success');
-          res.body.should.have.property('data');
-          res.body.success.should.be.a('boolean');
-          res.body.data.should.be.a('object');
-          res.body.success.should.equal(true);
-          res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Your order has been processed, thank you.');
-          done();
-        });
-    });
-  });
-
-  describe(' POST /orders', () => {
-    it('should not place a new order', (done) => {
-      chai.request(app)
-        .post('/api/v1/orders')
-        .send(invalidOrder)
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('success');
-          res.body.should.have.property('data');
-          res.body.success.should.be.a('boolean');
-          res.body.data.should.be.a('object');
-          res.body.success.should.equal(false);
-          res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Sorry, user not found, order not made');
-          done();
-        });
-    });
-  });
-
-  describe(' POST /orders', () => {
-    it('should return error on empty input fields and not place a new order', (done) => {
-      chai.request(app)
-        .post('/api/v1/orders')
-        .send(emptyInputs)
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(400);
-          res.body.should.be.a('object');
-          res.body.should.have.property('success');
-          res.body.should.have.property('error');
-          res.body.success.should.be.a('boolean');
-          res.body.error.should.be.a('string');
-          res.body.success.should.equal(false);
-          done();
-        });
-    });
-  });
-
-  describe(' POST /orders', () => {
-    it('should return error on invalid email and not place a new order', (done) => {
-      chai.request(app)
-        .post('/api/v1/orders')
+        .post('/api/v1/auth/signup')
         .send(invalidEmail)
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(400);
           res.body.should.be.a('object');
-          res.body.should.have.property('success');
-          res.body.should.have.property('error');
-          res.body.success.should.be.a('boolean');
-          res.body.error.should.be.a('string');
-          res.body.success.should.equal(false);
-          done();
-        });
-    });
-  });
-
-
-  // ==== Get all orders ==== //
-  describe(' GET /orders', () => {
-    it('should list all orders', (done) => {
-      chai.request(app)
-        .get('/api/v1/orders?userType=admin')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(200);
-          res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
           res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
-          res.body.data.orders.should.be.a('array');
-          res.body.data.message.should.equal('All orders returned, thank you.');
-          done();
-        });
-    });
-  });
-
-  describe(' GET /orders', () => {
-    it('should fail on user not an admin', (done) => {
-      chai.request(app)
-        .get('/api/v1/orders?userType=user')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(403);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
           res.body.status.should.equal('fail');
-          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          res.body.data.message.should.equal('Invalid email address');
           done();
         });
     });
-  });
 
-  // ==== Fetch a specific order ==== //
-
-  describe(' GET /orders/<orderId>', () => {
-    it('should fetch a specific order', (done) => {
+    it('should return error on sign up details empty and not register a user', (done) => {
       chai.request(app)
-        .get('/api/v1/orders/2?userType=admin')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('success');
-          res.body.data.message.should.be.a('string');
-          res.body.data.order.should.be.a('object');
-          res.body.data.message.should.equal('specific order returned, thank you.');
-          done();
-        });
-    });
-  });
-
-  describe(' GET /orders/<orderId>', () => {
-    it('should not fetch a specific order', (done) => {
-      chai.request(app)
-        .get('/api/v1/orders/2000?userType=admin')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('fail');
-          res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
-          done();
-        });
-    });
-  });
-
-  // ==== Update the status of an order ==== //
-
-  describe(' PUT /orders', () => {
-    it('should update the status of an order', (done) => {
-      chai.request(app)
-        .put('/api/v1/orders/2?userType=admin')
-        .send(statusToUpdateTo)
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('success');
-          res.body.data.message.should.be.a('string');
-          res.body.data.order.should.be.a('array');
-          res.body.data.message.should.equal('Status of order with id => 2, updated successfully.');
-          done();
-        });
-    });
-  });
-
-
-  describe(' PUT /orders', () => {
-    it('should not update the status of an order', (done) => {
-      chai.request(app)
-        .put('/api/v1/orders/2000?userType=admin')
-        .send(statusToUpdateTo)
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('fail');
-          res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
-          done();
-        });
-    });
-  });
-
-  describe(' PUT /orders', () => {
-    it('should fail on empty status field', (done) => {
-      chai.request(app)
-        .put('/api/v1/orders/2?userType=admin')
-        .send(emptyStatus)
+        .post('/api/v1/auth/signup')
+        .send(emptySignUpInputs)
         .end((err, res) => {
           if (err) throw err;
           res.status.should.equal(400);
@@ -282,42 +62,20 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.should.have.property('status');
           res.body.should.have.property('data');
           res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('fail');
-          res.body.data.message.should.equal('status cannot be empty');
-          done();
-        });
-    });
-  });
-
-  // ==== Users order history ==== //
-  describe(' GET /users/orders', () => {
-    it('should not get orders is empty', (done) => {
-      chai.request(app)
-        .get('/api/v1/users/orders?email=aasas@sss.ssss')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('fail');
           res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Sorry, orders not found');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('name cannot be less than 3 characters');
           done();
         });
     });
-  });
 
-  describe(' GET /users/orders', () => {
-    it('should get orders', (done) => {
+    it('should register a new user', (done) => {
       chai.request(app)
-        .get('/api/v1/users/orders?email=email@email.com')
+        .post('/api/v1/auth/signup')
+        .send(userDetails)
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(200);
+          res.status.should.equal(201);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -325,49 +83,7 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.data.should.be.a('object');
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Orders found');
-          done();
-        });
-    });
-  });
-
-  // ==== Homepage ==== //
-  describe(' GET /api/v1', () => {
-    it('should return welcome page on visit to /api/v1', (done) => {
-      chai.request(app)
-        .get('/api/v1')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(200);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('success');
-          res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('Welcome to Fast-Food-Fast API, the most delicious API in the world');
-          done();
-        });
-    });
-  });
-
-  // ==== 404 ==== //
-  describe(' GET /*', () => {
-    it('should return 404 if the page is not found', (done) => {
-      chai.request(app)
-        .get('/api/v1/*')
-        .end((err, res) => {
-          if (err) throw err;
-          res.status.should.equal(404);
-          res.body.should.be.a('object');
-          res.body.should.have.property('status');
-          res.body.should.have.property('data');
-          res.body.status.should.be.a('string');
-          res.body.data.should.be.a('object');
-          res.body.status.should.equal('fail');
-          res.body.data.message.should.be.a('string');
-          res.body.data.message.should.equal('404, page not found');
+          res.body.data.message.should.equal('New user created');
           done();
         });
     });

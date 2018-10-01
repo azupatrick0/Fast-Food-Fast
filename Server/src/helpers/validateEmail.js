@@ -1,5 +1,5 @@
 const validateEmail = (req, res, next) => {
-  // New Order Details
+  // User email
   const {
     email,
   } = req.body;
@@ -7,8 +7,10 @@ const validateEmail = (req, res, next) => {
   if (!(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))) {
     // Invalid email
     return res.status(400).json({
-      success: false,
-      error: 'Invalid email address',
+      status: 'fail',
+      data: {
+        message: 'Invalid email address',
+      },
     });
   }
   // Call the next middleware

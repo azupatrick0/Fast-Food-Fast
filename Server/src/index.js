@@ -18,7 +18,6 @@ app.use('/api/v1', apiRoutes);
 
 // Error handler
 app.use((err, req, res, next) => {
-  console.error(err.stack);
   res.status(500).json({
     success: false,
     data: {
