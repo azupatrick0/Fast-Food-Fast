@@ -6,7 +6,7 @@ dotenv.config();
 let sqlQuery = `CREATE TABLE IF NOT EXISTS orders(id SERIAL NOT NULL PRIMARY KEY,
 menuid INT NOT NULL, userid INT NOT NULL, name VARCHAR(255) NOT NULL, 
 quantity INT NOT NULL, amount INT NOT NULL,
-location VARCHAR(255), status VARCHAR(255) DEFAULT 'pending', createdat TIMESTAMPTZ DEFAULT NOW(),
+location VARCHAR(255), status VARCHAR(255) DEFAULT 'new', createdat TIMESTAMPTZ DEFAULT NOW(),
 FOREIGN KEY(menuid) REFERENCES menu(id) ON DELETE CASCADE,
 FOREIGN KEY(userid) REFERENCES users(id) ON DELETE CASCADE)`;
 
@@ -16,7 +16,7 @@ if (process.env.NODE_ENV === 'test') {
   CREATE TABLE IF NOT EXISTS orders(id SERIAL NOT NULL PRIMARY KEY,
   menuid INT NOT NULL, userid INT NOT NULL, name VARCHAR(255) NOT NULL, 
   quantity INT NOT NULL, amount INT NOT NULL,
-  location VARCHAR(255), status VARCHAR(255) DEFAULT 'pending', createdat TIMESTAMPTZ DEFAULT NOW(),
+  location VARCHAR(255), status VARCHAR(255) DEFAULT 'new', createdat TIMESTAMPTZ DEFAULT NOW(),
   FOREIGN KEY(menuid) REFERENCES menu(id) ON DELETE CASCADE,
   FOREIGN KEY(userid) REFERENCES users(id) ON DELETE CASCADE)`;
 }

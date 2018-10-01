@@ -7,9 +7,11 @@ import checkInput from '../helpers/checkInput';
 import oneItemInDatabase from '../helpers/oneItemInDatabase';
 import checkFoodInput from '../helpers/checkFoodInput';
 import isAdmin from '../helpers/isAdmin';
+import orderInDatabase from '../helpers/orderInDatabase';
+import checkStatusInput from '../helpers/checkStatusInput';
 
 export {
   checkSignUpInput, validateEmail, userInDatabase,
   checkSignInInput, isLoggedIn, checkInput, oneItemInDatabase,
-  checkFoodInput, isAdmin,
+  checkFoodInput, isAdmin, orderInDatabase, checkStatusInput,
 };
