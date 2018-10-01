@@ -1,11 +1,17 @@
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
 import app from '../index';
 
 dotenv.config();
 chai.use(chaiHttp);
 chai.should();
+
+// Token
+const userToken = jwt.sign({ email: 'email@email.com' }, process.env.SECRET_KEY, {
+  expiresIn: 86400, // expires in 24 hours
+});
 
 // User details
 const userDetails = {
@@ -38,6 +44,27 @@ const loginDetails = {
 const invalidLogin = {
   email: '',
   password: 'dfd',
+};
+
+
+// New order
+const newestOrder = {
+  menuid: 1,
+  userid: 1,
+  name: 'Azu Patrick',
+  quantity: 1,
+  amount: 800,
+  location: 'Lagos',
+};
+
+// Empty order details
+const emptyInputs = {
+  menuid: '',
+  userid: '',
+  name: '',
+  quantity: '',
+  price: '',
+  location: '',
 };
 
 describe('Fast-Food-Fast Test Suite', () => {
@@ -138,6 +165,85 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Welcome, Azu Patrick');
+          done();
+        });
+    });
+  });
+
+  // ==== Place a new order ==== //
+
+  describe(' POST /orders - place a new order', () => {
+    it('should place a new order', (done) => {
+      chai.request(app)
+        .post(`/api/v1/orders?&token=${userToken}`)
+        .send(newestOrder)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(201);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          done();
+        });
+    });
+
+    it('should not place a new order if order inputs are empty', (done) => {
+      chai.request(app)
+        .post(`/api/v1/orders?&token=${userToken}`)
+        .send(emptyInputs)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('menu id cannot be empty');
+          done();
+        });
+    });
+
+    it('should not place a new order if there is no token', (done) => {
+      chai.request(app)
+        .post('/api/v1/orders')
+        .send(newestOrder)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not place a new order if token is wrong', (done) => {
+      chai.request(app)
+        .post('/api/v1/orders?token=wrongtoken')
+        .send(newestOrder)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
           done();
         });
     });
