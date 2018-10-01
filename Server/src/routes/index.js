@@ -3,8 +3,9 @@ import express from 'express';
 import {
   checkSignUpInput, validateEmail, userInDatabase,
   checkSignInInput, isLoggedIn, checkInput, oneItemInDatabase,
+  checkFoodInput, isAdmin,
 } from '../helpers/index';
-import { signUp, signIn, newOrder } from '../controllers/index';
+import { signUp, signIn, newOrder, add } from '../controllers/index';
 
 // Express router
 const router = express.Router();
@@ -17,10 +18,13 @@ router.post('/auth/signup', checkSignUpInput, validateEmail, userInDatabase, sig
 validateEmail, hand control over to the signIn controller */
 router.post('/auth/login', checkSignInInput, validateEmail, signIn.login);
 
+/* If the user makes a POST request to the /users/items route, isLoggedIn, isAdmin,
+checkFoodInput, hand control over to the add controller */
+router.post('/menu', isLoggedIn, isAdmin, checkFoodInput, add.food);
+
 /* If the user makes a POST request to the /orders route, checkInput, validateEmail,
 oneItemInDatabase, hand control over to the newOrder controller */
 router.post('/orders', isLoggedIn, checkInput, oneItemInDatabase, newOrder.placeOrder);
-
 
 // Export router
 export default router;

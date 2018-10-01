@@ -5,8 +5,11 @@ import checkSignInInput from '../helpers/checkSignInInput';
 import isLoggedIn from '../helpers/isLoggedIn';
 import checkInput from '../helpers/checkInput';
 import oneItemInDatabase from '../helpers/oneItemInDatabase';
+import checkFoodInput from '../helpers/checkFoodInput';
+import isAdmin from '../helpers/isAdmin';
 
 export {
   checkSignUpInput, validateEmail, userInDatabase,
   checkSignInInput, isLoggedIn, checkInput, oneItemInDatabase,
+  checkFoodInput, isAdmin,
 };
