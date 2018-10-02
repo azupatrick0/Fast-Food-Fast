@@ -89,6 +89,12 @@ const wrongStatus = {
   status: 'wrongstatus',
 };
 
+// Updated food item
+const updatedFoodItem = {
+  meal: 'Fruttie',
+  price: 700,
+};
+
 
 describe('Fast-Food-Fast Test Suite', () => {
   // ==== Register a new user ==== //
@@ -762,6 +768,103 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.status.should.equal('fail');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+  });
+
+  // ==== Admin can edit food items in the menu ==== //
+
+  describe(' PUT /menu/itemsId - edit a food item in the menu', () => {
+    it('should not edit a food item on empty inputs', (done) => {
+      chai.request(app)
+        .put(`/api/v1/menu/1?role=admin&token=${userToken}`)
+        .send(emptyFoodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(400);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('meal cannot be empty');
+          done();
+        });
+    });
+
+    it('should not edit a food item if no token is provided', (done) => {
+      chai.request(app)
+        .put('/api/v1/menu/1?role=admin')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not edit a food item if token is wrong', (done) => {
+      chai.request(app)
+        .put('/api/v1/menu/1?role=admin&token=wrongtoken')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+
+    it('should not edit a food item if role is not admin', (done) => {
+      chai.request(app)
+        .put(`/api/v1/menu/1?role=user&token=${userToken}`)
+        .send(emptyFoodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+
+    it('should edit a food item', (done) => {
+      chai.request(app)
+        .put(`/api/v1/menu/1?role=admin&token=${userToken}`)
+        .send(updatedFoodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Item with id => 1, updated successfully.');
           done();
         });
     });
