@@ -6,6 +6,7 @@ import add from './add';
 import allOrders from './allOrders';
 import updateStatus from './updateStatus';
 import specificOrder from './specificOrder';
+import retrieve from './retrieveMenu';
 
 // Export controllers
-export { signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder };
+export { signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve };
