@@ -8,6 +8,10 @@ import updateStatus from './updateStatus';
 import specificOrder from './specificOrder';
 import retrieve from './retrieveMenu';
 import history from './history';
+import edit from './edit';
 
 // Export controllers
-export { signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve, history };
+export {
+  signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve,
+  history, edit,
+};
