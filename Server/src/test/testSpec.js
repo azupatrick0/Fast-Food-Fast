@@ -575,4 +575,79 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+  // ==== Fetch a specific order ==== //
+
+  describe(' GET /orders/<orderId> - fetch a specific order', () => {
+    it('should fetch a specific order', (done) => {
+      chai.request(app)
+        .get(`/api/v1/orders/1?role=admin&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('specific order returned, thank you.');
+          done();
+        });
+    });
+
+    it('should not fetch a specific order', (done) => {
+      chai.request(app)
+        .get(`/api/v1/orders/2000?role=admin&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, order with id => 2000, not found');
+          done();
+        });
+    });
+
+    it('should fail on user not an admin', (done) => {
+      chai.request(app)
+        .get(`/api/v1/orders/1?role=user&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+
+    it('should not fetch a specific order if there is no token', (done) => {
+      chai.request(app)
+        .get('/api/v1/orders/1?role=admin')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+  });
 });
