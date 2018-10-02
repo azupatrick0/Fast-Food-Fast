@@ -708,4 +708,62 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+  // ==== User see history of ordered food ==== //
+
+  describe(' GET /users/<userId>/orders - user see history of ordered food', () => {
+    it('should help a user see history of ordered food', (done) => {
+      chai.request(app)
+        .get(`/api/v1/users/1/orders?&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('All orders history returned, thank you.');
+          done();
+        });
+    });
+
+    it('should not help a user see history of ordered food if there is no token', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/1/orders')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not help a user see history of ordered food if token is wrong', (done) => {
+      chai.request(app)
+        .get('/api/v1/users/1/orders?&token=wrongtoken')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+  });
 });
