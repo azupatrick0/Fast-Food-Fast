@@ -5,7 +5,7 @@ import {
   checkSignInInput, isLoggedIn, checkInput, oneItemInDatabase,
   checkFoodInput, isAdmin, orderInDatabase, checkStatusInput,
 } from '../helpers/index';
-import { signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve } from '../controllers/index';
+import { signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve, history } from '../controllers/index';
 
 // Express router
 const router = express.Router();
@@ -41,6 +41,10 @@ router.get('/orders/:orderId', isLoggedIn, isAdmin, specificOrder.oneOrder);
 /* If the user makes a GET request to the /menu route, isLoggeIn, hand control over
 to the retrieve controller */
 router.get('/menu', isLoggedIn, retrieve.menu);
+
+/* If the user makes a GET request to the /users/<userId>/orders route, isLoggedIn,
+hand control over to the history controller */
+router.get('/users/:userId/orders', isLoggedIn, history.orders);
 
 // Export router
 export default router;
