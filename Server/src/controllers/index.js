@@ -9,9 +9,10 @@ import specificOrder from './specificOrder';
 import retrieve from './retrieveMenu';
 import history from './history';
 import edit from './edit';
+import remove from './remove';
 
 // Export controllers
 export {
   signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve,
-  history, edit,
+  history, edit, remove,
 };

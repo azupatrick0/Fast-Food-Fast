@@ -8,7 +8,7 @@ import {
 } from '../helpers/index';
 import {
   signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve,
-  history, edit,
+  history, edit, remove,
 } from '../controllers/index';
 
 // Express router
@@ -50,10 +50,13 @@ router.get('/menu', isLoggedIn, retrieve.menu);
 hand control over to the history controller */
 router.get('/users/:userId/orders', isLoggedIn, history.orders);
 
-/* If the user makes a PUT request to the /users/items/<itemId> route, isLoggedIn,
+/* If the user makes a PUT request to the /menu/<itemId> route, isLoggedIn,
 isAdmin, checkItemsInput, itemsInDatabase hand control to over the edit controller */
 router.put('/menu/:itemId', isLoggedIn, isAdmin, itemsInDatabase, checkItemsInput, edit.items);
 
+/* If the user makes a DELETE request to the /menu/items/<itemId> route, isLoggedIn, isAdmin,
+itemsInDatabase hand control over to the remove controller */
+router.delete('/menu/items/:itemId', isLoggedIn, isAdmin, itemsInDatabase, remove.items);
 
 // Export router
 export default router;
