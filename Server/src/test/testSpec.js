@@ -869,4 +869,81 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+  // ==== Delete an item ==== //
+
+  describe(' DELETE /menu/items/itemId - delete a food item', () => {
+    it('should not delete a food item if no token is provided', (done) => {
+      chai.request(app)
+        .delete('/api/v1/menu/items/1?role=admin')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('No token provided.');
+          done();
+        });
+    });
+
+    it('should not delete a food item if token is wrong', (done) => {
+      chai.request(app)
+        .delete('/api/v1/menu/items/1?role=admin&token=wrongtoken')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(500);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Failed to authenticate user token.');
+          done();
+        });
+    });
+
+    it('should not delete a food item if role is not admin', (done) => {
+      chai.request(app)
+        .delete(`/api/v1/menu/items/1?role=user&token=${userToken}`)
+        .send(emptyFoodItem)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(403);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Sorry, only an admin can access this endpoint');
+          done();
+        });
+    });
+
+    it('should delete a food item', (done) => {
+      chai.request(app)
+        .delete(`/api/v1/menu/items/1?role=admin&token=${userToken}`)
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Item with id => 1, deleted successfully.');
+          done();
+        });
+    });
+  });
 });
