@@ -967,4 +967,25 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+  // ==== 404 ==== //
+  describe(' GET /*', () => {
+    it('should return 404 if the page is not found', (done) => {
+      chai.request(app)
+        .get('/api/v1/*')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(404);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('fail');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('404, page not found');
+          done();
+        });
+    });
+  });
 });

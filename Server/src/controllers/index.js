@@ -11,9 +11,10 @@ import history from './history';
 import edit from './edit';
 import remove from './remove';
 import homePage from './homepage';
+import notFoundPage from './notFoundPage';
 
 // Export controllers
 export {
   signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve,
-  history, edit, remove, homePage,
+  history, edit, remove, homePage, notFoundPage,
 };

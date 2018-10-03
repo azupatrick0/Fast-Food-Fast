@@ -8,7 +8,7 @@ import {
 } from '../helpers/index';
 import {
   signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve,
-  history, edit, remove, homePage,
+  history, edit, remove, homePage, notFoundPage,
 } from '../controllers/index';
 
 // Express router
@@ -61,6 +61,10 @@ router.delete('/menu/items/:itemId', isLoggedIn, isAdmin, itemsInDatabase, remov
 /* If the user makes a GET request to the /api/v1/ route, hand control over to the
 homePage controller */
 router.get('/', homePage.home);
+
+/* If the user makes a request to the /api/v1/* route, hand control
+to the notFound controller */
+router.get('*', notFoundPage.notFound);
 
 // Export router
 export default router;
