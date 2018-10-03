@@ -946,4 +946,25 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+  // ==== Homepage ==== //
+  describe(' GET /api/v1', () => {
+    it('should return welcome page on visit to /api/v1', (done) => {
+      chai.request(app)
+        .get('/api/v1')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
+          res.body.should.be.a('object');
+          res.body.should.have.property('status');
+          res.body.should.have.property('data');
+          res.body.status.should.be.a('string');
+          res.body.data.should.be.a('object');
+          res.body.status.should.equal('success');
+          res.body.data.message.should.be.a('string');
+          res.body.data.message.should.equal('Welcome to Fast-Food-Fast API, the most delicious API in the world');
+          done();
+        });
+    });
+  });
 });

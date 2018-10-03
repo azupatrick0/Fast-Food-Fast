@@ -8,7 +8,7 @@ import {
 } from '../helpers/index';
 import {
   signUp, signIn, newOrder, add, allOrders, updateStatus, specificOrder, retrieve,
-  history, edit, remove,
+  history, edit, remove, homePage,
 } from '../controllers/index';
 
 // Express router
@@ -57,6 +57,10 @@ router.put('/menu/:itemId', isLoggedIn, isAdmin, itemsInDatabase, checkItemsInpu
 /* If the user makes a DELETE request to the /menu/items/<itemId> route, isLoggedIn, isAdmin,
 itemsInDatabase hand control over to the remove controller */
 router.delete('/menu/items/:itemId', isLoggedIn, isAdmin, itemsInDatabase, remove.items);
+
+/* If the user makes a GET request to the /api/v1/ route, hand control over to the
+homePage controller */
+router.get('/', homePage.home);
 
 // Export router
 export default router;
