@@ -37,6 +37,8 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
   * [/orders.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/orders.html)  
   * [/admin.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/admin.html)  
   * [/history.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/history.html) 
+## Documentation
+[Link](https://fastfoodfast10.docs.apiary.io)
 ## API Routes
 * Register a user
 
