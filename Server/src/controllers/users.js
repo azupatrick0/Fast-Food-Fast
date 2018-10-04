@@ -6,8 +6,48 @@ import db from '../db/index';
 
 dotenv.config();
 
-// Sign in a user
-class signIn {
+class users {
+  // Sign up a user
+  static signup(req, res) {
+    // User details
+    const {
+      name,
+      email,
+      password,
+      role,
+    } = req.body;
+
+    // Encrypt password
+    const saltRounds = 10;
+    const encryptedPassword = bcrypt.hashSync(password, saltRounds);
+
+    const query = {
+      text: 'INSERT INTO users(name,email,password,role) VALUES($1,$2,$3,$4)',
+      values: [`${name}`, `${email}`, `${encryptedPassword}`, `${role}`],
+    };
+
+    // Insert new user into the database
+    return db.query(query, (err) => {
+      if (err) {
+        return res.status(500).json({
+          status: 'fail',
+          error: {
+            message: 'An error occured while trying to sign you up, please try again.',
+          },
+        });
+      }
+
+      // New user created
+      return res.status(201).json({
+        status: 'success',
+        data: {
+          message: 'New user created',
+        },
+      });
+    });
+  }
+
+  // Login a user
   static login(req, res) {
     // User details
     const {
@@ -76,5 +116,5 @@ class signIn {
   }
 }
 
-// Export signIn
-export default signIn;
+// Export users
+export default users;
