@@ -1,6 +1,10 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
 // Home page
 class homePage {
   static home(req, res) {
+    console.log(process.env.SECRET_KEY);
     // Home page found
     return res.status(200).json({
       status: 'success',
@@ -13,4 +17,3 @@ class homePage {
 
 // Export homePage
 export default homePage;
-

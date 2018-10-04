@@ -13,4 +13,3 @@ class notFoundPage {
 
 // Export notFoundPage
 export default notFoundPage;
-

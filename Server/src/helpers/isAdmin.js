@@ -1,12 +1,10 @@
 // Checks if user is an admin
 const isAdmin = (req, res, next) => {
-  // Get user type
-  const {
-    userType,
-  } = req.query;
+  // Get user role
+  const { role } = req.query;
 
   // User not an admin
-  if (!(userType === 'admin')) {
+  if (role !== 'admin') {
     return res.status(403).json({
       status: 'fail',
       data: {

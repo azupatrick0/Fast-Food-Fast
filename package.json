@@ -4,13 +4,19 @@
   "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
   "scripts": {
     "start": "npm run build && node ./Server/dist/index.js ",
-    "start:dev": "nodemon ./node_modules/babel-cli/bin/babel-node.js ./Server/src/index.js",
+    "start:dev": "npm run create-table-users-dev && npm run create-table-items-dev && npm run create-table-orders-dev  && cross-env NODE_ENV=development nodemon ./node_modules/babel-cli/bin/babel-node.js ./Server/src/index.js",
     "pretest": "npm run lint",
-    "test": "nyc mocha --exit ./Server/src/test/testSpec.js --require babel-register --timeout 20000",
+    "test": "npm run create-table-users-test && npm run create-table-items-test && npm run create-table-orders-test && cross-env NODE_ENV=test nyc mocha --exit ./Server/src/test/testSpec.js --require babel-register --timeout 25000",
     "build": "npm run clean && node ./node_modules/babel-cli/bin/babel.js ./Server/src -d ./Server/dist",
     "lint": "./node_modules/.bin/eslint ./Server --fix --ignore-path .gitignore",
     "clean": "rimraf ./Server/dist",
-    "coverage": "nyc report --reporter=text-lcov | coveralls"
+    "coverage": "nyc report --reporter=text-lcov | coveralls",
+    "create-table-users-dev": "cross-env NODE_ENV=development babel-node ./Server/src/models/users.js",
+    "create-table-items-dev": "cross-env NODE_ENV=development babel-node ./Server/src/models/menu.js",
+    "create-table-orders-dev": "cross-env NODE_ENV=development babel-node ./Server/src/models/orders.js",
+    "create-table-users-test": "cross-env NODE_ENV=test babel-node ./Server/src/models/users.js",
+    "create-table-items-test": "cross-env NODE_ENV=test babel-node ./Server/src/models/menu.js",
+    "create-table-orders-test": "cross-env NODE_ENV=test babel-node ./Server/src/models/orders.js"
   },
   "engines": {
     "node": "8.11.4"
@@ -36,12 +42,16 @@
     "body-parser": "^1.18.3",
     "chai": "^4.1.2",
     "chai-http": "^4.2.0",
-    "express": "^4.16.3"
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "jsonwebtoken": "^8.3.0",
+    "pg": "^7.4.3"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "coveralls": "^3.0.1",
+    "cross-env": "^5.2.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^12.1.0",
     "eslint-plugin-import": "^2.12.0",

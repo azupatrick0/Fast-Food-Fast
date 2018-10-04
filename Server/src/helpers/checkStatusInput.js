@@ -12,12 +12,12 @@ const checkStatusInput = (req, res, next) => {
         message: 'status cannot be empty',
       },
     });
-  } else if ((status !== 'completed') && (status !== 'accepted') && (status !== 'rejected')) {
+  } else if ((status !== 'complete') && (status !== 'new') && (status !== 'processing') && (status !== 'cancelled')) {
     // status not valid
     return res.status(400).json({
       status: 'fail',
       data: {
-        message: 'status must be either completed or accepted or rejected',
+        message: 'status must be either complete, new, processing, or cancelled',
       },
     });
   }
