@@ -15,35 +15,61 @@
 
 <body>
 
-    <div class="slide-dashboard flex">
-        <div class="app-description">
+    <div class="slide-dashboard">
+        <div class="blur">
+            <div class="nav-bar">
             <a href="dashboard.html">
                 <img src="images/ffflogo.png" alt="ffflogo" class="logo" /><strong>Fast-Food-Fast</strong>
             </a>
-            <div class="order" onclick="showLocation('orders.html')"> Order a Meal </div>
-            <div class="history" onclick="showLocation('history.html')"> Order History </div>
-        </div>
-
-        <div class="dashboard-box">
-            <button class="signout" onclick="showLocation('index.html')">SIGN OUT</button>
             <button class="signout primary" onclick="showLocation('admin.html')">ADMIN</button>
-            <div class="dashboard-properties">
-                <p>Welcome to your Dashboard</p>
-            </div>
-            <br/>
-            <img src="images/user.jpg" alt="user" /><br/><br/>
-            <form action="#" method="POST" class="form">
-                <input type="text" class="dashboardName" name="dashboardName" placeholder="Azu Patrick" readonly/>
-                <br/><br/>
-                <input type="email" class="dashboardEmail" name="dashboardEmail" placeholder="azupatrick0@gmail.com" readonly/>
-                <br/><br/>
-                <input type="password" class="dashboardPassword" name="dashboardPassword" placeholder="***********" readonly/>
-                <br/><br/>
-            </form>
-            <button class="update" onclick="redirect('dashboard.html')">Update</button>
-
+            <button class="signout" onclick="showLocation('orders.html')">ORDER A MEAL</button>
+            <button class="signout primary" onclick="showLocation('history.html')">ORDER HISTORY</button>
+            <button class="signout" onclick="showLocation('index.html')">SIGN OUT</button>
+            <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
+                <div class="tab-modal">
+                    <div class="tab-modal-link">
+                        <a href="admin.html">Admin</a>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <a href="orders.html">Order a meal</a>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/><a href="history.html">Order History</a>
+                        <br/>
+                        <br/>
+                        <hr/>
+                        <br/>
+                        <a href="index.html">Sign Out</a>
+                        <br/>
+                        <br/>
+                    </div>
+                </div>
         </div>
+            <br /><br /><br />
 
+            <div class="blur2">
+                <div class="dashboard-properties">
+                    <p><strong>Welcome to your Dashboard</strong></p>
+                </div>
+                <br />
+                <img src="images/user.jpg" alt="user" /><br /><br />
+                <form action="#" method="POST" class="form">
+                    <input type="text" class="dashboardName" name="dashboardName" placeholder="Azu Patrick" readonly />
+                    <br /><br />
+                    <input type="email" class="dashboardEmail" name="dashboardEmail" placeholder="azupatrick0@gmail.com"
+                        readonly />
+                    <br /><br />
+                    <input type="password" class="dashboardPassword" name="dashboardPassword" placeholder="***********"
+                        readonly />
+                    <br /><br />
+                </form>
+                <button class="update" onclick="redirect('dashboard.html')">Update</button>
+
+            </div>
+        </div>
     </div>
 
     <script src="./scripts/dashboardScript.js"></script>
