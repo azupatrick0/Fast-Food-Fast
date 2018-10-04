@@ -38,111 +38,66 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
   * [/admin.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/admin.html)  
   * [/history.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/history.html) 
 ## API Routes
+* Register a user
+
+    ``` 
+    POST /auth/signup
+    ```
+* Login a user
+
+    ``` 
+    POST /auth/login 
+    ```
 * Get a list of orders
 
     ``` 
     GET /orders 
     ```
-    ### req
-    
-      * params
-      req.query: userType=admin
-      e.g /orders?userType=admin
+* Get the order history for a  particular user. 
+
+    ``` 
+    GET /users/<userId>/orders
+    ``` 
 * Fetch a specific order
 
     ``` 
     GET /orders/<orderId>  
     ```
-  
-      * params
-      req.query: userType=admin
-      e.g /orders/2?userType=admin
+ 
 * Place a new order for food
 
     ``` 
     POST /orders  
     ```
-   ### req
-   
-  
-    * body: 
     
-      {
-            "email": "email2@email.com",
-            "items": [
-                {
-                    "meal": "fruttie",
-                    "quantity": 1
-                },
-                {
-                    "meal": "burger",
-                    "quantity": 1
-                },
-                {
-                    "meal": "veggie",
-                    "quantity": 2
-                }
-            ],
-            "location": "Lagos"
- }
-   ### res
-     {
-    "success": true,
-    "data": {
-        "message": "Your order has been processed, thank you.",
-        "newestOrder": {
-            "id": 4,
-            "email": "email2@email.com",
-            "items": [
-                {
-                    "meal": "fruttie",
-                    "quantity": 1
-                },
-                {
-                    "meal": "burger",
-                    "quantity": 1
-                },
-                {
-                    "meal": "veggie",
-                    "quantity": 2
-                }
-            ],
-            "location": "Lagos",
-            "created": "Fri Sep 28 2018",
-            "status": "pending"
-        }
-    }
-}
 * Update the order status
 
     ``` 
     PUT /orders/<orderId>   
     ```
-    ### req
-    
-    * body: 
-      
-      {
-        status: 'completed'
-      }
-      
-      * params
-      req.query: userType=admin
-      e.g /orders/2?userType=admin
-      
-     ### res
-      
-      {
-         status: 'success',
-         data: {
-             message: 'Status of order with id => 1, updated successfully.',
-         }
-      }
 
-* View orders history
+* Get available menu
 
     ``` 
-    GET users/orders
+    GET /menu
+    ```
+    
+* Add a meal option to the menu
+
+    ``` 
+    POST /menu
+    ```
+    
+* Edit food items in the menu
+
+    ``` 
+    PUT /menu/<itemId>
+    ```
+    
+* Delete food items from the menu
+
+    ``` 
+    DELETE /menu/items/<itemId>
     ```
     
 ## Installation
