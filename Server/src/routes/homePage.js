@@ -9,5 +9,9 @@ const router = express.Router();
 homePage controller */
 router.get('/', homePage.home);
 
+/* If the user makes a GET request to the /api/v1/docs route, hand control over to the
+Docs controller */
+router.get('/docs', homePage.docs);
+
 // Export router
 export default router;

@@ -17,7 +17,6 @@ if (process.env.NODE_ENV === 'test') {
 // Create users table in the database
 db.query(sqlQuery, (err, res) => {
   if (err) {
-    console.log(err);
     return res.status(500).json({
       status: 'fail',
       error: {

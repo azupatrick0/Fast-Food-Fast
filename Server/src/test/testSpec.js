@@ -207,7 +207,6 @@ describe('Fast-Food-Fast Test Suite', () => {
         .send(emptyFoodItem)
         .end((err, res) => {
           if (err) throw err;
-          console.log(userToken);
           res.status.should.equal(400);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
@@ -942,6 +941,19 @@ describe('Fast-Food-Fast Test Suite', () => {
           res.body.status.should.equal('success');
           res.body.data.message.should.be.a('string');
           res.body.data.message.should.equal('Item with id => 1, deleted successfully.');
+          done();
+        });
+    });
+  });
+
+  // ==== Docs ==== //
+  describe(' GET /api/v1/docs', () => {
+    it('should return API documenetation on visit to /api/v1/docs', (done) => {
+      chai.request(app)
+        .get('/api/v1/docs')
+        .end((err, res) => {
+          if (err) throw err;
+          res.status.should.equal(200);
           done();
         });
     });
