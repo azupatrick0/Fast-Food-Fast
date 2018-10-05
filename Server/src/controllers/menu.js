@@ -18,7 +18,6 @@ class menu {
 
     db.query(query, (err) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
@@ -56,7 +55,6 @@ class menu {
 
     db.query(query, (err) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
@@ -88,7 +86,6 @@ class menu {
 
     db.query(query, (err) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
@@ -110,7 +107,6 @@ class menu {
   static getFoodItems(req, res) {
     db.query('SELECT * FROM menu', (err, result) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {

@@ -21,7 +21,6 @@ class orders {
 
     db.query(query, (err) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
@@ -87,7 +86,6 @@ class orders {
 
     db.query(query, (err, result) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
@@ -131,7 +129,6 @@ class orders {
     // Select specific order from the database
     db.query(query, (err, result) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
@@ -178,7 +175,6 @@ class orders {
 
     db.query(query, (err) => {
       if (err) {
-        console.log(err);
         return res.status(500).json({
           status: 'fail',
           error: {
