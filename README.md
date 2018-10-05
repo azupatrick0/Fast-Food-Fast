@@ -102,6 +102,11 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
     DELETE /menu/items/<itemId>
     ```
     
+* Get API documentation
+
+    ``` 
+    GET /docs
+    ```
 ## Installation
  * Ensure you have node 8.x.x installed.
  
