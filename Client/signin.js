@@ -5,7 +5,7 @@ function login() {
   const signinEmail = document.querySelector('.signinEmail').value;
   const signinPassword = document.querySelector('.signinPassword').value;
   // Fetch from the server
-  fetch('http://localhost:3000/api/v1/auth/login', {
+  fetch('http://fast-food-fast.herokuapp.com/api/v1/auth/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
