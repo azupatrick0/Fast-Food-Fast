@@ -22,12 +22,12 @@ class users {
     const encryptedPassword = bcrypt.hashSync(password, saltRounds);
 
     const query = {
-      text: 'INSERT INTO users(name,email,password,role) VALUES($1,$2,$3,$4)',
+      text: 'INSERT INTO users(name,email,password,role) VALUES($1,$2,$3,$4) RETURNING *',
       values: [`${name}`, `${email}`, `${encryptedPassword}`, `${role}`],
     };
 
     // Insert new user into the database
-    return db.query(query, (err) => {
+    return db.query(query, (err, result) => {
       if (err) {
         return res.status(500).json({
           status: 'fail',
@@ -37,11 +37,18 @@ class users {
         });
       }
 
+      // If user is created, then create a token for the user
+      const token = jwt.sign({ email: `${email}` }, process.env.SECRET_KEY, {
+        expiresIn: 86400, // expires in 24 hours
+      });
+
       // New user created
       return res.status(201).json({
         status: 'success',
         data: {
           message: 'New user created',
+          userDetails: result.rows[0],
+          token,
         },
       });
     });
