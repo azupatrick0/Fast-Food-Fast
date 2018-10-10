@@ -32,17 +32,17 @@
             <br/>
 
             <form action="#" method="POST" class="form">
-                <input type="email" class="signinEmail" name="signinEmail" placeholder="Email" />
+                <input type="email" class="signinEmail" name="signinEmail" placeholder="Email" oninput="clearFeedback('.feedback')"/>
                 <span class="feedback"></span>
                 <br/><br/>
-                <input type="password" class="signinPassword" name="signinPassword" placeholder="Password" />
+                <input type="password" class="signinPassword" name="signinPassword" placeholder="Password" oninput="clearFeedback('.feedback2')"/>
                 <span class="feedback2"></span>
                 <br/><br/>
                 <a href="#" class="forgot-password">Forgot Password?</a>
                 <br/><br/>
             </form>
-            <button class="signin" onclick="redirect('dashboard.html')">Sign In</button>
-
+            <button class="signin" onclick="redirect()"><span class="signinText">Sign In</span> <span class="spinner"></span></button>
+            <span class="feedback3"></span>
             <div class="signin-properties">
                 <p> Dont have an account?
                     <a href="signup.html">Sign up</a>
@@ -52,7 +52,8 @@
 
     </div>
 
-    <script src="./scripts/signinScript.js"></script>
+    <script src="./signin.js"></script>
+    
 
 </body>
 
