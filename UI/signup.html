@@ -32,17 +32,19 @@
             <br/>
 
             <form action="#" method="POST" class="form">
-                <input type="text" class="signupName" name="signupName" placeholder="Name" />
+                <input type="text" class="signupName" name="signupName" placeholder="Name" oninput="clearFeedback('.feedback3')"/>
+                <span class="feedback3"></span>
                 <br/><br/>
-                <input type="email" class="signupEmail" name="signupEmail" placeholder="Email" />
+                <input type="email" class="signupEmail" name="signupEmail" placeholder="Email" oninput="clearFeedback('.feedback')"/>
                 <span class="feedback"></span>
                 <br/><br/>
-                <input type="password" class="signupPassword" name="signupPassword" placeholder="Password" />
+                <input type="password" class="signupPassword" name="signupPassword" placeholder="Password" oninput="clearFeedback('.feedback2')"/>
                 <span class="feedback2"></span>
                 <br/><br/>
+                <input type="hidden" class="signupRole" name="signupRole" value="user" />
             </form>
-            <button class="signup" onclick="redirect('dashboard.html')">Sign Up</button>
-
+            <button class="signup" onclick="redirect()"><span class="signupText">Sign Up</span> <span class="spinner"></span></button>
+            <span class="feedback4"></span>
             <div class="signup-properties">
                 <p> Already have an account?
                     <a href="signin.html">Sign in</a>
@@ -52,7 +54,7 @@
 
     </div>
 
-    <script src="./scripts/signupScript.js"></script>
+    <script src="./signup.js"></script>
 
 </body>
 
