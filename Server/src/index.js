@@ -1,6 +1,7 @@
 // Import modules
 import express from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { menu, orders, users, homePage, notFoundPage } from './routes/index';
 
 // Express app
@@ -12,6 +13,8 @@ const port = process.env.PORT || 3000;
 // Middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cors());
+
 // If the user makes a request to the /api/v1/menu route, hand control to the menu route
 app.use('/api/v1/menu', menu);
 
