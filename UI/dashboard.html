@@ -14,21 +14,24 @@
 </head>
 
 <body>
-
+    <div class="modal">
+        <p>Sorry, only an admin can access this link, thank you </p>
+        <button class="accept-btn" onclick="closeModal()">Ok</button><br /><br />
+    </div>
     <div class="slide-dashboard">
         <div class="blur">
             <div class="nav-bar">
             <a href="dashboard.html">
                 <img src="images/ffflogo.png" alt="ffflogo" class="logo" /><strong>Fast-Food-Fast</strong>
             </a>
-            <button class="signout primary" onclick="showLocation('admin.html')">ADMIN</button>
+            <button class="signout primary" onclick="showAdminLocation('admin.html')">ADMIN</button>
             <button class="signout" onclick="showLocation('orders.html')">ORDER A MEAL</button>
             <button class="signout primary" onclick="showLocation('history.html')">ORDER HISTORY</button>
             <button class="signout" onclick="showLocation('index.html')">SIGN OUT</button>
             <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
                 <div class="tab-modal">
                     <div class="tab-modal-link">
-                        <a href="admin.html">Admin</a>
+                        <a onclick="showAdminLocation('admin.html')">Admin</a>
                         <br/>
                         <br/>
                         <hr/>
@@ -55,24 +58,24 @@
                     <p><strong>Welcome to your Dashboard</strong></p>
                 </div>
                 <br />
-                <img src="images/user.jpg" alt="user" /><br /><br />
+                <img src="images/user.png" alt="user" /><br /><br />
                 <form action="#" method="POST" class="form">
-                    <input type="text" class="dashboardName" name="dashboardName" placeholder="Azu Patrick" readonly />
+                    <input type="text" class="dashboardName" name="dashboardName" value="" readonly/>
                     <br /><br />
-                    <input type="email" class="dashboardEmail" name="dashboardEmail" placeholder="azupatrick0@gmail.com"
+                    <input type="email" class="dashboardEmail" name="dashboardEmail" value=""
                         readonly />
                     <br /><br />
-                    <input type="password" class="dashboardPassword" name="dashboardPassword" placeholder="***********"
+                    <input type="password" class="dashboardPassword" name="dashboardPassword" value=""
                         readonly />
                     <br /><br />
                 </form>
-                <button class="update" onclick="redirect('dashboard.html')">Update</button>
+                <button class="update">Update</button>
 
             </div>
         </div>
     </div>
 
-    <script src="./scripts/dashboardScript.js"></script>
+    <script src="./dashboard.js"></script>
 
 </body>
 

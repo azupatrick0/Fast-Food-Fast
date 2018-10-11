@@ -13,6 +13,18 @@ a:hover {
     cursor: pointer;
 }
 
+.accept-btn {
+    background-color: rgba(111, 50, 192, 0.5);
+    color: white;
+    width: 80%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
 .app-description {
     background-color: rgba(255, 255, 255, 0.5);
     padding: 0.44em 0 1.25em 0;
@@ -129,6 +141,28 @@ img {
     margin-left: 0.3em;
 }
 
+.modal {
+    background-color: rgba(0,0,0,0.95);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    display: none;
+}
+
+.modal p {
+    margin-top: 10%;
+    text-align: center;
+    color:rgb(252, 227, 6);
+    font-size: 30px;   
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.modal button {
+    margin-left: 45%;
+    width: 12%;
+}
+
 p {
     font-size: 20px;
 }
@@ -184,6 +218,10 @@ p {
 /* High resolution tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
 
+    .accept-btn {
+        width: 100%;
+    }
+
    button {
        width: 18.5%;
    }
@@ -194,6 +232,9 @@ p {
 }
 /*Low resolution Tablets*/
 @media (min-width: 480px) and (max-width: 767px) {
+    .accept-btn {
+        width: 100%;
+    }
     
     .slide-dashboard {
         background-position: center;
@@ -266,6 +307,10 @@ p {
         font-size: 30px;
     }
 
+    .modal .accept-btn {
+        width: 30vw;
+        margin-left: 35%;
+    }
       
     .tab-modal {
         background-color: rgba(93, 81, 134, 0.7);
