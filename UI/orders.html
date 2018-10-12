@@ -14,7 +14,14 @@
 </head>
 
 <body>
-
+    <div class="modal">
+        <p>An error occured while retrieving available menu, please try again </p>
+        <button class="accept-btn" onclick="closeModal('.modal')">Ok</button><br /><br />
+    </div>
+    <div class="modal modal2">
+        <p>Cart cannot be empty</p>
+        <button class="accept-btn" onclick="closeModal('.modal2')">Ok</button><br /><br />
+    </div>
     <header>
         <nav>
             <div class="nav-bar">
@@ -22,7 +29,7 @@
                     <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
                 </a>
                 <a href="history.html" class="order">History</a>
-                <a href="signout.html" class="history">Sign Out</a>
+                <a href="index.html" class="history">Sign Out</a>
                 <button onclick="showLocation('orders.html')" class="signout">ORDER</button>
                 <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
                 <div class="tab-modal">
@@ -56,53 +63,23 @@
                 <div class="flex">
                     <div class="flex-items cart">
                         <p><strong>Cart</strong></p>
-                        <table>
-                            <tr>
-                                <td>
-                                    <img src="images/food1.jpg" alt="food" />Fruttie * 1 = &#8358;400.00
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/food2.png" alt="food" />Burger * 1 = &#8358;200.00
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/food3.png" alt="food" />Veggie * 2 = &#8358;700.00
-                                </td>
-                            </tr>
+                        <table class="first-table">
+                            
                         </table>
                     </div>
                     <div class="flex-items">
                         <p><strong>Delicious Meals</strong></p>
                         <table class="second-table">
-                            <tr>
-                                <td>
-                                    <img src="images/food1.jpg" alt="food" /><br/> Fruttie &nbsp;&nbsp;&nbsp;&nbsp;&#8358;400
-                                    <button class="meal-button">Add to cart</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/food2.png" alt="food" /><br/> Burger &nbsp;&nbsp;&nbsp;&nbsp;&#8358;200
-                                    <button class="meal-button">Add to cart</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="images/food3.png" alt="food" /><br/> Veggie &nbsp;&nbsp;&nbsp;&nbsp;&#8358;350
-                                    <button class="meal-button">Add to cart</button>
-                                </td>
-                            </tr>
+                            <div class="spinner"></div>
                         </table>
                     </div>
                     <div class="flex-items">
                         <p><strong>Checkout</strong></p>
-                        <table>
+                        <table class="third-table">
                             <tr>
                                 <td>
-                                    Delivery Location <select>
+                                    Delivery Location
+                                    <select class="location">
                                         <option>Abuja</option>
                                         <option>Lagos</option>
                                         <option>Port Harcourt</option>
@@ -111,24 +88,24 @@
                             </tr>
                             <tr>
                                 <td>
-                                    Delivery Date &#10236; 7<sup>th</sup> October, 2018
+                                    Delivery Date &#10236; <span class="date"></span>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="radio"> Pay on Delivery
+                                    <input type="radio" name="radio"> Pay on Delivery
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <input type="radio"> Pay with debit card <img src="images/debit_card.png" class="debit-card"
+                                    <input type="radio" name="radio"> Pay with debit card <img src="images/debit_card.png" class="debit-card"
                                         alt="debit card" />
                                 </td>
                             </tr>
                             <tr>
                                 <td>
                                     <button class="order-button" onclick="orderResponse()">
-                                        Order
+                                        <span class="orderValue">Order</span> <span class="orderSpinner"></span>
                                     </button>
                                 </td>
                             </tr>
@@ -139,7 +116,7 @@
             </div>
     </div>
 
-    <script src="./scripts/orderScript.js"></script>
+    <script src="./orders.js"></script>
 
 </body>
 
