@@ -19,7 +19,7 @@ class orders {
       values: [`${menuid}`, `${userid}`, `${name}`, `${quantity}`, `${amount}`, `${location}`],
     };
 
-    db.query(query, (err) => {
+    db.query(query, (err, result) => {
       if (err) {
         return res.status(500).json({
           status: 'fail',
@@ -34,6 +34,7 @@ class orders {
         status: 'success',
         data: {
           message: 'Your order has been processed, thank you.',
+          orderDetails: result.rows[0],
         },
       });
     });

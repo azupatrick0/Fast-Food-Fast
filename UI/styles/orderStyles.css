@@ -13,6 +13,18 @@ a:hover {
     cursor: pointer;
 }
 
+.accept-btn {
+    background-color: rgba(111, 50, 192, 0.5);
+    color: white;
+    width: 80%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
 .blur {
     position: absolute;
     z-index: -1;
@@ -91,6 +103,12 @@ button:hover {
     font-size: 20px;
 }
 
+.first-table button, .second-table button {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 3.125em;
+}
+
 .flex {
     display: flex;
 }
@@ -98,6 +116,7 @@ button:hover {
 .flex-items {
     margin-left: 3%; 
     width: 31vw;
+    overflow-x: auto;
 }
 
 .flex-items p {
@@ -125,15 +144,48 @@ img {
     border-radius: 100%;
 }
 
+input[type=number] {
+    width: 10vw;
+    font-size: 18px;
+    padding: 0.5em;
+    border-radius: 5px;
+    color: plum;
+    box-shadow: 1px 0px 6px 2px rgba(116, 116, 199, 0.5);
+}
+
 .logo {
     height: 25px;
     width: 3%;
 }
 
-.meal-button, .order-button{
+.order-button{
     width: 100%;
     margin-left: 0;
+    margin-right: 3.125em;
 }
+
+.modal {
+    background-color: rgba(0,0,0,0.95);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    display: none;
+}
+
+.modal p {
+    margin-top: 10%;
+    text-align: center;
+    color:rgb(252, 227, 6);
+    font-size: 30px;   
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.modal button {
+    margin-left: 45%;
+    width: 12%;
+}
+
 
 .nav-bar {
     font-size: 14px;
@@ -160,6 +212,30 @@ img {
 
 .order:hover {
     color: red;
+}
+
+
+.orderSpinner {
+    width: 3%;
+    height: 5vh;
+    border: 12px solid white;
+    border-radius: 10%;
+    animation: ordercyclic 1s infinite;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    margin: -2% 0 0 20%;
+}
+
+
+@-webkit-keyframes ordercyclic {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes ordercyclic {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 p {
@@ -191,6 +267,29 @@ select {
     margin: 0;
 }
 
+.spinner {
+    width: 25%;
+    height: 35vh;
+    border: 12px solid white;
+    border-radius: 10%;
+    animation: cyclic 1s infinite;
+    display: none;
+    position: absolute;
+    z-index: 1;
+}
+
+
+@-webkit-keyframes cyclic {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes cyclic {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
 .tab-modal {
     display: none;
 }
@@ -219,12 +318,16 @@ tr:nth-child(even) {
 }
 
 .second-table td,th {
-    padding: 15px;
+    padding: 10px;
 }
 
 
 /* High resolution tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
+
+    .accept-btn {
+        width: 100%;
+    }
     
     .blur2 {
         margin-left: 1em;
@@ -243,6 +346,15 @@ tr:nth-child(even) {
         margin-left: 40%;
     }
 
+    .flex-items {
+        overflow-x: auto;
+    }
+
+    .first-table button, .second-table button {
+        width: 12vw;
+        margin-left: 0;
+    }
+
     .hamburger {
         display: inline;
         position: absolute;
@@ -255,9 +367,8 @@ tr:nth-child(even) {
         display: none;
     }
 
-    .meal-button {
-        width: 12vw;
-        margin-left: 0;
+    input[type=number] {
+        width: 13vw;
     }
 
     .nav-bar {
@@ -299,6 +410,10 @@ tr:nth-child(even) {
 
 /*Low resolution Tablets*/
 @media (min-width: 481px) and (max-width: 767px) {
+
+    .accept-btn {
+        width: 100%;
+    }
 
     .blur {
         height: 130em;
@@ -345,7 +460,11 @@ tr:nth-child(even) {
     .history, .signout, .order {
         display: none;
     }
-    
+
+    input[type=number] {
+        width: 16vw;
+    }
+
     .nav-bar {
         text-align: unset;
     }
@@ -358,6 +477,13 @@ tr:nth-child(even) {
     .slide0 p { 
         padding: 30% 0 0 8%; 
         font-size: 30px;
+    }
+
+    .spinner {
+        width: 15%;
+        height: 25vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
     }
 
     .tab-modal {
@@ -448,10 +574,20 @@ tr:nth-child(even) {
     .history, .signout, .order {
         display: none;
     }
-   
+
+    input[type=number] {
+        width: 22vw;
+    }
+
     .logo {
         width: 8%;
     }
+
+    .modal .accept-btn {
+        width: 30vw;
+        margin-left: 35%;
+    }
+      
 
     .nav-bar {
         text-align: unset;
@@ -461,6 +597,13 @@ tr:nth-child(even) {
     .slide0 p { 
         padding: 30% 0 0 8%; 
         font-size: 30px;
+    }
+    
+    .spinner {
+        width: 25%;
+        height: 15vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
     }
 
     .tab-modal {
