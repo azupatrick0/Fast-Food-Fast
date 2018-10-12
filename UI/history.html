@@ -14,41 +14,16 @@
 </head>
 
 <body>
+        <div class="modal modal2">
+                <p>An error occured while retrieving all your orders history, please try again</p>
+                <button class="reject-btn" onclick="closeModal('.modal2')">Ok</button><br /><br />
+            </div>
+            <div class="modal modal3">
+                <p>You have no history of ordered food, thank you.</p>
+                <button class="reject-btn" onclick="closeModal('.modal3')">Ok</button><br /><br />
+            </div>
         <div class="modal modal1">
-                <p>Food Items </p>
-                <table class="first-table">
-                    <th>
-                        Ordered Meal
-                    </th>
-                    <th>
-                        Quantity
-                    </th>
-                    <tr>
-                        <td>
-                            <img src="images/food1.jpg" alt="food" class="img" />Fruttie
-                        </td>
-                        <td>
-                            1
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="images/food2.png" alt="food" class="img" />Burger
-                        </td>
-                        <td>
-                            1
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="images/food3.png" alt="food" class="img" />Veggie
-                        </td>
-                        <td>
-                            2
-                        </td>
-                    </tr>
-                </table><br/><br/>
-                <button class="reject-btn" onclick="closeModal('.modal1')">Close</button>
+            
             </div>
 
     <header>
@@ -87,106 +62,18 @@
         <div class="blur"></div>
         <p><br/>
             <span class="centre"><strong>Order History</strong></span><br/><br/>
-            <div><input type="text" class="search-history" placeholder="Search History" /> <button class="search-btn">Search</button></div><br/>
-            <div class="blur2">
+           <div class="blur2">
                 <div class="flex">
                     <div class="flex-items"><br/><br/><br/><br/><br/>
-                        <table>
-                            <!-- START OF HISTORY HEADING -->
-                            <tr>
-                                <th>
-                                    S/N
-                                </th>
-                                <th>
-                                    Ordered Meal
-                                </th>
-                                <th>
-                                    Amount
-                                </th>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Location
-                                </th>
-                                <th>
-                                    Status
-                                </th>
-                            </tr>
-                            <!-- END OF HISTORY HEADING -->
-                            <!-- START OF HISTORY BODY-1 -->
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
-                                </td>
-                                <td>
-                                    400
-                                </td>
-                                <td>
-                                    7/10/2018
-                                </td>
-                                <td>
-                                    Lagos
-                                </td>
-                                <td>
-                                    Accepted
-                                </td>
-                            </tr>
-                            <!-- END OF HISTORY BODY-1 -->
-                            <!-- START OF HISTORY BODY-2 -->
-                            <tr>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
-                                </td>
-                                <td>
-                                    200
-                                </td>
-                                <td>
-                                    31/08/2018
-                                </td>
-                                <td>
-                                    Abuja
-                                </td>
-                                <td>
-                                    Rejected
-                                </td>
-                            </tr>
-                            <!-- END OF HISTORY BODY-2 -->
-                            <!-- START OF HISTORY BODY-3 -->
-                            <tr>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
-                                </td>
-                                <td>
-                                    700
-                                </td>
-                                <td>
-                                    31/08/2018
-                                </td>
-                                <td>
-                                    Lagos
-                                </td>
-                                <td>
-                                    Completed
-                                </td>
-                            </tr>
-                            <!-- END OF HISTORY BODY-3 -->
+                        <table class="second-table">
+                                <span class="spinner"></span>
                         </table>
                     </div>
                 </div>
             </div>
     </div>
 
-    <script src="./scripts/historyScript.js"></script>
+    <script src="./history.js"></script>
 
 </body>
 

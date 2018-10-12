@@ -82,6 +82,33 @@ button:hover {
     cursor: pointer;
 }
 
+.bigdiv {
+    font-size: 30px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5em;
+    width: 100%;
+    display: flex;
+}
+
+.bigdiv div {
+    margin: 0 auto;
+}
+
+.bigdiv2 {
+    font-size: 30px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5em;
+    width: 100;
+    text-align: center;
+    display: flex;
+}
+
+.bigdiv2 div {
+    margin: 0 auto;
+}
+
 .centre {
     margin-left: 37%;
     color: red;
@@ -138,11 +165,6 @@ img {
     z-index: 3;
     display: none;
 }
-
-/*.modal4 {
-    display: block;
-}*/
-
 
 .modal p {
     margin-top: 10%;
@@ -244,6 +266,29 @@ p {
     font-family: 'Ubuntu Condensed', sans-serif;
     padding-top: 3.5%; 
     margin: 0;
+}
+
+.spinner {
+    width: 12%;
+    height: 20vh;
+    border-top: 15px solid rgb(228, 95, 95);
+    border-radius: 100%;
+    animation: cyclic 1s infinite;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    margin-left: 40%;
+}
+
+
+@-webkit-keyframes cyclic {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes cyclic {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 .tab-modal {
@@ -401,6 +446,13 @@ tr:nth-child(even) {
         font-size: 30px;
     }
 
+    .spinner {
+        width: 15%;
+        height: 25vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
+    }
+
     .tab-modal {
         background-color: rgba(93, 81, 134, 0.5);
         position: fixed;
@@ -504,6 +556,13 @@ tr:nth-child(even) {
     .slide0 p { 
         padding: 10% 0 0 8%; 
         font-size: 30px;
+    }
+
+    .spinner {
+        width: 25%;
+        height: 15vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
     }
 
     .tab-modal {
