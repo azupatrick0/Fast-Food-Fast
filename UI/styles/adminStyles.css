@@ -29,6 +29,33 @@ a:hover {
     width: 100%;
 }
 
+.bigdiv {
+    font-size: 30px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5em;
+    width: 100%;
+    display: flex;
+}
+
+.bigdiv div {
+    margin: 0 auto;
+}
+
+.bigdiv2 {
+    font-size: 30px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0.5em;
+    width: 100;
+    text-align: center;
+    display: flex;
+}
+
+.bigdiv2 div {
+    margin: 0 auto;
+}
+
 .blur {
     position: absolute;
     z-index: -1;
@@ -106,6 +133,15 @@ button:hover {
     border-radius: 0;
 }
 
+.feedback {
+    display: none;
+    background-color: plum;
+    padding: 0.5em 0 0.2em 0.5em;
+    color: white;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    font-size: 20px;
+}
+
 .flex {
     display: flex;
 }
@@ -120,14 +156,9 @@ button:hover {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-
-form {
-    margin-left: 30%;
-}
-
 input {
     height: 47px;
-    width: 60%;
+    width: 40%;
     outline: none;
     border: 1.5px solid rgba(0,0,255,0.3);
     text-overflow: ellipsis;
@@ -135,6 +166,7 @@ input {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
     border-radius: 5px;
+    margin-left: 30%;
 }
 
 input:focus {
@@ -234,6 +266,30 @@ img {
     color: red;
 }
 
+.orderstable button {
+    background-color: rgba(111, 50, 192, 0.5);
+    color: white;
+    width: 80%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
+.orderstable .reject-btn {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    width: 80%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
 p {
     font-size: 20px;
 }
@@ -325,6 +381,29 @@ select:focus {
     margin: 0;
 }
 
+.spinner {
+    width: 12%;
+    height: 20vh;
+    border-top: 15px solid rgb(228, 95, 95);
+    border-radius: 100%;
+    animation: cyclic 1s infinite;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    margin-left: 43%;
+}
+
+
+@-webkit-keyframes cyclic {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes cyclic {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
 .tab-modal {
     display: none;
 }
@@ -404,7 +483,7 @@ tr:nth-child(even) {
         margin-left: 40%;
     }
     
-    .first-table .reject-btn {
+    .orderstable button {
         width: 100%;
     }
 
@@ -514,7 +593,7 @@ tr:nth-child(even) {
     }
 
     
-    .first-table .reject-btn {
+    .orderstable button {
         width: 100%;
     }
 
@@ -541,6 +620,13 @@ tr:nth-child(even) {
     .slide0 p { 
         padding: 10% 0 0 8%; 
         font-size: 30px;
+    }
+
+    .spinner {
+        width: 15%;
+        height: 25vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
     }
 
     .tab-modal {
@@ -642,7 +728,7 @@ tr:nth-child(even) {
     }
 
     
-    .first-table .reject-btn {
+    .orderstable button {
         width: 100%;
     }
 
@@ -677,6 +763,13 @@ tr:nth-child(even) {
     .slide0 p { 
         padding: 10% 0 0 8%; 
         font-size: 30px;
+    }
+
+    .spinner {
+        width: 25%;
+        height: 15vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
     }
 
     .tab-modal {

@@ -13,88 +13,86 @@
 
 </head>
 
-<body>
+<body class="adminBody">
+    <div class="modal modalSpinner">
+        <p>Updating </p>
+        <span class="spinner"></span>
+    </div>
+    <div class="modal modalSpinner2">
+        <p>Deleting </p>
+        <span class="spinner"></span>
+    </div>
+    <div class="modal modalSpinner3">
+            <p>Adding Item </p>
+            <span class="spinner"></span>
+        </div>
     <div class="modal">
         <p>Are you sure you want to Accept this order? </p>
-        <button class="accept-btn" onclick="accepted()">Accept</button><br /><br />
+        <button class="accept-btn accept-btn1">Accept</button><br /><br />
         <button class="reject-btn" onclick="closeModal('.modal')">Cancel</button>
     </div>
+    <div class="modal modalError2">
+        <p> An error occured while retrieving all orders, please try again</p>
+        <button class="reject-btn" onclick="closeModal('.modalError2')">Ok</button>
+    </div>
+    <div class="modal modalError3">
+        <p> An error occured while retrieving available menu, please try again</p>
+        <button class="reject-btn" onclick="closeModal('.modalError2')">Ok</button>
+    </div>
+    <div class="modal modalError4">
+        <p> No food items found in the menu, thank you.</p>
+        <button class="reject-btn" onclick="closeModal('.modalError2')">Ok</button>
+    </div>
+    
+    <div class="modal modalAdd">
+            <p>New food item added to menu successfully.</p>
+            <button class="reject-btn" onclick="closeModal('.modalAdd')">Ok</button>
+        </div>
+        <div class="modal modalAddError">
+                <p> An error occured while trying to add new food item to menu, please try again.</p>
+                <button class="reject-btn" onclick="closeModal('.modalAddError')">Ok</button>
+            </div>
+    <div class="modal modalDeleted">
+        <p> Item deleted successfully</p>
+        <button class="reject-btn" onclick="closeModal('.modalDeleted')">Ok</button>
+    </div>
+
+    <div class="modal modalNoOrders">
+        <p> No orders found, thank you. </p>
+        <button class="reject-btn" onclick="closeModal('.modalNoOrders')">Ok</button>
+    </div>
+
     <div class="modal modal1">
         <p>Are you sure you want to Decline this order? </p>
-        <button class="accept-btn" onclick="declined()">Accept</button><br /><br />
+        <button class="accept-btn accept-btn2">Accept</button><br /><br />
         <button class="reject-btn" onclick="closeModal('.modal1')">Cancel</button>
     </div>
     <div class="modal modal2">
         <p>Are you sure you want to Complete this order? </p>
-        <button class="accept-btn" onclick="completed()">Accept</button><br /><br />
+        <button class="accept-btn accept-btn3">Accept</button><br /><br />
         <button class="reject-btn" onclick="closeModal('.modal2')">Cancel</button>
     </div>
     <div class="modal modal3">
         <p>Add food items </p>
         <form action="#" method="POST" class="form">
-            <input type="text" class="sn" name="sn" placeholder="S/N" />
+            <input type="text" class="add-food-item" name="food-item" placeholder="Food Item" />
             <br /><br />
-            <input type="text" class="food-item" name="food-item" placeholder="Food Item" />
+            <input type="text" class="add-price" name="price" placeholder="Price" />
             <br /><br />
-            <input type="text" class="price" name="price" placeholder="Price" />
-
-            <br /><br />
+            <span class="feedback"></span>
         </form>
-        <button class="accept-btn" onclick="addItem()">Add</button><br /><br />
+        <button class="accept-btn accept-btn-add">Add</button><br /><br />
         <button class="reject-btn" onclick="closeModal('.modal3')">Cancel</button>
     </div>
-    <div class="modal modal4">
-        <p>Edit food item </p>
-        <form action="#" method="POST" class="form">
-            <input type="text" class="eserial" name="sn" placeholder="S/N" />
-            <br /><br />
-            <input type="text" class="efood-item" name="food-item" placeholder="Food Item" />
-            <br /><br />
-            <input type="text" class="eprice" name="price" placeholder="Price" />
-            <br /><br />
-        </form>
-        <button class="accept-btn" onclick="editItem()">Edit</button><br /><br />
-        <button class="reject-btn" onclick="closeModal('.modal4')">Cancel</button>
+    <div class="edit">
+
     </div>
     <div class="modal modal5">
-        <p>Food Items </p>
-        <table class="first-table">
-            <th>
-                Ordered Meal
-            </th>
-            <th>
-                Quantity
-            </th>
-            <tr>
-                <td>
-                    <img src="images/food1.jpg" alt="food" class="img" />Fruttie
-                </td>
-                <td>
-                    1
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="images/food2.png" alt="food" class="img" />Burger
-                </td>
-                <td>
-                    1
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <img src="images/food3.png" alt="food" class="img" />Veggie
-                </td>
-                <td>
-                    2
-                </td>
-            </tr>
-        </table><br/><br/>
         <button class="reject-btn" onclick="closeModal('.modal5')">Close</button>
     </div>
     <div class="modal modal6">
-        <p>Are you sure you want to Delete this order? </p>
-        <button class="accept-btn" onclick="deleted()">Accept</button><br /><br />
+        <p>Are you sure you want to Delete this food item? </p>
+        <button class="accept-btn accept-btn6">Accept</button><br /><br />
         <button class="reject-btn" onclick="closeModal('.modal6')">Cancel</button>
     </div>
     <header>
@@ -133,7 +131,7 @@
         <p><br />
             <span class="centre"><strong>Admin Dashboard</strong></span><br /><br />
             <div class="quick-access">
-                <button onclick="showModalAdd()" class="brk">
+                <button onclick="addItem()" class="brk">
                     <img src="images/add.png" alt="add" /><br /> Add Food Items
                 </button>
                 <button onclick="scrollDown()">
@@ -145,215 +143,22 @@
                 <div class="flex">
                     <div class="flex-items">
                         <p><strong>List of Orders</strong></p>
-                        <table class="first-table">
-                            <!-- START OF ORDERS HEADING -->
-                            <tr>
-                                <th>
-                                    S/N
-                                </th>
-                                <th>
-                                    Name
-                                </th>
-                                <th>
-                                    Orders
-                                </th>
-                                <th>
-                                    Amount
-                                </th>
-                                <th>
-                                    Date
-                                </th>
-                                <th>
-                                    Location
-                                </th>
-                                <th>
-                                    Status
-                                </th>
-                                <th>
-                                    Completed
-                                </th>
-                            </tr>
-                            <!-- END OF ORDERS HEADING -->
-                            <!-- START OF ORDERS BODY-1 -->
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    Azu Patrick
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
-                                </td>
-                                <td>
-                                    400
-                                </td>
-                                <td>
-                                    7/10/2018
-                                </td>
-                                <td>
-                                    Lagos
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept1" onclick="showModalAccept('.accept1')">Accept</button>
-                                    <button class="reject-btn decline1" onclick="showModalDecline('.decline1')">Decline</button>
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept-btn-big completed1" onclick="showModalCompleted('.completed1')">Complete</button>
-                                </td>
-                            </tr>
-                            <!-- END OF ORDERS BODY-1 -->
-                            <!-- START OF ORDERS BODY-2 -->
-                            <tr>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    John Doe
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept1" onclick="showModalItems('.accept1')">View Items</button>
-                                </td>
-                                <td>
-                                    200
-                                </td>
-                                <td>
-                                    31/08/2018
-                                </td>
-                                <td>
-                                    Abuja
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept2" onclick="showModalAccept('.accept2')">Accept</button>
-                                    <button class="reject-btn decline2" onclick="showModalDecline('.decline2')">Decline</button>
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept-btn-big completed2" onclick="showModalCompleted('.completed2')">Complete</button>
-                                </td>
-                            </tr>
-                            <!-- END OF ORDERS BODY-2 -->
-                            <!-- START OF ORDERS BODY-3 -->
-                            <tr>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    Ada Doe
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept2" onclick="showModalItems('.accept2')">View Items</button>
-                                </td>
-                                <td>
-                                    700
-                                </td>
-                                <td>
-                                    31/08/2018
-                                </td>
-                                <td>
-                                    Lagos
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept3" onclick="showModalAccept('.accept3')">Accept</button>
-                                    <button class="reject-btn decline3" onclick="showModalDecline('.decline3')">Decline</button>
-                                </td>
-                                <td>
-                                    <button class="accept-btn accept-btn-big completed3" onclick="showModalCompleted('.completed3')">Complete</button>
-                                </td>
-                            </tr>
-                            <!-- END OF ORDERS BODY-3 -->
+                        <table class="orderstable">
+
                         </table>
                         <div class="modal"></div>
                         <br />
                         <br />
                         <p>List of Food Items</p>
                         <table class="second-table">
-                            <!-- START OF FOOD ITEMS HEADING -->
-                            <tr>
-                                <th>
-                                    S/N
-                                </th>
-                                <th>
-                                    Food Item
-                                </th>
-                                <th>
-                                    Price
-                                </th>
-                                <th>
-                                    Edit
-                                </th>
-                                <th>
-                                    Delete
-                                </th>
-                            </tr>
-                            <!-- END OF FOOD ITEMS HEADING -->
-                            <!-- START OF FOOD ITEMS BODY-1 -->
-                            <tr>
-                                <td>
-                                    1
-                                </td>
-                                <td>
-                                    <img src="images/food1.jpg" alt="food" class="img" />Fruttie
-                                </td>
-                                <td>
-                                    400
-                                </td>
-                                <td>
 
-                                    <button class="edit-btn" onclick="showModalEdit(1)">Edit</button>
-                                </td>
-                                <td>
-
-                                    <button class="reject-btn" onclick="deleteItem(1)">Delete</button>
-                                </td>
-                            </tr>
-                            <!-- END OF FOOD ITEMS BODY-1 -->
-                            <!-- START OF FOOD ITEMS BODY-2 -->
-                            <tr>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    <img src="images/food2.png" alt="food" class="img" /> Burger
-                                </td>
-                                <td>
-                                    200
-                                </td>
-                                <td>
-
-                                    <button class="edit-btn" onclick="showModalEdit(2)">Edit</button>
-                                </td>
-                                <td>
-
-                                    <button class="reject-btn" onclick="deleteItem(2)">Delete</button>
-                            </tr>
-                            <!-- END OF FOOD ITEMS BODY-2 -->
-                            <!-- START OF FOOD ITEMS BODY-3 -->
-                            <tr>
-                                <td>
-                                    3
-                                </td>
-                                <td>
-                                    <img src="images/food3.png" alt="food" class="img" /> Veggie
-                                </td>
-                                <td>
-                                    350
-                                </td>
-                                <td>
-
-                                    <button class="edit-btn" onclick="showModalEdit(3)">Edit</button>
-                                </td>
-                                <td>
-
-                                    <button class="reject-btn" onclick="deleteItem(3)">Delete</button>
-                            </tr>
-                            <!-- END OF FOOD ITEMS BODY-3 -->
                         </table>
                     </div>
                 </div>
             </div>
     </div>
 
-    <script src="./scripts/adminScript.js"></script>
+    <script src="./admin.js"></script>
 
 </body>
 

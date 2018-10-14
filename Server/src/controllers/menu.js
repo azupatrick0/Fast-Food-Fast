@@ -16,7 +16,7 @@ class menu {
       values: [`${meal}`, `${price}`],
     };
 
-    db.query(query, (err) => {
+    db.query(query, (err, result) => {
       if (err) {
         return res.status(500).json({
           status: 'fail',
@@ -31,6 +31,7 @@ class menu {
         status: 'success',
         data: {
           message: 'New food item added to menu successfully.',
+          newFoodItem: result.rows[0],
         },
       });
     });
@@ -105,7 +106,7 @@ class menu {
   }
 
   static getFoodItems(req, res) {
-    db.query('SELECT * FROM menu', (err, result) => {
+    db.query('SELECT * FROM menu ORDER BY id ASC', (err, result) => {
       if (err) {
         return res.status(500).json({
           status: 'fail',
