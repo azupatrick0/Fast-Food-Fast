@@ -42,7 +42,7 @@ class orders {
 
   // Get all orders
   static getAllOrders(req, res) {
-    db.query('SELECT * FROM orders', (err, result) => {
+    db.query('SELECT * FROM orders ORDER BY id ASC', (err, result) => {
       if (err) {
         return res.status(500).json({
           status: 'fail',
@@ -81,7 +81,7 @@ class orders {
     } = req.params;
 
     const query = {
-      text: 'SELECT * FROM orders WHERE userid = $1',
+      text: 'SELECT * FROM orders WHERE userid = $1 ORDER BY id DESC',
       values: [`${userId}`],
     };
 
