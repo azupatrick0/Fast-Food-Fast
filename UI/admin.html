@@ -14,6 +14,12 @@
 </head>
 
 <body class="adminBody">
+
+    <div class="modal">
+        <p>Are you sure you want to Accept this order? </p>
+        <button class="accept-btn accept-btn1">Accept</button><br /><br />
+        <button class="reject-btn" onclick="closeModal('.modal')">Cancel</button>
+    </div>
     <div class="modal modalSpinner">
         <p>Updating </p>
         <span class="spinner"></span>
@@ -23,13 +29,8 @@
         <span class="spinner"></span>
     </div>
     <div class="modal modalSpinner3">
-            <p>Adding Item </p>
-            <span class="spinner"></span>
-        </div>
-    <div class="modal">
-        <p>Are you sure you want to Accept this order? </p>
-        <button class="accept-btn accept-btn1">Accept</button><br /><br />
-        <button class="reject-btn" onclick="closeModal('.modal')">Cancel</button>
+        <p>Adding Item </p>
+        <span class="spinner"></span>
     </div>
     <div class="modal modalError2">
         <p> An error occured while retrieving all orders, please try again</p>
@@ -43,15 +44,31 @@
         <p> No food items found in the menu, thank you.</p>
         <button class="reject-btn" onclick="closeModal('.modalError2')">Ok</button>
     </div>
-    
+
     <div class="modal modalAdd">
-            <p>New food item added to menu successfully.</p>
-            <button class="reject-btn" onclick="closeModal('.modalAdd')">Ok</button>
-        </div>
-        <div class="modal modalAddError">
-                <p> An error occured while trying to add new food item to menu, please try again.</p>
-                <button class="reject-btn" onclick="closeModal('.modalAddError')">Ok</button>
-            </div>
+        <p>New food item added to menu successfully.</p>
+        <button class="reject-btn" onclick="closeModal('.modalAdd')">Ok</button>
+    </div>
+    <div class="modal modalAddError">
+        <p> An error occured while trying to add new food item to menu, please try again.</p>
+        <button class="reject-btn" onclick="closeModal('.modalAddError')">Ok</button>
+    </div>
+    <div class="modal modalSearchError">
+        <p> Search id is not an integer</p>
+        <button class="reject-btn" onclick="closeModal('.modalSearchError')">Ok</button>
+    </div>
+    <div class="modal modalSearchError2">
+        <p> An error occured while trying to get the specific order, please try again.</p>
+        <button class="reject-btn" onclick="closeModal('.modalSearchError2')">Ok</button>
+    </div>
+    <div class="modal modalSearchNotFound">
+        <p> Sorry, order with this id, not found</p>
+        <button class="reject-btn" onclick="closeModal('.modalSearchNotFound')">Ok</button>
+    </div>
+    <div class="modal modalSearchSpinner">
+        <p>Searching</p>
+        <span class="spinner"></span>
+    </div>
     <div class="modal modalDeleted">
         <p> Item deleted successfully</p>
         <button class="reject-btn" onclick="closeModal('.modalDeleted')">Ok</button>
@@ -138,12 +155,16 @@
                     <img src="images/edit.png" alt="add" /><br /> Food Items
                 </button>
             </div>
-            <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn">Search</button></div><br />
+            <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn"
+                    onclick="getSpecificOrder()">Search</button></div><br />
             <div class="blur2">
                 <div class="flex">
                     <div class="flex-items">
                         <p><strong>List of Orders</strong></p>
                         <table class="orderstable">
+
+                        </table>
+                        <table class="specific-order-table">
 
                         </table>
                         <div class="modal"></div>
