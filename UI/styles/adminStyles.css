@@ -381,6 +381,34 @@ select:focus {
     margin: 0;
 }
 
+ .specific-order-table {
+    display: none;
+}
+
+.specific-order-table button {
+    background-color: rgba(111, 50, 192, 0.5);
+    color: white;
+    width: 100%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
+.specific-order-table .reject-btn {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    width: 100%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
 .spinner {
     width: 12%;
     height: 20vh;
@@ -433,6 +461,10 @@ tr:nth-child(even) {
 
 .second-table td {
     padding: 10px 10px 10px 60px;
+}
+
+.specific-order-table td, .specific-order-table th {
+    padding: 10px 10px 10px 80px;
 }
 
 /* High resolution laptops */

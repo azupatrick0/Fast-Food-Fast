@@ -13,6 +13,10 @@ const modalNoOrders = document.querySelector('.modalNoOrders');
 const modalSpinner = document.querySelector('.modalSpinner');
 const modalSpinner2 = document.querySelector('.modalSpinner2');
 const modalSpinner3 = document.querySelector('.modalSpinner3');
+const modalSearchError = document.querySelector('.modalSearchError');
+const modalSearchError2 = document.querySelector('.modalSearchError2');
+const modalSearchSpinner = document.querySelector('.modalSearchSpinner');
+const modalSearchNotFound = document.querySelector('.modalSearchNotFound');
 const modal1 = document.querySelector('.modal1');
 const modal2 = document.querySelector('.modal2');
 const modal3 = document.querySelector('.modal3');
@@ -45,6 +49,7 @@ const verifyToken = () => {
           ** Table header
           */
           const trheading = document.createElement('tr');
+          trheading.classList.add('trheading');
           const th1 = document.createElement('th');
           const th2 = document.createElement('th');
           const th3 = document.createElement('th');
@@ -104,6 +109,7 @@ const verifyToken = () => {
             completeBtn.innerText = 'Complete';
             // Create new table elements
             const tr = document.createElement('tr');
+            tr.classList.add(`trorders${orders.id}`);
             const td1 = document.createElement('td');
             const td2 = document.createElement('td');
             const td3 = document.createElement('td');
@@ -516,6 +522,38 @@ const addItem = () => {
   });
 };
 
+// Get a specific order
+const getSpecificOrder = () => {
+  let searchId = document.querySelector('.search-history').value;
+  searchId = Number(searchId);
+  if (!(Number.isInteger(+searchId)) || searchId === '' || searchId === null || searchId === undefined) {
+    modalSearchError.style.display = 'block';
+  }
+  const trhead = document.querySelector('.trheading');
+  const trorder = document.querySelector(`.trorders${searchId}`)
+  modalSearchSpinner.style.display = 'block';
+  fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${searchId}?role=${role}&token=${token}`)
+    .then(ress => ress.json())
+    .then((resultt) => {
+      if (resultt.data.message === 'specific order returned, thank you.') {
+        // Search successful
+        modalSearchSpinner.style.display = 'none';
+        document.querySelector('.orderstable').style.display = 'none';
+        document.querySelector('.specific-order-table').appendChild(trhead);
+        document.querySelector('.specific-order-table').appendChild(trorder);
+        document.querySelector('.specific-order-table').style.display = 'block';
+      } else if (resultt.data.message === 'An error occured while trying to get the specific order, please try again.') {
+        // Error occured
+        modalSearchSpinner.style.display = 'none';
+        modalSearchError2.style.display = 'block';
+      } else if (resultt.data.message === `Sorry, order with id => ${searchId}, not found`) {
+        // No order with the id
+        modalSearchSpinner.style.display = 'none';
+        modalSearchNotFound.style.display = 'block';
+      }
+    });
+};
+
 // Hamburger icon
 const hamburger = document.querySelector('.hamburger');
 
@@ -537,7 +575,7 @@ const showNavbar = (value) => {
 // Scroll down
 const scrollDown = () => {
   window.scrollTo({
-    top: 660,
+    top: 800,
     behavior: 'smooth',
   });
 };
