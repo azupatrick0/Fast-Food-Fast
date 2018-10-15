@@ -47,10 +47,15 @@ const verifyToken = () => {
             addBtn.innerText = 'Add to cart';
             // Create new table elements
             const tr = document.createElement('tr');
+            tr.classList.add(`tr-meal${food.id}`);
             const td1 = document.createElement('td');
+            td1.classList.add(`td1-meal${food.id}`);
             const td2 = document.createElement('td');
+            td2.classList.add(`td2-meal${food.id}`);
             const td3 = document.createElement('td');
+            td3.classList.add(`td3-meal${food.id}`);
             const td4 = document.createElement('td');
+            td4.classList.add(`td4-meal${food.id}`);
             const input = document.createElement('input');
             input.classList.add(`quantity${food.id}`);
             input.setAttribute('placeholder', 'Quantity');
@@ -59,6 +64,7 @@ const verifyToken = () => {
             input.setAttribute('readonly', '');
             td4.appendChild(input);
             const td5 = document.createElement('td');
+            td5.classList.add(`td5-meal${food.id}`);
             // Insert values into the table elements
             td1.appendChild(img);
             td2.innerText = food.meal;
@@ -95,35 +101,43 @@ const addToCart = (val) => {
   img.classList.add('img');
   // Create table elements
   const tr = document.createElement('tr');
+  tr.classList.add(`tr-cart${val}`);
   const td1 = document.createElement('td');
+  td1.classList.add(`td1-cart${val}`);
   const td2 = document.createElement('td');
+  td2.classList.add(`td2-cart${val}`);
   const td3 = document.createElement('td');
+  td3.classList.add(`td3-cart${val}`);
   // Insert values into the table elements
   td1.appendChild(img);
-  td2.innerText = secondTable.rows[val - 1].cells[1].innerText;
-  td3.innerText = secondTable.rows[val - 1].cells[2].innerText;
+  td2.innerText = document.querySelector(`.td2-meal${val}`).innerText;
+  td3.innerText = document.querySelector(`.td3-meal${val}`).innerText;
   let quantity = document.querySelector(`.quantity${val}`).value;
   quantity = Number(quantity);
   const td4 = document.createElement('td');
+  td4.classList.add(`td4-cart${val}`);
   td4.innerHTML = Number(0);
   td4.innerHTML = +(td4.innerHTML) + quantity;
   const td5 = document.createElement('td');
+  td5.classList.add(`td5-cart${val}`);
   const td6 = document.createElement('td');
+  td6.classList.add(`td6-cart${val}`);
   const td7 = document.createElement('td');
+  td7.classList.add(`td7-cart${val}`);
   // Plus button
   const plusBtn = document.createElement('button');
-  plusBtn.classList.add('plus-button');
-  plusBtn.setAttribute('onclick', `plus(${val - 1})`);
+  plusBtn.classList.add(`plus-button${val}`);
+  plusBtn.setAttribute('onclick', `plus(${val})`);
   plusBtn.innerText = '+';
   // Minus button
   const minusBtn = document.createElement('button');
-  minusBtn.classList.add('minus-button');
-  minusBtn.setAttribute('onclick', `minus(${val - 1})`);
+  minusBtn.classList.add(`minus-button${val}`);
+  minusBtn.setAttribute('onclick', `minus(${val})`);
   minusBtn.innerText = '-';
   // Delete button
   const delBtn = document.createElement('button');
-  delBtn.classList.add('del-button');
-  delBtn.setAttribute('onclick', `deleteRow(${val - 1})`);
+  delBtn.classList.add(`del-button${val}`);
+  delBtn.setAttribute('onclick', `deleteRow(${val})`);
   delBtn.innerText = 'x';
   td5.appendChild(plusBtn);
   td6.appendChild(minusBtn);
@@ -140,8 +154,8 @@ const addToCart = (val) => {
     menuid: foodId,
     userid,
     name,
-    quantity: firstTable.rows[val - 1].cells[3].innerHTML,
-    amount: firstTable.rows[val - 1].cells[2].innerHTML,
+    quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
+    amount: document.querySelector(`.td3-cart${val}`).innerHTML,
     location: document.querySelector('.location').value,
   });
   console.log(cart);
@@ -150,26 +164,74 @@ const addToCart = (val) => {
 
 // Add more items to cart
 const plus = (val) => {
-  firstTable.rows[val].cells[3].innerHTML = +(firstTable.rows[val].cells[3].innerHTML) + 1;
-  firstTable.rows[val].cells[2].innerHTML = +(secondTable.rows[val].cells[2].innerHTML) *
-    firstTable.rows[val].cells[3].innerHTML;
-  cart[val].quantity = firstTable.rows[val].cells[3].innerHTML;
-  cart[val].amount = firstTable.rows[val].cells[2].innerHTML;
+  const foodId = val;
+  document.querySelector(`.td4-cart${val}`).innerHTML = +(document.querySelector(`.td4-cart${val}`).innerHTML) + 1;
+  document.querySelector(`.td3-cart${val}`).innerHTML = +(document.querySelector(`.td3-meal${val}`).innerHTML) *
+    document.querySelector(`.td4-cart${val}`).innerHTML;
+  //cart[val-1].quantity = document.querySelector(`.td4-cart${val}`).innerHTML;
+  //cart[val-1].amount = document.querySelector(`.td3-cart${val}`).innerHTML;
+  cart.push({
+    menuid: foodId,
+    userid,
+    name,
+    quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
+    amount: document.querySelector(`.td3-cart${val}`).innerHTML,
+    location: document.querySelector('.location').value,
+  });
+
+  // Remove the first duplicate item
+  const duplicateItem = cart.find(obj => obj.menuid === val);
+  console.log(duplicateItem)
+  delete (duplicateItem.menuid);
+  delete (duplicateItem.userid);
+  delete (duplicateItem.name);
+  delete (duplicateItem.quantity);
+  delete (duplicateItem.amount);
+  delete (duplicateItem.location);
+  console.log(cart);
 };
 
 // Remove more items from cart
 const minus = (val) => {
-  firstTable.rows[val].cells[3].innerHTML -= 1;
-  firstTable.rows[val].cells[2].innerHTML -= +(secondTable.rows[val].cells[2].innerHTML);
-  cart[val].quantity = firstTable.rows[val].cells[3].innerHTML;
-  cart[val].amount = firstTable.rows[val].cells[2].innerHTML;
+  const foodId = val;
+  document.querySelector(`.td4-cart${val}`).innerHTML -= 1;
+  document.querySelector(`.td3-cart${val}`).innerHTML -= +(document.querySelector(`.td3-meal${val}`).innerHTML);
+  cart.push({
+    menuid: foodId,
+    userid,
+    name,
+    quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
+    amount: document.querySelector(`.td3-cart${val}`).innerHTML,
+    location: document.querySelector('.location').value,
+  });
+  // Remove the first duplicate item
+  const duplicateItem = cart.find(obj => obj.menuid === val);
+  console.log(duplicateItem)
+  delete (duplicateItem.menuid);
+  delete (duplicateItem.userid);
+  delete (duplicateItem.name);
+  delete (duplicateItem.quantity);
+  delete (duplicateItem.amount);
+  delete (duplicateItem.location);
+  console.log(cart);
 };
 
 // Delete cart row
 const deleteRow = (val) => {
-  firstTable.removeChild(firstTable.rows[val]);
-  cart[val] = [];
-  document.querySelector(`.meal-button${val + 1}`).removeAttribute('disabled');
+  firstTable.removeChild(document.querySelector(`.tr-cart${val}`));
+  
+  // Remove the first duplicate item
+  const duplicateItem = cart.find(obj => obj.menuid === val);
+  console.log(duplicateItem)
+  delete (duplicateItem.menuid);
+  delete (duplicateItem.userid);
+  delete (duplicateItem.name);
+  delete (duplicateItem.quantity);
+  delete (duplicateItem.amount);
+  delete (duplicateItem.location);
+  console.log(cart);
+  document.querySelector(`.meal-button${val}`).removeAttribute('disabled');
+  
 };
 
 // Order response
@@ -182,32 +244,34 @@ const orderResponse = () => {
     orderSpinner.style.display = 'block';
     // loop through cart and post orders to the database
     cart.forEach((order) => {
-      fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders?token=${token}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          menuid: order.menuid,
-          userid: order.userid,
-          name: order.name,
-          quantity: order.quantity,
-          amount: order.amount,
-          location: order.location,
-        }),
-      })
-        .then(res => res.json())
-        .then((result) => {
-          if (result.status === 'fail') {
-            feedback.innerHTML = 'An error occured while trying to process your order, please try again.';
-            feedback.style.display = 'block';
-          } else if (result.status === 'success') {
-            feedback.innerHTML = 'Your order has been processed, thank you';
-            feedback.style.display = 'block';
-            document.querySelector('.orderValue').innerHTML = 'Order';
-            orderSpinner.style.display = 'none';
-          }
-        });
+      if (Object.keys(order).length > 0) {
+        fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders?token=${token}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            menuid: order.menuid,
+            userid: order.userid,
+            name: order.name,
+            quantity: order.quantity,
+            amount: order.amount,
+            location: order.location,
+          }),
+        })
+          .then(res => res.json())
+          .then((result) => {
+            if (result.status === 'fail') {
+              feedback.innerHTML = 'An error occured while trying to process your order, please try again.';
+              feedback.style.display = 'block';
+            } else if (result.status === 'success') {
+              feedback.innerHTML = 'Your order has been processed, thank you';
+              feedback.style.display = 'block';
+              document.querySelector('.orderValue').innerHTML = 'Order';
+              orderSpinner.style.display = 'none';
+            }
+          });
+      }
     });
   }
 };
