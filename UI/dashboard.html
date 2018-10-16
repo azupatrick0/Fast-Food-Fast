@@ -27,7 +27,7 @@
             <button class="signout primary" onclick="showAdminLocation('https://fast-food-fast.herokuapp.com/admin.html')">ADMIN</button>
             <button class="signout" onclick="showLocation('https://fast-food-fast.herokuapp.com/orders.html')">ORDER A MEAL</button>
             <button class="signout primary" onclick="showLocation('https://fast-food-fast.herokuapp.com/history.html')">ORDER HISTORY</button>
-            <button class="signout" onclick="showLocation('https://fast-food-fast.herokuapp.com/index.html')">SIGN OUT</button>
+            <button class="signout" onclick="logout()">SIGN OUT</button>
             <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
                 <div class="tab-modal">
                     <div class="tab-modal-link">
@@ -45,7 +45,7 @@
                         <br/>
                         <hr/>
                         <br/>
-                        <a href="https://fast-food-fast.herokuapp.com/index.html">Sign Out</a>
+                        <a onclick="logout()">Sign Out</a>
                         <br/>
                         <br/>
                     </div>

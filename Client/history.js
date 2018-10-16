@@ -192,3 +192,8 @@ window.addEventListener('click', (event) => {
 const showLocation = (link) => {
   location.href = link;
 };
+
+const logout = () => {
+  window.localStorage.clear();
+  showLocation('https://fast-food-fast.herokuapp.com/index.html');
+};

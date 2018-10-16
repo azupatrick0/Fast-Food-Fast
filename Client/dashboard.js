@@ -77,3 +77,8 @@ window.addEventListener('click', (event) => {
     tabModal.style.display = 'none';
   }
 });
+
+const logout = () => {
+  window.localStorage.clear();
+  showLocation('https://fast-food-fast.herokuapp.com/index.html');
+};

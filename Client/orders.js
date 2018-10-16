@@ -343,3 +343,8 @@ const deliveryDate = () => {
   return date;
 };
 document.querySelector('.date').innerHTML = deliveryDate();
+
+const logout = () => {
+  window.localStorage.clear();
+  showLocation('https://fast-food-fast.herokuapp.com/index.html');
+};
