@@ -24,6 +24,7 @@ const verifyToken = () => {
         if (result.status === 'success') {
           // Hide spinner
           spinner.style.display = 'none';
+          let sum = 0;
           /*
           ** Table header
           */
@@ -55,6 +56,7 @@ const verifyToken = () => {
             const viewItemsBtn = document.createElement('button');
             viewItemsBtn.classList.add('accept-btn');
             viewItemsBtn.setAttribute('onclick', `showModalItems(${history.id})`);
+            sum += 1;
             items.push({
               id: Number(`${history.id}`),
               menuid: `${history.menuid}`,
@@ -70,9 +72,9 @@ const verifyToken = () => {
             const td4 = document.createElement('td');
             const td5 = document.createElement('td');
             // Insert values into the table elements
-            td1.innerText = `${history.id}`;
+            td1.innerText = sum;
             td2.appendChild(viewItemsBtn);
-            td3.innerText = `${history.createddate}`;
+            td3.innerText = `${history.createdat}`;
             td4.innerText = `${history.location}`;
             td5.innerText = `${history.status}`;
             tr.appendChild(td1);
@@ -112,8 +114,10 @@ const div3 = document.createElement('div');
 const bigdiv = document.createElement('div');
 bigdiv.classList.add('bigdiv');
 const div4 = document.createElement('div');
-const div5 = document.createElement('div');
-const div6 = document.createElement('div');
+const div5 = document.createElement('p');
+const div6 = document.createElement('p');
+const div7 = document.createElement('p');
+const div8 = document.createElement('p');
 const bigdiv2 = document.createElement('div');
 bigdiv2.classList.add('bigdiv2');
 
@@ -126,18 +130,22 @@ modalbtn.innerHTML = 'Ok';
 const showModalItems = (val) => {
   // Found items
   const found = items.find(obj => obj.id === val);
-  div4.textContent = 'Items Id';
-  div5.textContent = 'Quantity';
-  div6.textContent = 'Amount';
-  bigdiv2.appendChild(div4);
+  div5.innerHTML = 'Order Id';
+  div6.innerHTML = 'Items Id';
+  div7.innerHTML = 'Quantity';
+  div8.innerHTML = 'Amount';
   bigdiv2.appendChild(div5);
   bigdiv2.appendChild(div6);
-  div1.textContent = found.menuid;
-  div2.textContent = found.quantity;
-  div3.textContent = found.amount;
+  bigdiv2.appendChild(div7);
+  bigdiv2.appendChild(div8);
+  div1.textContent = found.id;
+  div2.textContent = found.menuid;
+  div3.textContent = found.quantity;
+  div4.textContent = found.amount;
   bigdiv.appendChild(div1);
   bigdiv.appendChild(div2);
   bigdiv.appendChild(div3);
+  bigdiv.appendChild(div4);
   modal1.innerHTML = '';
   modal1.appendChild(bigdiv2);
   modal1.appendChild(bigdiv);
