@@ -29,21 +29,20 @@ a:hover {
     position: absolute;
     z-index: -1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 67.5em;
     width: 100%;
-    margin: -1.3em 0 0 0;
-    padding: 0;
+    margin: 0;
+    padding: 2em 0 15em 0;
 }
 
 .blur2 {
     position: relative;
     z-index: 1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 29em;
     width: 95%;
     margin-left: 2em;
-    padding-right: 1.5em;
+    padding: 0 1.5em 6em 0;
 }
+
 
 body {
     width: 100%;
@@ -96,16 +95,18 @@ button:hover {
 }
 
 .bigdiv2 {
-    font-size: 30px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     padding: 0.5em;
     width: 100;
-    text-align: center;
     display: flex;
 }
 
-.bigdiv2 div {
+.bigdiv2 p {
+    margin-left: 3%;
+}
+
+.bigdiv2 p {
     margin: 0 auto;
 }
 
@@ -170,7 +171,7 @@ img {
     margin-top: 10%;
     text-align: center;
     color:rgb(252, 227, 6);
-    font-size: 30px;   
+    font-size: 20px;   
     font-family: 'Ubuntu Condensed', sans-serif;
 }
 
@@ -318,8 +319,18 @@ tr:nth-child(even) {
     background-color: rgba(99, 87, 87, 0.2);
 }
 
+/* High resolution laptops */
+@media (min-width: 1366px) {
+    td:nth-child(3) {
+        padding-left: 12em;
+    }
+}
+
 /* High resolution tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
+    .blur2 {
+        margin-left: 1em;
+    }
     
     body {
         width: 100%;
@@ -389,13 +400,15 @@ tr:nth-child(even) {
 
 /*Low resolution Tablets*/
 @media (min-width: 481px) and (max-width: 767px) {
+    .accept-btn {
+        width: 100%;
+    }
 
     .blur {
-        height: 52em;
+        padding-bottom: 20em;
     }
 
     .blur2 {
-        height: 90vh;
         margin-left: 0.8em;
     }
 
@@ -503,13 +516,13 @@ tr:nth-child(even) {
     }
 
     .blur {
-        height: 52em;
+        padding-bottom: 20em;
     }
 
     .blur2 {
-        height: 90vh;
         margin-left: 0.8em;
     }
+
 
     body {
         width: 100%;
