@@ -42,7 +42,7 @@ class orders {
 
   // Get all orders
   static getAllOrders(req, res) {
-    db.query('SELECT * FROM orders ORDER BY id ASC', (err, result) => {
+    db.query('SELECT * FROM orders ORDER BY id DESC', (err, result) => {
       if (err) {
         return res.status(500).json({
           status: 'fail',

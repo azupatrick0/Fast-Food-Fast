@@ -20,11 +20,10 @@ const modalSearchNotFound = document.querySelector('.modalSearchNotFound');
 const modal1 = document.querySelector('.modal1');
 const modal2 = document.querySelector('.modal2');
 const modal3 = document.querySelector('.modal3');
-const modal4 = document.querySelector('.modal4');
 const modal5 = document.querySelector('.modal5');
 const modal6 = document.querySelector('.modal6');
 // Select spinner
-const spinner = document.querySelector('.spinner');
+const spinner2 = document.querySelector('.spinner2');
 // Items array
 const items = [];
 const feedback = document.querySelector('.feedback');
@@ -32,19 +31,19 @@ const feedback = document.querySelector('.feedback');
 // Function that verifies if a token is present
 const verifyToken = () => {
   if (!token) {
-    location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   } else if (role !== 'admin') {
-    location.href = 'https://fast-food-fast.herokuapp.com/dashboard.html';
+    window.location.href = 'https://fast-food-fast.herokuapp.com/dashboard.html';
   } else {
     // Show spinner
-    // spinner.style.display = 'block';
+    spinner2.style.display = 'block';
     // Fetch all orders from the server
     fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders?role=${role}&token=${token}`)
       .then(res => res.json())
       .then((result) => {
         if (result.status === 'success') {
           // Hide spinner
-          // spinner.style.display = 'none';
+          spinner2.style.display = 'none';
           /*
           ** Table header
           */
@@ -57,7 +56,7 @@ const verifyToken = () => {
           const th5 = document.createElement('th');
           const th6 = document.createElement('th');
           const th7 = document.createElement('th');
-          th1.innerText = 'S/N';
+          th1.innerText = 'Order Id';
           th2.innerText = 'Name';
           th3.innerText = 'Ordered Items';
           th4.innerText = 'Date';
@@ -101,12 +100,29 @@ const verifyToken = () => {
             declineBtn.classList.add(`declineorder-btn${orders.id}`);
             declineBtn.classList.add('reject-btn');
             declineBtn.setAttribute('onclick', `declined(${orders.id})`);
+            declineBtn.setAttribute('status', `${orders.status}`);
             declineBtn.innerText = 'Decline';
             // Complete button
             const completeBtn = document.createElement('button');
             completeBtn.classList.add(`completeorder-btn${orders.id}`);
             completeBtn.setAttribute('onclick', `completed(${orders.id})`);
+            completeBtn.setAttribute('status', `${orders.status}`);
             completeBtn.innerText = 'Complete';
+            // Check status first then disable button based on result
+            if (orders.status === 'processing') {
+              acceptBtn.setAttribute('disabled', '');
+              acceptBtn.innerText = 'Accepted';
+              declineBtn.setAttribute('disabled', '');
+            } else if (orders.status === 'cancelled') {
+              acceptBtn.setAttribute('disabled', '');
+              declineBtn.setAttribute('disabled', '');
+              declineBtn.innerText = 'Declined';
+            } else if (orders.status === 'complete') {
+              acceptBtn.setAttribute('disabled', '');
+              declineBtn.setAttribute('disabled', '');
+              completeBtn.setAttribute('disabled', '');
+              completeBtn.innerText = 'Completed';
+            }
             // Create new table elements
             const tr = document.createElement('tr');
             tr.classList.add(`trorders${orders.id}`);
@@ -137,12 +153,12 @@ const verifyToken = () => {
           });
         } else if (result.status === 'fail') {
           // Hide spinner
-          // spinner.style.display = 'none';
+          spinner2.style.display = 'none';
           // Orders not found, error occured
           modalError2.style.display = 'block';
         } else if (result.data.message === 'No orders found, thank you.') {
           // Hide spinner
-          // spinner.style.display = 'none';
+          spinner2.style.display = 'none';
           // No orders yet
           modalNoOrders.style.display = 'block';
         }
@@ -231,7 +247,7 @@ const verifyToken = () => {
             document.querySelector('.second-table').appendChild(tr);
           });
         } else if (result.error.message === 'An error occured while retrieving available menu, please try again') {
-          location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         } else if (result.data.message === 'No food items found in the menu, thank you.') {
           // Hide spinner
           // spinner.style.display = 'none';
@@ -257,12 +273,14 @@ const div3 = document.createElement('div');
 const bigdiv = document.createElement('div');
 bigdiv.classList.add('bigdiv');
 const div4 = document.createElement('div');
-const div5 = document.createElement('div');
-const div6 = document.createElement('div');
+const div5 = document.createElement('p');
+const div6 = document.createElement('p');
+const div7 = document.createElement('p');
+const div8 = document.createElement('p');
 const bigdiv2 = document.createElement('div');
 bigdiv2.classList.add('bigdiv2');
 
-// View Items Modal Button
+// Modal Button
 const modalbtn = document.createElement('button');
 modalbtn.classList.add('reject-btn');
 modalbtn.setAttribute('onclick', 'closeModal(".modal5")');
@@ -271,24 +289,29 @@ modalbtn.innerHTML = 'Ok';
 const showModalItems = (val) => {
   // Found items
   const found = items.find(obj => obj.id === val);
-  div4.textContent = 'Items Id';
-  div5.textContent = 'Quantity';
-  div6.textContent = 'Amount';
-  bigdiv2.appendChild(div4);
+  div5.innerHTML = 'Order Id';
+  div6.innerHTML = 'Items Id';
+  div7.innerHTML = 'Quantity';
+  div8.innerHTML = 'Amount';
   bigdiv2.appendChild(div5);
   bigdiv2.appendChild(div6);
-  div1.textContent = found.menuid;
-  div2.textContent = found.quantity;
-  div3.textContent = found.amount;
+  bigdiv2.appendChild(div7);
+  bigdiv2.appendChild(div8);
+  div1.textContent = found.id;
+  div2.textContent = found.menuid;
+  div3.textContent = found.quantity;
+  div4.textContent = found.amount;
   bigdiv.appendChild(div1);
   bigdiv.appendChild(div2);
   bigdiv.appendChild(div3);
+  bigdiv.appendChild(div4);
   modal5.innerHTML = '';
   modal5.appendChild(bigdiv2);
   modal5.appendChild(bigdiv);
   modal5.appendChild(modalbtn);
   modal5.style.display = 'block';
 };
+
 
 // Accept an order
 const accepted = (val) => {
@@ -311,7 +334,7 @@ const accepted = (val) => {
           document.querySelector(`.acceptorder-btn${val}`).disabled = true;
           document.querySelector(`.declineorder-btn${val}`).disabled = true;
         } else if (result.status === 'fail') {
-          location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   });
@@ -338,7 +361,7 @@ const declined = (val) => {
           document.querySelector(`.acceptorder-btn${val}`).disabled = true;
           document.querySelector(`.declineorder-btn${val}`).disabled = true;
         } else if (result.status === 'fail') {
-          location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   });
@@ -364,7 +387,7 @@ const completed = (val) => {
           document.querySelector(`.completeorder-btn${val}`).innerText = 'Completed';
           document.querySelector(`.completeorder-btn${val}`).disabled = true;
         } else if (result.status === 'fail') {
-          location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   });
@@ -456,7 +479,7 @@ const editItem = (val) => {
               }
             });
         } else if (result.status === 'fail') {
-          location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   });
@@ -479,7 +502,7 @@ const deleteItem = (val) => {
           // Item deleted successfully
           modalDeleted.style.display = 'block';
         } else if (result.status === 'fail') {
-          location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   });
@@ -516,7 +539,7 @@ const addItem = () => {
           modalAddError.style.display = 'block';
         } else if (result.status === 'success') {
           modalAdd.style.display = 'block';
-          location.href = 'https://fast-food-fast.herokuapp.com/admin.html';
+          window.location.href = 'https://fast-food-fast.herokuapp.com/admin.html';
         }
       });
   });
@@ -572,17 +595,18 @@ const showNavbar = (value) => {
   }
 };
 
-// Scroll down
-const scrollDown = () => {
+// Scroll to menu table
+const scrollMenu = () => {
+  const top = document.querySelector('.orderstable').scrollHeight + 50;
   window.scrollTo({
-    top: 800,
+    top,
     behavior: 'smooth',
   });
 };
 
 // Re-directs the user to the specified location
 const showLocation = (link) => {
-  location.href = link;
+  window.location.href = link;
 };
 
 // Hide Tab modal on scroll or click
