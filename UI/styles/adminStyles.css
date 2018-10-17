@@ -43,16 +43,18 @@ a:hover {
 }
 
 .bigdiv2 {
-    font-size: 30px;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
     padding: 0.5em;
     width: 100;
-    text-align: center;
     display: flex;
 }
 
-.bigdiv2 div {
+.bigdiv2 p {
+    margin-left: 3%;
+}
+
+.bigdiv2 p {
     margin: 0 auto;
 }
 
@@ -60,20 +62,21 @@ a:hover {
     position: absolute;
     z-index: -1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 76.5em;
     width: 100%;
-    margin: -1.3em 0 0 0;
-    padding: 0;
+    margin: 0;
+    display: block;
+    height: 100%;
+    overflow: auto;
+    padding: 2em 0 15em 0;
 }
 
 .blur2 {
     position: relative;
     z-index: 1;
     background-color: rgba(0, 255, 255, 0.45);
-    height: 47em;
     width: 95%;
-    margin-left: 2em;
-    padding-right: 1.5em;
+    margin: 0 0 4em 2em;
+    padding: 0 1.5em 6em 0;
 }
 
 body {
@@ -421,6 +424,10 @@ select:focus {
     margin-left: 43%;
 }
 
+.spinner2 {
+    display: none;
+}
+
 
 @-webkit-keyframes cyclic {
     0% { -webkit-transform: rotate(0deg); }
@@ -759,6 +766,9 @@ tr:nth-child(even) {
         overflow-x: auto;
     }
 
+    form {
+        margin-left: 15%;
+    }
     
     .orderstable button {
         width: 100%;
@@ -775,17 +785,23 @@ tr:nth-child(even) {
     .history, .signout, .order {
         display: none;
     }
-
-    form {
-        margin-left: 15%;
-    }
-
-    input {
-        width: 80%;
-    }
    
     .logo {
         width: 8%;
+    }
+
+    .modal .form input {
+        width: 80%;
+        margin-left: 1%;
+    }
+
+    .modal input {
+        width: 80%;
+        margin-left: 10%;
+    }
+    
+    .modal p {
+        font-size: 20px;  
     }
 
     .nav-bar {

@@ -112,73 +112,74 @@
         <button class="accept-btn accept-btn6">Accept</button><br /><br />
         <button class="reject-btn" onclick="closeModal('.modal6')">Cancel</button>
     </div>
-    <header>
-        <nav>
-            <div class="nav-bar">
-                <a href="https://fast-food-fast.herokuapp.com/dashboard.html" class="site-name">
-                    <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
-                </a>
-                <a href="https://fast-food-fast.herokuapp.com/admin.html" class="order">Orders</a>
-                <button onclick="scrollDown()" class="history">Food Items</button>
-                <button onclick="logout()" class="signout">SIGN OUT</button>
-                <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
-                <div class="tab-modal">
-                    <div class="tab-modal-link">
-                        <a href="https://fast-food-fast.herokuapp.com/admin.html">Orders</a>
-                        <br />
-                        <br />
-                        <hr />
-                        <br />
-                        <a onclick="scrollDown()">Food Items</a>
-                        <br />
-                        <br />
-                        <hr />
-                        <br />
-                        <a onclick="logout()">Sign Out</a>
-                        <br />
-                        <br />
+    <div class="blur">
+        <header>
+            <nav>
+                <div class="nav-bar">
+                    <a href="https://fast-food-fast.herokuapp.com/dashboard.html" class="site-name">
+                        <img src="images/ffflogo.png" alt="ffflogo" class="logo" /> <strong>Fast-Food-Fast</strong>
+                    </a>
+                    <a href="https://fast-food-fast.herokuapp.com/admin.html" class="order">Orders</a>
+                    <button onclick="scrollMenu()" class="history">Menu</button>
+                    <button onclick="logout()" class="signout">SIGN OUT</button>
+                    <button class="hamburger" onclick="showNavbar('.tab-modal')">&#9776;</button>
+                    <div class="tab-modal">
+                        <div class="tab-modal-link">
+                            <a href="https://fast-food-fast.herokuapp.com/admin.html">Orders</a>
+                            <br />
+                            <br />
+                            <hr />
+                            <br />
+                            <a onclick="scrollMenu()">Menu</a>
+                            <br />
+                            <br />
+                            <hr />
+                            <br />
+                            <a onclick="logout()">Sign Out</a>
+                            <br />
+                            <br />
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
-    </header>
+            </nav>
+        </header>
 
-    <div class="slide0">
-        <div class="blur"></div>
-        <p><br />
-            <span class="centre"><strong>Admin Dashboard</strong></span><br /><br />
-            <div class="quick-access">
-                <button onclick="addItem()" class="brk">
-                    <img src="images/add.png" alt="add" /><br /> Add Food Items
-                </button>
-                <button onclick="scrollDown()">
-                    <img src="images/edit.png" alt="add" /><br /> Food Items
-                </button>
-            </div>
-            <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn"
-                    onclick="getSpecificOrder()">Search</button></div><br />
-            <div class="blur2">
-                <div class="flex">
-                    <div class="flex-items">
-                        <p><strong>List of Orders</strong></p>
-                        <table class="orderstable">
+        <div class="slide0">
+            <p><br />
+                <span class="centre"><strong>Admin Dashboard</strong></span><br /><br />
+                <div class="quick-access">
+                    <button onclick="addItem()" class="brk">
+                        <img src="images/add.png" alt="add" /><br /> Add Food Items
+                    </button>
+                    <button onclick="scrollMenu()">
+                        <img src="images/edit.png" alt="add" /><br /> <span class="toggleValue">Menu</span>
+                    </button>
+                </div>
+                <div><input type="text" class="search-history" placeholder="Search Orders" /> <button class="search-btn"
+                        onclick="getSpecificOrder()">Search</button></div><br />
+                <div class="blur2">
+                    <div class="flex">
+                        <div class="flex-items">
+                            <p><strong>List of Orders</strong></p>
+                            <span class="spinner spinner2"></span>
+                            <table class="orderstable">
 
-                        </table>
-                        <table class="specific-order-table">
+                            </table>
+                            <table class="specific-order-table">
 
-                        </table>
-                        <div class="modal"></div>
-                        <br />
-                        <br />
-                        <p>List of Food Items</p>
-                        <table class="second-table">
+                            </table>
+                            <div class="modal"></div>
+                            <br />
+                            <br />
+                            <p><strong>Menu</strong></p>
+                            <table class="second-table">
 
-                        </table>
+                            </table>
+                        </div>
                     </div>
                 </div>
-            </div>
+        </div>
     </div>
-
     <script src="./admin.js"></script>
 
 </body>
