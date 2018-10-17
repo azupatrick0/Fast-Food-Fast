@@ -27,16 +27,18 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
 [Link](https://azupatrick0.github.io/Fast-Food-Fast/UI/index.html)
 ## Pivotal Tracker Page
 [Link](https://www.pivotaltracker.com/n/projects/2193822)
-## Heroku Page
+## Heroku API Page
 [Link](https://fast-food-fast.herokuapp.com/api/v1)
+## Heroku UI Page
+[Link](https://fast-food-fast.herokuapp.com/index.html)
 ## UI Template Pages
-  * [/index](https://azupatrick0.github.io/Fast-Food-Fast/UI/index.html)   
-  * [/signup](https://azupatrick0.github.io/Fast-Food-Fast/UI/signup.html)  
-  * [/signin.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/signin.html) 
-  * [/dashboard.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/dashboard.html) 
-  * [/orders.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/orders.html)  
-  * [/admin.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/admin.html)  
-  * [/history.html](https://azupatrick0.github.io/Fast-Food-Fast/UI/history.html) 
+  * [/index](https://fast-food-fast.herokuapp.com/index.html)   
+  * [/signup](https://fast-food-fast.herokuapp.com/signup.html)  
+  * [/signin.html](https://fast-food-fast.herokuapp.com/signin.html) 
+  * [/dashboard.html](https://fast-food-fast.herokuapp.com/dashboard.html) 
+  * [/orders.html](https://fast-food-fast.herokuapp.com/orders.html)  
+  * [/admin.html](https://fast-food-fast.herokuapp.com/admin.html)  
+  * [/history.html](https://fast-food-fast.herokuapp.com/history.html) 
 ## Documentation
 [Link](https://fastfoodfast10.docs.apiary.io)
 ## API Routes
