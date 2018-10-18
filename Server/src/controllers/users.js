@@ -31,7 +31,7 @@ class users {
       if (err) {
         return res.status(500).json({
           status: 'fail',
-          error: {
+          data: {
             message: 'An error occured while trying to sign you up, please try again.',
           },
         });

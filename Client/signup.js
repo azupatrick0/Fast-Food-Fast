@@ -1,6 +1,7 @@
 // Function that helps a user register and logs him in to his dashboard
 function signUp() {
-  const feedback4 = document.querySelector('.feedback3');
+  const feedback4 = document.querySelector('.feedback4');
+  const modal = document.querySelector('.modal');
   const signupEmail = document.querySelector('.signupEmail').value;
   const signupPassword = document.querySelector('.signupPassword').value;
   const signupName = document.querySelector('.signupName').value;
@@ -44,10 +45,14 @@ function signUp() {
         window.localStorage.setItem('password', password);
         // Appropriate page
         window.location.href = './dashboard.html';
-      } else if (result.error.message === 'An error occured while trying to sign you up, please try again.') {
+      } else if (result.data.message === 'An error occured while trying to sign you up, please try again.') {
         // Internal server error
         feedback4.style.display = 'block';
         feedback4.innerHTML = 'An error occured while trying to sign you up, please try again.';
+        document.querySelector('.spinner').style.display = 'none';
+        document.querySelector('.signupText').innerHTML = 'Sign Up';
+      } else if (result.data.message === `email => ${signupEmail} already in use, please choose another.`) {
+        modal.style.display = 'block';
         document.querySelector('.spinner').style.display = 'none';
         document.querySelector('.signupText').innerHTML = 'Sign Up';
       }
@@ -93,6 +98,11 @@ form.addEventListener('keyup', (event) => {
     document.querySelector('.signin').click();
   }
 });
+
+// Close modal
+const closeModal = (closeobj) => {
+  document.querySelector(closeobj).style.display = 'none';
+};
 
 // Clear feedback given to the user
 function clearFeedback(val) {
