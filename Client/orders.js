@@ -10,15 +10,14 @@ const feedback = document.querySelector('.feedback');
 // Table object
 const firstTable = document.querySelector('.first-table');
 const secondTable = document.querySelector('.second-table');
-const thirdTable = document.querySelector('.third-table');
 // Close the displayed modal
 const closeModal = (val) => {
   document.querySelector(val).style.display = 'none';
 };
 // Function that verifies if a token is present
 const verifyToken = () => {
-  if (!token) {
-    location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+  if (!token || token === '' || token === null || token === undefined) {
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   } else {
     // Show spinner
     spinner.style.display = 'block';
@@ -82,6 +81,11 @@ const verifyToken = () => {
           spinner.style.display = 'none';
           // Menu not yet found
           modal.style.display = 'block';
+        } else if (result.data.message === 'Failed to authenticate user token.') {
+          // Hide spinner
+          spinner.style.display = 'none';
+          // Redirect user to sign in
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   }
@@ -168,8 +172,6 @@ const plus = (val) => {
   document.querySelector(`.td4-cart${val}`).innerHTML = +(document.querySelector(`.td4-cart${val}`).innerHTML) + 1;
   document.querySelector(`.td3-cart${val}`).innerHTML = +(document.querySelector(`.td3-meal${val}`).innerHTML) *
     document.querySelector(`.td4-cart${val}`).innerHTML;
-  //cart[val-1].quantity = document.querySelector(`.td4-cart${val}`).innerHTML;
-  //cart[val-1].amount = document.querySelector(`.td3-cart${val}`).innerHTML;
   cart.push({
     menuid: foodId,
     userid,
@@ -181,14 +183,12 @@ const plus = (val) => {
 
   // Remove the first duplicate item
   const duplicateItem = cart.find(obj => obj.menuid === val);
-  console.log(duplicateItem)
   delete (duplicateItem.menuid);
   delete (duplicateItem.userid);
   delete (duplicateItem.name);
   delete (duplicateItem.quantity);
   delete (duplicateItem.amount);
   delete (duplicateItem.location);
-  console.log(cart);
 };
 
 // Remove more items from cart
@@ -206,32 +206,26 @@ const minus = (val) => {
   });
   // Remove the first duplicate item
   const duplicateItem = cart.find(obj => obj.menuid === val);
-  console.log(duplicateItem)
   delete (duplicateItem.menuid);
   delete (duplicateItem.userid);
   delete (duplicateItem.name);
   delete (duplicateItem.quantity);
   delete (duplicateItem.amount);
   delete (duplicateItem.location);
-  console.log(cart);
 };
 
 // Delete cart row
 const deleteRow = (val) => {
   firstTable.removeChild(document.querySelector(`.tr-cart${val}`));
-  
   // Remove the first duplicate item
   const duplicateItem = cart.find(obj => obj.menuid === val);
-  console.log(duplicateItem)
   delete (duplicateItem.menuid);
   delete (duplicateItem.userid);
   delete (duplicateItem.name);
   delete (duplicateItem.quantity);
   delete (duplicateItem.amount);
   delete (duplicateItem.location);
-  console.log(cart);
   document.querySelector(`.meal-button${val}`).removeAttribute('disabled');
-  
 };
 
 // Order response
@@ -329,7 +323,7 @@ const showCart = (value) => {
 
 // Re-directs the user to the specified location
 const showLocation = (link) => {
-  location.href = link;
+  window.location.href = link;
 };
 
 // Get Date

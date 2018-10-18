@@ -11,7 +11,7 @@ const isLoggedIn = (req, res, next) => {
   jwt.verify(token, process.env.SECRET_KEY, (err) => {
     // If there is no token, forbid the user from accessing the routes
     if (token === '' || token === null || token === undefined) {
-      return res.status(403).json({
+      return res.status(401).json({
         status: 'fail',
         data: {
           message: 'No token provided.',
@@ -19,7 +19,7 @@ const isLoggedIn = (req, res, next) => {
       });
     } else if (err) {
       // Wrong token
-      return res.status(500).json({
+      return res.status(401).json({
         status: 'fail',
         data: {
           message: 'Failed to authenticate user token.',
