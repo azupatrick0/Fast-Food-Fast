@@ -225,7 +225,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .post('/api/v1/menu?role=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -243,7 +243,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .post('/api/v1/menu?role=admin&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -341,7 +341,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .send(newestOrder)
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -360,7 +360,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .send(newestOrder)
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -417,7 +417,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .get('/api/v1/orders?role=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -435,7 +435,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .post('/api/v1/orders?role=admin&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -549,7 +549,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .put('/api/v1/orders/1?role=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -567,7 +567,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .put('/api/v1/orders/1?role=admin&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -642,7 +642,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .get('/api/v1/orders/1?role=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -682,7 +682,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .get('/api/v1/menu')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -700,7 +700,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .get('/api/v1/menu?token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -740,7 +740,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .get('/api/v1/users/1/orders')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -758,7 +758,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .get('/api/v1/users/1/orders?&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -799,7 +799,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .put('/api/v1/menu/1?role=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -817,7 +817,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .put('/api/v1/menu/1?role=admin&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -877,7 +877,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .delete('/api/v1/menu/items/1?role=admin')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(403);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');
@@ -895,7 +895,7 @@ describe('Fast-Food-Fast Test Suite', () => {
         .delete('/api/v1/menu/items/1?role=admin&token=wrongtoken')
         .end((err, res) => {
           if (err) throw err;
-          res.status.should.equal(500);
+          res.status.should.equal(401);
           res.body.should.be.a('object');
           res.body.should.have.property('status');
           res.body.should.have.property('data');

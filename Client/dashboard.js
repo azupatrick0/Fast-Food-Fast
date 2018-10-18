@@ -1,6 +1,5 @@
 // Get token, role and modal
 const token = window.localStorage.getItem('token');
-const role = window.localStorage.getItem('role');
 const name = window.localStorage.getItem('name');
 const email = window.localStorage.getItem('email');
 const password = window.localStorage.getItem('password');
@@ -8,26 +7,40 @@ const modal = document.querySelector('.modal');
 
 // Function that verifies if a token is present
 const verifyToken = () => {
-  if (!token) {
-    location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+  if (!token || token === '' || token === null || token === undefined) {
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+  }
+  try {
+    // Decode token => gotten from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
+    JSON.parse(atob(token.split('.')[1]));
+  } catch (e) {
+    // Error, not an encoded token
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   }
 };
 
 // Verify token on window load
 window.onload = verifyToken();
-
 // Re-directs the admin to appropriate location
 const showAdminLocation = (link) => {
-  if (role !== 'admin') {
-    modal.style.display = 'block';
-  } else {
-    location.href = link;
+  try {
+    // Decode token => gotten from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
+    const decoded = JSON.parse(atob(token.split('.')[1]));
+    if (decoded.email !== 'email@email.com') {
+      // Not an admin
+      modal.style.display = 'block';
+    } else {
+      window.location.href = link;
+    }
+  } catch (e) {
+    // Error, not an encoded token
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   }
 };
 
 // Re-directs the user to the specified location
 const showLocation = (link) => {
-  location.href = link;
+  window.location.href = link;
 };
 
 // Close the displayed modal

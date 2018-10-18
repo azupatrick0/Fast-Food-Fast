@@ -2,6 +2,7 @@
 function login() {
   const feedback = document.querySelector('.feedback');
   const feedback2 = document.querySelector('.feedback2');
+  const feedback3 = document.querySelector('.feedback3');
   const signinEmail = document.querySelector('.signinEmail').value;
   const signinPassword = document.querySelector('.signinPassword').value;
   // Fetch from the server
@@ -39,7 +40,7 @@ function login() {
         window.localStorage.setItem('email', email);
         window.localStorage.setItem('password', password);
         // Appropriate page
-        location.href = './dashboard.html';
+        window.location.href = './dashboard.html';
       } else if (result.data.message === 'Authentication failed. User not found') {
         // User not found
         feedback.style.display = 'block';

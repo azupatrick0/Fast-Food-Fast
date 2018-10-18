@@ -46,7 +46,7 @@ class orders {
       if (err) {
         return res.status(500).json({
           status: 'fail',
-          error: {
+          data: {
             message: 'An error occured while retrieving all orders, please try again',
           },
         });

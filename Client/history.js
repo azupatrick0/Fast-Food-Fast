@@ -6,14 +6,13 @@ const modal2 = document.querySelector('.modal2');
 const modal3 = document.querySelector('.modal3');
 const spinner = document.querySelector('.spinner');
 // Table object
-const firstTable = document.querySelector('.first-table');
 const secondTable = document.querySelector('.second-table');
 const items = [];
 
 // Function that verifies if a token is present
 const verifyToken = () => {
-  if (!token) {
-    location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+  if (!token || token === '' || token === null || token === undefined) {
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   } else {
     // Show spinner
     spinner.style.display = 'block';
@@ -94,6 +93,11 @@ const verifyToken = () => {
           spinner.style.display = 'none';
           // History not yet found, no record
           modal3.style.display = 'block';
+        } else if (result.data.message === 'Failed to authenticate user token.') {
+          // Hide spinner
+          spinner.style.display = 'none';
+          // Redirect user to sign in
+          window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
         }
       });
   }
@@ -190,7 +194,7 @@ window.addEventListener('click', (event) => {
 
 // Re-directs the user to the specified location
 const showLocation = (link) => {
-  location.href = link;
+  window.location.href = link;
 };
 
 const logout = () => {

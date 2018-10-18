@@ -90,7 +90,7 @@ class menu {
         return res.status(500).json({
           status: 'fail',
           error: {
-            message: 'An error occured while trying to delete the item, from the men please try again.',
+            message: 'An error occured while trying to delete the item, from the menu please try again.',
           },
         });
       }
@@ -110,7 +110,7 @@ class menu {
       if (err) {
         return res.status(500).json({
           status: 'fail',
-          error: {
+          data: {
             message: 'An error occured while retrieving available menu, please try again',
           },
         });
