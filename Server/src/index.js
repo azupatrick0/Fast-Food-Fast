@@ -35,6 +35,9 @@ app.use('/api/v1', homePage);
 // If the user makes a request to the /api/v1/* route, hand control to the notFoundPage route
 app.use('/api/v1/*', notFoundPage);
 
+// If the user visit page not defined, redirect to not found page
+app.use('/*', express.static('UI/notfound.html'));
+
 // Error handler
 app.use((err, req, res, next) => {
   res.status(500).json({
