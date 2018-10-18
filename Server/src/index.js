@@ -15,6 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
 app.use(express.static('UI'));
+app.use('/*', express.static('UI/notfound.html'));
 app.use(express.static('Client'));
 
 // If the user makes a request to the /api/v1/menu route, hand control to the menu route
