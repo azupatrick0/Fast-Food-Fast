@@ -38,19 +38,19 @@ const feedback = document.querySelector('.feedback');
 const verifyToken = () => {
   // No token
   if (!token || token === '' || token === null || token === undefined) {
-    window.location.href = 'http://localhost:3000/signin.html';
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   }
   /* Decode token => gotten from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript */
   try {
     const decoded = JSON.parse(atob(token.split('.')[1]));
     if (decoded.email !== 'email@email.com') {
       // Not an admin
-      window.location.href = 'http://localhost:3000/dashboard.html';
+      window.location.href = 'https://fast-food-fast.herokuapp.com/dashboard.html';
     } else {
       // Show spinner
       spinner2.style.display = 'block';
       // Fetch all orders from the server
-      fetch(`http://localhost:3000/api/v1/orders?role=${role}&token=${token}`)
+      fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders?role=${role}&token=${token}`)
         .then(res => res.json())
         .then((result) => {
           if (result.status === 'success') {
@@ -178,13 +178,13 @@ const verifyToken = () => {
             // Hide spinner
             spinner2.style.display = 'none';
             // Redirect user to sign in
-            window.location.href = 'http://localhost:3000/signin.html';
+            window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
           }
         });
       // Show spinner
       // spinner.style.display = 'block';
       // Fetch available menu from the server
-      fetch(`http://localhost:3000/api/v1/menu?token=${token}`)
+      fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu?token=${token}`)
         .then(res => res.json())
         .then((result) => {
           if (result.status === 'success') {
@@ -271,13 +271,13 @@ const verifyToken = () => {
             // Hide spinner
             spinner2.style.display = 'none';
             // Redirect user to sign in
-            window.location.href = 'http://localhost:3000/signin.html';
+            window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
           }
         });
     }
   } catch (e) {
     // Error, not an encoded token
-    window.location.href = 'http://localhost:3000/signin.html';
+    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
   }
 };
 
@@ -355,7 +355,7 @@ const accepted = (val) => {
   modal.style.display = 'block';
   document.querySelector('.accept-btn1').addEventListener('click', () => {
     modal.style.display = 'none';
-    fetch(`http://localhost:3000/api/v1/orders/${val}?role=${role}&token=${token}`, {
+    fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${val}?role=${role}&token=${token}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -382,7 +382,7 @@ const declined = (val) => {
   modal1.style.display = 'block';
   document.querySelector('.accept-btn2').addEventListener('click', () => {
     modal1.style.display = 'none';
-    fetch(`http://localhost:3000/api/v1/orders/${val}?role=${role}&&token=${token}`, {
+    fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${val}?role=${role}&&token=${token}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -409,7 +409,7 @@ const completed = (val) => {
   modal2.style.display = 'block';
   document.querySelector('.accept-btn3').addEventListener('click', () => {
     modal2.style.display = 'none';
-    fetch(`http://localhost:3000/api/v1/orders/${val}?role=${role}&&token=${token}`, {
+    fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${val}?role=${role}&&token=${token}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -516,7 +516,7 @@ const editItem = (val) => {
       .then((response) => {
         const imgurl = response.secure_url;
         // Fetch the food item from the menu and do an update
-        fetch(`http://localhost:3000/api/v1/menu/${val}?role=${role}&token=${token}`, {
+        fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu/${val}?role=${role}&token=${token}`, {
           method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
@@ -531,7 +531,7 @@ const editItem = (val) => {
           .then((result) => {
             if (result.status === 'success') {
               // Fetch available updated menu from the server
-              fetch(`http://localhost:3000/api/v1/menu?token=${token}`)
+              fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu?token=${token}`)
                 .then(resUpdated => resUpdated.json())
                 .then((resultUpdated) => {
                   if (resultUpdated.status === 'success') {
@@ -568,7 +568,7 @@ const deleteItem = (val) => {
   document.querySelector('.accept-btn6').addEventListener('click', () => {
     modal6.style.display = 'none';
     modalSpinner2.style.display = 'block';
-    fetch(`http://localhost:3000/api/v1/menu/items/${val}?role=${role}&token=${token}`, {
+    fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu/items/${val}?role=${role}&token=${token}`, {
       method: 'DELETE',
     })
       .then(res => res.json())
@@ -616,7 +616,7 @@ const addItem = () => {
       .then((response) => {
         const imgurl = response.secure_url;
         // Fetch all menu
-        fetch(`http://localhost:3000/api/v1/menu?role=${role}&token=${token}`, {
+        fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu?role=${role}&token=${token}`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -635,7 +635,7 @@ const addItem = () => {
             } else if (result.status === 'success') {
               modalSpinner3.style.display = 'none';
               modalAdd.style.display = 'block';
-              window.location.href = 'http://localhost:3000/admin.html';
+              window.location.href = 'https://fast-food-fast.herokuapp.com/admin.html';
             }
           });
       })
@@ -656,7 +656,7 @@ const getSpecificOrder = () => {
   const trhead = document.querySelector('.trheading');
   const trorder = document.querySelector(`.trorders${searchId}`)
   modalSearchSpinner.style.display = 'block';
-  fetch(`http://localhost:3000/api/v1/orders/${searchId}?role=${role}&token=${token}`)
+  fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${searchId}?role=${role}&token=${token}`)
     .then(ress => ress.json())
     .then((resultt) => {
       if (resultt.data.message === 'specific order returned, thank you.') {
@@ -728,5 +728,5 @@ window.addEventListener('click', (event) => {
 
 const logout = () => {
   window.localStorage.clear();
-  showLocation('http://localhost:3000/index.html');
+  showLocation('https://fast-food-fast.herokuapp.com/index.html');
 };
