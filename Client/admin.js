@@ -10,9 +10,11 @@ const modalError5 = document.querySelector('.modalError5');
 const modalError6 = document.querySelector('.modalError6');
 const modalError7 = document.querySelector('.modalError7');
 const modalError8 = document.querySelector('.modalError8');
+const modalImage = document.querySelector('.modalImage');
 const modalAdd = document.querySelector('.modalAdd');
 const modalAddError = document.querySelector('.modalAddError');
 const modalDeleted = document.querySelector('.modalDeleted');
+const modalEditSuccess = document.querySelector('.modalEditSuccess');
 const modalNoOrders = document.querySelector('.modalNoOrders');
 const modalSpinner = document.querySelector('.modalSpinner');
 const modalSpinner2 = document.querySelector('.modalSpinner2');
@@ -36,19 +38,19 @@ const feedback = document.querySelector('.feedback');
 const verifyToken = () => {
   // No token
   if (!token || token === '' || token === null || token === undefined) {
-    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+    window.location.href = 'http://localhost:3000/signin.html';
   }
   /* Decode token => gotten from https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript */
   try {
     const decoded = JSON.parse(atob(token.split('.')[1]));
     if (decoded.email !== 'email@email.com') {
       // Not an admin
-      window.location.href = 'https://fast-food-fast.herokuapp.com/dashboard.html';
+      window.location.href = 'http://localhost:3000/dashboard.html';
     } else {
       // Show spinner
       spinner2.style.display = 'block';
       // Fetch all orders from the server
-      fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders?role=${role}&token=${token}`)
+      fetch(`http://localhost:3000/api/v1/orders?role=${role}&token=${token}`)
         .then(res => res.json())
         .then((result) => {
           if (result.status === 'success') {
@@ -95,6 +97,8 @@ const verifyToken = () => {
               items.push({
                 id: Number(`${orders.id}`),
                 menuid: `${orders.menuid}`,
+                imgurl: `${orders.imgurl}`,
+                meal: `${orders.meal}`,
                 quantity: `${orders.quantity}`,
                 amount: `${orders.amount}`,
               });
@@ -174,13 +178,13 @@ const verifyToken = () => {
             // Hide spinner
             spinner2.style.display = 'none';
             // Redirect user to sign in
-            window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+            window.location.href = 'http://localhost:3000/signin.html';
           }
         });
       // Show spinner
       // spinner.style.display = 'block';
       // Fetch available menu from the server
-      fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu?token=${token}`)
+      fetch(`http://localhost:3000/api/v1/menu?token=${token}`)
         .then(res => res.json())
         .then((result) => {
           if (result.status === 'success') {
@@ -216,7 +220,7 @@ const verifyToken = () => {
               */
               // Item image
               const img = document.createElement('img');
-              img.setAttribute('src', 'images/food1.jpg');
+              img.setAttribute('src', `${item.imgurl}`);
               img.classList.add('img');
               // Edit button
               const editBtn = document.createElement('button');
@@ -240,6 +244,7 @@ const verifyToken = () => {
               const td6 = document.createElement('td');
               // Insert values into the table elements
               td1.innerText = `${item.id}`;
+              td2.classList.add(`tr${item.id}img`);
               td2.appendChild(img);
               td3.classList.add(`tr${item.id}meal`);
               td3.innerText = `${item.meal}`;
@@ -266,13 +271,13 @@ const verifyToken = () => {
             // Hide spinner
             spinner2.style.display = 'none';
             // Redirect user to sign in
-            window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+            window.location.href = 'http://localhost:3000/signin.html';
           }
         });
     }
   } catch (e) {
     // Error, not an encoded token
-    window.location.href = 'https://fast-food-fast.herokuapp.com/signin.html';
+    window.location.href = 'http://localhost:3000/signin.html';
   }
 };
 
@@ -285,19 +290,25 @@ const closeModal = (closeobj) => {
 };
 
 // Items objects
-const div1 = document.createElement('div');
-const div2 = document.createElement('div');
-const div3 = document.createElement('div');
+const div1 = document.createElement('p');
+const div2 = document.createElement('p');
+const div3 = document.createElement('p');
 const bigdiv = document.createElement('div');
 bigdiv.classList.add('bigdiv');
-const div4 = document.createElement('div');
+const div4 = document.createElement('p');
 const div5 = document.createElement('p');
 const div6 = document.createElement('p');
 const div7 = document.createElement('p');
 const div8 = document.createElement('p');
+const div9 = document.createElement('p');
+const div10 = document.createElement('p');
+const div11 = document.createElement('p');
+const div12 = document.createElement('p');
 const bigdiv2 = document.createElement('div');
 bigdiv2.classList.add('bigdiv2');
-
+// Item image
+const img = document.createElement('img');
+img.classList.add('img');
 // Modal Button
 const modalbtn = document.createElement('button');
 modalbtn.classList.add('reject-btn');
@@ -307,22 +318,31 @@ modalbtn.innerHTML = 'Ok';
 const showModalItems = (val) => {
   // Found items
   const found = items.find(obj => obj.id === val);
-  div5.innerHTML = 'Order Id';
-  div6.innerHTML = 'Items Id';
-  div7.innerHTML = 'Quantity';
-  div8.innerHTML = 'Amount';
-  bigdiv2.appendChild(div5);
-  bigdiv2.appendChild(div6);
+  div7.innerHTML = 'Order Id';
+  div8.innerHTML = 'Items Id';
+  div9.innerHTML = 'Food Image';
+  div10.innerHTML = 'Food Item';
+  div11.innerHTML = 'Quantity';
+  div12.innerHTML = 'Amount';
   bigdiv2.appendChild(div7);
   bigdiv2.appendChild(div8);
+  bigdiv2.appendChild(div9);
+  bigdiv2.appendChild(div10);
+  bigdiv2.appendChild(div11);
+  bigdiv2.appendChild(div12);
   div1.textContent = found.id;
   div2.textContent = found.menuid;
-  div3.textContent = found.quantity;
-  div4.textContent = found.amount;
+  img.setAttribute('src', `${found.imgurl}`);
+  div3.appendChild(img);
+  div4.textContent = found.meal;
+  div5.textContent = found.quantity;
+  div6.textContent = found.amount;
   bigdiv.appendChild(div1);
   bigdiv.appendChild(div2);
   bigdiv.appendChild(div3);
   bigdiv.appendChild(div4);
+  bigdiv.appendChild(div5);
+  bigdiv.appendChild(div6);
   modal5.innerHTML = '';
   modal5.appendChild(bigdiv2);
   modal5.appendChild(bigdiv);
@@ -335,7 +355,7 @@ const accepted = (val) => {
   modal.style.display = 'block';
   document.querySelector('.accept-btn1').addEventListener('click', () => {
     modal.style.display = 'none';
-    fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${val}?role=${role}&token=${token}`, {
+    fetch(`http://localhost:3000/api/v1/orders/${val}?role=${role}&token=${token}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -362,7 +382,7 @@ const declined = (val) => {
   modal1.style.display = 'block';
   document.querySelector('.accept-btn2').addEventListener('click', () => {
     modal1.style.display = 'none';
-    fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${val}?role=${role}&&token=${token}`, {
+    fetch(`http://localhost:3000/api/v1/orders/${val}?role=${role}&&token=${token}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -389,7 +409,7 @@ const completed = (val) => {
   modal2.style.display = 'block';
   document.querySelector('.accept-btn3').addEventListener('click', () => {
     modal2.style.display = 'none';
-    fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${val}?role=${role}&&token=${token}`, {
+    fetch(`http://localhost:3000/api/v1/orders/${val}?role=${role}&&token=${token}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -410,6 +430,9 @@ const completed = (val) => {
   });
 };
 
+// Item image
+const imgUpdated = document.createElement('img');
+imgUpdated.classList.add('img');
 // Edit an item
 const editItem = (val) => {
   // Create a modal
@@ -426,11 +449,18 @@ const editItem = (val) => {
   input1.setAttribute('value', '');
   input1.setAttribute('placeholder', 'Food Item');
   const br = document.createElement('br');
+
   const input2 = document.createElement('input');
   input2.classList.add(`edit-price${val}`);
   input2.setAttribute('type', 'text');
   input2.setAttribute('value', '');
   input2.setAttribute('placeholder', 'Price');
+
+  const input3 = document.createElement('input');
+  input3.classList.add('update-image');
+  input3.setAttribute('type', 'file');
+  input3.setAttribute('accept', 'image/*');
+
   // Create accept button
   const acceptButton = document.createElement('button');
   acceptButton.classList.add(`acceptt-btn${val}`);
@@ -445,7 +475,15 @@ const editItem = (val) => {
   modalDiv.appendChild(paragraph);
   modalDiv.appendChild(input1);
   modalDiv.appendChild(br);
+  modalDiv.appendChild(br);
+  modalDiv.appendChild(br);
   modalDiv.appendChild(input2);
+  modalDiv.appendChild(br);
+  modalDiv.appendChild(br);
+  modalDiv.appendChild(br);
+  modalDiv.appendChild(input3);
+  modalDiv.appendChild(br);
+  modalDiv.appendChild(br);
   modalDiv.appendChild(br);
   modalDiv.appendChild(acceptButton);
   modalDiv.appendChild(cancelButton);
@@ -465,39 +503,61 @@ const editItem = (val) => {
   document.querySelector(`.acceptt-btn${val}`).addEventListener('click', () => {
     document.querySelector(`.modall${val}`).style.display = 'none';
     modalSpinner.style.display = 'block';
-    // Fetch the food item from the menu and do an update
-    fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu/${val}?role=${role}&token=${token}`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        meal: document.querySelector(`.edit-food-item${val}`).value,
-        price: document.querySelector(`.edit-price${val}`).value,
-      }),
+    // Upload an image to cloudinary and return the url => Adapted from https://codepen.io/eitanp461/pen/NdPNmX
+    const apiUrl = 'https://api.cloudinary.com/v1_1/pato/upload';
+    const form = new FormData();
+    form.append('upload_preset', 'xopaggct');
+    form.append('file', document.querySelector('.update-image').files[0]);
+    fetch(apiUrl, {
+      method: 'POST',
+      body: form,
     })
       .then(res => res.json())
-      .then((result) => {
-        if (result.status === 'success') {
-          // Fetch available updated menu from the server
-          fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu?token=${token}`)
-            .then(resUpdated => resUpdated.json())
-            .then((resultUpdated) => {
-              if (resultUpdated.status === 'success') {
-                // Updated menu found
-                const found = resultUpdated.data.items.find(obj => obj.id === val);
-                document.querySelector(`.tr${val}meal`).innerText = found.meal;
-                document.querySelector(`.tr${val}price`).innerText = found.price;
-                modalSpinner.style.display = 'none';
-                document.querySelector('.edit').innerHTML = '';
-              } else if (resultUpdated.data.message === 'An error occured while retrieving available menu, please try again') {
-                // Menu not found, error occured
-                modalError3.style.display = 'block';
-              }
-            });
-        } else if (result.status === 'fail') {
-          modalError7.style.display = 'block';
-        }
+      .then((response) => {
+        const imgurl = response.secure_url;
+        // Fetch the food item from the menu and do an update
+        fetch(`http://localhost:3000/api/v1/menu/${val}?role=${role}&token=${token}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            meal: document.querySelector(`.edit-food-item${val}`).value,
+            price: document.querySelector(`.edit-price${val}`).value,
+            imgurl,
+          }),
+        })
+          .then(res => res.json())
+          .then((result) => {
+            if (result.status === 'success') {
+              // Fetch available updated menu from the server
+              fetch(`http://localhost:3000/api/v1/menu?token=${token}`)
+                .then(resUpdated => resUpdated.json())
+                .then((resultUpdated) => {
+                  if (resultUpdated.status === 'success') {
+                    // Updated menu found
+                    const found = resultUpdated.data.items.find(obj => obj.id === val);
+                    document.querySelector(`.tr${val}meal`).innerText = found.meal;
+                    document.querySelector(`.tr${val}price`).innerText = found.price;
+                    imgUpdated.setAttribute('src', `${found.imgurl}`);
+                    document.querySelector(`.tr${val}img`).innerHTML = '';
+                    document.querySelector(`.tr${val}img`).appendChild(imgUpdated);
+                    modalSpinner.style.display = 'none';
+                    modalEditSuccess.style.display = 'block';
+                    document.querySelector('.edit').innerHTML = '';
+                  } else if (resultUpdated.data.message === 'An error occured while retrieving available menu, please try again') {
+                    // Menu not found, error occured
+                    modalError3.style.display = 'block';
+                  }
+                });
+            } else if (result.status === 'fail') {
+              modalError7.style.display = 'block';
+            }
+          });
+      })
+      .catch((err) => {
+        modalImage.style.display = 'block';
+        console.log(err);
       });
   });
 };
@@ -508,7 +568,7 @@ const deleteItem = (val) => {
   document.querySelector('.accept-btn6').addEventListener('click', () => {
     modal6.style.display = 'none';
     modalSpinner2.style.display = 'block';
-    fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu/items/${val}?role=${role}&token=${token}`, {
+    fetch(`http://localhost:3000/api/v1/menu/items/${val}?role=${role}&token=${token}`, {
       method: 'DELETE',
     })
       .then(res => res.json())
@@ -533,31 +593,55 @@ const addItem = () => {
     // New item values
     const meal = document.querySelector('.add-food-item').value;
     const price = document.querySelector('.add-price').value;
+    const img2 = document.querySelector('.add-image').value;
     if (meal === '' || meal === null || meal === undefined) {
       feedback.innerHTML = 'Food item cannot be empty';
     } else if (!(Number.isInteger(+price)) || price === '' || price === null || price === undefined) {
       feedback.innerHTML = 'price must be an Integer';
+    } if (img2 === '' || img2 === null || img2 === undefined) {
+      feedback.innerHTML = 'Please select an image';
     }
     modal3.style.display = 'none';
     modalSpinner3.style.display = 'block';
-    fetch(`https://fast-food-fast.herokuapp.com/api/v1/menu?role=${role}&token=${token}`, {
+    // Upload an image to cloudinary and return the url => Adapted from https://codepen.io/eitanp461/pen/NdPNmX
+    const apiUrl = 'https://api.cloudinary.com/v1_1/pato/upload';
+    const form = new FormData();
+    form.append('upload_preset', 'xopaggct');
+    form.append('file', document.querySelector('.add-image').files[0]);
+    fetch(apiUrl, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        meal,
-        price,
-      }),
+      body: form,
     })
       .then(res => res.json())
-      .then((result) => {
-        if (result.status === 'fail') {
-          modalAddError.style.display = 'block';
-        } else if (result.status === 'success') {
-          modalAdd.style.display = 'block';
-          window.location.href = 'https://fast-food-fast.herokuapp.com/admin.html';
-        }
+      .then((response) => {
+        const imgurl = response.secure_url;
+        // Fetch all menu
+        fetch(`http://localhost:3000/api/v1/menu?role=${role}&token=${token}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            meal,
+            price,
+            imgurl,
+          }),
+        })
+          .then(res => res.json())
+          .then((result) => {
+            if (result.status === 'fail') {
+              modalSpinner3.style.display = 'none';
+              modalAddError.style.display = 'block';
+            } else if (result.status === 'success') {
+              modalSpinner3.style.display = 'none';
+              modalAdd.style.display = 'block';
+              window.location.href = 'http://localhost:3000/admin.html';
+            }
+          });
+      })
+      .catch((err) => {
+        modalImage.style.display = 'block';
+        console.log(err);
       });
   });
 };
@@ -572,7 +656,7 @@ const getSpecificOrder = () => {
   const trhead = document.querySelector('.trheading');
   const trorder = document.querySelector(`.trorders${searchId}`)
   modalSearchSpinner.style.display = 'block';
-  fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders/${searchId}?role=${role}&token=${token}`)
+  fetch(`http://localhost:3000/api/v1/orders/${searchId}?role=${role}&token=${token}`)
     .then(ress => ress.json())
     .then((resultt) => {
       if (resultt.data.message === 'specific order returned, thank you.') {
@@ -614,7 +698,7 @@ const showNavbar = (value) => {
 
 // Scroll to menu table
 const scrollMenu = () => {
-  const top = document.querySelector('.orderstable').scrollHeight + 150;
+  const top = document.querySelector('.orderstable').scrollHeight + 50;
   window.scrollTo({
     top,
     behavior: 'smooth',
@@ -644,5 +728,5 @@ window.addEventListener('click', (event) => {
 
 const logout = () => {
   window.localStorage.clear();
-  showLocation('https://fast-food-fast.herokuapp.com/index.html');
+  showLocation('http://localhost:3000/index.html');
 };

@@ -8,12 +8,12 @@ class menu {
     const {
       meal,
       price,
-
+      imgurl,
     } = req.body;
 
     const query = {
-      text: 'INSERT INTO menu(meal,price) VALUES($1,$2)',
-      values: [`${meal}`, `${price}`],
+      text: 'INSERT INTO menu(meal,price,imgurl) VALUES($1,$2,$3)',
+      values: [`${meal}`, `${price}`, `${imgurl}`],
     };
 
     db.query(query, (err, result) => {
@@ -47,11 +47,12 @@ class menu {
     const {
       meal,
       price,
+      imgurl,
     } = req.body;
 
     const query = {
-      text: 'UPDATE menu SET meal = $1, price = $2 WHERE id = $3',
-      values: [`${meal}`, `${price}`, `${itemId}`],
+      text: 'UPDATE menu SET meal = $1, price = $2, imgurl = $3 WHERE id = $4',
+      values: [`${meal}`, `${price}`, `${imgurl}`, `${itemId}`],
     };
 
     db.query(query, (err) => {
