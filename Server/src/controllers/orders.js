@@ -7,6 +7,8 @@ class orders {
     // New Order Details
     const {
       menuid,
+      meal,
+      imgurl,
       userid,
       name,
       quantity,
@@ -15,8 +17,8 @@ class orders {
     } = req.body;
 
     const query = {
-      text: 'INSERT INTO orders(menuid,userid,name,quantity,amount,location) VALUES($1,$2,$3,$4,$5,$6)',
-      values: [`${menuid}`, `${userid}`, `${name}`, `${quantity}`, `${amount}`, `${location}`],
+      text: 'INSERT INTO orders(menuid,meal,imgurl,userid,name,quantity,amount,location) VALUES($1,$2,$3,$4,$5,$6,$7,$8)',
+      values: [`${menuid}`, `${meal}`, `${imgurl}`, `${userid}`, `${name}`, `${quantity}`, `${amount}`, `${location}`],
     };
 
     db.query(query, (err, result) => {
@@ -89,7 +91,7 @@ class orders {
       if (err) {
         return res.status(500).json({
           status: 'fail',
-          error: {
+          data: {
             message: 'An error occured while retrieving all your orders history, please try again',
           },
         });

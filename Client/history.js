@@ -59,6 +59,8 @@ const verifyToken = () => {
             items.push({
               id: Number(`${history.id}`),
               menuid: `${history.menuid}`,
+              imgurl: `${history.imgurl}`,
+              meal: `${history.meal}`,
               quantity: `${history.quantity}`,
               amount: `${history.amount}`,
             });
@@ -83,7 +85,7 @@ const verifyToken = () => {
             tr.appendChild(td5);
             secondTable.appendChild(tr);
           });
-        } else if (result.error.message === 'An error occured while retrieving all your orders history, please try again') {
+        } else if (result.data.message === 'An error occured while retrieving all your orders history, please try again') {
           // Hide spinner
           spinner.style.display = 'none';
           // History not found, error occured
@@ -111,22 +113,29 @@ const closeModal = (closeobj) => {
   document.querySelector(closeobj).style.display = 'none';
 };
 
+
 // Items objects
-const div1 = document.createElement('div');
-const div2 = document.createElement('div');
-const div3 = document.createElement('div');
+const div1 = document.createElement('p');
+const div2 = document.createElement('p');
+const div3 = document.createElement('p');
 const bigdiv = document.createElement('div');
 bigdiv.classList.add('bigdiv');
-const div4 = document.createElement('div');
+const div4 = document.createElement('p');
 const div5 = document.createElement('p');
 const div6 = document.createElement('p');
 const div7 = document.createElement('p');
 const div8 = document.createElement('p');
+const div9 = document.createElement('p');
+const div10 = document.createElement('p');
+const div11 = document.createElement('p');
+const div12 = document.createElement('p');
 const bigdiv2 = document.createElement('div');
 bigdiv2.classList.add('bigdiv2');
-
+// Item image
+const img = document.createElement('img');
+img.classList.add('img');
 // Modal Button
-let modalbtn = document.createElement('button');
+const modalbtn = document.createElement('button');
 modalbtn.classList.add('reject-btn');
 modalbtn.setAttribute('onclick', 'closeModal(".modal1")');
 modalbtn.innerHTML = 'Ok';
@@ -134,22 +143,31 @@ modalbtn.innerHTML = 'Ok';
 const showModalItems = (val) => {
   // Found items
   const found = items.find(obj => obj.id === val);
-  div5.innerHTML = 'Order Id';
-  div6.innerHTML = 'Items Id';
-  div7.innerHTML = 'Quantity';
-  div8.innerHTML = 'Amount';
-  bigdiv2.appendChild(div5);
-  bigdiv2.appendChild(div6);
+  div7.innerHTML = 'Order Id';
+  div8.innerHTML = 'Items Id';
+  div9.innerHTML = 'Food Image';
+  div10.innerHTML = 'Food Item';
+  div11.innerHTML = 'Quantity';
+  div12.innerHTML = 'Amount';
   bigdiv2.appendChild(div7);
   bigdiv2.appendChild(div8);
+  bigdiv2.appendChild(div9);
+  bigdiv2.appendChild(div10);
+  bigdiv2.appendChild(div11);
+  bigdiv2.appendChild(div12);
   div1.textContent = found.id;
   div2.textContent = found.menuid;
-  div3.textContent = found.quantity;
-  div4.textContent = found.amount;
+  img.setAttribute('src', `${found.imgurl}`);
+  div3.appendChild(img);
+  div4.textContent = found.meal;
+  div5.textContent = found.quantity;
+  div6.textContent = found.amount;
   bigdiv.appendChild(div1);
   bigdiv.appendChild(div2);
   bigdiv.appendChild(div3);
   bigdiv.appendChild(div4);
+  bigdiv.appendChild(div5);
+  bigdiv.appendChild(div6);
   modal1.innerHTML = '';
   modal1.appendChild(bigdiv2);
   modal1.appendChild(bigdiv);

@@ -60,6 +60,10 @@
         <p> An error occured while trying to delete the item, from the menu please try again.</p>
         <button class="reject-btn" onclick="closeModal('.modalError8')">Ok</button>
     </div>
+    <div class="modal modalImage">
+        <p> An error occured while trying to process the image, please try again.</p>
+        <button class="reject-btn" onclick="closeModal('.modalImage')">Ok</button>
+    </div>
     <div class="modal modalAdd">
         <p>New food item added to menu successfully.</p>
         <button class="reject-btn" onclick="closeModal('.modalAdd')">Ok</button>
@@ -88,7 +92,10 @@
         <p> Item deleted successfully</p>
         <button class="reject-btn" onclick="closeModal('.modalDeleted')">Ok</button>
     </div>
-
+    <div class="modal modalEditSuccess">
+        <p> Item updated successfully</p>
+        <button class="reject-btn" onclick="closeModal('.modalEditSuccess')">Ok</button>
+    </div>
     <div class="modal modalNoOrders">
         <p> No orders found, thank you. </p>
         <button class="reject-btn" onclick="closeModal('.modalNoOrders')">Ok</button>
@@ -110,6 +117,8 @@
             <input type="text" class="add-food-item" name="food-item" placeholder="Food Item" />
             <br /><br />
             <input type="text" class="add-price" name="price" placeholder="Price" />
+            <br /><br />
+            <input type="file" class="add-image" name="image" accept="image/*" />
             <br /><br />
             <span class="feedback"></span>
         </form>

@@ -37,8 +37,9 @@ const verifyToken = () => {
             */
             // Item image
             const img = document.createElement('img');
-            img.setAttribute('src', 'images/food1.jpg');
+            img.setAttribute('src', `${food.imgurl}`);
             img.classList.add('img');
+            img.classList.add(`img${food.id}`);
             // Add to cart button
             const addBtn = document.createElement('button');
             addBtn.classList.add(`meal-button${food.id}`);
@@ -76,7 +77,7 @@ const verifyToken = () => {
             tr.appendChild(td5);
             secondTable.appendChild(tr);
           });
-        } else if (result.error.message === 'An error occured while retrieving available menu, please try again') {
+        } else if (result.data.message === 'An error occured while retrieving available menu, please try again') {
           // Hide spinner
           spinner.style.display = 'none';
           // Menu not yet found
@@ -100,9 +101,9 @@ const cart = [];
 const addToCart = (val) => {
   const foodId = val;
   // Item image
-  const img = document.createElement('img');
+  /* const img = document.createElement('img');
   img.setAttribute('src', 'images/food1.jpg');
-  img.classList.add('img');
+  img.classList.add('img'); */
   // Create table elements
   const tr = document.createElement('tr');
   tr.classList.add(`tr-cart${val}`);
@@ -113,7 +114,7 @@ const addToCart = (val) => {
   const td3 = document.createElement('td');
   td3.classList.add(`td3-cart${val}`);
   // Insert values into the table elements
-  td1.appendChild(img);
+  td1.innerHTML = document.querySelector(`.td1-meal${val}`).innerHTML;
   td2.innerText = document.querySelector(`.td2-meal${val}`).innerText;
   td3.innerText = document.querySelector(`.td3-meal${val}`).innerText;
   let quantity = document.querySelector(`.quantity${val}`).value;
@@ -156,6 +157,8 @@ const addToCart = (val) => {
   firstTable.appendChild(tr);
   cart.push({
     menuid: foodId,
+    meal: document.querySelector(`.td2-cart${val}`).innerHTML,
+    imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
     userid,
     name,
     quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
@@ -174,6 +177,8 @@ const plus = (val) => {
     document.querySelector(`.td4-cart${val}`).innerHTML;
   cart.push({
     menuid: foodId,
+    meal: document.querySelector(`.td2-cart${val}`).innerHTML,
+    imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
     userid,
     name,
     quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
@@ -184,6 +189,8 @@ const plus = (val) => {
   // Remove the first duplicate item
   const duplicateItem = cart.find(obj => obj.menuid === val);
   delete (duplicateItem.menuid);
+  delete (duplicateItem.meal);
+  delete (duplicateItem.imgurl);
   delete (duplicateItem.userid);
   delete (duplicateItem.name);
   delete (duplicateItem.quantity);
@@ -198,6 +205,8 @@ const minus = (val) => {
   document.querySelector(`.td3-cart${val}`).innerHTML -= +(document.querySelector(`.td3-meal${val}`).innerHTML);
   cart.push({
     menuid: foodId,
+    meal: document.querySelector(`.td2-cart${val}`).innerHTML,
+    imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
     userid,
     name,
     quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
@@ -207,6 +216,8 @@ const minus = (val) => {
   // Remove the first duplicate item
   const duplicateItem = cart.find(obj => obj.menuid === val);
   delete (duplicateItem.menuid);
+  delete (duplicateItem.meal);
+  delete (duplicateItem.imgurl);
   delete (duplicateItem.userid);
   delete (duplicateItem.name);
   delete (duplicateItem.quantity);
@@ -220,6 +231,8 @@ const deleteRow = (val) => {
   // Remove the first duplicate item
   const duplicateItem = cart.find(obj => obj.menuid === val);
   delete (duplicateItem.menuid);
+  delete (duplicateItem.meal);
+  delete (duplicateItem.imgurl);
   delete (duplicateItem.userid);
   delete (duplicateItem.name);
   delete (duplicateItem.quantity);
@@ -246,6 +259,8 @@ const orderResponse = () => {
           },
           body: JSON.stringify({
             menuid: order.menuid,
+            meal: order.meal,
+            imgurl: order.imgurl,
             userid: order.userid,
             name: order.name,
             quantity: order.quantity,

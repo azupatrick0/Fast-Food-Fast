@@ -86,21 +86,27 @@ button:hover {
 
 .bigdiv {
     font-size: 30px;
+    background-color: plum;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 0.5em;
+    padding: 0;
     width: 100%;
     display: flex;
 }
 
-.bigdiv div {
+.bigdiv p {
+    margin-left: 3%;
+}
+
+.bigdiv p {
     margin: 0 auto;
 }
 
 .bigdiv2 {
+    background-color: white;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    padding: 0.5em;
+    padding: 0;
     width: 100;
     display: flex;
 }
@@ -191,6 +197,20 @@ img {
 
 .modal1 table td {
     padding-left: 22%;
+}
+
+.modal1 {
+    padding-top: 10%;
+}
+
+.modal1 p {
+    margin-top: 1%;
+    color: rgba(48, 44, 44, 0.8);
+    font-weight: bold;
+}
+
+.modal1 .reject-btn {
+    margin-top: 5%;
 }
 
 
