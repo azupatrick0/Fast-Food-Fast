@@ -14,8 +14,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static('UI'));
-app.use(express.static('Client'));
+app.use(express.static('./Client/dist'));
 
 // If the user makes a request to the /api/v1/menu route, hand control to the menu route
 app.use('/api/v1/menu', menu);
