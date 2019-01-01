@@ -9,26 +9,26 @@ export const HomePage = () => {
         <header>
             <nav>
                 <div className="nav-bar">
-                    <a href="/" className="site-name">
+                    <a href="https://fast-food-fast.herokuapp.com/" className="site-name">
                         <img src={logo} alt="ffflogo" className="logo" /> <strong>Fast-Food-Fast</strong>
                     </a>
-                    <a href="/Signup" className="order">Order a meal</a>
-                    <a href="/Signup" className="history">History</a>
+                    <a href="https://fast-food-fast.herokuapp.com/Signup" className="order">Order a meal</a>
+                    <a href="https://fast-food-fast.herokuapp.com/Signup" className="history">History</a>
                     <button onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signin')} className="login centre">LOGIN</button>
-    <a className="hamburger" onClick={()=> ShowHideHamburger()}>&#9776;</a>
+    <a className="hamburger" onClick={()=> ShowHideHamburger('.tab-modal')}>&#9776;</a>
                     <div className="tab-modal">
                         <div className="tab-modal-a">
-                            <a href="/Signup">Order a meal</a>
+                            <a href="https://fast-food-fast.herokuapp.com/Signup">Order a meal</a>
                             <br />
                             <br />
                             <hr />
                             <br />
-                            <a href="/Signup">History</a>
+                            <a href="https://fast-food-fast.herokuapp.com/Signup">History</a>
                             <br />
                             <br />
                             <hr />
                             <br />
-                            <a href="/Signin">Login</a>
+                            <a href="https://fast-food-fast.herokuapp.com/Signin">Login</a>
                             <br />
                             <br />
                         </div>
