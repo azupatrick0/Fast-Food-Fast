@@ -42,7 +42,7 @@ describe('Fast-Food-Fast Client Test Suite', () => {
         expect(wrapper.instance().props.View).to.be.a('string');
         expect(wrapper.instance().props.View.length).to.be.gt(0);
         expect(wrapper.contains(<HomePage />)).to.equal(true);
-        expect(wrapper2.html().length).to.eql(538);
+        expect(wrapper2.html().length).to.eql(754);
         wrapper2.find('button').simulate('click');
       });
     });
