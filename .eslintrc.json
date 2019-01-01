@@ -13,6 +13,7 @@
         "react/jsx-uses-react": "error",   
         "react/jsx-uses-vars": "error",
         "no-console": "off",
-        "import/no-unresolved": "off"
+        "import/no-unresolved": "off",
+        "import/extensions": "off"
    }
 }
