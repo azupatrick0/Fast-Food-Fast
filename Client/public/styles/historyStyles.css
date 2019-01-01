@@ -1,0 +1,645 @@
+* {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: red;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+    color: rgba(243, 38, 38, 0.7);
+    cursor: pointer;
+}
+
+.accept-btn {
+    background-color: rgba(111, 50, 192, 0.5);
+    color: white;
+    width: 80%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
+.blur {
+    position: absolute;
+    z-index: -1;
+    background-color: rgba(0, 255, 255, 0.45);
+    width: 100%;
+    display: block;
+    height: 100%;
+    overflow: auto;
+    margin: 0;
+    padding: 2em 0 15em 0;
+}
+
+.blur2 {
+    position: relative;
+    z-index: 1;
+    background-color: rgba(0, 255, 255, 0.45);
+    width: 95%;
+    margin-left: 2em;
+    padding: 0 1.5em 6em 0;
+}
+
+
+body {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: url('../images/fast-food-fast-1.png') no-repeat 0 -15em;
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+body p {
+    color: red;
+}
+
+button {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    border-radius: 5px;
+    width: 10%;
+    height: 45px;
+    margin-left: 38%;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+}
+
+button:active {
+    transform: translateY(3px);
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.7;
+    border: 0;
+    color: white;
+    cursor: pointer;
+}
+
+.bigdiv {
+    font-size: 30px;
+    background-color: plum;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    width: 100%;
+    display: flex;
+}
+
+.bigdiv p {
+    margin-left: 3%;
+}
+
+.bigdiv p {
+    margin: 0 auto;
+}
+
+.bigdiv2 {
+    background-color: white;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 0;
+    width: 100;
+    display: flex;
+}
+
+.bigdiv2 p {
+    margin-left: 3%;
+}
+
+.bigdiv2 p {
+    margin: 0 auto;
+}
+
+.centre {
+    margin-left: 37%;
+    color: red;
+    font-size: 25px;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding: 0.5em;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-items {
+    margin-left: 3%; 
+    width: 90vw;
+}
+
+.flex-items p {
+    font-size: 18px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.hamburger {
+    display: none;
+}
+
+.history {
+    font-size: 20px;
+    margin-left: 3%;
+    color: white;
+}
+
+.history:hover {
+    color: red;
+}
+
+img {
+    height: 40px;
+    width: 3em;
+    border-radius: 100%;
+}
+
+.logo {
+    height: 25px;
+    width: 3%;
+}
+
+
+.modal {
+    background-color: rgba(0,0,0,0.95);
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    z-index: 3;
+    display: none;
+}
+
+.modal p {
+    margin-top: 10%;
+    text-align: center;
+    color:rgb(252, 227, 6);
+    font-size: 20px;   
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.modal button {
+    margin-left: 45%;
+    width: 12%;
+}
+
+.modal1 table{
+    margin: 0 15% 0 15%;
+    width: 70%;
+    box-shadow: unset;
+}
+
+.modal1 table td {
+    padding-left: 22%;
+}
+
+.modal1 {
+    padding-top: 10%;
+}
+
+.modal1 p {
+    margin-top: 1%;
+    color: rgba(48, 44, 44, 0.8);
+    font-weight: bold;
+}
+
+.modal1 .reject-btn {
+    margin-top: 5%;
+}
+
+
+.nav-bar {
+    font-size: 14px;
+    color: red;
+    background-color: transparent;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 10vh;
+    width: 100%;
+    padding: 0.44em 0 1.25em 0.44em;
+    text-align: center;
+}
+
+.nav-bar button{
+    margin-left: 3%;
+}
+
+.order {
+    margin-left: 35%;
+    font-size: 20px;
+    color: white;
+}
+
+.order:hover {
+    color: red;
+}
+
+p {
+    font-size: 20px;
+}
+
+.search-btn {
+    background-color: rgb(230, 73, 73);
+    color: white;
+    width: 7%;
+    height: 2.8em;
+    margin-left: 0;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
+.search-history {
+    height: 2.8em;
+    width: 30%;
+    margin-left: 60.7%;
+    outline: none;
+    border: 1.5px solid rgba(0,0,255,0.3);
+    text-overflow: ellipsis;
+    padding-left: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+}
+
+.search-history:focus {
+    box-shadow: 1px 0px 6px 2px rgba(116, 116, 199, 0.5);
+}
+
+
+.site-name {
+    font-size: 24px;
+}
+
+.slide0 {
+    background-color: rgba(0, 255, 255, 0.45);
+    background-size: cover;
+    background-attachment: fixed;
+    height: 90vh; 
+    width: 100%; 
+}
+
+.slide0 p { 
+    font-family: 'Ubuntu Condensed', sans-serif;
+    padding-top: 3.5%; 
+    margin: 0;
+}
+
+.spinner {
+    width: 12%;
+    height: 20vh;
+    border-top: 15px solid rgb(228, 95, 95);
+    border-radius: 100%;
+    animation: cyclic 1s infinite;
+    display: none;
+    position: absolute;
+    z-index: 1;
+    margin-left: 40%;
+}
+
+
+@-webkit-keyframes cyclic {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+  
+@keyframes cyclic {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.tab-modal {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    background-color: white;
+    color: rgba(99, 87, 87, 0.9);
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px; 
+    box-shadow: 1px 6px 6px 3px rgba(116, 116, 199, 0.5);
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+td {
+    padding: 10px 10px 10px 50px;
+}
+
+th {
+    padding: 10px;
+}
+
+tr:nth-child(even) {
+    background-color: rgba(99, 87, 87, 0.2);
+}
+
+/* High resolution laptops */
+@media (min-width: 1366px) {
+    td:nth-child(3) {
+        padding-left: 12em;
+    }
+}
+
+/* High resolution tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .blur2 {
+        margin-left: 1em;
+    }
+    
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 40%;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    .history, .signout, .order {
+        display: none;
+    }
+
+    .nav-bar {
+        text-align: unset;
+    }
+        
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+        z-index: 2;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        padding: 0.2em;
+    }
+     
+    td {
+        padding: 10px 10px 10px 30px;
+    }
+
+    .search-btn {
+        width: 8%;
+    }
+
+}
+
+/*Low resolution Tablets*/
+@media (min-width: 481px) and (max-width: 767px) {
+    .accept-btn {
+        width: 100%;
+    }
+
+    .blur {
+        padding-bottom: 20em;
+    }
+
+    .blur2 {
+        margin-left: 0.8em;
+    }
+
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 20%;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .flex-items {
+        width: 90vw;
+        overflow-x: auto;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 30px;
+    }
+
+    .history, .signout, .order {
+        display: none;
+    }
+   
+    .logo {
+        width: 6%;
+    }
+
+    .nav-bar {
+        text-align: unset;
+    }
+
+    .slide0 p { 
+        padding: 10% 0 0 8%; 
+        font-size: 30px;
+    }
+
+    .spinner {
+        width: 15%;
+        height: 25vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
+    }
+
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+        z-index: 2;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        padding: 0.2em;
+    }
+
+    .search-btn {
+        width: 17vw;
+    }
+
+    .search-history {
+        width: 40%;
+        margin-left: 40%;
+    }
+
+    td {
+        padding: 10px 10px 10px 25px;
+    }
+
+
+}
+/*SmartPhones*/
+@media (min-width: 1px) and (max-width: 480px) {
+
+    .accept-btn {
+        width: 100%;
+    }
+
+    .blur {
+        padding-bottom: 20em;
+    }
+
+    .blur2 {
+        margin-left: 0.8em;
+    }
+
+
+    body {
+        width: 100%;
+        padding: 0;
+        margin: 0;
+        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background-size: cover;
+        background-attachment: fixed;
+    }
+
+    .centre {
+        margin-left: 20%;
+    }
+
+    .flex {
+        display: block;
+    }
+
+    .flex-items {
+        width: 90vw;
+        overflow-x: auto;
+    }
+
+    .hamburger {
+        display: inline;
+        position: absolute;
+        left: 84%;
+        padding: 0;
+        font-size: 25px;
+    }
+
+    .history, .signout, .order {
+        display: none;
+    }
+   
+    .logo {
+        width: 8%;
+    }
+
+    .nav-bar {
+        text-align: unset;
+    }
+
+    .slide0 p { 
+        padding: 10% 0 0 8%; 
+        font-size: 30px;
+    }
+
+    .spinner {
+        width: 25%;
+        height: 15vh;
+        margin-left: 40%;
+        margin-bottom: 3%;
+    }
+
+    .tab-modal {
+        background-color: rgba(93, 81, 134, 0.5);
+        position: fixed;
+        top: 4.5em;
+        right: 0;
+        height: 43vh;
+        width: 40%;
+        z-index: 2;
+    }
+
+    .tab-modal-link {
+        margin-top: 10%;
+        padding-top: 15px;
+        text-align: center;
+    }
+
+    .tab-modal-link a {
+        color:rgb(252, 227, 6);
+        font-size: 20px;   
+        font-family: 'Ubuntu Condensed', sans-serif;
+    }
+
+    .tab-modal-link a:hover {
+        color: white;
+        padding: 0.2em;
+    }
+
+    .search-btn {
+        width: 18vw;
+    }
+
+    .search-history {
+        width: 40%;
+        margin-left: 40%;
+    }
+
+    td {
+        padding: 10px 10px 10px 20px;
+    }
+
+
+}
