@@ -5,7 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
 import { Footer, NavBar, NotFound } from '../src/components';
 import { HomePage } from '../src/components/NavBar';
-import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/LandingPage';
+import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
 require('browser-env')();
 
