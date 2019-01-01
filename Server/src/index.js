@@ -1,7 +1,9 @@
 // Import modules
 import express from 'express';
+import path from 'path';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+
 import { menu, orders, users, homePage, notFoundPage } from './routes/index';
 
 // Express app
@@ -14,7 +16,7 @@ const port = process.env.PORT || 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors());
-app.use(express.static('./Client/dist'));
+app.use(express.static('./build'));
 
 // If the user makes a request to the /api/v1/menu route, hand control to the menu route
 app.use('/api/v1/menu', menu);
@@ -34,8 +36,10 @@ app.use('/api/v1', homePage);
 // If the user makes a request to the /api/v1/* route, hand control to the notFoundPage route
 app.use('/api/v1/*', notFoundPage);
 
-// If the user visit page not defined, redirect to not found page
-app.use('/*', express.static('UI/notfound.html'));
+// To use other UI routes
+app.get('/*', (req, res) => {
+  res.sendFile(path.resolve('./build', 'index.html'));
+});
 
 // Error handler
 app.use((err, req, res, next) => {

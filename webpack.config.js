@@ -1,44 +1,46 @@
-// import path from 'path';
-// import dotenv from 'dotenv';
 const path = require('path');
 const dotenv = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 dotenv.config();
 
-let useMode;
-if (process.env.NODE_ENV === 'development') {
-  useMode = 'development';
-} else if (process.env.NODE_ENV === 'test') {
-  useMode = 'test';
-} else {
-  useMode = 'production';
-}
 module.exports = {
-  entry: path.resolve(__dirname, 'Client/src/index.js'),
-  target: 'web',
+  entry: path.resolve(__dirname, 'Client/src'),
   output: {
-    path: path.join(__dirname, 'Client/dist'),
+    path: path.resolve(__dirname, 'build'),
+    publicPath: '/',
     filename: 'bundle.js',
   },
-  mode: useMode,
   module: {
     rules: [
       {
         test: /\.js$/,
-        include: path.join(__dirname, 'Client'),
-        exclude: /node_modules/,
         use: ['babel-loader'],
       },
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
+        use: [
+          'file-loader',
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              bypassOnDebug: true,
+              disable: true,
+            },
+          },
+        ],
+      }
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: './Client/src/index.html',
+      filename: 'index.html',
+      inject: 'body'
     }),
   ],
 };
