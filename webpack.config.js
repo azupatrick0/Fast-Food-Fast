@@ -22,7 +22,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.(gif|png|jpe?g|svg)$/i,
+        test: /\.(gif|png|jpg|jpe?g|svg)$/i,
         use: [
           'file-loader',
           {
@@ -43,4 +43,7 @@ module.exports = {
       inject: 'body'
     }),
   ],
+  resolve: {
+    extensions: ['.js', '.css', '.jpg', '.png']
+  },
 };
