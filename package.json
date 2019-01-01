@@ -7,6 +7,7 @@
     "start:dev": "npm run start:webpack:dev & npm run create-table-users-dev && npm run create-table-items-dev && npm run create-table-orders-dev && cross-env NODE_ENV=development nodemon ./node_modules/babel-cli/bin/babel-node.js ./Server/src/index.js",
     "start:webpack:dev": "webpack --mode development --watch",
     "start:webpack:prod": "webpack --mode production",
+    "pretest": "npm run lint",
     "test": "npm run create-table-users-test && npm run create-table-items-test && npm run create-table-orders-test && cross-env NODE_ENV=test nyc mocha --exit ./Server/src/test/testSpec.js ./Client/test/index.spec.js --require babel-register --require ignore-styles --timeout 250000",
     "build": "npm run clean && node ./node_modules/babel-cli/bin/babel.js ./Server/src -d ./Server/dist",
     "lint": "./node_modules/.bin/eslint ./Client ./Server --fix --ignore-path .gitignore",

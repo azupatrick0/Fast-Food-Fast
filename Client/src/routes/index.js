@@ -1,7 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, browserHistory } from 'react-router-dom';
-import LandingPage from '../../src/components/LandingPage';
-import { NotFound } from '../components/index';
+import { NotFound, LandingPage } from '../components/index';
 
 const Routes = () => (
     <BrowserRouter history={browserHistory}>
