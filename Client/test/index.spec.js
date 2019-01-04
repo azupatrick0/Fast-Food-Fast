@@ -1,9 +1,10 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NavBar, NotFound } from '../src/components';
+import { Footer, NavBar, NotFound, Signup } from '../src/components';
 import { HomePage } from '../src/components/NavBar';
 import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
@@ -78,6 +79,18 @@ describe('Fast-Food-Fast Client Test Suite', () => {
         wrapper4.find('button').at(1).simulate('click');
         wrapper4.find('button').at(2).simulate('click');
         wrapper5.find('a').simulate('click');
+      });
+    });
+
+    describe('<Signup />', () => {
+      it('renders Signup Component', () => {
+      //   const signupAction =  dispatch({
+      //     type: USER_SIGNUP_SUCCESS,
+      //     payload: response.data.userDetails
+      // });
+        const wrapper = shallow(<Signup />);
+        expect(wrapper.length).to.eql(1);
+        // wrapper.find('.accept-btn').simulate('click');
       });
     });
   });

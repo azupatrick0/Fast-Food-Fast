@@ -99,6 +99,7 @@ button:hover {
 
 .feedback3 {
     display: none;
+    margin-left: 0;
     background-color: plum;
     padding: 0.3em 0 0 0.4em;
     border-radius: 3px;
@@ -174,7 +175,7 @@ p {
 }
 
 .slide-signup {
-    background: url('../images/fast-food-fast-1.png') no-repeat -330px -180px;
+    background: url('../images/fast-food-fast-1.png') no-repeat -330px -160px;
     background-size: cover;
     background-attachment: fixed;
     height: 100vh; 
@@ -240,6 +241,17 @@ p {
 @keyframes cyclic {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* High resolution laptops */
+@media (min-width: 1366px) {
+    .slide-signup {
+        background: url('../images/fast-food-fast-1.png') no-repeat -380px -240px;
+        background-size: cover;
+        background-attachment: fixed;
+        height: 100vh; 
+        width: 100%; 
+    }
 }
 
 /* High resolution tablets */
@@ -322,6 +334,15 @@ p {
 
     .feedback, .feedback2 {
         height: 10vh;
+    }
+
+    .form .feedback3 {
+        height: 8vh;
+        margin-left: 0;
+    }
+
+    .feedback4 {
+        height: 15vh;
     }
 
     .flex {
