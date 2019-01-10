@@ -50,7 +50,6 @@
     "babel-register": "^6.26.0",
     "bcrypt": "^3.0.3",
     "body-parser": "^1.18.3",
-    "bootstrap": "3.3.6",
     "browser-env": "^3.2.5",
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
