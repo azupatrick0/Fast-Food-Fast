@@ -5,12 +5,10 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../public/styles/signupStyles.css';
 import logo from '../../public/images/ffflogo.png';
-import { CloseModal, ValidateUserDetails, ClearFeedback } from '../utils/index';
-
+import { ValidateUserDetails } from '../../js/utils/index';
 import SignupAUser from '../actions/index';
 
-
-class Signup extends Component {
+export class Signup extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +17,7 @@ class Signup extends Component {
             password: '',
             role: 'user'
         }
+        this.feedback4 = React.createRef();
     }
 
     onHandleFormChange(e) {
@@ -42,26 +41,23 @@ class Signup extends Component {
             password,
             role
         }
-
         this.props.act(SignupAUser(userData));
+        
     }
- 
     render() {
+        if(this.props.status === 'FAILED' || this.props.status === 'ERROR') {
+            this.feedback4.current.style.display = 'block';
+        }
         return (
             <Fragment>
-
-                { this.props.status === 'SUCCESS' && <Redirect to='/Dashboard' /> }
-        
+                
+                {this.props.status === 'SUCCESS' && <Redirect to='/Dashboard' />}
                 <Helmet>
                     <title>
                         Fast-Food-Fast | Sign Up
                         </title>
                     <link rel="shortcut icon" type="image/png" href='../../public/images/ffflogo.png' />
                 </Helmet>
-                <div className="modal">
-                    <p>{this.props.error}</p><br />
-                    <button className="accept-btn" onClick={()=> CloseModal('.modal')}>Ok</button>
-                </div>
                 <div className="slide-signup flex">
 
                     <div className="app-description">
@@ -71,7 +67,7 @@ class Signup extends Component {
                         <br />
                         <br /> Fast-Food-Fast​ is a food delivery service app for a restaurant
                     </div>
-                   
+
                     <div className="signup-box">
                         <div className="signup-properties">
                             <p>Sign up to order for food easily, no matter where you are</p>
@@ -79,20 +75,20 @@ class Signup extends Component {
                         <br />
 
                         <form action="#" method="POST" className="form" onKeyUp={(e) => this.onClickButton(e)}>
-                            <input type="text" className="signupName" name="name" value={this.state.name} placeholder="Name" onInput={() => ClearFeedback('.feedback3')} onChange={(e) => this.onHandleFormChange(e)} />
+                            <input type="text" className="signupName" name="name" value={this.state.name} placeholder="Name"  onChange={(e) => this.onHandleFormChange(e)} />
                             <span className="feedback3"></span>
                             <br /><br />
-                            <input type="email" className="signupEmail" name="email" value={this.state.email} placeholder="Email" onInput={() => ClearFeedback('.feedback')} onChange={(e) => this.onHandleFormChange(e)} />
+                            <input type="email" className="signupEmail" name="email" value={this.state.email} placeholder="Email"  onChange={(e) => this.onHandleFormChange(e)} />
                             <span className="feedback"></span>
                             <span className="feedback feedback5"></span>
                             <br /><br />
-                            <input type="password" className="signupPassword" name="password" value={this.state.password} placeholder="Password" onInput={() => ClearFeedback('.feedback2')} onChange={(e) => this.onHandleFormChange(e)} />
+                            <input type="password" className="signupPassword" name="password" value={this.state.password} placeholder="Password"  onChange={(e) => this.onHandleFormChange(e)} />
                             <span className="feedback2"></span>
                             <br /><br />
                             <input type="hidden" className="signupRole" name="signupRole" value="user" />
                         </form>
-                        <button className="signup" onClick={() => ValidateUserDetails(this.onHandleSignup())}><span className="signupText">Sign Up</span> <span className="spinner"></span></button>
-                        <span className="modal">{this.props.error}</span>
+                        <button className="signup" onClick={() => ValidateUserDetails(this.onHandleSignup())}><span className="signupText" ref={this.signupText}>Sign Up</span> <span className="spinner" ref={this.spinner}></span></button>
+                        <span className="feedback4" ref={this.feedback4}>{this.props.error}</span>
                         <div className="signup-properties">
                             <p> Already have an account?
                         <a href="https://fast-food-fast.herokuapp.com/Signin">Sign in</a>
@@ -100,7 +96,7 @@ class Signup extends Component {
                         </div>
                     </div>
                 </div>
- 
+
             </Fragment>
         );
     }
@@ -109,7 +105,7 @@ class Signup extends Component {
 Signup.propTypes = {
     status: PropTypes.string,
     error: PropTypes.string,
-    act: PropTypes.func.isRequired
+    act: PropTypes.func
 }
 
 const mapStateToProps = state => ({

@@ -341,8 +341,9 @@ p {
         margin-left: 0;
     }
 
-    .feedback4 {
-        height: 15vh;
+    .signup-box .feedback4 {
+        height: 20vh;
+        overflow-x: scroll;
     }
 
     .flex {

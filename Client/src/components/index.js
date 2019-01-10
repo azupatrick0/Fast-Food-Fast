@@ -2,6 +2,7 @@ import Footer from './Footer';
 import NavBar from './NavBar';
 import NotFound from './NotFound';
 import LandingPage from './landingPage';
-import Signup from './Signup';
+// eslint-disable-next-line import/no-named-as-default
+import SignupConnected, { Signup } from './Signup';
 
-export { Footer, NavBar, NotFound, LandingPage, Signup };
+export { Footer, NavBar, NotFound, LandingPage, Signup, SignupConnected};

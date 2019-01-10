@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-import { shallow, configure } from 'enzyme';
+import { mount, shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
@@ -12,7 +11,7 @@ require('browser-env')();
 
 configure({ adapter: new Adapter() });
 
-describe('Fast-Food-Fast Client Test Suite', () => {
+describe('Fast-Food-Fast Client Components Test Suite', () => {
   describe('Routes Test Suite', () => {
     delete window.location;
     window.location = {};
@@ -29,7 +28,7 @@ describe('Fast-Food-Fast Client Test Suite', () => {
       it('renders Footer Component', () => {
         const wrapper = shallow(<Footer />);
         expect(wrapper.length).to.eql(1);
-        expect(wrapper.html().length).to.eql(81);
+        expect(wrapper.html().length).to.eql(56);
       });
     });
 
@@ -59,38 +58,42 @@ describe('Fast-Food-Fast Client Test Suite', () => {
       it('renders LandingPage Component', () => {
         delete window.location;
         window.location = {};
-        const wrapper = shallow(<LandingPage />)
-        const wrapper2 = shallow(<Slide0 />)
-        const wrapper3 = shallow(<Slide1 />)
-        const wrapper4 = shallow(<Slide2 />)
-        const wrapper5 = shallow(<Footer />)
+        const wrapper = mount(<LandingPage />)
+        const wrapper2 = mount(<Slide0 />)
+        const wrapper3 = mount(<Slide1 />)
+        const wrapper4 = mount(<Slide2 />)
         expect(wrapper.length).to.eql(1);
         expect(wrapper.contains(<NavBar View='homePage' />)).to.equal(true);
         expect(wrapper.contains(<Slide0 />)).to.equal(true);
         expect(wrapper.contains(<Slide1 />)).to.equal(true);
         expect(wrapper.contains(<Slide2 />)).to.equal(true);
         expect(wrapper.contains(<Footer />)).to.equal(true);
-        expect(wrapper2.html().length).to.eql(330);
-        expect(wrapper3.html().length).to.eql(1192);
-        expect(wrapper4.html().length).to.eql(1343);
+        expect(wrapper2.html().length).to.eql(326);
+        expect(wrapper3.html().length).to.eql(1173);
+        expect(wrapper4.html().length).to.eql(1326);
         wrapper2.find('button').simulate('click');
         wrapper3.find('button').simulate('click');
         wrapper4.find('button').at(0).simulate('click');
         wrapper4.find('button').at(1).simulate('click');
         wrapper4.find('button').at(2).simulate('click');
-        wrapper5.find('a').simulate('click');
       });
     });
 
     describe('<Signup />', () => {
-      it('renders Signup Component', () => {
-      //   const signupAction =  dispatch({
-      //     type: USER_SIGNUP_SUCCESS,
-      //     payload: response.data.userDetails
-      // });
-        const wrapper = shallow(<Signup />);
-        expect(wrapper.length).to.eql(1);
-        // wrapper.find('.accept-btn').simulate('click');
+      it('renders connected Signup Component', () => {
+        const wrapper = shallow(<Signup act={()=> 'clicked me'}/>);
+        const event = {target: {name: "name", value: "francis"}};
+        const event2 = {target: {name: "email", value: "francis@gmail.com"}};
+        const event3 = {target: {name: "password", value: "francis42"}};
+        const event4 = {keyCode: 13};
+        expect(wrapper.length).to.eql(1);              
+        wrapper.find('.signupName').simulate('change',event);
+        wrapper.find('.signupEmail').simulate('change',event2);
+        wrapper.find('.signupPassword').simulate('change',event3);
+        const userEmail = <input className="signupEmail" value="myemail"/>
+        const userPassword = <input className="signupPassword" value="mypassword"/>
+        const userName = <input className="signupName" value="myname"/>
+        wrapper.find('.form').simulate('keyup',userEmail,userPassword,userName,event4);
       });
     });
   });
