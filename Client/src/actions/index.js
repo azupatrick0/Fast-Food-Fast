@@ -1,3 +1,4 @@
 import SignupAUser from './SignupActions';
+import SigninAUser from './SigninActions';
 
-export default SignupAUser ;
+export { SignupAUser, SigninAUser };

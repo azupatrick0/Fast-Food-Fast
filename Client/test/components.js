@@ -3,7 +3,7 @@ import { mount, shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NavBar, NotFound, Signup } from '../src/components';
+import { Footer, NavBar, NotFound, Signup, Signin } from '../src/components';
 import { HomePage } from '../src/components/NavBar';
 import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
@@ -92,8 +92,22 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         wrapper.find('.signupPassword').simulate('change',event3);
         const userEmail = <input className="signupEmail" value="myemail"/>
         const userPassword = <input className="signupPassword" value="mypassword"/>
-        const userName = <input className="signupName" value="myname"/>
-        wrapper.find('.form').simulate('keyup',userEmail,userPassword,userName,event4);
+        wrapper.find('.form').simulate('keyup',userEmail,userPassword,event4);
+      });
+    });
+
+    describe('<Signin />', () => {
+      it('renders connected Signin Component', () => {
+        const wrapper = shallow(<Signin act={()=> 'clicked me'}/>);
+        const event2 = {target: {name: "email", value: "francis@gmail.com"}};
+        const event3 = {target: {name: "password", value: "francis42"}};
+        const event4 = {keyCode: 13};
+        expect(wrapper.length).to.eql(1);              
+        wrapper.find('.signupEmail').simulate('change',event2);
+        wrapper.find('.signupPassword').simulate('change',event3);
+        const userEmail = <input className="signupEmail" value="myemail"/>
+        const userPassword = <input className="signupPassword" value="mypassword"/>
+        wrapper.find('.form').simulate('keyup',userEmail,userPassword,event4);
       });
     });
   });

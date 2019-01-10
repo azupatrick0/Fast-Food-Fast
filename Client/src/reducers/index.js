@@ -1,3 +1,7 @@
 import SignupReducer from './SignupReducer';
+import SigninReducer from './SigninReducer';
 
-export default SignupReducer;
+export { 
+    SignupReducer,
+    SigninReducer
+}

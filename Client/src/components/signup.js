@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import '../../public/styles/signupStyles.css';
 import logo from '../../public/images/ffflogo.png';
 import { ValidateUserDetails } from '../../js/utils/index';
-import SignupAUser from '../actions/index';
+import { SignupAUser } from '../actions/index';
 
 export class Signup extends Component {
     constructor(props) {
@@ -51,7 +51,7 @@ export class Signup extends Component {
         return (
             <Fragment>
                 
-                {this.props.status === 'SUCCESS' && <Redirect to='/Dashboard' />}
+                {this.props.status === 'SUCCESS' && <Redirect to='/Orders' />}
                 <Helmet>
                     <title>
                         Fast-Food-Fast | Sign Up
@@ -109,8 +109,8 @@ Signup.propTypes = {
 }
 
 const mapStateToProps = state => ({
-    status: state.status,
-    error: state.error
+    status: state.signup.status,
+    error: state.signup.error
 });
 
 const mapDispatchToProps = (dispatch) => ({

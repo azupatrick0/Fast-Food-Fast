@@ -2,10 +2,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import fetchMock from 'fetch-mock'
-import SignupAUser from '../src/actions/index';
+import { SignupAUser, SigninAUser } from '../src/actions/index';
 import {
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_ERROR,
+    USER_SIGNIN_SUCCESS,
+    USER_SIGNIN_ERROR,
 } from '../src/actions/actionTypes';
 
 require('browser-env')();
@@ -21,8 +23,9 @@ const userDetails = {
 };
 
 describe('Fast-Food-Fast Actions Test Suite', () => {
-    const store = mockStore({});
+    
     describe('Signup Actions', () => {
+        const store = mockStore({});
         beforeEach(() => {
             store.clearActions();
         })
@@ -69,6 +72,69 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
 
 
             return store.dispatch(SignupAUser(userDetails)).then(() => {
+                expect(store.getActions()).to.eql(expectedActions)
+            })
+        })
+    })
+
+    describe('Signin Actions', () => {
+        const store = mockStore({});
+        afterEach(() => {
+            fetchMock.restore()
+        })
+        it('creates USER_SIGNIN_SUCCESS when user has been signed in', () => {
+            fetchMock.post('https://fast-food-fast.herokuapp.com/api/v1/auth/login', {
+                body: {
+                    email: 'dkzxcxasdressqwwedfgdsdfswedxxzdfvcd0@gmail.com',
+                    password: '$2b$10$JBWg1F.B/GDnzkpTb4dbseVJvjhlisplwMFcRilFOQA4NTa7lUfaW'
+                },
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            const expectedActions = [{
+                type: USER_SIGNIN_SUCCESS,
+                payload: {
+                    data: {
+                        message: "Welcome, xxxxx",
+                        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inh4eHh6enZ2ZGZjY2NnYm5kZmZmZmZmZmF4bWM3OG1jdnYzMzEydnZ2OG1ka2RrenhjeGFzZHJlc3Nxd3dlZGZnZHNkZnN3ZWR4eHpkZnZjZDBAZ21haWwuY29tIiwiaWF0IjoxNTQ3MTM1NDYyLCJleHAiOjE1NDcyMjE4NjJ9.EpekXLJ-Lb1ZYRhOGQ8745P_l2tl4jSKGJ2w9j6fB5Q",
+                        userDetails: {
+                            createdat: "2019-01-10T14:59:18.605Z",
+                            email: "xxxxzzvvdfcccgbndfffffffaxmc78mcvv3312vvv8mdkdkzxcxasdressqwwedfgdsdfswedxxzdfvcd0@gmail.com",
+                            id: 69,
+                            name: "xxxxx",
+                            password: "$2b$10$JBWg1F.B/GDnzkpTb4dbseVJvjhlisplwMFcRilFOQA4NTa7lUfaW",
+                            role: "user",
+                        }
+                    },
+                    status: "success"
+                },
+            }]
+            store.dispatch(SigninAUser({
+                email: 'xxxxzzvvdfcccgbndfffffffaxmc78mcvv3312vvv8mdkdkzxcxasdressqwwedfgdsdfswedxxzdfvcd0@gmail.com',
+                password: '$2b$10$JBWg1F.B/GDnzkpTb4dbseVJvjhlisplwMFcRilFOQA4NTa7lUfaW'
+            })).then(() => {
+                expect(store.getActions()).to.eql(expectedActions)
+            })
+         })
+
+        it('creates USER_SIGNIN_ERROR when an error occurs during sign in', () => {
+            fetchMock.post('https://fast-food-fast.herokuapp.com/api/v1/auth/login', {
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+
+            });
+            const expectedActions = [{
+                type: USER_SIGNIN_ERROR,
+                payload: 'An error occured while signing you in, please try again'
+            }]
+
+
+            return store.dispatch(SigninAUser({
+                email: '',
+                password: ''
+            })).then(() => {
                 expect(store.getActions()).to.eql(expectedActions)
             })
         })
