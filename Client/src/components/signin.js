@@ -47,7 +47,7 @@ export class Signin extends Component {
         return (
             <Fragment>
                 
-                {this.props.status === 'SUCCESS' && <Redirect to='/Orders' />}
+                {this.props.status === 'SUCCESS' && <Redirect to='/orders' />}
                 <Helmet>
                     <title>
                         Fast-Food-Fast | Sign In

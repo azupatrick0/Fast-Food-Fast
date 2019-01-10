@@ -8,8 +8,8 @@ const Routes = () => (
                 <Route path='/' exact component={LandingPage} />
                 <Route path='/index' exact component={LandingPage} />
                 <Route path='/index.html' exact component={LandingPage} />
-                <Route path='/Signup' exact component={SignupConnected} />
-                <Route path='/Signin' exact component={SigninConnected} />
+                <Route path='/signup' exact component={SignupConnected} />
+                <Route path='/signin' exact component={SigninConnected} />
                 <Route component={NotFound} />
         </Switch>
     </BrowserRouter>
