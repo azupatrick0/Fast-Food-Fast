@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { ShowLocation, ShowHideHamburger } from '../utils/index';
+import { ShowLocation, ShowHideHamburger } from '../../js/utils/index';
 import '../../public/styles/landingPageStyles.css';
 import logo from '../../public/images/ffflogo.png';
 

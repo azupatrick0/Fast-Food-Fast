@@ -1,5 +1,4 @@
 import React, { Fragment, Component } from 'react';
-import { ScrollToTop } from '../utils/index';
 import '../../public/styles/landingPageStyles.css';
 
 class Footer extends Component {
@@ -8,7 +7,7 @@ class Footer extends Component {
         return (
             <Fragment>
                 <footer>
-                    <strong>&copy; 2018 Fast-Food-Fast.</strong><a className="up-arrow" onClick={()=> ScrollToTop()}>&#11014;</a>
+                    <strong>&copy; 2018 Fast-Food-Fast.</strong>
                 </footer>
             </Fragment>
         );

@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import Helmet from 'react-helmet';
 import { Footer, NavBar } from './index';
-import { ShowLocation } from '../utils/index';
+import { ShowLocation } from '../../js/utils/index';
 import '../../public/styles/landingPageStyles.css';
 import placeorder from '../../public/images/place-order.png';
 import money from '../../public/images/money.png';
@@ -31,7 +31,7 @@ export const Slide0 = () => {
 export const Slide1 = () => {
     return (
         <div className="slide1">
-            <p><br/>
+            <br/>
                 <div className="centre"><strong>How it Works</strong></div><br/>
                 <div className="grid">
                     <div className="grid-items">
@@ -57,7 +57,6 @@ export const Slide1 = () => {
                 <button className="get-started middle" onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signup')}>
                     Get Started
                 </button>
-            </p>
         </div>
     );
 }
@@ -65,7 +64,6 @@ export const Slide1 = () => {
 export const Slide2 = () => {
     return (
         <div className="slide2">
-            <p>
                 <div className="centre"><strong>Our Popular Meals</strong></div><br />
                 <div className="grid">
                     <div className="grid-items">
@@ -104,7 +102,6 @@ export const Slide2 = () => {
                         </div>
                     </div>
                 </div>
-            </p>
         </div>
     );
 }
