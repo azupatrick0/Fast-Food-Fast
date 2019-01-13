@@ -12,7 +12,6 @@ import {
 
 require('browser-env')();
 
-
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 const userDetails = {
@@ -23,7 +22,19 @@ const userDetails = {
 };
 
 describe('Fast-Food-Fast Actions Test Suite', () => {
-    
+    // FROM: https://www.npmjs.com/package/node-localstorage
+    beforeEach(()=>{
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ'
+
+        if (typeof localStorage === "undefined" || localStorage === null) {
+            var LocalStorage = require('node-localstorage').LocalStorage;
+            // eslint-disable-next-line no-global-assign
+            localStorage = new LocalStorage('./scratch');
+          }
+           
+          localStorage.setItem('token', token);
+          console.log(localStorage.getItem('token'));
+    })
     describe('Signup Actions', () => {
         const store = mockStore({});
         beforeEach(() => {

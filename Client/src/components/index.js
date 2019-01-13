@@ -5,6 +5,7 @@ import LandingPage from './landingPage';
 // eslint-disable-next-line import/no-named-as-default
 import SignupConnected, { Signup } from './signup';
 import SigninConnected, { Signin } from './signin';
+import OrdersConnected, { Orders } from './orders';
 
 export {
     Footer,
@@ -14,5 +15,7 @@ export {
     Signup,
     SignupConnected,
     Signin,
-    SigninConnected
+    SigninConnected,
+    Orders,
+    OrdersConnected
 };
