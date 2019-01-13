@@ -8,7 +8,7 @@
     "start:webpack:dev": "webpack --mode development --watch",
     "start:webpack:prod": "webpack --mode production",
     "pretest": "npm run lint",
-    "test": "npm run create-table-users-test && npm run create-table-items-test && npm run create-table-orders-test && cross-env NODE_ENV=test nyc mocha --exit  ./Server/src/test/testSpec.js ./Client/test/index.js --require babel-register --require ignore-styles --timeout 250000",
+    "test": "npm run create-table-users-test && npm run create-table-items-test && npm run create-table-orders-test && cross-env NODE_ENV=test nyc mocha --exit  ./Server/src/test/testSpec.js --require ./Client/setup.js ./Client/test/index.js --require babel-register --require ignore-styles --timeout 250000",
     "test:client": "cross-env NODE_ENV=test nyc mocha --exit --require ./Client/setup.js ./Client/test/index.js --require babel-register --require ignore-styles --timeout 250000",
     "build": "npm run clean && node ./node_modules/babel-cli/bin/babel.js ./Server/src -d ./Server/dist",
     "lint": "./node_modules/.bin/eslint ./Client ./Server --fix --ignore-path .gitignore",
