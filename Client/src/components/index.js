@@ -6,6 +6,7 @@ import LandingPage from './landingPage';
 import SignupConnected, { Signup } from './signup';
 import SigninConnected, { Signin } from './signin';
 import OrdersConnected, { Orders } from './orders';
+import HistoryConnected, { History } from './history';
 
 export {
     Footer,
@@ -17,5 +18,7 @@ export {
     Signin,
     SigninConnected,
     Orders,
-    OrdersConnected
+    OrdersConnected,
+    History,
+    HistoryConnected
 };

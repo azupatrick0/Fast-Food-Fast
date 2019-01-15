@@ -1,8 +1,73 @@
 import { expect } from 'chai';
 import bcrypt from 'bcrypt';
-import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer } from '../src/reducers/index';
+import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer, GetHistoryReducer } from '../src/reducers/index';
 
 require('browser-env')();
+
+const history = {
+    status: 'success',
+    data: {
+      message: 'All orders history returned, thank you.',
+      history: [
+        {
+          id: 4,
+          menuid: 1,
+          meal: 'Fruttie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 2,
+          amount: 800,
+          location: 'Lagos',
+          status: 'new',
+          createdat: '2018-10-21T08:28:42.590Z',
+          createddate: '2018-10-21T00:00:00.000Z'
+        },
+        {
+          id: 3,
+          menuid: 2,
+          meal: 'Burger',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986437/psjp6ayhoemdidt8vcro.png',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 3,
+          amount: 600,
+          location: 'Abuja',
+          status: 'processing',
+          createdat: '2018-10-19T22:02:06.962Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        },
+        {
+          id: 2,
+          menuid: 3,
+          meal: 'Veggie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986467/n9usp2sumwxxmgiaogbd.png',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 9,
+          amount: 3150,
+          location: 'Abuja',
+          status: 'complete',
+          createdat: '2018-10-19T22:02:03.956Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        },
+        {
+          id: 1,
+          menuid: 1,
+          meal: 'Fruttie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 4,
+          amount: 1600,
+          location: 'Abuja',
+          status: 'complete',
+          createdat: '2018-10-19T22:02:03.869Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        }
+      ]
+    }
+  }
 
 describe('Fast-Food-Fast Client Reducers Test Suite', () => {
     // FROM: https://www.npmjs.com/package/node-localstorage
@@ -16,7 +81,6 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
         }
 
         localStorage.setItem('token', token);
-        console.log(localStorage.getItem('token'));
     })
     describe('Sign up Reducers', () => {
         it('returns status error when an error occurs during sign up', () => {
@@ -529,6 +593,121 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
         it('should return the initial menu state', () => {
             expect(GetMenuReducer(undefined, {})).to.eql({
                 mealData: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('Get History Reducers', () => {
+
+        it('returns LOADING when loading history from the server', () => {
+            const initialState = {
+                history: null,
+                status: '',
+                error: '',
+            }
+            const state = GetHistoryReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                history: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not loading history from the server', () => {
+            const initialState = {
+                history: null,
+                status: '',
+                error: '',
+            }
+            const state = GetHistoryReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                history: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during fetching history', () => {
+            const initialState = {
+                history: null,
+                status: 'ERROR',
+                error: 'An error occured while retrieving all your orders history, please try again',
+            }
+            const state = GetHistoryReducer(initialState,
+                {
+                    type: 'GET_HISTORY_ERROR',
+                    payload: 'An error occured while retrieving all your orders history, please try again',
+
+                });
+            expect(state).to.eql({ history: null, status: 'ERROR', error: 'An error occured while retrieving all your orders history, please try again' });
+        });
+
+        it('returns status failed when getting history fails', () => {
+            const initialState = {
+                history: null,
+                status: '',
+                error: '',
+            }
+            const state = GetHistoryReducer(initialState,
+                {
+                    type: 'GET_HISTORY_FAILED',
+                    payload: 'Failed to authenticate user token'
+                });
+
+            expect(state).to.eql({ history: null, status: 'FAILED', error: 'Failed to authenticate user token' });
+        });
+
+        it('returns updated state after fetching history success', () => {
+            const initialState = {
+                history: null,
+                status: '',
+                error: '',
+            }
+            const state = GetHistoryReducer(initialState,
+                {
+                    type: 'GET_HISTORY_SUCCESS',
+                    payload: history
+                });
+            expect(state).to.eql({
+                history: history,
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default history state if no action is specified', () => {
+            const initialState = {
+                history: null,
+                status: '',
+                error: '',
+            }
+            const state = GetHistoryReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        history: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                history: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial history state', () => {
+            expect(GetHistoryReducer(undefined, {})).to.eql({
+                history: null,
                 status: '',
                 error: '',
             });

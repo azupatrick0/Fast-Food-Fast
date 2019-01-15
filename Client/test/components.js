@@ -23,7 +23,6 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
       }
        
       localStorage.setItem('token', token);
-      console.log(localStorage.getItem('token'));
 })
   describe('Routes Test Suite', () => {
     delete window.location;

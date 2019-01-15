@@ -39,6 +39,62 @@ export const HomePage = () => {
     );
 };
 
+
+export class HistoryPage extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            logOut: false
+        }
+    }
+    onLogout() {
+        window.localStorage.clear();
+        this.setState({
+            logOut: true
+        })
+    }
+
+    render() {
+        return (
+            <Fragment>
+                  {this.state.logOut === true && <Redirect to='/' />}
+                <header>
+                    <nav>
+                        <div className="nav-bar">
+                            <a href="https://fast-food-fast.herokuapp.com/Orders" className="site-name">
+                                <img src="images/ffflogo.png" alt="ffflogo" className="logo" /> <strong>Fast-Food-Fast</strong>
+                            </a>
+                            <a href="https://fast-food-fast.herokuapp.com/Orders" className="order">Order a meal</a>
+                            <a onClick={() => this.onLogout()} className="history">Sign Out</a>
+                            <button onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/History')} className="signout">HISTORY</button>
+                            <button className="hamburger" onClick={() => ShowHideHamburger('.tab-modal')}>&#9776;</button>
+                            <div className="tab-modal">
+                                <div className="tab-modal-link">
+                                    <a href="https://fast-food-fast.herokuapp.com/Orders">Order a meal</a>
+                                    <br />
+                                    <br />
+                                    <hr />
+                                    <br />
+                                    <a href="https://fast-food-fast.herokuapp.com/History">History</a>
+                                    <br />
+                                    <br />
+                                    <hr />
+                                    <br />
+                                    <a onClick={() => this.onLogout()}>Sign Out</a>
+                                    <br />
+                                    <br />
+                                </div>
+                            </div>
+                        </div>
+                    </nav>
+
+                </header>
+            </Fragment>
+        )
+
+    }
+}
+
 export class OrdersPage extends Component {
     constructor(props) {
         super(props);
@@ -100,7 +156,9 @@ class NavBar extends Component {
         return (
             <Fragment>
                 {this.props.View === 'homePage' ? <HomePage /> :
-                    this.props.View === 'ordersPage' ? <OrdersPage /> : ''}
+                    this.props.View === 'ordersPage' ? <OrdersPage /> :
+                        this.props.View === 'historyPage' ? <HistoryPage /> : ''
+                }
             </Fragment>
         );
     }

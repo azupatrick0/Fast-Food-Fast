@@ -1,3 +1,4 @@
+import Axios from 'axios';
 import { 
     START_LOADING,
     STOP_LOADING,
@@ -14,12 +15,7 @@ const MakeOrder = (cart) => (dispatch) => {
             dispatch({
                 type: START_LOADING
             });
-            return fetch(`https://fast-food-fast.herokuapp.com/api/v1/orders?token=${token}`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
+            return Axios.post(`https://fast-food-fast.herokuapp.com/api/v1/orders?token=${token}`, {
                     menuid: order.menuid,
                     meal: order.meal,
                     imgurl: order.imgurl,
@@ -28,19 +24,16 @@ const MakeOrder = (cart) => (dispatch) => {
                     quantity: order.quantity,
                     amount: order.amount,
                     location: order.location,
-                }),
-            })
-                .then(res => res.json())
-                .then((result) => {
+            }).then((response) => {
                     dispatch({
                         type: STOP_LOADING
                     });
-                    if (result.status === 'fail') {
+                    if (response.data.status === 'fail') {
                         dispatch({
                             type: ORDER_MEAL_FAILED,
                             payload: 'Failed to authenticate user token'
                         });
-                    } else if (result.status === 'success') {
+                    } else if (response.data.status === 'success') {
                         dispatch({
                             type: ORDER_MEAL_SUCCESS,
                             payload: 'Your order has been processed, thank you'
