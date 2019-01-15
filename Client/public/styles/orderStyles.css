@@ -82,12 +82,11 @@ button:hover {
     cursor: pointer;
 }
 
-.centre {
-    margin-left: 43%;
-    color: red;
-    font-size: 25px;
+.center {
     font-family: 'Ubuntu Condensed', sans-serif;
-    padding: 0.5em;
+    margin-left: 40%;
+    font-size: 40px;
+    color: red;
 }
 
 .debit-card {
@@ -139,9 +138,11 @@ button:hover {
 }
 
 img {
-    height: 40px;
-    width: 3em;
     border-radius: 100%;
+}
+input[type=radio] {
+    height: 1.2em;
+    width: 10%;
 }
 
 input[type=number] {
@@ -246,6 +247,10 @@ p {
     font-size: 24px;
 }
 
+.second-table {
+    width: 38vw;
+}
+
 select {
     font-size: 18px;
     border-radius: 5px;
@@ -263,19 +268,19 @@ select {
 
 .slide0 p { 
     font-family: 'Ubuntu Condensed', sans-serif;
-    padding-top: 3.5%; 
     margin: 0;
 }
 
 .spinner {
-    width: 25%;
-    height: 35vh;
-    border: 12px solid white;
-    border-radius: 10%;
+    width: 12%;
+    height: 20vh;
+    border-top: 15px solid rgb(228, 95, 95);
+    border-radius: 100%;
     animation: cyclic 1s infinite;
     display: none;
     position: absolute;
     z-index: 1;
+    margin: 10% 0 0 43%;
 }
 
 
@@ -340,10 +345,6 @@ tr:nth-child(even) {
         background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
         background-size: cover;
         background-attachment: fixed;
-    }
-
-    .centre {
-        margin-left: 40%;
     }
 
     .flex-items {
@@ -437,8 +438,8 @@ tr:nth-child(even) {
         display: none;
     }
 
-    .centre {
-        margin-left: 20%;
+    .center {
+        margin-left: 28%;
     }
 
     .flex {
@@ -551,8 +552,10 @@ tr:nth-child(even) {
         display: none;
     }
 
-    .centre {
-        margin-left: 20%;
+    .center {
+        text-align: center;
+        margin-left: 25%;
+        font-size: 25px;
     }
 
     .flex {

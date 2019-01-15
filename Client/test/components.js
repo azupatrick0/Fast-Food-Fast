@@ -12,6 +12,19 @@ require('browser-env')();
 configure({ adapter: new Adapter() });
 
 describe('Fast-Food-Fast Client Components Test Suite', () => {
+  // FROM: https://www.npmjs.com/package/node-localstorage
+  beforeEach(()=>{
+    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ'
+
+    if (typeof localStorage === "undefined" || localStorage === null) {
+        var LocalStorage = require('node-localstorage').LocalStorage;
+        // eslint-disable-next-line no-global-assign
+        localStorage = new LocalStorage('./scratch');
+      }
+       
+      localStorage.setItem('token', token);
+      console.log(localStorage.getItem('token'));
+})
   describe('Routes Test Suite', () => {
     delete window.location;
     window.location = {};
@@ -42,7 +55,7 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         expect(wrapper.instance().props.View).to.be.a('string');
         expect(wrapper.instance().props.View.length).to.be.gt(0);
         expect(wrapper.contains(<HomePage />)).to.equal(true);
-        expect(wrapper2.html().length).to.eql(754);
+        expect(wrapper2.html().length).to.eql(757);
         wrapper2.find('button').simulate('click');
       });
     });
