@@ -2,7 +2,7 @@ import Axios from 'axios';
 import { USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILED, USER_SIGNUP_ERROR } from './actionTypes';
 
 const SignupAUser = (userDetails) => (dispatch) => {
-    return Axios.post('https://fast-food-fast.herokuapp.com/api/v1/auth/signup', {
+    return Axios.post(`${process.env.BASE_URL_PROD}/api/v1/auth/signup`, {
             name: userDetails.name,
             email: userDetails.email,
             password: userDetails.password,

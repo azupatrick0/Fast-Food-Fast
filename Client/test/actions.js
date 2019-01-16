@@ -201,7 +201,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const store = mockStore({});
 
         it('creates USER_SIGNUP_SUCCESS when user has been signed up', () => {
-            moxios.stubRequest('https://fast-food-fast.herokuapp.com/api/v1/auth/signup', {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/auth/signup`, {
                 status: 201,
                 response: responseData,
             });
@@ -219,7 +219,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         })
 
         it('creates USER_SIGNUP_FAILED when user fails authentication during sign up', () => {
-            moxios.stubRequest('https://fast-food-fast.herokuapp.com/api/v1/auth/signup', {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/auth/signup`, {
                 status: 409,
                 response: `Email => ${userDetails.email} already in use, please choose another.`,
             });
@@ -241,7 +241,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const store = mockStore({});
 
         it('creates USER_SIGNIN_SUCCESS when user has been signed in', () => {
-            moxios.stubRequest('https://fast-food-fast.herokuapp.com/api/v1/auth/login', {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/auth/login`, {
                 status: 200,
                 response: responseData2,
             });
@@ -259,7 +259,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         })
 
         it('creates USER_SIGNIN_FAILED when user fails authentication during signed in', () => {
-            moxios.stubRequest('https://fast-food-fast.herokuapp.com/api/v1/auth/login', {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/auth/login`, {
                 status: 401,
                 response: 'Email or password incorrect',
             });
@@ -282,7 +282,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
 
         it('creates GET_MENU_SUCCESS, when menu is retrieved successfully', () => {
-            moxios.stubRequest(`https://fast-food-fast.herokuapp.com/api/v1/menu?token=${token}`, {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu?token=${token}`, {
                 status: 200,
                 response: menu,
             });
@@ -299,7 +299,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         })
 
         it('creates GET_MENU_FAILED when menu is not retrieved successfully', () => {
-            moxios.stubRequest('https://fast-food-fast.herokuapp.com/api/v1/menu', {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu`, {
                 status: 401,
                 response: 'Failed to authenticate user token',
             });
@@ -323,7 +323,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
 
         it('creates GET_HISTORY_SUCCESS, when history is retrieved successfully', () => {
-            moxios.stubRequest(`https://fast-food-fast.herokuapp.com/api/v1/users/${id}/orders?token=${token}`, {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/users/${id}/orders?token=${token}`, {
                 status: 200,
                 response: history,
             });
@@ -340,7 +340,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         })
 
         it('creates GET_HISTORY_FAILED when menu is not retrieved successfully', () => {
-            moxios.stubRequest('https://fast-food-fast.herokuapp.com/api/v1/menu', {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu`, {
                 status: 401,
                 response: 'Failed to authenticate user token',
             });

@@ -8,18 +8,18 @@ import '../../public/styles/orderStyles.css';
 import debitCard from "../../public/images/debit_card.png";
 import { GetMenu, MakeOrder } from '../actions/index';
 
+
 const userid = window.localStorage.getItem('id');
 const name = window.localStorage.getItem('name');
 const cart = [];
 const newCart = [];
-
-
 
 export class Orders extends Component {
     constructor(props) {
         super(props);
         this.state = {
             clicked: false,
+            ready: 0
         }
         this.modal = React.createRef();
         this.firstTable = React.createRef();
@@ -57,6 +57,18 @@ export class Orders extends Component {
         document.querySelector(`.meal-button${val}`).removeAttribute('disabled');
     }
 
+    shouldComponentUpdate() {
+        if (this.state.ready === 1) {
+            return false;
+        }
+        return true;
+    }
+
+    onReady() {
+        this.setState({
+            ready: 1 
+         })
+    }
 
     onOrderAMeal() {
         if (cart.length === 0) {
@@ -70,6 +82,8 @@ export class Orders extends Component {
             })
             this.props.act(MakeOrder(cart));
         }
+      document.querySelector('.spinner').style.display = 'block';
+      window.location.href='https://fast-food-fast.herokuapp.com/history'
     }
 
     onShowCart() {
@@ -99,6 +113,7 @@ export class Orders extends Component {
             });
             console.log('new cart state ===>', cart)
         }, 1000)
+       
     }
 
     onClear() {
@@ -156,7 +171,6 @@ export class Orders extends Component {
                                 <p><strong>Cart</strong></p>
                                 <table className="first-table" ref={this.firstTable}>
                                     {this.state.clicked === true &&
-
                                         <tbody className="first-table-body">
                                             {newCart.map((mealClass) => {
                                                 { document.querySelector(`.meal-button${mealClass}`).disabled = true }
@@ -260,7 +274,10 @@ export class Orders extends Component {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button className="order-button" onClick={() => this.onOrderAMeal()}>
+                                                <button className="order-button" onClick={() => {this.onReady();  setTimeout(() => {
+                                                    this.onOrderAMeal()
+                                                },1000)
+                                            }}>
                                                     <span className="orderValue">Order</span> <span className="orderSpinner"></span>
                                                 </button>
                                             </td>

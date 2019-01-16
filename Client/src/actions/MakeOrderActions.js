@@ -15,7 +15,7 @@ const MakeOrder = (cart) => (dispatch) => {
             dispatch({
                 type: START_LOADING
             });
-            return Axios.post(`https://fast-food-fast.herokuapp.com/api/v1/orders?token=${token}`, {
+            return Axios.post(`${process.env.BASE_URL_PROD}/api/v1/orders?token=${token}`, {
                     menuid: order.menuid,
                     meal: order.meal,
                     imgurl: order.imgurl,

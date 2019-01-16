@@ -122,5 +122,7 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         wrapper.find('.form').simulate('keyup',userEmail,userPassword,event4);
       });
     });
+
+    it
   });
 });

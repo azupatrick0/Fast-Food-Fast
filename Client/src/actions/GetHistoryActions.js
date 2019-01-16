@@ -14,7 +14,7 @@ const GetHistory = () => (dispatch) => {
     dispatch({
         type: START_LOADING
     });
-    return Axios.get(`https://fast-food-fast.herokuapp.com/api/v1/users/${id}/orders?token=${token}`)
+    return Axios.get(`${process.env.BASE_URL_PROD}/api/v1/users/${id}/orders?token=${token}`)
         .then((response) => {
             dispatch({
                 type: STOP_LOADING

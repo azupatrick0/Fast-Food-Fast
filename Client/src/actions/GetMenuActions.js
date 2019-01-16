@@ -1,4 +1,5 @@
 import Axios from 'axios';
+
 import { 
     START_LOADING,
     STOP_LOADING,
@@ -13,7 +14,7 @@ const GetMenu = () => (dispatch) => {
     dispatch({
         type: START_LOADING
     });
-    return Axios.get(`https://fast-food-fast.herokuapp.com/api/v1/menu?token=${token}`)
+    return Axios.get(`${process.env.BASE_URL_PROD}/api/v1/menu?token=${token}`)
         .then((response) => {
             dispatch({
                 type: STOP_LOADING
