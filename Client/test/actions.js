@@ -2,14 +2,14 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import moxios from 'moxios';
-import { SignupAUser, SigninAUser, MakeOrder, GetMenu, GetHistory } from '../src/actions/index';
+import { SignupAUser, SigninAUser, GetMenu, GetHistory } from '../src/actions/index';
 import {
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_FAILED,
     USER_SIGNIN_SUCCESS,
     USER_SIGNIN_FAILED,
-    ORDER_MEAL_SUCCESS,
-    ORDER_MEAL_FAILED,
+    // ORDER_MEAL_SUCCESS,
+    // ORDER_MEAL_FAILED,
     GET_MENU_SUCCESS,
     GET_MENU_FAILED,
     GET_HISTORY_SUCCESS,
@@ -161,26 +161,26 @@ const history = {
     }
   }
 
-const orderData = [{
-    menuid: 1,
-    meal: "Fruttie",
-    imgurl: "https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg",
-    userid: 1,
-    name: "Azu Patrick",
-    quantity: 2,
-    amount: 800,
-    location: "Lagos"
-  },
-  {
-    menuid: 2,
-    meal: "Burger",
-    imgurl: "https://res.cloudinary.com/pato/image/upload/v11539986387/yjvhhoun9pajw07zu0dw.jpg",
-    userid: 1,
-    name: "Azu Patrick",
-    quantity: 1,
-    amount: 200,
-    location: "Lagos"
-  }]
+// const orderData = [{
+//     menuid: 1,
+//     meal: "Fruttie",
+//     imgurl: "https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg",
+//     userid: 1,
+//     name: "Azu Patrick",
+//     quantity: 2,
+//     amount: 800,
+//     location: "Lagos"
+//   },
+//   {
+//     menuid: 2,
+//     meal: "Burger",
+//     imgurl: "https://res.cloudinary.com/pato/image/upload/v11539986387/yjvhhoun9pajw07zu0dw.jpg",
+//     userid: 1,
+//     name: "Azu Patrick",
+//     quantity: 1,
+//     amount: 200,
+//     location: "Lagos"
+//   }]
   
 
 describe('Fast-Food-Fast Actions Test Suite', () => {
