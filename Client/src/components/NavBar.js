@@ -62,12 +62,12 @@ export class HistoryPage extends Component {
                     <nav>
                         <div className="nav-bar">
                             <a href="https://fast-food-fast.herokuapp.com/Orders" className="site-name">
-                                <img src="images/ffflogo.png" alt="ffflogo" className="logo" /> <strong>Fast-Food-Fast</strong>
+                                <img src={logo} alt="ffflogo" className="logo" /> <strong>Fast-Food-Fast</strong>
                             </a>
                             <a href="https://fast-food-fast.herokuapp.com/Orders" className="order">Order a meal</a>
                             <a onClick={() => this.onLogout()} className="history">Sign Out</a>
                             <button onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/History')} className="signout">HISTORY</button>
-                            <button className="hamburger" onClick={() => ShowHideHamburger('.tab-modal')}>&#9776;</button>
+                            <a className="hamburger" onClick={() => ShowHideHamburger('.tab-modal')}>&#9776;</a>
                             <div className="tab-modal">
                                 <div className="tab-modal-link">
                                     <a href="https://fast-food-fast.herokuapp.com/Orders">Order a meal</a>

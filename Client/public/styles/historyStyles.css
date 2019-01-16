@@ -44,6 +44,9 @@ a:hover {
     width: 95%;
     margin-left: 2em;
     padding: 0 1.5em 6em 0;
+    display: block;
+    height: 100%;
+    overflow: auto;
 }
 
 
@@ -273,6 +276,9 @@ p {
     box-shadow: 1px 0px 6px 2px rgba(116, 116, 199, 0.5);
 }
 
+.second-table-history {
+    width: 100%;
+}
 
 .site-name {
     font-size: 24px;
@@ -283,7 +289,9 @@ p {
     background-size: cover;
     background-attachment: fixed;
     height: 90vh; 
-    width: 100%; 
+    width: 100%;
+    display: block;
+    overflow: auto;
 }
 
 .slide0 p { 
@@ -334,6 +342,22 @@ td {
     padding: 10px 10px 10px 50px;
 }
 
+td:nth-child(3) {
+    padding-left: 2em;
+}
+
+td:nth-child(4) {
+    padding-left: 2em;
+}
+
+td:nth-child(5) {
+    padding-left: 2em;
+}
+
+td:nth-child(7) {
+    padding-left: 4em;
+}
+
 th {
     padding: 10px;
 }
@@ -344,8 +368,26 @@ tr:nth-child(even) {
 
 /* High resolution laptops */
 @media (min-width: 1366px) {
+    td:nth-child(1) {
+        padding-left: 2em;
+    }
+    td:nth-child(2) {
+        padding-left: 3em;
+    }
     td:nth-child(3) {
-        padding-left: 12em;
+        padding-left: 3em;
+    }
+    td:nth-child(4) {
+        padding-left: 3em;
+    }
+    td:nth-child(5) {
+        padding-left: 3em;
+    }
+    td:nth-child(6) {
+        padding-left: 4em;
+    }
+    td:nth-child(7) {
+        padding-left: 5em;
     }
 }
 
@@ -413,6 +455,11 @@ tr:nth-child(even) {
      
     td {
         padding: 10px 10px 10px 30px;
+    }
+
+
+    td:nth-child(4) {
+        padding-left: 2em;
     }
 
     .search-btn {

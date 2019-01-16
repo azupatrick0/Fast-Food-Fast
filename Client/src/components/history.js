@@ -3,7 +3,7 @@ import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavBar } from '../components/index';
-import '../../public/styles/orderStyles.css';
+import '../../public/styles/historyStyles.css';
 import { GetHistory} from '../actions/index';
 
 export class History extends Component {
@@ -24,7 +24,7 @@ export class History extends Component {
     }
 
     render() {
-
+        let sum = 0;
         if (this.props.status === 'LOADING') {
             this.spinner.current.style.display = 'block';
         } else if (this.props.status === 'NOTLOADING') {
@@ -42,12 +42,12 @@ export class History extends Component {
                         </title>
                     <link rel="shortcut icon" type="image/png" href='../../public/images/ffflogo.png' />
                 </Helmet>
-
+               
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
-
                 <div className="blur">
                     <NavBar View={'historyPage'} />
-
+                    <br />
+                    <br />
                     <div className="slide0">
                         <br />
                         <span className="centre"><strong>Order History</strong></span><br /><br />
@@ -55,7 +55,7 @@ export class History extends Component {
                             <div className="flex">
                                 <div className="flex-items"><br /><br /><br /><br /><br />
                                 <span className="spinner" ref={this.spinner}></span>
-                                    <table className="second-table" ref={this.secondTable}>
+                                    <table className="second-table second-table-history" ref={this.secondTable}>
                                     {this.props.status === 'SUCCESS' && <tbody>
                                         <tr>
                                             <th>S/N</th>
@@ -63,12 +63,14 @@ export class History extends Component {
                                             <th>Meal</th>
                                             <th>Quantity</th>
                                             <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
                                         </tr>
                                             {this.props.data.map((mealObject) => {
                                                 return (
                                                     <tr className={`tr-meal${mealObject.id}`} key={`tr-meal${mealObject.id}`}>
                                                         <td>
-                                                            {mealObject.id}
+                                                            {sum += 1}
                                                         </td>
                                                         <td className={`td1-meal${mealObject.id}`}>
                                                             <img src={`${mealObject.imgurl}`} className={`img img${mealObject.id}`} />
@@ -81,6 +83,12 @@ export class History extends Component {
                                                         </td>
                                                         <td className={`td4-meal${mealObject.id}`}>
                                                             {mealObject.amount}
+                                                        </td>
+                                                        <td className={`td5-meal${mealObject.id}`}>
+                                                            {mealObject.createdat}
+                                                        </td>
+                                                        <td className={`td6-meal${mealObject.id}`}>
+                                                            {mealObject.status}
                                                         </td>
                                                     </tr>
                                                 )
