@@ -11,7 +11,7 @@ const token = window.localStorage.getItem('token');
 
 const MakeOrder = (cart) => (dispatch) => {
     cart.forEach((order) => {
-        if (Object.keys(order).length > 0) {
+        if (Object.keys(order).length > 0 && Object.values(order)[5] > 0) {
             dispatch({
                 type: START_LOADING
             });

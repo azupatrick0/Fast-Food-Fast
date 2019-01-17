@@ -13,6 +13,30 @@ const userid = window.localStorage.getItem('id');
 const name = window.localStorage.getItem('name');
 const cart = [];
 const newCart = [];
+const allQuantity = [];
+const isBelowOne = (val) =>  val < 1;
+const removeDuplicate = (cart, val) => {
+    const duplicateItem = cart.find(obj => obj.menuid === val);
+    delete (duplicateItem.menuid);
+    delete (duplicateItem.meal);
+    delete (duplicateItem.imgurl);
+    delete (duplicateItem.userid);
+    delete (duplicateItem.name);
+    delete (duplicateItem.quantity);
+    delete (duplicateItem.amount);
+    delete (duplicateItem.location);
+}
+const cartSystem = (val) => {
+    return (cart.push({
+        menuid: val,
+        meal: document.querySelector(`.td2-cart${val}`).innerHTML,
+        imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
+        userid,
+        name,
+        quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
+        amount: document.querySelector(`.td3-cart${val}`).innerHTML,
+    }))
+}
 
 export class Orders extends Component {
     constructor(props) {
@@ -28,33 +52,23 @@ export class Orders extends Component {
         this.cart = React.createRef();
         this.toggleCart = React.createRef();
         this.feedback = React.createRef();
+        this.feedback2 = React.createRef();
     }
 
     onPlus(val) {
         document.querySelector(`.td4-cart${val}`).innerHTML = +(document.querySelector(`.td4-cart${val}`).innerHTML) + 1;
         document.querySelector(`.td3-cart${val}`).innerHTML = +(document.querySelector(`.td3-meal${val}`).innerHTML) *
             document.querySelector(`.td4-cart${val}`).innerHTML;
-
-        cart.push({
-            menuid: val,
-            meal: document.querySelector(`.td2-cart${val}`).innerHTML,
-            imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
-            userid,
-            name,
-            quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
-            amount: document.querySelector(`.td3-cart${val}`).innerHTML,
-        });
+        cartSystem(val);
+        removeDuplicate(cart,val);
+        
     }
 
     onMinus(val) {
         document.querySelector(`.td4-cart${val}`).innerHTML -= 1;
         document.querySelector(`.td3-cart${val}`).innerHTML -= +(document.querySelector(`.td3-meal${val}`).innerHTML);
-    }
-
-
-    onDelete(val) {
-        document.querySelector('.first-table-body').removeChild(document.querySelector(`.tr-cart${val}`));
-        document.querySelector(`.meal-button${val}`).removeAttribute('disabled');
+        cartSystem(val);
+        removeDuplicate(cart,val);
     }
 
     shouldComponentUpdate() {
@@ -72,14 +86,24 @@ export class Orders extends Component {
 
     onOrderAMeal() {
         if (cart.length === 0) {
-            console.log('cart cannot be empty');
             this.feedback.current.style.display = 'block';
         } else {
             cart.map((mealObject) => {
-                Object.assign(mealObject, {
-                    location: document.querySelector('.location').value,
-                });
+                if((Object.keys(mealObject)).length > 0) {
+                    allQuantity.push(Number(Object.values(mealObject)[5]));
+                }
+            });
+            if (allQuantity.every(isBelowOne)) {
+                this.feedback.current.style.display = 'block';
+            } else {
+                cart.map((mealObject) => {
+                    if((Object.keys(mealObject)).length !== 0) {
+                    Object.assign(mealObject, {
+                        location: document.querySelector('.location').value,
+                    });
+                }
             })
+            }
             this.props.act(MakeOrder(cart));
         }
       document.querySelector('.spinner').style.display = 'block';
@@ -111,14 +135,7 @@ export class Orders extends Component {
                 quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
                 amount: document.querySelector(`.td3-cart${val}`).innerHTML,
             });
-            console.log('new cart state ===>', cart)
         }, 1000)
-       
-    }
-
-    onClear() {
-        this.firstTable.current.innerHTML = '';
-        cart.length = 0;
     }
 
     componentDidMount() {
@@ -156,6 +173,7 @@ export class Orders extends Component {
                 </Helmet>
 
                 <NavBar View={'ordersPage'} />
+                <div className="modal feedback" ref={this.feedback2}>Cart quantity cannot be less than 1 <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback}>Cart cannot be empty <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal" ref={this.modal}><p>{this.props.error || this.props.errorOrder}<br /><br />Click <a href='/orders'>Here</a></p></div>
                 <div className="slide0">
@@ -194,9 +212,6 @@ export class Orders extends Component {
                                                         <td className={`td6-cart${mealObject.id}`}>
                                                             <button className={`cart-subtract-button${mealObject.id}`} onClick={() => this.onMinus(`${mealObject.id}`)}>-</button>
                                                         </td>
-                                                        <td className={`td7-cart${mealObject.id}`}>
-                                                            <button className={`cart-delete-button${mealObject.id}`} onClick={() => this.onDelete(`${mealObject.id}`)}>x</button>
-                                                        </td>
                                                         <td className={`td1-cart${mealObject.id}`}>
                                                             <img src={`${mealObject.imgurl}`} className={`img img${mealObject.id}`} hidden />
                                                         </td>
@@ -231,9 +246,6 @@ export class Orders extends Component {
                                                         </td>
                                                         <td className={`td5-meal${mealObject.id}`}>
                                                             <button className={`meal-button${mealObject.id}`} onClick={() => this.onAddToCart(`${mealObject.id}`)}>Add to Cart</button>
-                                                        </td>
-                                                        <td>
-                                                            <button className='clear-cart' onClick={() => this.onClear()}>Clear Cart</button>
                                                         </td>
                                                     </tr>
                                                 )
