@@ -8,15 +8,43 @@ import '../../public/styles/orderStyles.css';
 import debitCard from "../../public/images/debit_card.png";
 import { GetMenu, MakeOrder } from '../actions/index';
 
+
 const userid = window.localStorage.getItem('id');
 const name = window.localStorage.getItem('name');
 const cart = [];
-
-
+const newCart = [];
+const allQuantity = [];
+const isBelowOne = (val) =>  val < 1;
+const removeDuplicate = (cart, val) => {
+    const duplicateItem = cart.find(obj => obj.menuid === val);
+    delete (duplicateItem.menuid);
+    delete (duplicateItem.meal);
+    delete (duplicateItem.imgurl);
+    delete (duplicateItem.userid);
+    delete (duplicateItem.name);
+    delete (duplicateItem.quantity);
+    delete (duplicateItem.amount);
+    delete (duplicateItem.location);
+}
+const cartSystem = (val) => {
+    return (cart.push({
+        menuid: val,
+        meal: document.querySelector(`.td2-cart${val}`).innerHTML,
+        imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
+        userid,
+        name,
+        quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
+        amount: document.querySelector(`.td3-cart${val}`).innerHTML,
+    }))
+}
 
 export class Orders extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            clicked: false,
+            ready: 0
+        }
         this.modal = React.createRef();
         this.firstTable = React.createRef();
         this.spinner = React.createRef();
@@ -24,15 +52,62 @@ export class Orders extends Component {
         this.cart = React.createRef();
         this.toggleCart = React.createRef();
         this.feedback = React.createRef();
+        this.feedback2 = React.createRef();
+    }
+
+    onPlus(val) {
+        document.querySelector(`.td4-cart${val}`).innerHTML = +(document.querySelector(`.td4-cart${val}`).innerHTML) + 1;
+        document.querySelector(`.td3-cart${val}`).innerHTML = +(document.querySelector(`.td3-meal${val}`).innerHTML) *
+            document.querySelector(`.td4-cart${val}`).innerHTML;
+        cartSystem(val);
+        removeDuplicate(cart,val);
+        
+    }
+
+    onMinus(val) {
+        document.querySelector(`.td4-cart${val}`).innerHTML -= 1;
+        document.querySelector(`.td3-cart${val}`).innerHTML -= +(document.querySelector(`.td3-meal${val}`).innerHTML);
+        cartSystem(val);
+        removeDuplicate(cart,val);
+    }
+
+    shouldComponentUpdate() {
+        if (this.state.ready === 1) {
+            return false;
+        }
+        return true;
+    }
+
+    onReady() {
+        this.setState({
+            ready: 1 
+         })
     }
 
     onOrderAMeal() {
         if (cart.length === 0) {
-            console.log('cart cannot be empty');
             this.feedback.current.style.display = 'block';
         } else {
+            cart.map((mealObject) => {
+                if((Object.keys(mealObject)).length > 0) {
+                    allQuantity.push(Number(Object.values(mealObject)[5]));
+                }
+            });
+            if (allQuantity.every(isBelowOne)) {
+                this.feedback.current.style.display = 'block';
+            } else {
+                cart.map((mealObject) => {
+                    if((Object.keys(mealObject)).length !== 0) {
+                    Object.assign(mealObject, {
+                        location: document.querySelector('.location').value,
+                    });
+                }
+            })
+            }
             this.props.act(MakeOrder(cart));
-        }   
+        }
+      document.querySelector('.spinner').style.display = 'block';
+      window.location.href='https://fast-food-fast.herokuapp.com/history'
     }
 
     onShowCart() {
@@ -46,53 +121,21 @@ export class Orders extends Component {
     }
 
     onAddToCart(val) {
-        const tr = document.createElement('tr');
-  tr.classList.add(`tr-cart${val}`);
-  const td1 = document.createElement('td');
-  td1.classList.add(`td1-cart${val}`);
-  const td2 = document.createElement('td');
-  td2.classList.add(`td2-cart${val}`);
-  const td3 = document.createElement('td');
-  td3.classList.add(`td3-cart${val}`);
-  // Insert values into the table elements
-  td1.innerHTML = document.querySelector(`.td1-meal${val}`).innerHTML;
-  td2.innerText = document.querySelector(`.td2-meal${val}`).innerText;
-  td3.innerText = document.querySelector(`.td3-meal${val}`).innerText;
-  let quantity = document.querySelector(`.quantity${val}`).value;
-  quantity = Number(quantity);
-  const td4 = document.createElement('td');
-  td4.classList.add(`td4-cart${val}`);
-  td4.innerHTML = Number(0);
-  td4.innerHTML = +(td4.innerHTML) + quantity;
-  const td5 = document.createElement('td');
-  td5.classList.add(`td5-cart${val}`);
-  const td6 = document.createElement('td');
-  td6.classList.add(`td6-cart${val}`);
-  const td7 = document.createElement('td');
-  td7.classList.add(`td7-cart${val}`);
-  tr.appendChild(td1);
-  tr.appendChild(td2);
-  tr.appendChild(td3);
-  tr.appendChild(td4);
-  tr.appendChild(td5);
-  tr.appendChild(td6);
-  tr.appendChild(td7);
-this.firstTable.current.appendChild(tr)
-cart.push({
-    menuid: val,
-    meal: document.querySelector(`.td2-cart${val}`).innerHTML,
-    imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
-    userid,
-    name,
-    quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
-    amount: document.querySelector(`.td3-cart${val}`).innerHTML,
-    location: document.querySelector('.location').value,
-  });
-}
-
-    onClear() {
-        this.firstTable.current.innerHTML = '';
-        cart.length = 0;
+        this.setState({
+            clicked: true
+        });
+        newCart.push(val);
+        setTimeout(() => {
+            cart.push({
+                menuid: val,
+                meal: document.querySelector(`.td2-cart${val}`).innerHTML,
+                imgurl: document.querySelector(`.img${val}`).getAttribute('src'),
+                userid,
+                name,
+                quantity: document.querySelector(`.td4-cart${val}`).innerHTML,
+                amount: document.querySelector(`.td3-cart${val}`).innerHTML,
+            });
+        }, 1000)
     }
 
     componentDidMount() {
@@ -110,8 +153,7 @@ cart.push({
     }
 
     render() {
-
-        if (this.props.status === 'LOADING'|| this.props.statusOrder === 'LOADING') {
+        if (this.props.status === 'LOADING' || this.props.statusOrder === 'LOADING') {
             this.spinner.current.style.display = 'block';
         } else if (this.props.status === 'NOTLOADING' || this.props.statusOrder === 'NOTLOADING') {
             this.spinner.current.style.display = 'none';
@@ -131,7 +173,8 @@ cart.push({
                 </Helmet>
 
                 <NavBar View={'ordersPage'} />
-                <div className="modal feedback" ref={this.feedback}>Cart cannot be empty <button onClick={()=>this.feedback.current.style.display = 'none'}>Ok</button></div>
+                <div className="modal feedback" ref={this.feedback2}>Cart quantity cannot be less than 1 <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
+                <div className="modal feedback" ref={this.feedback}>Cart cannot be empty <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal" ref={this.modal}><p>{this.props.error || this.props.errorOrder}<br /><br />Click <a href='/orders'>Here</a></p></div>
                 <div className="slide0">
                     <div className="blur"></div>
@@ -145,7 +188,39 @@ cart.push({
                             <div className="flex-items cart" ref={this.cart} >
                                 <p><strong>Cart</strong></p>
                                 <table className="first-table" ref={this.firstTable}>
-                                   
+                                    {this.state.clicked === true &&
+                                        <tbody className="first-table-body">
+                                            {newCart.map((mealClass) => {
+                                                { document.querySelector(`.meal-button${mealClass}`).disabled = true }
+                                                const mealObject = this.props.data.find((mealObject) => {
+                                                    return mealObject.id === Number(mealClass);
+                                                })
+                                                return (
+                                                    <tr className={`tr-cart${mealObject.id}`} key={`tr-cart${mealObject.id}`} >
+                                                        <td className={`td2-cart${mealObject.id}`}>
+                                                            {mealObject.meal}
+                                                        </td>
+                                                        <td className={`td3-cart${mealObject.id}`}>
+                                                            {mealObject.price}
+                                                        </td>
+                                                        <td className={`td4-cart${mealObject.id}`}>
+                                                            {1}
+                                                        </td>
+                                                        <td className={`td5-cart${mealObject.id}`}>
+                                                            <button className={`cart-add-button${mealObject.id}`} onClick={() => this.onPlus(`${mealObject.id}`)}>+</button>
+                                                        </td>
+                                                        <td className={`td6-cart${mealObject.id}`}>
+                                                            <button className={`cart-subtract-button${mealObject.id}`} onClick={() => this.onMinus(`${mealObject.id}`)}>-</button>
+                                                        </td>
+                                                        <td className={`td1-cart${mealObject.id}`}>
+                                                            <img src={`${mealObject.imgurl}`} className={`img img${mealObject.id}`} hidden />
+                                                        </td>
+
+                                                    </tr>
+                                                )
+                                            })}
+                                        </tbody>
+                                    }
                                 </table>
                             </div>
                             <div className="spinner" ref={this.spinner}></div>
@@ -156,7 +231,7 @@ cart.push({
                                         <tbody>
                                             {this.props.data.map((mealObject) => {
                                                 return (
-                                                    <tr className={`tr-meal${mealObject.id}`} key={`tr-meal${mealObject.id}`}>
+                                                    <tr className={`tr-meal${mealObject.id}`} key={`tr-meal${mealObject.id}`} >
                                                         <td className={`td1-meal${mealObject.id}`}>
                                                             <img src={`${mealObject.imgurl}`} className={`img img${mealObject.id}`} />
                                                         </td>
@@ -167,13 +242,10 @@ cart.push({
                                                             {mealObject.price}
                                                         </td>
                                                         <td className={`td4-meal${mealObject.id}`}>
-                                                            <input type='number' className={`quantity${mealObject.id}`} placeholder='Quantity' value='1' readOnly />
+                                                            <input type='number' className={`quantity${mealObject.id}`} placeholder='Quantity' value='1' readOnly hidden />
                                                         </td>
                                                         <td className={`td5-meal${mealObject.id}`}>
                                                             <button className={`meal-button${mealObject.id}`} onClick={() => this.onAddToCart(`${mealObject.id}`)}>Add to Cart</button>
-                                                        </td>
-                                                        <td>
-                                                            <button onClick={()=>this.onClear()}>Clear Cart</button>
                                                         </td>
                                                     </tr>
                                                 )
@@ -214,7 +286,10 @@ cart.push({
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button className="order-button" onClick={() => this.onOrderAMeal()}>
+                                                <button className="order-button" onClick={() => {this.onReady();  setTimeout(() => {
+                                                    this.onOrderAMeal()
+                                                },1000)
+                                            }}>
                                                     <span className="orderValue">Order</span> <span className="orderSpinner"></span>
                                                 </button>
                                             </td>

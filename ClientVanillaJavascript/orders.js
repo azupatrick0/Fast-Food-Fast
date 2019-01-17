@@ -172,6 +172,7 @@ const addToCart = (val) => {
 // Add more items to cart
 const plus = (val) => {
   const foodId = val;
+  
   document.querySelector(`.td4-cart${val}`).innerHTML = +(document.querySelector(`.td4-cart${val}`).innerHTML) + 1;
   document.querySelector(`.td3-cart${val}`).innerHTML = +(document.querySelector(`.td3-meal${val}`).innerHTML) *
     document.querySelector(`.td4-cart${val}`).innerHTML;

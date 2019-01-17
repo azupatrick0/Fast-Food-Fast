@@ -3,8 +3,8 @@ import { mount, shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NavBar, NotFound, Signup, Signin } from '../src/components';
-import { HomePage } from '../src/components/NavBar';
+import { Footer, NavBar, NotFound, Signup, Signin, History, Orders } from '../src/components';
+import { HomePage, OrdersPage, HistoryPage } from '../src/components/NavBar';
 import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
 require('browser-env')();
@@ -23,7 +23,6 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
       }
        
       localStorage.setItem('token', token);
-      console.log(localStorage.getItem('token'));
 })
   describe('Routes Test Suite', () => {
     delete window.location;
@@ -51,6 +50,14 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
       it('renders NavBar Component', () => {
         const wrapper = shallow(<NavBar View='homePage' />);
         const wrapper2 = shallow(<HomePage />);
+        const wrapper3 = shallow(<OrdersPage />);
+        const wrapper4 = shallow(<HistoryPage />);
+        wrapper3.find('.signout').simulate('click');
+        wrapper3.find('.history').simulate('click');
+        wrapper3.find('.signout-orderpage').simulate('click');
+        wrapper4.find('.signout-historypage').simulate('click');
+        wrapper4.find('.historypage-history').simulate('click');
+        wrapper4.find('.historypage-history-signout').simulate('click');
         expect(wrapper.length).to.eql(1);
         expect(wrapper.instance().props.View).to.be.a('string');
         expect(wrapper.instance().props.View.length).to.be.gt(0);
@@ -94,8 +101,8 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
 
     describe('<Signup />', () => {
       it('renders connected Signup Component', () => {
-        const wrapper = shallow(<Signup act={()=> 'clicked me'}/>);
-        const event = {target: {name: "name", value: "francis"}};
+        const wrapper = mount(<Signup act={()=> 'clicked me'}/>);
+       const event = {target: {name: "name", value: "francis"}};
         const event2 = {target: {name: "email", value: "francis@gmail.com"}};
         const event3 = {target: {name: "password", value: "francis42"}};
         const event4 = {keyCode: 13};
@@ -105,8 +112,7 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         wrapper.find('.signupPassword').simulate('change',event3);
         const userEmail = <input className="signupEmail" value="myemail"/>
         const userPassword = <input className="signupPassword" value="mypassword"/>
-        wrapper.find('.form').simulate('keyup',userEmail,userPassword,event4);
-      });
+        wrapper.find('.form').simulate('keyup',userEmail,userPassword,event4);});
     });
 
     describe('<Signin />', () => {
@@ -121,6 +127,23 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         const userEmail = <input className="signupEmail" value="myemail"/>
         const userPassword = <input className="signupPassword" value="mypassword"/>
         wrapper.find('.form').simulate('keyup',userEmail,userPassword,event4);
+      });
+    });
+
+    describe('<History />', () => {
+      
+      it('renders connected History Component', () => {
+        const wrapper = shallow(<History act={()=> 'clicked me'}/>);
+        expect(wrapper.length).to.eql(1);   
+      });
+    });
+
+    describe('<Orders />', () => {
+      
+      it('renders connected Orders Component', () => {
+        const wrapper = shallow(<Orders act={()=> 'clicked me'}/>);
+        expect(wrapper.length).to.eql(1);
+        wrapper.find('.order-button').simulate('click');
       });
     });
   });
