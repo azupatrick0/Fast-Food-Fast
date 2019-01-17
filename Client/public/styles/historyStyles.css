@@ -122,12 +122,12 @@ button:hover {
     margin: 0 auto;
 }
 
-.centre {
+.history-centre {
     margin-left: 37%;
     color: red;
     font-size: 25px;
     font-family: 'Ubuntu Condensed', sans-serif;
-    padding: 0.5em;
+  
 }
 
 .flex {
@@ -294,7 +294,7 @@ p {
     overflow: auto;
 }
 
-.slide0 p { 
+.slide0-history p { 
     font-family: 'Ubuntu Condensed', sans-serif;
     padding-top: 3.5%; 
     margin: 0;
@@ -406,7 +406,7 @@ tr:nth-child(even) {
         background-attachment: fixed;
     }
 
-    .centre {
+    .history-centre {
         margin-left: 40%;
     }
 
@@ -491,7 +491,7 @@ tr:nth-child(even) {
         background-attachment: fixed;
     }
 
-    .centre {
+    .history-centre {
         margin-left: 20%;
     }
 
@@ -524,7 +524,7 @@ tr:nth-child(even) {
         text-align: unset;
     }
 
-    .slide0 p { 
+    .slide0-history p { 
         padding: 10% 0 0 8%; 
         font-size: 30px;
     }
@@ -603,7 +603,7 @@ tr:nth-child(even) {
         background-attachment: fixed;
     }
 
-    .centre {
+    .history-centre {
         margin-left: 20%;
     }
 
@@ -636,7 +636,7 @@ tr:nth-child(even) {
         text-align: unset;
     }
 
-    .slide0 p { 
+    .slide0-history p { 
         padding: 10% 0 0 8%; 
         font-size: 30px;
     }

@@ -20,7 +20,6 @@ export class History extends Component {
 
     componentDidMount() {
         this.props.act(GetHistory());
-        console.log('called')
     }
 
     render() {
@@ -48,9 +47,9 @@ export class History extends Component {
                     <NavBar View={'historyPage'} />
                     <br />
                     <br />
-                    <div className="slide0">
+                    <div className="slide0-history">
                         <br />
-                        <span className="centre"><strong>Order History</strong></span><br /><br />
+                        <span className="history-centre"><strong>Order History</strong></span><br /><br />
                         <div className="blur2">
                             <div className="flex">
                                 <div className="flex-items"><br /><br /><br /><br /><br />

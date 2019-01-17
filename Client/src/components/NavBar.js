@@ -65,8 +65,8 @@ export class HistoryPage extends Component {
                                 <img src={logo} alt="ffflogo" className="logo" /> <strong>Fast-Food-Fast</strong>
                             </a>
                             <a href="https://fast-food-fast.herokuapp.com/Orders" className="order">Order a meal</a>
-                            <a onClick={() => this.onLogout()} className="history">Sign Out</a>
-                            <button onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/History')} className="signout">HISTORY</button>
+                            <a onClick={() => this.onLogout()} className="history historypage-history-signout">Sign Out</a>
+                            <button onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/History')} className="signout historypage-history">HISTORY</button>
                             <a className="hamburger" onClick={() => ShowHideHamburger('.tab-modal')}>&#9776;</a>
                             <div className="tab-modal">
                                 <div className="tab-modal-link">
@@ -80,7 +80,7 @@ export class HistoryPage extends Component {
                                     <br />
                                     <hr />
                                     <br />
-                                    <a onClick={() => this.onLogout()}>Sign Out</a>
+                                    <a onClick={() => this.onLogout()} className="signout-historypage">Sign Out</a>
                                     <br />
                                     <br />
                                 </div>
@@ -135,7 +135,7 @@ export class OrdersPage extends Component {
                                     <br />
                                     <hr />
                                     <br />
-                                    <a onClick={() => this.onLogout()}>Sign Out</a>
+                                    <a onClick={() => this.onLogout()} className="signout-orderpage">Sign Out</a>
                                     <br />
                                     <br />
                                 </div>

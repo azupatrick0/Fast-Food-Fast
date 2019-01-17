@@ -233,7 +233,7 @@ export class Orders extends Component {
                                                             <button className={`meal-button${mealObject.id}`} onClick={() => this.onAddToCart(`${mealObject.id}`)}>Add to Cart</button>
                                                         </td>
                                                         <td>
-                                                            <button onClick={() => this.onClear()}>Clear Cart</button>
+                                                            <button className='clear-cart' onClick={() => this.onClear()}>Clear Cart</button>
                                                         </td>
                                                     </tr>
                                                 )
