@@ -4,7 +4,6 @@ import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
 import { Footer, NavBar, NotFound, Signup, Signin, History, Orders } from '../src/components';
-import { HomePage, OrdersPage, HistoryPage } from '../src/components/NavBar';
 import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
 require('browser-env')();
