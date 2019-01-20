@@ -14,7 +14,7 @@ const name = window.localStorage.getItem('name');
 const cart = [];
 const newCart = [];
 const allQuantity = [];
-const isBelowOne = (val) =>  val < 1;
+const isBelowOne = (val) => val < 1;
 const removeDuplicate = (cart, val) => {
     const duplicateItem = cart.find(obj => obj.menuid === val);
     delete (duplicateItem.menuid);
@@ -60,15 +60,15 @@ export class Orders extends Component {
         document.querySelector(`.td3-cart${val}`).innerHTML = +(document.querySelector(`.td3-meal${val}`).innerHTML) *
             document.querySelector(`.td4-cart${val}`).innerHTML;
         cartSystem(val);
-        removeDuplicate(cart,val);
-        
+        removeDuplicate(cart, val);
+
     }
 
     onMinus(val) {
         document.querySelector(`.td4-cart${val}`).innerHTML -= 1;
         document.querySelector(`.td3-cart${val}`).innerHTML -= +(document.querySelector(`.td3-meal${val}`).innerHTML);
         cartSystem(val);
-        removeDuplicate(cart,val);
+        removeDuplicate(cart, val);
     }
 
     shouldComponentUpdate() {
@@ -80,8 +80,8 @@ export class Orders extends Component {
 
     onReady() {
         this.setState({
-            ready: 1 
-         })
+            ready: 1
+        })
     }
 
     onOrderAMeal() {
@@ -89,7 +89,7 @@ export class Orders extends Component {
             this.feedback.current.style.display = 'block';
         } else {
             cart.map((mealObject) => {
-                if((Object.keys(mealObject)).length > 0) {
+                if ((Object.keys(mealObject)).length > 0) {
                     allQuantity.push(Number(Object.values(mealObject)[5]));
                 }
             });
@@ -97,17 +97,17 @@ export class Orders extends Component {
                 this.feedback.current.style.display = 'block';
             } else {
                 cart.map((mealObject) => {
-                    if((Object.keys(mealObject)).length !== 0) {
-                    Object.assign(mealObject, {
-                        location: document.querySelector('.location').value,
-                    });
-                }
-            })
+                    if ((Object.keys(mealObject)).length !== 0) {
+                        Object.assign(mealObject, {
+                            location: document.querySelector('.location').value,
+                        });
+                    }
+                })
             }
             this.props.act(MakeOrder(cart));
         }
-      document.querySelector('.spinner').style.display = 'block';
-      window.location.href='https://fast-food-fast.herokuapp.com/history'
+        document.querySelector('.spinner').style.display = 'block';
+        window.location.href = 'https://fast-food-fast.herokuapp.com/history'
     }
 
     onShowCart() {
@@ -172,7 +172,17 @@ export class Orders extends Component {
                     <link rel="shortcut icon" type="image/png" href='../../public/images/ffflogo.png' />
                 </Helmet>
 
-                <NavBar View={'ordersPage'} />
+                <NavBar
+                    link0={'https://fast-food-fast.herokuapp.com/Orders'}
+                    link1={'https://fast-food-fast.herokuapp.com/History'}
+                    link2={'https://fast-food-fast.herokuapp.com/Orders'}
+                    anchor1Body={'History'}
+                    anchor2Body={'Sign Out'} 
+                    buttonBody={'ORDER'}
+                    anchor3Body={'History'}
+                    anchor4Body={'Order a meal'}
+                    anchor5Body={'Sign Out'}
+                />
                 <div className="modal feedback" ref={this.feedback2}>Cart quantity cannot be less than 1 <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback}>Cart cannot be empty <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal" ref={this.modal}><p>{this.props.error || this.props.errorOrder}<br /><br />Click <a href='/orders'>Here</a></p></div>
@@ -286,10 +296,11 @@ export class Orders extends Component {
                                         </tr>
                                         <tr>
                                             <td>
-                                                <button className="order-button" onClick={() => {this.onReady();  setTimeout(() => {
-                                                    this.onOrderAMeal()
-                                                },1000)
-                                            }}>
+                                                <button className="order-button" onClick={() => {
+                                                    this.onReady(); setTimeout(() => {
+                                                        this.onOrderAMeal()
+                                                    }, 1000)
+                                                }}>
                                                     <span className="orderValue">Order</span> <span className="orderSpinner"></span>
                                                 </button>
                                             </td>

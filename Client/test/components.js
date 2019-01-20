@@ -48,22 +48,36 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
       delete window.location;
       window.location = {};
       it('renders NavBar Component', () => {
-        const wrapper = shallow(<NavBar View='homePage' />);
-        const wrapper2 = shallow(<HomePage />);
-        const wrapper3 = shallow(<OrdersPage />);
-        const wrapper4 = shallow(<HistoryPage />);
-        wrapper3.find('.signout').simulate('click');
-        wrapper3.find('.history').simulate('click');
-        wrapper3.find('.signout-orderpage').simulate('click');
-        wrapper4.find('.signout-historypage').simulate('click');
-        wrapper4.find('.historypage-history').simulate('click');
-        wrapper4.find('.historypage-history-signout').simulate('click');
+        const wrapper = shallow(
+          <NavBar
+              link0={'https://fast-food-fast.herokuapp.com/Orders'}
+              link1={'https://fast-food-fast.herokuapp.com/History'}
+              link2={'https://fast-food-fast.herokuapp.com/Orders'}
+              anchor1Body={'History'}
+              anchor2Body={'Sign Out'} 
+              buttonBody={'ORDER'}
+              anchor3Body={'History'}
+              anchor4Body={'Order a meal'}
+              anchor5Body={'Sign Out'}
+          />);
+        wrapper.find('.signout').simulate('click');
+        wrapper.find('.history').simulate('click');
+        wrapper.find('.signout-navbar').simulate('click');
         expect(wrapper.length).to.eql(1);
-        expect(wrapper.instance().props.View).to.be.a('string');
-        expect(wrapper.instance().props.View.length).to.be.gt(0);
-        expect(wrapper.contains(<HomePage />)).to.equal(true);
-        expect(wrapper2.html().length).to.eql(757);
-        wrapper2.find('button').simulate('click');
+        expect(wrapper.instance().props.link0).to.be.a('string');
+        expect(wrapper.instance().props.link1).to.be.a('string');
+        expect(wrapper.instance().props.link2).to.be.a('string');
+        expect(wrapper.instance().props.anchor1Body).to.be.a('string');
+        expect(wrapper.instance().props.buttonBody).to.be.a('string');
+        expect(wrapper.instance().props.anchor3Body).to.be.a('string');
+        expect(wrapper.instance().props.anchor4Body).to.be.a('string');
+        expect(wrapper.instance().props.link0.length).to.be.gt(0);
+        expect(wrapper.instance().props.link1.length).to.be.gt(0);
+        expect(wrapper.instance().props.link2.length).to.be.gt(0);
+        expect(wrapper.instance().props.anchor1Body.length).to.be.gt(0);
+        expect(wrapper.instance().props.buttonBody.length).to.be.gt(0);
+        expect(wrapper.instance().props.anchor3Body.length).to.be.gt(0);
+        expect(wrapper.instance().props.anchor4Body.length).to.be.gt(0);
       });
     });
 
@@ -83,7 +97,15 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         const wrapper3 = mount(<Slide1 />)
         const wrapper4 = mount(<Slide2 />)
         expect(wrapper.length).to.eql(1);
-        expect(wrapper.contains(<NavBar View='homePage' />)).to.equal(true);
+        expect(wrapper.contains(<NavBar
+          link0={'https://fast-food-fast.herokuapp.com/'}
+          link1={'https://fast-food-fast.herokuapp.com/Signup'}
+          link2={'https://fast-food-fast.herokuapp.com/Signin'}
+          anchor1Body={'Order a meal'}
+          buttonBody={'LOGIN'}
+          anchor3Body={'Order a meal'}
+          anchor4Body={'Login'}
+      />)).to.equal(true);
         expect(wrapper.contains(<Slide0 />)).to.equal(true);
         expect(wrapper.contains(<Slide1 />)).to.equal(true);
         expect(wrapper.contains(<Slide2 />)).to.equal(true);

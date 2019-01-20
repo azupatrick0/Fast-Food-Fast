@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { SignupReducer, SigninReducer, GetMenuReducer, MakeOrderReducer, GetHistoryReducer } from './reducers/index';
+import { SignupReducer, SigninReducer, GetMenuReducer, MakeOrderReducer, GetHistoryReducer, GetAllOrdersReducer } from './reducers/index';
 
 
 const rootReducer = combineReducers({
@@ -9,7 +9,8 @@ const rootReducer = combineReducers({
     signin: SigninReducer,
     getmenu: GetMenuReducer,
     makeorder: MakeOrderReducer,
-    orderhistory: GetHistoryReducer
+    orderhistory: GetHistoryReducer,
+    getorders: GetAllOrdersReducer
 })
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

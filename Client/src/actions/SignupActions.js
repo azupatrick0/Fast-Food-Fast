@@ -14,16 +14,16 @@ const SignupAUser = (userDetails) => (dispatch) => {
                     payload: `Email => ${userDetails.email} already in use, please choose another.`
                 });
             }
-            dispatch({
-                type: USER_SIGNUP_SUCCESS,
-                payload: response.data
-            });
-            
+
             window.localStorage.setItem('token', response.data.data.token);
             window.localStorage.setItem('id', response.data.data.userDetails.id);
             window.localStorage.setItem('name', response.data.data.userDetails.name);
             window.localStorage.setItem('role', response.data.data.userDetails.role);
             window.localStorage.setItem('email', response.data.data.userDetails.email);
+            dispatch({
+                type: USER_SIGNUP_SUCCESS,
+                payload: response.data
+            });
         }).catch((error) => {
             console.log(error);
             dispatch({
