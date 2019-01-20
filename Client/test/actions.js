@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import moxios from 'moxios';
-import { SignupAUser, SigninAUser, GetMenu, GetHistory, GetAllOrders } from '../src/actions/index';
+import { SignupAUser, SigninAUser, GetMenu, GetHistory, GetAllOrders, AcceptOrders, DeclineOrders, CompleteOrders } from '../src/actions/index';
 import {
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_FAILED,
@@ -423,4 +423,128 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         })
     })
 
+
+    describe('AcceptOrders Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const val = 148;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
+
+        it('creates ACCEPT_ORDERS_SUCCESS, when an order is accepted by admina', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
+                status: 200,
+                response: '1',
+            });
+
+            const expected = [{
+                type: 'ACCEPT_ORDERS_SUCCESS',
+                payload: '1',
+
+            }]
+
+            store.dispatch(AcceptOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('creates ACCEPT_ORDERS_ERROR when an error occur during accepting a users order', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
+                status: 500,
+                response: 'An error occured while trying to update the order, please try again',
+            });
+
+            const expected = [{
+                type: 'ACCEPT_ORDERS_ERROR',
+                payload: 'An error occured while trying to update the order, please try again',
+
+            }]
+
+            store.dispatch(AcceptOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
+    describe('DeclineOrders Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const val = 147;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
+
+        it('creates DECLINE_ORDERS_SUCCESS, when an order is declined by admina', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
+                status: 200,
+                response: '1',
+            });
+
+            const expected = [{
+                type: 'DECLINE_ORDERS_SUCCESS',
+                payload: '1',
+
+            }]
+
+            store.dispatch(DeclineOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('creates DECLINE_ORDERS_ERROR when an error occur during adeclining a users order', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
+                status: 500,
+                response: 'An error occured while trying to update the order, please try again',
+            });
+
+            const expected = [{
+                type: 'DECLINE_ORDERS_ERROR',
+                payload: 'An error occured while trying to update the order, please try again',
+
+            }]
+
+            store.dispatch(DeclineOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
+
+    describe('CompleteOrders Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const val = 148;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
+
+        it('creates COMPLETE_ORDERS_SUCCESS, when an order is completed by admina', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
+                status: 200,
+                response: '1',
+            });
+
+            const expected = [{
+                type: 'COMPLETE_ORDERS_SUCCESS',
+                payload: '1',
+
+            }]
+
+            store.dispatch(CompleteOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('creates COMPLETE_ORDERS_ERROR when an error occur during completing a users order', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
+                status: 500,
+                response: 'An error occured while trying to update the order, please try again',
+            });
+
+            const expected = [{
+                type: 'COMPLETE_ORDERS_ERROR',
+                payload: 'An error occured while trying to update the order, please try again',
+
+            }]
+
+            store.dispatch(CompleteOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
 });

@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import bcrypt from 'bcrypt';
-import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer, GetHistoryReducer, GetAllOrdersReducer } from '../src/reducers/index';
+import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer, GetHistoryReducer, GetAllOrdersReducer, AcceptOrdersReducer, DeclineOrdersReducer, CompleteOrdersReducer } from '../src/reducers/index';
 
 require('browser-env')();
 
@@ -874,6 +874,308 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
         it('should return the initial all orders state', () => {
             expect(GetAllOrdersReducer(undefined, {})).to.eql({
                 orders: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('AcceptOrders Reducers', () => {
+
+        it('returns LOADING when loading all orders from the server', () => {
+            const initialState = {
+                acceptorders: null,
+                status: '',
+                error: '',
+            }
+            const state = AcceptOrdersReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                acceptorders: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not loading all orders from the server', () => {
+            const initialState = {
+                acceptorders: null,
+                status: '',
+                error: '',
+            }
+            const state = AcceptOrdersReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                acceptorders: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during accepting orders', () => {
+            const initialState = {
+                acceptorders: null,
+                status: 'ERROR',
+                error: 'An error occured while trying to update the order, please try again',
+            }
+            const state = AcceptOrdersReducer(initialState,
+                {
+                    type: 'ACCEPT_ORDERS_ERROR',
+                    payload: 'An error occured while trying to update the order, please try again',
+
+                });
+            expect(state).to.eql({ acceptorders: null, status: 'ERROR', error: 'An error occured while trying to update the order, please try again' });
+        });
+
+        it('returns updated state after admin accepting orders', () => {
+            const initialState = {
+                acceptorders: null,
+                status: '',
+                error: '',
+            }
+            const state = AcceptOrdersReducer(initialState,
+                {
+                    type: 'ACCEPT_ORDERS_SUCCESS',
+                    payload: '1'
+                });
+            expect(state).to.eql({
+                acceptorders: '1',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default accept order state if no action is specified', () => {
+            const initialState = {
+                acceptorders: null,
+                status: '',
+                error: '',
+            }
+            const state = AcceptOrdersReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        acceptorders: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                acceptorders: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial all orders state', () => {
+            expect(AcceptOrdersReducer(undefined, {})).to.eql({
+                acceptorders: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('DeclineOrders Reducers', () => {
+
+        it('returns LOADING when loading all orders from the server', () => {
+            const initialState = {
+                declineorders: null,
+                status: '',
+                error: '',
+            }
+            const state = DeclineOrdersReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                declineorders: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not loading all orders from the server', () => {
+            const initialState = {
+                declineorders: null,
+                status: '',
+                error: '',
+            }
+            const state = DeclineOrdersReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                declineorders: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during declining orders', () => {
+            const initialState = {
+                declineorders: null,
+                status: 'ERROR',
+                error: 'An error occured while trying to update the order, please try again',
+            }
+            const state = DeclineOrdersReducer(initialState,
+                {
+                    type: 'DECLINE_ORDERS_ERROR',
+                    payload: 'An error occured while trying to update the order, please try again',
+
+                });
+            expect(state).to.eql({ declineorders: null, status: 'ERROR', error: 'An error occured while trying to update the order, please try again' });
+        });
+
+        it('returns updated state after admin declining orders', () => {
+            const initialState = {
+                declineorders: null,
+                status: '',
+                error: '',
+            }
+            const state = DeclineOrdersReducer(initialState,
+                {
+                    type: 'DECLINE_ORDERS_SUCCESS',
+                    payload: '1'
+                });
+            expect(state).to.eql({
+                declineorders: '1',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default decline order state if no action is specified', () => {
+            const initialState = {
+                declineorders: null,
+                status: '',
+                error: '',
+            }
+            const state = DeclineOrdersReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        declineorders: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                declineorders: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial all orders state', () => {
+            expect(DeclineOrdersReducer(undefined, {})).to.eql({
+                declineorders: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+
+
+    describe('CompleteOrders Reducers', () => {
+
+        it('returns LOADING when loading all orders from the server', () => {
+            const initialState = {
+                completeorders: null,
+                status: '',
+                error: '',
+            }
+            const state = CompleteOrdersReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                completeorders: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not loading all orders from the server', () => {
+            const initialState = {
+                completeorders: null,
+                status: '',
+                error: '',
+            }
+            const state = CompleteOrdersReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                completeorders: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during completing orders', () => {
+            const initialState = {
+                completeorders: null,
+                status: 'ERROR',
+                error: 'An error occured while trying to update the order, please try again',
+            }
+            const state = CompleteOrdersReducer(initialState,
+                {
+                    type: 'COMPLETE_ORDERS_ERROR',
+                    payload: 'An error occured while trying to update the order, please try again',
+
+                });
+            expect(state).to.eql({ completeorders: null, status: 'ERROR', error: 'An error occured while trying to update the order, please try again' });
+        });
+
+        it('returns updated state after admin completing orders', () => {
+            const initialState = {
+                completeorders: null,
+                status: '',
+                error: '',
+            }
+            const state = CompleteOrdersReducer(initialState,
+                {
+                    type: 'COMPLETE_ORDERS_SUCCESS',
+                    payload: '1'
+                });
+            expect(state).to.eql({
+                completeorders: '1',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default complete order state if no action is specified', () => {
+            const initialState = {
+                completeorders: null,
+                status: '',
+                error: '',
+            }
+            const state = CompleteOrdersReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        completeorders: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                completeorders: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial all orders state', () => {
+            expect(CompleteOrdersReducer(undefined, {})).to.eql({
+                acceptorders: null,
                 status: '',
                 error: '',
             });

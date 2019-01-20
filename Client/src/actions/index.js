@@ -4,5 +4,18 @@ import GetMenu from './GetMenuActions';
 import MakeOrder from './MakeOrderActions';
 import GetHistory from './GetHistoryActions';
 import GetAllOrders from './GetAllOrders';
+import AcceptOrders from './AcceptOrders';
+import DeclineOrders from './DeclineOrders';
+import CompleteOrders from './CompleteOrders'
 
-export { SignupAUser, SigninAUser, GetMenu, MakeOrder, GetHistory, GetAllOrders };
+export {
+    SignupAUser,
+    SigninAUser,
+    GetMenu,
+    MakeOrder,
+    GetHistory,
+    GetAllOrders,
+    AcceptOrders,
+    DeclineOrders,
+    CompleteOrders
+};

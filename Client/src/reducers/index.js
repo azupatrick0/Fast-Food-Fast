@@ -4,6 +4,9 @@ import GetMenuReducer from './GetMenuReducer';
 import MakeOrderReducer from './MakeOrderReducer';
 import GetHistoryReducer from './GetHistoryReducer';
 import GetAllOrdersReducer from './GetAllOrdersReducer';
+import AcceptOrdersReducer from './AcceptOrdersReducer';
+import DeclineOrdersReducer from './DeclineOrdersReducer';
+import CompleteOrdersReducer from './CompleteOrdersReducer';
 
 export { 
     SignupReducer,
@@ -11,5 +14,8 @@ export {
     GetMenuReducer,
     MakeOrderReducer,
     GetHistoryReducer,
-    GetAllOrdersReducer
+    GetAllOrdersReducer,
+    AcceptOrdersReducer,
+    DeclineOrdersReducer,
+    CompleteOrdersReducer
 }

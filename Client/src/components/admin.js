@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { NavBar } from '../components/index';
 import '../../public/styles/historyStyles.css';
-import { GetAllOrders, GetMenu } from '../actions/index';
+import { GetAllOrders, GetMenu, AcceptOrders, DeclineOrders, CompleteOrders } from '../actions/index';
 
 export class Admin extends Component {
     constructor(props) {
@@ -14,6 +14,7 @@ export class Admin extends Component {
         this.secondTable2 = React.createRef();
         this.feedback = React.createRef();
         this.feedback2 = React.createRef();
+        this.feedback3 = React.createRef();
     }
 
     onAdd() {
@@ -26,6 +27,45 @@ export class Admin extends Component {
 
     onDelete() {
         console.log('Deleted')
+    }
+
+    onAccept(id) {
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        this.props.act(AcceptOrders(role, token, id));
+        setTimeout(() => { 
+            this.props.act(GetAllOrders(role, token));
+        }, 350);
+        setTimeout(() => {
+            this.feedback3.current.style.display = 'block';
+            document.querySelector('.span').innerHTML = 'Accepted';
+        }, 900);
+    }
+    
+    onDecline(id) {
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        this.props.act(DeclineOrders(role, token, id));
+        setTimeout(() => { 
+            this.props.act(GetAllOrders(role, token));
+        }, 350);
+        setTimeout(() => {
+            this.feedback3.current.style.display = 'block';
+            document.querySelector('.span').innerHTML = 'Declined';
+        }, 900);
+    }
+
+    onComplete(id) {
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        this.props.act(CompleteOrders(role, token, id));
+        setTimeout(() => { 
+            this.props.act(GetAllOrders(role, token));
+        }, 350);
+        setTimeout(() => {
+            this.feedback3.current.style.display = 'block';
+            document.querySelector('.span').innerHTML = 'Completed';
+        }, 900);
     }
 
     componentDidMount() {
@@ -47,25 +87,25 @@ export class Admin extends Component {
 
     render() {
         let sum = 0;
-        if (this.props.status === 'LOADING' || this.props.statusMenu === 'LOADING') {
+        if (this.props.status === 'LOADING' || this.props.statusMenu === 'LOADING' || this.props.statusAcceptOrders === 'LOADING') {
             this.spinner.current.style.display = 'block';
-        } else if (this.props.status === 'NOTLOADING' || this.props.statusMenu === 'NOTLOADING') {
+        } else if (this.props.status === 'NOTLOADING' || this.props.statusMenu === 'NOTLOADING' || this.props.statusAcceptOrders === 'NOTLOADING') {
             this.spinner.current.style.display = 'none';
-        } else if (this.props.status === 'ERROR' || this.props.statusMenu === 'ERROR') {
+        } else if (this.props.status === 'ERROR' || this.props.statusMenu === 'ERROR' || this.props.statusAcceptOrders === 'ERROR') {
             this.feedback.current.style.display = 'block';
-        }
+        } 
         return (
             <Fragment>
                 {this.props.status === 'FAILED' ? this.feedback.current.style.display = 'block' :
                     this.props.statusMenu === 'FAILED' ? this.feedback2.current.style.display = 'block' : ''
                 }
-
                 <Helmet>
                     <title>
                         Fast-Food-Fast | Admin
                         </title>
                     <link rel="shortcut icon" type="image/png" href='../../public/images/ffflogo.png' />
                 </Helmet>
+                <div className="modal feedback" ref={this.feedback3}><p><span className='span'></span></p> <button onClick={() => this.feedback3.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback2}><p>{this.props.errorMenu}</p> <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <div className="blur">
@@ -93,6 +133,8 @@ export class Admin extends Component {
                             <div className="flex">
                                 <div className="flex-items"><br /><br /><br /><br /><br />
                                     <span className="spinner" ref={this.spinner}></span>
+
+                                            
                                     <table className="second-table second-table-history" ref={this.secondTable}>
                                         {this.props.status === 'SUCCESS' && <tbody>
                                             <tr>
@@ -131,11 +173,12 @@ export class Admin extends Component {
                                                             {mealObject.createdat}
                                                         </td>
                                                         <td className={`td6-meal${mealObject.id}`}>
-                                                            <button className={`acceptorder-btn${mealObject.id} accept-btn`}>Accept</button>
-                                                            <button className={`declineorder-btn${mealObject.id} reject-btn`}>Decline</button>
+    
+                                                            <button className={`acceptorder-btn${mealObject.id} accept-btn`} onClick={() => this.onAccept(`${mealObject.id}`)}>Accept</button>
+                                                            <button className={`declineorder-btn${mealObject.id} reject-btn`} onClick={() => this.onDecline(`${mealObject.id}`)}>Decline</button>
                                                         </td>
                                                         <td className={`td6-meal${mealObject.id}`}>
-                                                            <button className={`completeorder-btn${mealObject.id} accept-btn`}>Complete</button>
+                                                            <button className={`completeorder-btn${mealObject.id} accept-btn`} onClick={() => this.onComplete(`${mealObject.id}`)}>Complete</button>
                                                         </td>
                                                     </tr>
                                                 )
@@ -195,9 +238,16 @@ Admin.propTypes = {
     statusMenu: PropTypes.string,
     errorMenu: PropTypes.string,
     menu: PropTypes.array,
+    statusAcceptOrders: PropTypes.string,
+    errorAcceptOrders: PropTypes.string,
+    acceptorders: PropTypes.string,
     act: PropTypes.func,
     GetAllOrders: PropTypes.func,
     GetMenu: PropTypes.func,
+    AcceptOrders: PropTypes.func,
+    DeclineOrders: PropTypes.func,
+    CompleteOrders: PropTypes.func,
+    message: PropTypes.string,
 }
 
 const mapStateToProps = state => ({
@@ -207,6 +257,12 @@ const mapStateToProps = state => ({
     statusMenu: state.getmenu.status,
     errorMenu: state.getmenu.error,
     menu: state.getmenu.mealData,
+    statusAcceptOrders: state.acceptorders.status,
+    errorAcceptOrders: state.acceptorders.error,
+    acceptorders: state.acceptorders.acceptorders,
+    statusDeclineOrders: state.declineorders.status,
+    errorDeclineOrders: state.declineorders.error,
+    declineorders: state.declineorders.acceptorders
 });
 
 const mapDispatchToProps = (dispatch) => ({
