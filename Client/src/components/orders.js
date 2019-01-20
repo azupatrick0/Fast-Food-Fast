@@ -139,7 +139,8 @@ export class Orders extends Component {
     }
 
     componentDidMount() {
-        this.props.act(GetMenu());
+        const token = window.localStorage.getItem('token');
+        this.props.act(GetMenu(token));
     }
 
     onDeliveryDate() {

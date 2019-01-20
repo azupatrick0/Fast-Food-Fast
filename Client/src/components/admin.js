@@ -29,15 +29,20 @@ export class Admin extends Component {
     }
 
     componentDidMount() {
-        this.props.act(GetAllOrders());
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        this.props.act(GetAllOrders(role, token));
     }
 
     onGetMenu() {
-        this.props.act(GetMenu());
+        const token = window.localStorage.getItem('token');
+        this.props.act(GetMenu(token));
     }
 
     onGetOrders() {
-        this.props.act(GetAllOrders());
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        this.props.act(GetAllOrders(role, token));
     }
 
     render() {
@@ -77,9 +82,9 @@ export class Admin extends Component {
                     <br />
                     <br />
                     <div className='quick-access'>
-                        <button onClick={() => this.onAdd()}>Add Food Item</button>
-                        <button onClick={() => this.onGetMenu()}>Get Menu</button>
-                        <button onClick={() => this.onGetOrders()}>Get Orders</button>
+                        <button className='add' onClick={() => this.onAdd()}>Add Food Item</button>
+                        <button className='get-menu' onClick={() => this.onGetMenu()}>Get Menu</button>
+                        <button className='get-orders' onClick={() => this.onGetOrders()}>Get Orders</button>
                     </div>
                     <div className="slide0-history">
                         <br />

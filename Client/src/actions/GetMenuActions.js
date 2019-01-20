@@ -8,9 +8,7 @@ import {
     GET_MENU_ERROR
 } from './actionTypes';
 
-const token = window.localStorage.getItem('token');
-
-const GetMenu = () => (dispatch) => {
+const GetMenu = (token) => (dispatch) => {
     dispatch({
         type: START_LOADING
     });

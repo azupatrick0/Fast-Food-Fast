@@ -2,14 +2,12 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import moxios from 'moxios';
-import { SignupAUser, SigninAUser, GetMenu, GetHistory } from '../src/actions/index';
+import { SignupAUser, SigninAUser, GetMenu, GetHistory, GetAllOrders } from '../src/actions/index';
 import {
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_FAILED,
     USER_SIGNIN_SUCCESS,
     USER_SIGNIN_FAILED,
-    // ORDER_MEAL_SUCCESS,
-    // ORDER_MEAL_FAILED,
     GET_MENU_SUCCESS,
     GET_MENU_FAILED,
     GET_HISTORY_SUCCESS,
@@ -160,27 +158,56 @@ const history = {
       ]
     }
   }
-
-// const orderData = [{
-//     menuid: 1,
-//     meal: "Fruttie",
-//     imgurl: "https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg",
-//     userid: 1,
-//     name: "Azu Patrick",
-//     quantity: 2,
-//     amount: 800,
-//     location: "Lagos"
-//   },
-//   {
-//     menuid: 2,
-//     meal: "Burger",
-//     imgurl: "https://res.cloudinary.com/pato/image/upload/v11539986387/yjvhhoun9pajw07zu0dw.jpg",
-//     userid: 1,
-//     name: "Azu Patrick",
-//     quantity: 1,
-//     amount: 200,
-//     location: "Lagos"
-//   }]
+const allOrders = {
+    status: 'success',
+    data: {
+      message: 'All orders returned, thank you.',
+      orders: [
+        {
+          id: 3,
+          menuid: 2,
+          meal: 'Burger',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986437/psjp6ayhoemdidt8vcro.png',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 3,
+          amount: 600,
+          location: 'Abuja',
+          status: 'processing',
+          createdat: '2018-10-19T22:02:06.962Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        },
+        {
+          id: 2,
+          menuid: 3,
+          meal: 'Veggie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986467/n9usp2sumwxxmgiaogbd.png',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 9,
+          amount: 3150,
+          location: 'Abuja',
+          status: 'complete',
+          createdat: '2018-10-19T22:02:03.956Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        },
+        {
+          id: 1,
+          menuid: 1,
+          meal: 'Fruttie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 4,
+          amount: 1600,
+          location: 'Abuja',
+          status: 'new',
+          createdat: '2018-10-19T22:02:03.869Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        }
+      ]
+    }
+  }
   
 
 describe('Fast-Food-Fast Actions Test Suite', () => {
@@ -293,7 +320,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
 
             }]
 
-            store.dispatch(GetMenu()).then(() => {
+            store.dispatch(GetMenu(token)).then(() => {
                 expect(store.getActions()).to.eql(expected)
             })
         })
@@ -310,8 +337,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
 
             }]
 
-            store.dispatch(GetMenu()).then((res) => {
-                console.log(res,'??????????')
+            store.dispatch(GetMenu(token)).then(() => {
                 expect(store.getActions()).to.eql(expected)
             })
         })
@@ -356,4 +382,45 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
             })
         })
     })
+
+    describe('GetAllOrders Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
+
+        it('creates GET_ORDERS_SUCCESS, when all orders are retrieved successfully', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/?role=${role}&token=${token}`, {
+                status: 200,
+                response: allOrders,
+            });
+
+            const expected = [{
+                type: 'GET_ORDERS_SUCCESS',
+                payload: history,
+
+            }]
+
+            store.dispatch(GetAllOrders(role, token)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('creates GET_ORDERS_FAILED when all orders are not retrieved successfully', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/?role=${role}&token=${token}`, {
+                status: 401,
+                response: 'Failed to authenticate user token',
+            });
+
+            const expected = [{
+                type: 'GET_ORDERS_FAILED',
+                payload: 'Failed to authenticate user token',
+
+            }]
+
+            store.dispatch(GetAllOrders(role, token)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
 });

@@ -26,7 +26,7 @@ export default (state = initialState, action) => {
 
         case STOP_LOADING: {
             state = {
-                history: null,
+                orders: null,
                 status: 'NOTLOADING',
                 error: ''
             }

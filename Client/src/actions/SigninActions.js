@@ -20,7 +20,7 @@ const SigninAUser = (userDetails) => (dispatch) => {
                 window.localStorage.setItem('email', response.data.data.userDetails.email);
                 dispatch({
                     type: USER_SIGNIN_SUCCESS,
-                    payload: response.data
+                    payload: response.data.data.userDetails
                 });
             }
         }).catch((error) => {

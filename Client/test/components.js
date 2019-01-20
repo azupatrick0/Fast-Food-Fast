@@ -3,7 +3,7 @@ import { mount, shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NavBar, NotFound, Signup, Signin, History, Orders } from '../src/components';
+import { Footer, NavBar, NotFound, Signup, Signin, History, Orders, Admin } from '../src/components';
 import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
 require('browser-env')();
@@ -152,7 +152,6 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
     });
 
     describe('<History />', () => {
-      
       it('renders connected History Component', () => {
         const wrapper = shallow(<History act={()=> 'clicked me'}/>);
         expect(wrapper.length).to.eql(1);   
@@ -160,11 +159,30 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
     });
 
     describe('<Orders />', () => {
-      
       it('renders connected Orders Component', () => {
         const wrapper = shallow(<Orders act={()=> 'clicked me'}/>);
         expect(wrapper.length).to.eql(1);
         wrapper.find('.order-button').simulate('click');
+      });
+    });
+
+    describe('<Admin />', () => {
+      it('renders connected Admin Component', () => {
+        const wrapper = shallow(<Admin act={()=> 'clicked me'}/>);
+        expect(wrapper.length).to.eql(1);
+        wrapper.find('.add').simulate('click');
+        wrapper.find('.get-menu').simulate('click');
+        wrapper.find('.get-orders').simulate('click');
+        expect(wrapper.contains(<NavBar
+          link0={'https://fast-food-fast.herokuapp.com/Admin'}
+          link1={'https://fast-food-fast.herokuapp.com/Admin'}
+          link2={'https://fast-food-fast.herokuapp.com/Admin'}
+          anchor1Body={'Orders'}
+          anchor2Body={'Sign Out'}
+          buttonBody={'ADMIN'}
+          anchor3Body={'Orders'}
+          anchor5Body={'Sign Out'}
+      />)).to.eql(true);
       });
     });
   });

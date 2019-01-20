@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import bcrypt from 'bcrypt';
-import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer, GetHistoryReducer } from '../src/reducers/index';
+import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer, GetHistoryReducer, GetAllOrdersReducer } from '../src/reducers/index';
 
 require('browser-env')();
 
@@ -62,6 +62,57 @@ const history = {
           amount: 1600,
           location: 'Abuja',
           status: 'complete',
+          createdat: '2018-10-19T22:02:03.869Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        }
+      ]
+    }
+  }
+
+  const allOrders = {
+    status: 'success',
+    data: {
+      message: 'All orders returned, thank you.',
+      orders: [
+        {
+          id: 3,
+          menuid: 2,
+          meal: 'Burger',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986437/psjp6ayhoemdidt8vcro.png',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 3,
+          amount: 600,
+          location: 'Abuja',
+          status: 'processing',
+          createdat: '2018-10-19T22:02:06.962Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        },
+        {
+          id: 2,
+          menuid: 3,
+          meal: 'Veggie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986467/n9usp2sumwxxmgiaogbd.png',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 9,
+          amount: 3150,
+          location: 'Abuja',
+          status: 'complete',
+          createdat: '2018-10-19T22:02:03.956Z',
+          createddate: '2018-10-19T00:00:00.000Z'
+        },
+        {
+          id: 1,
+          menuid: 1,
+          meal: 'Fruttie',
+          imgurl: 'https://res.cloudinary.com/pato/image/upload/v1539986387/yjvhhoun9pajw07zu0dw.jpg',
+          userid: 1,
+          name: 'Azu Patrick',
+          quantity: 4,
+          amount: 1600,
+          location: 'Abuja',
+          status: 'new',
           createdat: '2018-10-19T22:02:03.869Z',
           createddate: '2018-10-19T00:00:00.000Z'
         }
@@ -708,6 +759,121 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
         it('should return the initial history state', () => {
             expect(GetHistoryReducer(undefined, {})).to.eql({
                 history: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('GetAllOrders Reducers', () => {
+
+        it('returns LOADING when loading all orders from the server', () => {
+            const initialState = {
+                orders: null,
+                status: '',
+                error: '',
+            }
+            const state = GetAllOrdersReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                orders: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not loading all orders from the server', () => {
+            const initialState = {
+                orders: null,
+                status: '',
+                error: '',
+            }
+            const state = GetAllOrdersReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                orders: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during fetching all orders', () => {
+            const initialState = {
+                orders: null,
+                status: 'ERROR',
+                error: 'An error occured while retrieving all orders, please try again',
+            }
+            const state = GetAllOrdersReducer(initialState,
+                {
+                    type: 'GET_ORDERS_ERROR',
+                    payload: 'An error occured while retrieving all orders, please try again',
+
+                });
+            expect(state).to.eql({ orders: null, status: 'ERROR', error: 'An error occured while retrieving all orders, please try again' });
+        });
+
+        it('returns status failed when getting all orders fails', () => {
+            const initialState = {
+                orders: null,
+                status: '',
+                error: '',
+            }
+            const state = GetAllOrdersReducer(initialState,
+                {
+                    type: 'GET_ORDERS_FAILED',
+                    payload: 'Failed to authenticate user token'
+                });
+
+            expect(state).to.eql({ orders: null, status: 'FAILED', error: 'Failed to authenticate user token' });
+        });
+
+        it('returns updated state after fetching orders success', () => {
+            const initialState = {
+                orders: null,
+                status: '',
+                error: '',
+            }
+            const state = GetAllOrdersReducer(initialState,
+                {
+                    type: 'GET_ORDERS_SUCCESS',
+                    payload: allOrders
+                });
+            expect(state).to.eql({
+                orders: allOrders,
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default all orders state if no action is specified', () => {
+            const initialState = {
+                orders: null,
+                status: '',
+                error: '',
+            }
+            const state = GetAllOrdersReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        orders: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                orders: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial all orders state', () => {
+            expect(GetAllOrdersReducer(undefined, {})).to.eql({
+                orders: null,
                 status: '',
                 error: '',
             });

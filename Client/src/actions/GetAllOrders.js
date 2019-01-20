@@ -7,10 +7,7 @@ import {
     GET_ORDERS_ERROR,
 } from './actionTypes';
 
-const token = window.localStorage.getItem('token');
-const role = window.localStorage.getItem('role');
-
-const GetAllOrders = () => (dispatch) => {
+const GetAllOrders = (role, token) => (dispatch) => {
     dispatch({
         type: START_LOADING
     });
