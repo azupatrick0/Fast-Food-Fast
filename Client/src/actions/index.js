@@ -6,7 +6,9 @@ import GetHistory from './GetHistoryActions';
 import GetAllOrders from './GetAllOrders';
 import AcceptOrders from './AcceptOrders';
 import DeclineOrders from './DeclineOrders';
-import CompleteOrders from './CompleteOrders'
+import CompleteOrders from './CompleteOrders';
+import UpdateMenu from './UpdateMenuActions';
+import CloudinaryImageUpload from './CloudinaryActions';
 
 export {
     SignupAUser,
@@ -17,5 +19,7 @@ export {
     GetAllOrders,
     AcceptOrders,
     DeclineOrders,
-    CompleteOrders
+    CompleteOrders,
+    UpdateMenu,
+    CloudinaryImageUpload
 };

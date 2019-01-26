@@ -12,7 +12,9 @@ import {
     GetAllOrdersReducer,
     AcceptOrdersReducer,
     DeclineOrdersReducer,
-    CompleteOrdersReducer
+    CompleteOrdersReducer,
+    CloudinaryReducer,
+    UpdateMenuReducer
 } from './reducers/index';
 
 
@@ -25,20 +27,12 @@ const rootReducer = combineReducers({
     getorders: GetAllOrdersReducer,
     acceptorders: AcceptOrdersReducer,
     declineorders: DeclineOrdersReducer,
-    completeorders: CompleteOrdersReducer
+    completeorders: CompleteOrdersReducer,
+    cloudinary: CloudinaryReducer,
+    updatedmenu: UpdateMenuReducer
+
 });
 
-// const persistConfig = {
-//     key: 'root',
-//     storage,
-// }
-  
-// const persistedReducer = persistReducer(persistConfig, rootReducer);
-  
-// const store = createStore(persistedReducer, composeWithDevTools(applyMiddleware(thunk)));
-// const persistor = persistStore(store)
-
-// export { store, persistor };
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 export default store;

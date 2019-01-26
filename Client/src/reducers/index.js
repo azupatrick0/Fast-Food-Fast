@@ -7,6 +7,8 @@ import GetAllOrdersReducer from './GetAllOrdersReducer';
 import AcceptOrdersReducer from './AcceptOrdersReducer';
 import DeclineOrdersReducer from './DeclineOrdersReducer';
 import CompleteOrdersReducer from './CompleteOrdersReducer';
+import CloudinaryReducer from './ClodinaryReducer';
+import UpdateMenuReducer from './UpdateMenuReducer';
 
 export { 
     SignupReducer,
@@ -17,5 +19,7 @@ export {
     GetAllOrdersReducer,
     AcceptOrdersReducer,
     DeclineOrdersReducer,
-    CompleteOrdersReducer
+    CompleteOrdersReducer,
+    CloudinaryReducer,
+    UpdateMenuReducer
 }
