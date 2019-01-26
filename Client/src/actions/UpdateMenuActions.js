@@ -1,8 +1,6 @@
 import Axios from 'axios';
 
 import { 
-    START_LOADING,
-    STOP_LOADING,
     UPDATE_MENU_SUCCESS,
     UPDATE_MENU_FAILED,
     UPDATE_MENU_ERROR

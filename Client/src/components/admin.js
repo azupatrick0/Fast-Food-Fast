@@ -142,7 +142,6 @@ export class Admin extends Component {
 
     render() {
         let sum = 0;
-        const token = window.localStorage.getItem('token');
         if (this.props.status === 'LOADING' || this.props.statusMenu === 'LOADING' || this.props.statusAcceptOrders === 'LOADING') {
             this.spinner.current.style.display = 'block';
         } else if (this.props.status === 'NOTLOADING' || this.props.statusMenu === 'NOTLOADING' || this.props.statusAcceptOrders === 'NOTLOADING') {
