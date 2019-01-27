@@ -117,7 +117,15 @@ class LandingPage extends Component {
                     <link rel="shortcut icon" type="image/png" href='../../public/images/ffflogo.png' />
                 </Helmet>
 
-                <NavBar View={'homePage'} />
+                <NavBar
+                    link0={'https://fast-food-fast.herokuapp.com/'}
+                    link1={'https://fast-food-fast.herokuapp.com/Signup'}
+                    link2={'https://fast-food-fast.herokuapp.com/Signin'}
+                    anchor1Body={'Order a meal'}
+                    buttonBody={'LOGIN'}
+                    anchor3Body={'Order a meal'}
+                    anchor4Body={'Login'}
+                />
 
                 <Slide0 />
 

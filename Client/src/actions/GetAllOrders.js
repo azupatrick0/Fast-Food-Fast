@@ -1,41 +1,40 @@
 import Axios from 'axios';
-
 import { 
     START_LOADING,
     STOP_LOADING,
-    GET_MENU_SUCCESS,
-    GET_MENU_FAILED,
-    GET_MENU_ERROR
+    GET_ORDERS_SUCCESS,
+    GET_ORDERS_FAILED,
+    GET_ORDERS_ERROR,
 } from './actionTypes';
 
-const GetMenu = (token) => (dispatch) => {
+const GetAllOrders = (role, token) => (dispatch) => {
     dispatch({
         type: START_LOADING
     });
-    return Axios.get(`${process.env.BASE_URL_PROD}/api/v1/menu?token=${token}`)
+    return Axios.get(`${process.env.BASE_URL_PROD}/api/v1/orders/?role=${role}&token=${token}`)
         .then((response) => {
             dispatch({
                 type: STOP_LOADING
             });
             if (response.data.status === 'fail') {
                 dispatch({
-                    type: GET_MENU_FAILED,
+                    type: GET_ORDERS_FAILED,
                     payload: 'Failed to authenticate user token'
                 });
             }
             else if (response.data.status === 'success') {
                 dispatch({
-                    type: GET_MENU_SUCCESS,
-                    payload: response.data.data.items
+                    type: GET_ORDERS_SUCCESS,
+                    payload: response.data.data.orders
                 });
             }
         }).catch((error) => {
             console.log(error);
             dispatch({
-                type: GET_MENU_ERROR,
-                payload: 'An error occured while retrieving available menu, please try again',
+                type: GET_ORDERS_ERROR,
+                payload: 'An error occured while retrieving all orders, please try again',
             });
         })
 }
 
-export default GetMenu;
+export default GetAllOrders;

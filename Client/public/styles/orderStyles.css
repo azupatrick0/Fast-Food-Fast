@@ -25,6 +25,22 @@ a:hover {
     border-radius: 0;
 }
 
+.accept-btn-big {
+    width: 100%;
+}
+
+.edit-btn {
+    background-color: yellowgreen;
+    color: white;
+    width: 80%;
+    margin-left: 0;
+    height: 2.8em;
+    outline: none;
+    font-size: 14px;
+    border: 0;
+    border-radius: 0;
+}
+
 .blur {
     position: absolute;
     z-index: -1;
@@ -188,6 +204,34 @@ input[type=number] {
 }
 
 
+.modal2 {
+    background-color: rgba(0,0,0,0.8);
+    height: 100vh;
+    width: 100%;
+    margin-left: -10%;
+    position: fixed;
+    z-index: 3;
+    padding: 18% 0 0 35%;
+}
+
+.modal2 p {
+    margin-top: 10%;
+    text-align: center;
+    color:rgb(252, 227, 6);
+    font-size: 30px;   
+    font-family: 'Ubuntu Condensed', sans-serif;
+}
+
+.modal2 button {
+    margin: 0;
+    width: 50%;
+}
+
+.modal2 input {
+    width: 50%;
+}
+
+
 .nav-bar {
     font-size: 14px;
     color: red;
@@ -243,12 +287,33 @@ p {
     font-size: 20px;
 }
 
+.quick-access button{
+    background-color: rgba(0, 255, 255, 0.8);
+    height: 3.5em;
+    font-size: 16px;
+    width: 15%;
+    margin-left: 3%;
+    border: 1px solid plum;
+    font-family: 'Ubuntu Condensed', sans-serif;
+    border-radius: 0;
+    padding: 0.5em;
+    color: red;
+}
+
+.quick-access button:hover {
+    color: green;
+}
+
 .site-name {
     font-size: 24px;
 }
 
 .second-table {
     width: 38vw;
+}
+
+.second-table-admin {
+    width: 100%;
 }
 
 select {
@@ -326,6 +391,10 @@ tr:nth-child(even) {
     padding: 10px;
 }
 
+.update-image {
+    color: white;
+    font-size: 20px;
+}
 
 /* High resolution tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
@@ -376,6 +445,12 @@ tr:nth-child(even) {
         text-align: unset;
     }
         
+    .quick-access button {
+        width: 33%;
+        height: 4em;
+        margin: 0 0 2% 35%;
+    }
+
     .tab-modal {
         background-color: rgba(93, 81, 134, 0.5);
         position: fixed;
@@ -473,6 +548,12 @@ tr:nth-child(even) {
    
     .logo {
         width: 6%;
+    }
+
+    .quick-access button {
+        width: 50%;
+        height: 4em;
+        margin: 0 0 2% 25%;
     }
 
     .slide0 p { 
@@ -596,6 +677,11 @@ tr:nth-child(even) {
         text-align: unset;
     }
         
+    .quick-access button {
+        width: 75%;
+        height: 4em;
+        margin: 0 0 2% 13%;
+    }
 
     .slide0 p { 
         padding: 30% 0 0 8%; 

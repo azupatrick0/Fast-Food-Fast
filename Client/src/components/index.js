@@ -7,6 +7,7 @@ import SignupConnected, { Signup } from './signup';
 import SigninConnected, { Signin } from './signin';
 import OrdersConnected, { Orders } from './orders';
 import HistoryConnected, { History } from './history';
+import AdminConnected, { Admin } from './admin';
 
 export {
     Footer,
@@ -20,5 +21,7 @@ export {
     Orders,
     OrdersConnected,
     History,
-    HistoryConnected
+    HistoryConnected,
+    Admin,
+    AdminConnected
 };

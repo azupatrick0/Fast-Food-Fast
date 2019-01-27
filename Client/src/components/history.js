@@ -44,7 +44,17 @@ export class History extends Component {
                
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <div className="blur">
-                    <NavBar View={'historyPage'} />
+                <NavBar
+                    link0={'https://fast-food-fast.herokuapp.com/Orders'}
+                    link1={'https://fast-food-fast.herokuapp.com/Orders'}
+                    link2={'https://fast-food-fast.herokuapp.com/History'}
+                    anchor1Body={'Order a meal'}
+                    anchor2Body={'Sign Out'} 
+                    buttonBody={'HISTORY'}
+                    anchor3Body={'Order a meal'}
+                    anchor4Body={'History'}
+                    anchor5Body={'Sign Out'}
+                />
                     <br />
                     <br />
                     <div className="slide0-history">

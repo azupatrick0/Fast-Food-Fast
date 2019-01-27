@@ -1,7 +1,23 @@
 import { createStore, applyMiddleware, combineReducers } from 'redux';
+// import { persistStore, persistReducer } from 'redux-persist';
+// import storage from 'redux-persist/lib/storage';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
-import { SignupReducer, SigninReducer, GetMenuReducer, MakeOrderReducer, GetHistoryReducer } from './reducers/index';
+import {
+    SignupReducer,
+    SigninReducer,
+    GetMenuReducer,
+    MakeOrderReducer,
+    GetHistoryReducer,
+    GetAllOrdersReducer,
+    AcceptOrdersReducer,
+    DeclineOrdersReducer,
+    CompleteOrdersReducer,
+    CloudinaryReducer,
+    UpdateMenuReducer,
+    PopulateMenuReducer,
+    DeletedMenuReducer
+} from './reducers/index';
 
 
 const rootReducer = combineReducers({
@@ -9,8 +25,16 @@ const rootReducer = combineReducers({
     signin: SigninReducer,
     getmenu: GetMenuReducer,
     makeorder: MakeOrderReducer,
-    orderhistory: GetHistoryReducer
-})
+    orderhistory: GetHistoryReducer,
+    getorders: GetAllOrdersReducer,
+    acceptorders: AcceptOrdersReducer,
+    declineorders: DeclineOrdersReducer,
+    completeorders: CompleteOrdersReducer,
+    cloudinary: CloudinaryReducer,
+    updatedmenu: UpdateMenuReducer,
+    addedtomenu:  PopulateMenuReducer,
+    deletedfrommenu: DeletedMenuReducer
+});
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 

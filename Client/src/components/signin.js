@@ -46,7 +46,8 @@ export class Signin extends Component {
         }
         return (
             <Fragment>
-                {this.props.status === 'SUCCESS' && <Redirect to='/orders' />}
+                {this.props.role === 'admin' ? <Redirect to='/admin' /> :
+                this.props.status === 'SUCCESS' && <Redirect to='/orders' />}
                 <Helmet>
                     <title>
                         Fast-Food-Fast | Sign In
@@ -96,12 +97,14 @@ export class Signin extends Component {
 Signin.propTypes = {
     status: PropTypes.string,
     error: PropTypes.string,
+    role: PropTypes.string,
     act: PropTypes.func
 }
 
 const mapStateToProps = state => ({
     status: state.signin.status,
-    error: state.signin.error
+    error: state.signin.error,
+    role: state.signin.role,
 });
 
 const mapDispatchToProps = (dispatch) => ({
