@@ -1,6 +1,5 @@
 [![Build Status](https://travis-ci.org/azupatrick0/Fast-Food-Fast.svg?branch=develop)](https://travis-ci.org/azupatrick0/Fast-Food-Fast)
 [![Coverage Status](https://coveralls.io/repos/github/azupatrick0/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/azupatrick0/Fast-Food-Fast?branch=develop)
-[![Maintainability](https://api.codeclimate.com/v1/badges/43858cf4c54536e521f4/maintainability)](https://codeclimate.com/github/azupatrick0/Fast-Food-Fast/maintainability)
 # Fast-Food-Fast
 ## Description
 Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela Cycle 36 Developer Challenge.
