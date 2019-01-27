@@ -1,12 +1,12 @@
 import {
     START_LOADING,
     STOP_LOADING,
-    UPDATE_MENU_SUCCESS,
-    UPDATE_MENU_ERROR,
+    POPULATE_MENU_SUCCESS,
+    POPULATE_MENU_ERROR,
 } from '../actions/actionTypes';
 
 const initialState =  {
-    updatedMealData: null,
+    addedMealData: null,
     status: '',
     error: '',
 }
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
 
         case START_LOADING: {
             state = {
-                updatedMealData: null,
+                addedMealData: null,
                 status: 'LOADING',
                 error: '',
             }
@@ -25,24 +25,24 @@ export default (state = initialState, action) => {
 
         case STOP_LOADING: {
             state = {
-                updatedMealData: null,
+                addedMealData: null,
                 status: 'NOTLOADING',
                 error: ''
             }
             break;
         }
        
-        case UPDATE_MENU_SUCCESS: {
+        case POPULATE_MENU_SUCCESS: {
             state = {
-                updatedMealData: action.payload,
+                addedMealData: action.payload,
                 status: 'SUCCESS',
                 error: ''
             }
             break;
         }
-        case UPDATE_MENU_ERROR: {
+        case POPULATE_MENU_ERROR: {
             state = {
-                updatedMealData: null,
+                addedMealData: null,
                 status: 'ERROR',
                 error: action.payload,
             }

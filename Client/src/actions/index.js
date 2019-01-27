@@ -9,6 +9,8 @@ import DeclineOrders from './DeclineOrders';
 import CompleteOrders from './CompleteOrders';
 import UpdateMenu from './UpdateMenuActions';
 import CloudinaryImageUpload from './CloudinaryActions';
+import PopulateMenu from './PopulateMenuActions';
+import DeleteMenu from './DeleteMenuActions';
 
 export {
     SignupAUser,
@@ -21,5 +23,7 @@ export {
     DeclineOrders,
     CompleteOrders,
     UpdateMenu,
-    CloudinaryImageUpload
+    CloudinaryImageUpload,
+    PopulateMenu,
+    DeleteMenu
 };

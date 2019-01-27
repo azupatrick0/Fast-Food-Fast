@@ -7,7 +7,6 @@ import {
 
  const apiUrl = 'https://api.cloudinary.com/v1_1/pato/upload';
 const CloudinaryImageUpload = (form) => (dispatch) => {
-   
     dispatch({
         type: START_LOADING
     });

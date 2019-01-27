@@ -1,6 +1,20 @@
 import { expect } from 'chai';
 import bcrypt from 'bcrypt';
-import { SignupReducer, SigninReducer, MakeOrderReducer, GetMenuReducer, GetHistoryReducer, GetAllOrdersReducer, AcceptOrdersReducer, DeclineOrdersReducer, CompleteOrdersReducer } from '../src/reducers/index';
+import {
+    SignupReducer,
+    SigninReducer,
+    MakeOrderReducer,
+    GetMenuReducer,
+    GetHistoryReducer,
+    GetAllOrdersReducer,
+    AcceptOrdersReducer,
+    DeclineOrdersReducer,
+    CompleteOrdersReducer,
+    UpdateMenuReducer,
+    PopulateMenuReducer,
+    DeletedMenuReducer,
+    CloudinaryReducer
+} from '../src/reducers/index';
 
 require('browser-env')();
 
@@ -641,7 +655,7 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                 error: '',
             });
         });
-        it('should return the initial menu state', () => {
+        it('should return the initial get menu state', () => {
             expect(GetMenuReducer(undefined, {})).to.eql({
                 mealData: null,
                 status: '',
@@ -971,7 +985,7 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                 error: '',
             });
         });
-        it('should return the initial all orders state', () => {
+        it('should return the initial accept orders state', () => {
             expect(AcceptOrdersReducer(undefined, {})).to.eql({
                 acceptorders: null,
                 status: '',
@@ -1071,7 +1085,7 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                 error: '',
             });
         });
-        it('should return the initial all orders state', () => {
+        it('should return the initial decline orders state', () => {
             expect(DeclineOrdersReducer(undefined, {})).to.eql({
                 declineorders: null,
                 status: '',
@@ -1173,9 +1187,409 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                 error: '',
             });
         });
-        it('should return the initial all orders state', () => {
+        it('should return the initial complete order state', () => {
             expect(CompleteOrdersReducer(undefined, {})).to.eql({
                 acceptorders: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('UpdateMenu Reducers', () => {
+
+        it('returns LOADING when updating menu', () => {
+            const initialState = {
+                updatedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = UpdateMenuReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                updatedMealData: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not updating menu', () => {
+            const initialState = {
+                updatedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = UpdateMenuReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                updatedMealData: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during updating menu', () => {
+            const initialState = {
+                updatedMealData: null,
+                status: 'ERROR',
+                error: 'An error occured while trying to update the item, please try again.',
+            }
+            const state = UpdateMenuReducer(initialState,
+                {
+                    type: 'UPDATE_MENU_ERROR',
+                    payload: 'An error occured while trying to update the item, please try again.',
+
+                });
+            expect(state).to.eql({ updatedMealData: null, status: 'ERROR', error: 'An error occured while trying to update the item, please try again.' });
+        });
+
+        it('returns updated state after admin updates menu', () => {
+            const initialState = {
+                updatedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = UpdateMenuReducer(initialState,
+                {
+                    type: 'UPDATE_MENU_SUCCESS',
+                    payload: 'Item with id => 1, updated successfully.'
+                });
+            expect(state).to.eql({
+                updatedMealData: 'Item with id => 1, updated successfully.',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default update menu state if no action is specified', () => {
+            const initialState = {
+                updatedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = UpdateMenuReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        updatedMealData: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                updatedMealData: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial update menu state', () => {
+            expect(UpdateMenuReducer(undefined, {})).to.eql({
+                updatedMealData: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('PopulateMenu Reducers', () => {
+
+        it('returns LOADING when populatingmenu', () => {
+            const initialState = {
+                addedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = PopulateMenuReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                addedMealData: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not populating the menu', () => {
+            const initialState = {
+                addedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = PopulateMenuReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                addedMealData: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during populating menu', () => {
+            const initialState = {
+                addedMealData: null,
+                status: 'ERROR',
+                error: 'An error occured while trying to add new food item to menu, please try again.',
+            }
+            const state = PopulateMenuReducer(initialState,
+                {
+                    type: 'POPULATE_MENU_ERROR',
+                    payload: 'An error occured while trying to add new food item to menu, please try again.',
+
+                });
+            expect(state).to.eql({ addedMealData: null, status: 'ERROR', error: 'An error occured while trying to add new food item to menu, please try again.' });
+        });
+
+        it('returns updated state after admin populates menu', () => {
+            const initialState = {
+                addedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = PopulateMenuReducer(initialState,
+                {
+                    type: 'POPULATE_MENU_SUCCESS',
+                    payload: 'New food item added to menu successfully.'
+                });
+            expect(state).to.eql({
+                addedMealData: 'New food item added to menu successfully.',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default populate menu state if no action is specified', () => {
+            const initialState = {
+                addedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = PopulateMenuReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        addedMealData: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                addedMealData: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial populate menu state', () => {
+            expect(PopulateMenuReducer(undefined, {})).to.eql({
+                addedMealData: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('DeleteMenu Reducers', () => {
+
+        it('returns LOADING when deleting food item from the menu', () => {
+            const initialState = {
+                deletedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = DeletedMenuReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                deletedMealData: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not deleting food item from the menu', () => {
+            const initialState = {
+                deletedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = DeletedMenuReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                deletedMealData: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during deleting food item from the menu', () => {
+            const initialState = {
+                deletedMealData: null,
+                status: 'ERROR',
+                error: 'An error occured while trying to delete the item, from the menu please try again.',
+            }
+            const state = DeletedMenuReducer(initialState,
+                {
+                    type: ' DELETE_MENU_ERROR',
+                    payload: 'An error occured while trying to delete the item, from the menu please try again.',
+
+                });
+            expect(state).to.eql({ deletedMealData: null, status: 'ERROR', error: 'An error occured while trying to delete the item, from the menu please try again.' });
+        });
+
+        it('returns updated state after admin deletes food item from the menu', () => {
+            const initialState = {
+                deletedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = DeletedMenuReducer(initialState,
+                {
+                    type: 'DELETE_MENU_SUCCESS',
+                    payload: 'Item with id => 1, deleted successfully.'
+                });
+            expect(state).to.eql({
+                deletedMealData: 'Item with id => 1, deleted successfully.',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default delete food item from menu state if no action is specified', () => {
+            const initialState = {
+                deletedMealData: null,
+                status: '',
+                error: '',
+            }
+            const state = DeletedMenuReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        deletedMealData: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                deletedMealData: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial all delete menu state', () => {
+            expect(DeletedMenuReducer(undefined, {})).to.eql({
+                deletedMealData: null,
+                status: '',
+                error: '',
+            });
+        });
+    });
+
+    describe('Cloudinary Reducers', () => {
+
+        it('returns LOADING when uploading image to cloudinary', () => {
+            const initialState = {
+                imgurl: null,
+                status: '',
+                error: '',
+            }
+            const state = CloudinaryReducer(initialState,
+                {
+                    type: 'START_LOADING',
+                });
+            expect(state).to.eql({
+                imgurl: null,
+                status: 'LOADING',
+                error: '',
+            });
+        });
+
+
+        it('returns NOTLOADING when not uploading image to cloudinary', () => {
+            const initialState = {
+                imgurl: null,
+                status: '',
+                error: '',
+            }
+            const state = CloudinaryReducer(initialState,
+                {
+                    type: 'STOP_LOADING',
+                });
+            expect(state).to.eql({
+                imgurl: null,
+                status: 'NOTLOADING',
+                error: '',
+            });
+        });
+
+        it('returns status error when an error occurs during uploading image to cloudinary', () => {
+            const initialState = {
+                imgurl: null,
+                status: 'ERROR',
+                error: 'Failed to upload image',
+            }
+            const state = CloudinaryReducer(initialState,
+                {
+                    type: 'CLOUDINARY_IMAGE_UPLOAD_ERROR',
+                    payload: 'Failed to upload image',
+
+                });
+            expect(state).to.eql({ imgurl: null, status: 'ERROR', error: 'Failed to upload image' });
+        });
+
+        it('returns updated state after admin uploads image to cloudinary', () => {
+            const initialState = {
+                imgurl: null,
+                status: '',
+                error: '',
+            }
+            const state = CloudinaryReducer(initialState,
+                {
+                    type: 'CLOUDINARY_IMAGE_UPLOAD_SUCCESS',
+                    payload: 'https://res.cloudinary.com/pato/image/upload/v1548575560/jmyht9if1sqlfe0rbxem.jpg'
+                });
+            expect(state).to.eql({
+                imgurl: 'https://res.cloudinary.com/pato/image/upload/v1548575560/jmyht9if1sqlfe0rbxem.jpg',
+                status: 'SUCCESS',
+                error: ''
+            });
+        });
+
+        it('returns default image upload state if no action is specified', () => {
+            const initialState = {
+                imgurl: null,
+                status: '',
+                error: '',
+            }
+            const state = CloudinaryReducer(initialState,
+                {
+                    type: '',
+                    payload: {
+                        imgurl: null,
+                        status: '',
+                        error: '',
+                    }
+                })
+            expect(state).to.eql({
+                imgurl: null,
+                status: '',
+                error: '',
+            });
+        });
+        it('should return the initial image upload state', () => {
+            expect(CloudinaryReducer(undefined, {})).to.eql({
+                imgurl: null,
                 status: '',
                 error: '',
             });

@@ -1,12 +1,12 @@
 import {
     START_LOADING,
     STOP_LOADING,
-    UPDATE_MENU_SUCCESS,
-    UPDATE_MENU_ERROR,
+    DELETE_MENU_SUCCESS,
+    DELETE_MENU_ERROR,
 } from '../actions/actionTypes';
 
 const initialState =  {
-    updatedMealData: null,
+    deletedMealData: null,
     status: '',
     error: '',
 }
@@ -16,7 +16,7 @@ export default (state = initialState, action) => {
 
         case START_LOADING: {
             state = {
-                updatedMealData: null,
+                deletedMealData: null,
                 status: 'LOADING',
                 error: '',
             }
@@ -25,24 +25,24 @@ export default (state = initialState, action) => {
 
         case STOP_LOADING: {
             state = {
-                updatedMealData: null,
+                deletedMealData: null,
                 status: 'NOTLOADING',
                 error: ''
             }
             break;
         }
        
-        case UPDATE_MENU_SUCCESS: {
+        case DELETE_MENU_SUCCESS: {
             state = {
-                updatedMealData: action.payload,
+                deletedMealData: action.payload,
                 status: 'SUCCESS',
                 error: ''
             }
             break;
         }
-        case UPDATE_MENU_ERROR: {
+        case DELETE_MENU_ERROR: {
             state = {
-                updatedMealData: null,
+                deletedMealData: null,
                 status: 'ERROR',
                 error: action.payload,
             }

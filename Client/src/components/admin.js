@@ -12,6 +12,8 @@ import {
     CompleteOrders,
     UpdateMenu,
     CloudinaryImageUpload,
+    PopulateMenu,
+    DeleteMenu,
 } from '../actions/index';
 
 export class Admin extends Component {
@@ -19,6 +21,7 @@ export class Admin extends Component {
         super(props);
         this.state = {
             editStatus: false,
+            addStatus: false,
             obj: null,
             foodPrice: '',
             foodImage: '',
@@ -30,18 +33,12 @@ export class Admin extends Component {
         this.feedback = React.createRef();
         this.feedback2 = React.createRef();
         this.feedback3 = React.createRef();
+        this.feedback5 = React.createRef();
+        this.feedback6 = React.createRef();
         this.foodImage = React.createRef();
         this.foodPrice = React.createRef();
         this.foodName = React.createRef();
     }
-
-    // onHandleFormChange(e) {
-    //     // this.setState({
-    //     //     [e.target.name]: e.target.value,
-    //     // })
-       
-    // }
-
 
     onUpdateMenu(itemId) {
         const role = window.localStorage.getItem('role');
@@ -52,7 +49,6 @@ export class Admin extends Component {
         const formData = new FormData();
         formData.append('upload_preset', 'kls6oowk');
         formData.append('file', this.foodImage.current.files[0]);
-        console.log(formData,'****')
         this.props.act(CloudinaryImageUpload(formData));
         this.setState({
             editStatus: false,
@@ -69,8 +65,33 @@ export class Admin extends Component {
         }, 2800);
     }
 
+    onPopulateMenu() {
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        const meal = this.foodName.current.value;
+        const price = this.foodPrice.current.value;
+        // Cloudinary Upload Image
+        const formData = new FormData();
+        formData.append('upload_preset', 'kls6oowk');
+        formData.append('file', this.foodImage.current.files[0]);
+        this.props.act(CloudinaryImageUpload(formData));
+        this.setState({
+            addStatus: false,
+        });
+        // Call actions
+        setTimeout(() => {
+            this.props.act(PopulateMenu(role, token, meal, price, this.props.imgurl));
+        }, 1800);
+
+        setTimeout(() => {
+            this.props.act(GetMenu(token));
+        }, 2800);
+    }
+
     onAdd() {
-        console.log('Added')
+        this.setState({
+            addStatus: true,
+        });
     }
 
     onEdit(val) {
@@ -80,8 +101,16 @@ export class Admin extends Component {
         });
     }
 
-    onDelete() {
-        console.log('Deleted')
+    onDelete(itemId) {
+        const role = window.localStorage.getItem('role');
+        const token = window.localStorage.getItem('token');
+        const deleteItem = prompt('Are you sure you want to delete this item?');
+        if (deleteItem != null) {
+         this.props.act(DeleteMenu(itemId, role, token));
+         setTimeout(() => {
+            this.props.act(GetMenu(token));
+        }, 2800);
+        }
     }
 
     onAccept(id) {
@@ -146,7 +175,7 @@ export class Admin extends Component {
             this.spinner.current.style.display = 'block';
         } else if (this.props.status === 'NOTLOADING' || this.props.statusMenu === 'NOTLOADING' || this.props.statusAcceptOrders === 'NOTLOADING') {
             this.spinner.current.style.display = 'none';
-        } else if (this.props.status === 'ERROR' || this.props.statusMenu === 'ERROR' || this.props.statusAcceptOrders === 'ERROR') {
+        } else if (this.props.status === 'ERROR' || this.props.statusMenu === 'ERROR' || this.props.statusAcceptOrders === 'ERROR' || this.props.addedToMenuStatus === 'ERROR' || this.props.deletedFromMenuStatus=== 'ERROR') {
             this.feedback.current.style.display = 'block';
         }
         return (
@@ -154,7 +183,7 @@ export class Admin extends Component {
                 {this.props.status === 'FAILED' ? this.feedback.current.style.display = 'block' :
                     this.props.statusMenu === 'FAILED' ? this.feedback2.current.style.display = 'block' : ''
                 }
-                
+
                 <Helmet>
                     <title>
                         Fast-Food-Fast | Admin
@@ -163,7 +192,7 @@ export class Admin extends Component {
                 </Helmet>
                 <div className="modal feedback" ref={this.feedback3}><p><span className='span'></span></p> <button onClick={() => this.feedback3.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback2}><p>{this.props.errorMenu}</p> <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
-                <div className="modal feedback" ref={this.feedback}><p>{this.props.error}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
+                <div className="modal feedback" ref={this.feedback}><p>{this.props.error || this.props.addedToMenuError || this.props.deletedFromMenuError}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <div className="blur">
                     <NavBar
                         link0={'https://fast-food-fast.herokuapp.com/Admin'}
@@ -202,6 +231,7 @@ export class Admin extends Component {
                                                 <th>Amount</th>
                                                 <th>Date</th>
                                                 <th>Status</th>
+                                                <th>Accept/Decline</th>
                                                 <th>Completed</th>
                                             </tr>
                                             {this.props.orders.map((mealObject) => {
@@ -227,6 +257,9 @@ export class Admin extends Component {
                                                         </td>
                                                         <td className={`td5-meal${mealObject.id}`}>
                                                             {mealObject.createdat}
+                                                        </td>
+                                                        <td className={`td5-meal${mealObject.id}`}>
+                                                            {mealObject.status}
                                                         </td>
                                                         <td className={`td6-meal${mealObject.id}`}>
 
@@ -275,7 +308,7 @@ export class Admin extends Component {
                                                     })}
                                                 </tbody>
                                             }
-                            
+
                                         </table>
                                     </div>
                                 </div>
@@ -284,30 +317,29 @@ export class Admin extends Component {
                     </div>
                 </div>
                 <div>
-                {console.log(this.state.editStatus,'*****', this.state.obj, '****', typeof(this.state.obj), this.props.menu)}
-                {(this.state.editStatus == true) &&
+                    {(this.state.editStatus == true) &&
                         <div>
                             {
                                 this.props.menu.map(mealObject => {
-                                    if( mealObject.id === this.state.obj) {
-                                        return(
+                                    if (mealObject.id === this.state.obj) {
+                                        return (
 
                                             <form key={mealObject.id}>
-                                            <div className='modal2'>
-                                                <input type='file' ref={this.foodImage} name='foodImage' accept='image/*' className={`input1-meal-value${mealObject.id} update-image`}  defaultValue=''  />
-                                                <br />
-                                                <br />
-                                                <input type='text' ref={this.foodName} name='foodName' className={`input2-meal-value${mealObject.id}`}  defaultValue={mealObject.meal}  />
-                                                <br />
-                                                <br />
-                                                <input type='text' ref={this.foodPrice} name='foodPrice' className={`input3-meal-value${mealObject.id}`}  defaultValue={mealObject.price}  />
-                                                <br />
-                                                <br />
-                                                <button type='button' className={`input1-meal-value${mealObject.id} accept-btn`}   defaultValue='' onClick={() => {this.onUpdateMenu(mealObject.id)}}>Update Menu</button>
-                                                <br />
-                                                <br />
-                                                <button type='submit' className={`input1-meal-value${mealObject.id}`} defaultValue=''  onClick={() => {this.onCloseModal()}}>Cancel</button>
-                                            </div>
+                                                <div className='modal2  feedback5'  ref={this.feedback5}>
+                                                    <input type='file' ref={this.foodImage} name='foodImage' accept='image/*' className={`input1-edit-meal-value${mealObject.id} update-image`} defaultValue='' />
+                                                    <br />
+                                                    <br />
+                                                    <input type='text' ref={this.foodName} name='foodName' className={`input2-edit-meal-value${mealObject.id}`} defaultValue={mealObject.meal} />
+                                                    <br />
+                                                    <br />
+                                                    <input type='text' ref={this.foodPrice} name='foodPrice' className={`input3-edit-meal-value${mealObject.id}`} defaultValue={mealObject.price} />
+                                                    <br />
+                                                    <br />
+                                                    <button type='button' className={`btn1-edit-meal-value${mealObject.id} accept-btn`} defaultValue='' onClick={() => { this.onUpdateMenu(mealObject.id) }}>Update Menu</button>
+                                                    <br />
+                                                    <br />
+                                                    <button type='button' className={`btn2-edit-meal-value${mealObject.id}`} defaultValue='' onClick={() => this.feedback5.current.style.display = 'none'}>Cancel</button>
+                                                </div>
                                             </form>
                                         );
                                     }
@@ -315,8 +347,37 @@ export class Admin extends Component {
                             }
                         </div>
 
-                }
+                    }
                 </div>
+
+                <div>
+                    {(this.state.addStatus == true) &&
+                        <div>
+                            {
+                                <form>
+                                    <div className='modal2 feedback6'  ref={this.feedback6}>
+                                        <input type='file' ref={this.foodImage} name='foodImage' accept='image/*' className={`update-image`} defaultValue='' />
+                                        <br />
+                                        <br />
+                                        <input type='text' ref={this.foodName} name='foodName' defaultValue='' placeholder='Food Name' />
+                                        <br />
+                                        <br />
+                                        <input type='text' ref={this.foodPrice} name='foodPrice' defaultValue='' placeholder='Food Price' />
+                                        <br />
+                                        <br />
+                                        <button type='button' className={`accept-btn`} defaultValue='' onClick={() => { this.onPopulateMenu() }}>Add to Menu</button>
+                                        <br />
+                                        <br />
+                                        <button type='button' defaultValue='' onClick={() => this.feedback6.current.style.display = 'none'}>Cancel</button>
+                                    </div>
+                                </form>
+
+                            }
+                        </div>
+
+                    }
+                </div>
+
             </Fragment>
         );
     }
@@ -341,6 +402,10 @@ Admin.propTypes = {
     message: PropTypes.string,
     imgurl: PropTypes.string,
     updatedMenuStatus: PropTypes.string,
+    addedToMenuError: PropTypes.string,
+    addedToMenuStatus: PropTypes.string,
+    deletedFromMenuStatus: PropTypes.string,
+    deletedFromMenuError: PropTypes.string,
 }
 
 const mapStateToProps = state => ({
@@ -358,6 +423,10 @@ const mapStateToProps = state => ({
     declineorders: state.declineorders.acceptorders,
     imgurl: state.cloudinary.imgurl,
     updatedMenuStatus: state.updatedmenu.status,
+    addedToMenuStatus: state.addedtomenu.status,
+    addedToMenuError: state.addedtomenu.error,
+    deletedFromMenuStatus: state.deletedfrommenu.status,
+    deletedFromMenuError: state.deletedfrommenu.error,
 });
 
 const mapDispatchToProps = (dispatch) => ({

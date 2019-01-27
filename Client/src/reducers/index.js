@@ -9,6 +9,8 @@ import DeclineOrdersReducer from './DeclineOrdersReducer';
 import CompleteOrdersReducer from './CompleteOrdersReducer';
 import CloudinaryReducer from './ClodinaryReducer';
 import UpdateMenuReducer from './UpdateMenuReducer';
+import PopulateMenuReducer from './PopulateMenuReducer';
+import DeletedMenuReducer from './DeleteMenuReducer';
 
 export { 
     SignupReducer,
@@ -21,5 +23,7 @@ export {
     DeclineOrdersReducer,
     CompleteOrdersReducer,
     CloudinaryReducer,
-    UpdateMenuReducer
+    UpdateMenuReducer,
+    PopulateMenuReducer,
+    DeletedMenuReducer
 }

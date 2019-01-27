@@ -14,7 +14,9 @@ import {
     DeclineOrdersReducer,
     CompleteOrdersReducer,
     CloudinaryReducer,
-    UpdateMenuReducer
+    UpdateMenuReducer,
+    PopulateMenuReducer,
+    DeletedMenuReducer
 } from './reducers/index';
 
 
@@ -29,8 +31,9 @@ const rootReducer = combineReducers({
     declineorders: DeclineOrdersReducer,
     completeorders: CompleteOrdersReducer,
     cloudinary: CloudinaryReducer,
-    updatedmenu: UpdateMenuReducer
-
+    updatedmenu: UpdateMenuReducer,
+    addedtomenu:  PopulateMenuReducer,
+    deletedfrommenu: DeletedMenuReducer
 });
 
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

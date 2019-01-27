@@ -2,7 +2,8 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import moxios from 'moxios';
-import { SignupAUser, SigninAUser, GetMenu, GetHistory, GetAllOrders, AcceptOrders, DeclineOrders, CompleteOrders } from '../src/actions/index';
+import fetchMock from 'fetch-mock';
+import { SignupAUser, SigninAUser, GetMenu, GetHistory, GetAllOrders, AcceptOrders, DeclineOrders, CompleteOrders, UpdateMenu, PopulateMenu, DeleteMenu, CloudinaryImageUpload } from '../src/actions/index';
 import {
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_FAILED,
@@ -17,6 +18,9 @@ import {
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
+const meal = 'Frutties';
+const price = 1000;
+const imgurl = 'https://res.cloudinary.com/pato/image/upload/v1548545164/fe39xu5xp6ncnpzeotc7.jpg';
 const userDetails =
 {
     name: "Nikita Cheng",
@@ -430,7 +434,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const val = 148;
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
 
-        it('creates ACCEPT_ORDERS_SUCCESS, when an order is accepted by admina', () => {
+        it('creates ACCEPT_ORDERS_SUCCESS, when an order is accepted by admin', () => {
             moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
                 status: 200,
                 response: '1',
@@ -471,7 +475,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const val = 147;
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
 
-        it('creates DECLINE_ORDERS_SUCCESS, when an order is declined by admina', () => {
+        it('creates DECLINE_ORDERS_SUCCESS, when an order is declined by admin', () => {
             moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
                 status: 200,
                 response: '1',
@@ -513,7 +517,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
         const val = 148;
         const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTUzODY3NDA4MSwiZXhwIjoyMDAwMDAwMDAwfQ.WS29iggWiAknaAnPDXsGku-F2NXBU33iBAQE-Hb6zSQ';
 
-        it('creates COMPLETE_ORDERS_SUCCESS, when an order is completed by admina', () => {
+        it('creates COMPLETE_ORDERS_SUCCESS, when an order is completed by admin', () => {
             moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&token=${token}`, {
                 status: 200,
                 response: '1',
@@ -543,6 +547,181 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
             }]
 
             store.dispatch(CompleteOrders(role, token, val)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
+    describe('UpdateMenu Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const itemId= 1;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTU0ODU2ODczNiwiZXhwIjoxNTQ4NjU1MTM2fQ.JBhxffA8umRWA-z3gf7i8maj9Zcw8WoBZC2PKentI6c';
+
+        it('returns UPDATE_MENU_SUCCESS, when a food item is updated by admin', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu/${itemId}?role=${role}&token=${token}`, {
+                status: 200,
+                response: 'Item with id => 148, updated successfully.',
+            });
+
+            const expected = [{
+                type: 'UPDATE_MENU_SUCCESS',
+                payload: 'Item with id => 148, updated successfully.',
+
+            }]
+
+            store.dispatch(UpdateMenu(itemId, role, token, meal, price, imgurl)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('returns UPDATE_MENU_ERROR when an error occur during updating food item in the menu', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu/${itemId}?role=${role}&token=${token}`, {
+                status: 500,
+                response: 'An error occured while trying to update the item, please try again.',
+            });
+
+            const expected = [{
+                type: 'UPDATE_MENU_ERROR',
+                payload: 'An error occured while trying to update the item, please try again.',
+
+            }]
+
+            store.dispatch(UpdateMenu(itemId, role, token, meal, price, imgurl)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
+    describe('PopulateMenu Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTU0ODU2ODczNiwiZXhwIjoxNTQ4NjU1MTM2fQ.JBhxffA8umRWA-z3gf7i8maj9Zcw8WoBZC2PKentI6c';
+
+        it('returns POPULATE_MENU_SUCCESS, when a food item is added to the menu by admin', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu?role=${role}&token=${token}`, {
+                status: 200,
+                response: 'New food item added to menu successfully.',
+            });
+
+            const expected = [{
+                type: 'POPULATE_MENU_SUCCESS',
+                payload: 'New food item added to menu successfully.',
+
+            }]
+
+            store.dispatch(PopulateMenu(role, token, meal, price, imgurl)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('returns POPULATE_MENU_ERROR when an error occurs during an admin adding a food item to the menu', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu?role=${role}&token=${token}`, {
+                status: 500,
+                response: 'An error occured while trying to update the item, please try again.',
+            });
+
+            const expected = [{
+                type: 'POPULATE_MENU_ERROR',
+                payload: 'An error occured while trying to add new food item to menu, please try again.',
+
+            }]
+
+            store.dispatch(PopulateMenu(role, token, meal, price, imgurl)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
+    describe('DeleteMenu Actions', () => {
+        const store = mockStore({});
+        const role = 'admin';
+        const itemId = 1;
+        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImVtYWlsQGVtYWlsLmNvbSIsImlhdCI6MTU0ODU2ODczNiwiZXhwIjoxNTQ4NjU1MTM2fQ.JBhxffA8umRWA-z3gf7i8maj9Zcw8WoBZC2PKentI6c';
+
+        it('returns DELETE_MENU_SUCCESS, when a food item is deleted from the menu by admin', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu/items/${itemId}?role=${role}&token=${token}`, {
+                status: 200,
+                response: 'Item with id => 1, deleted successfully',
+            });
+
+            const expected = [{
+                type: 'DELETE_MENU_SUCCESS',
+                payload: 'Item with id => 1, deleted successfully',
+
+            }]
+
+            store.dispatch(DeleteMenu(itemId, role, token)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('returns DELETE_MENU_ERROR when an error occurs during an admin deleteing a food item from the menu', () => {
+            moxios.stubRequest(`${process.env.BASE_URL_PROD}/api/v1/menu/items/${itemId}?role=${role}&token=${token}`, {
+                status: 500,
+                response: 'An error occured while trying to delete the item, from the menu please try again.',
+            });
+
+            const expected = [{
+                type: 'DELETE_MENU_ERROR',
+                payload: 'An error occured while trying to delete the item, from the menu please try again.',
+
+            }]
+
+            store.dispatch(DeleteMenu(itemId, role, token)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+    })
+
+    describe('Cloudinary Actions', () => {
+        const store = mockStore({});
+        const formData = new FormData();
+        formData.append('upload_preset', 'kls6oowk');
+        beforeEach(() => {
+            store.clearActions();
+        })
+        afterEach(() => {
+            fetchMock.restore()
+        })
+        it('returns CLOUDINARY_IMAGE_UPLOAD_SUCCESS, when an image is uploaded successfully by admin', () => {
+            fetchMock.post('https://api.cloudinary.com/v1_1/pato/upload', {
+                body: formData,
+                response: 'https://res.cloudinary.com/pato/image/upload/v1548545164/fe39xu5xp6ncnpzeotc7.jpg',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            const expected = [{
+                type: 'CLOUDINARY_IMAGE_UPLOAD_SUCCESS',
+                payload: 'https://res.cloudinary.com/pato/image/upload/v1548545164/fe39xu5xp6ncnpzeotc7.jpg',
+
+            }]
+           
+            store.dispatch(CloudinaryImageUpload(formData)).then(() => {
+                expect(store.getActions()).to.eql(expected)
+            })
+        })
+
+        it('returns CLOUDINARY_IMAGE_UPLOAD_ERROR when an error occurs during an admin uploading an image', () => {
+            const formData = new FormData();
+            formData.append('upload_preset', 'kls6oowk');
+            fetchMock.post('https://api.cloudinary.com/v1_1/pato/upload', {
+                body: formData,
+                response: 'https://res.cloudinary.com/pato/image/upload/v1548545164/fe39xu5xp6ncnpzeotc7.jpg',
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+
+            const expected = [{
+                type: 'CLOUDINARY_IMAGE_UPLOAD_ERROR',
+                payload: 'Failed to upload image',
+
+            }]
+
+            store.dispatch(CloudinaryImageUpload(formData)).then(() => {
                 expect(store.getActions()).to.eql(expected)
             })
         })
