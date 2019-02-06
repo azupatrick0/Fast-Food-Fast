@@ -13,10 +13,6 @@ export default (state = initialState, action) => {
        
         case USER_SIGNIN_FAILED: {
             state = {
-                name: null,
-                email: null,
-                password: null,
-                role: null,
                 status: 'FAILED',
                 error: action.payload
             }
@@ -25,8 +21,6 @@ export default (state = initialState, action) => {
         case USER_SIGNIN_SUCCESS: {
             state = {
                 name: action.payload.name,
-                email: action.payload.email,
-                password: action.payload.password,
                 role: action.payload.role,
                 status: 'SUCCESS',
                 error: '',
@@ -36,10 +30,6 @@ export default (state = initialState, action) => {
 
         case USER_SIGNIN_ERROR: {
             state = {
-                name: null,
-                email: null,
-                password: null,
-                role: null,
                 status: 'ERROR',
                 error: action.payload
             }

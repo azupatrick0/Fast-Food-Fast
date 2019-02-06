@@ -198,7 +198,6 @@ p {
 }
 
 .slide0 {
-    background-color: rgba(0, 255, 255, 0.45);
     background-size: cover;
     background-attachment: fixed;
     height: 95vh; 
@@ -236,7 +235,7 @@ p {
 }
 
 .slide2 {
-    background-color: rgba(0, 255, 255, 0.9);
+    background-color: rgba(0, 255, 255, 0.5);
     height: 47em; 
     width: 100%;   
 }

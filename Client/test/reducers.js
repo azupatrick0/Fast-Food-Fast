@@ -284,7 +284,7 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                     payload: 'An error occured while signing you in, please try again',
                     error: {}
                 });
-            expect(state).to.eql({ name: null, email: null, password: null, role: null, status: 'ERROR', error: 'An error occured while signing you in, please try again' });
+            expect(state).to.eql({ status: 'ERROR', error: 'An error occured while signing you in, please try again' });
         });
 
         it('returns status failed when sign in fails', () => {
@@ -303,10 +303,6 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                 });
 
             expect(state).to.eql({
-                name: null,
-                email: null,
-                password: null,
-                role: null,
                 status: 'FAILED',
                 error: 'Email or password incorrect'
             });
@@ -322,25 +318,18 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
                 error: '',
             };
 
-            // Encrypt password
-            const saltRounds = 10;
-            const encryptedPassword = bcrypt.hashSync('dfghjklasdfghgfdsdf23456', saltRounds);
             const state = SigninReducer(initialState,
                 {
                     type: 'USER_SIGNIN_SUCCESS',
                     payload: {
-                        name: 'azu',
-                        email: 'azupatrick00000@gmail.com',
-                        password: encryptedPassword,
+                        name: 'Azu Patrick',
                         role: 'user',
                         status: 'SUCCESS',
                         error: '',
                     }
                 });
             expect(state).to.eql({
-                name: 'azu',
-                email: 'azupatrick00000@gmail.com',
-                password: encryptedPassword,
+                name: 'Azu Patrick',
                 role: 'user',
                 status: 'SUCCESS',
                 error: '',

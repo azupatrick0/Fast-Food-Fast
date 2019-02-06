@@ -43,7 +43,6 @@ export class History extends Component {
                 </Helmet>
                
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
-                <div className="blur">
                 <NavBar
                     link0={'https://fast-food-fast.herokuapp.com/Orders'}
                     link1={'https://fast-food-fast.herokuapp.com/Orders'}
@@ -109,7 +108,6 @@ export class History extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
             </Fragment>
         );
     }

@@ -193,7 +193,6 @@ export class Admin extends Component {
                 <div className="modal feedback" ref={this.feedback3}><p><span className='span'></span></p> <button onClick={() => this.feedback3.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback2}><p>{this.props.errorMenu}</p> <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error || this.props.addedToMenuError || this.props.deletedFromMenuError}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
-                <div className="blur">
                     <NavBar
                         link0={'https://fast-food-fast.herokuapp.com/Admin'}
                         link1={'https://fast-food-fast.herokuapp.com/Admin'}
@@ -315,7 +314,6 @@ export class Admin extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
                 <div>
                     {(this.state.editStatus == true) &&
                         <div>

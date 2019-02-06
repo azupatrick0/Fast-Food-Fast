@@ -5,7 +5,8 @@ import LandingPage from './landingPage';
 // eslint-disable-next-line import/no-named-as-default
 import SignupConnected, { Signup } from './signup';
 import SigninConnected, { Signin } from './signin';
-import OrdersConnected, { Orders } from './orders';
+import { Orders } from './orders';
+import ordersView from './ordersView'
 import HistoryConnected, { History } from './history';
 import AdminConnected, { Admin } from './admin';
 
@@ -19,7 +20,7 @@ export {
     Signin,
     SigninConnected,
     Orders,
-    OrdersConnected,
+    ordersView,
     History,
     HistoryConnected,
     Admin,

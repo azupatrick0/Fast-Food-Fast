@@ -7,9 +7,7 @@ import {
     ORDER_MEAL_ERROR
 } from './actionTypes';
 
-const token = window.localStorage.getItem('token');
-
-const MakeOrder = (cart) => (dispatch) => {
+const MakeOrder = (cart, token, name ) => (dispatch) => {
     cart.forEach((order) => {
         if (Object.keys(order).length > 0 && Object.values(order)[5] > 0) {
             dispatch({
@@ -20,7 +18,7 @@ const MakeOrder = (cart) => (dispatch) => {
                     meal: order.meal,
                     imgurl: order.imgurl,
                     userid: order.userid,
-                    name: order.name,
+                    name,
                     quantity: order.quantity,
                     amount: order.amount,
                     location: order.location,

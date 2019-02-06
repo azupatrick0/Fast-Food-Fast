@@ -316,6 +316,47 @@ p {
     width: 100%;
 }
 
+.first-table td:nth-child(1) {
+    padding-left: 1.5em;
+}
+
+.first-table td:nth-child(2) {
+    padding-left: 1.5em;
+}
+
+.first-table td:nth-child(3) {
+    padding-left: 1.5em;
+}
+
+.first-table td:nth-child(4) {
+    padding-left: 1.5em;
+}
+
+.first-table td:nth-child(5) {
+    padding-left: 1.5em;
+}
+
+.second-table td:nth-child(1) {
+    padding-left: 0.5em;
+}
+
+.second-table td:nth-child(2) {
+    padding-left: 0.1em;
+}
+
+.second-table td:nth-child(3) {
+    padding-left: 0.1em;
+}
+
+.second-table td:nth-child(4) {
+    padding-left: 0.1em;
+    cursor: pointer;
+}
+
+.second-table td:nth-child(4) button {
+    width: 60%;
+}
+
 select {
     font-size: 18px;
     border-radius: 5px;
@@ -324,7 +365,6 @@ select {
 }
 
 .slide0 {
-    background-color: rgba(0, 255, 255, 0.45);
     background-size: cover;
     background-attachment: fixed;
     height: 90vh; 
@@ -379,6 +419,7 @@ td,th {
     padding: 10px;
 }
 
+
 tr:nth-child(even) {
     background-color: rgba(99, 87, 87, 0.2);
 }
@@ -397,7 +438,7 @@ tr:nth-child(even) {
 }
 
 /* High resolution tablets */
-@media (min-width: 768px) and (max-width: 1023px) {
+@media (min-width: 768px) and (max-width: 1024px) {
 
     .accept-btn {
         width: 100%;
@@ -423,6 +464,34 @@ tr:nth-child(even) {
     .first-table button, .second-table button {
         width: 12vw;
         margin-left: 0;
+    }
+
+    .first-table td:nth-child(1) {
+        padding-left: 0.5em;
+    }
+    
+    .first-table td:nth-child(2) {
+        padding-left: 0.5em;
+    }
+    
+    .first-table td:nth-child(3) {
+        padding-left: 0.5em;
+    }
+    
+    .first-table td:nth-child(4) {
+        padding-left: 0.5em;
+    }
+
+    .first-table td:nth-child(4) button, td:nth-child(5) button{
+       width: 60%;
+    }
+    
+    .first-table td:nth-child(5) {
+        padding-left: 0;
+    }
+
+    .second-table td:nth-child(4) button{
+        width: 90%;
     }
 
     .hamburger {
@@ -732,6 +801,41 @@ tr:nth-child(even) {
         width: 55vw;
         padding: 0.5em;
         height: 2.3em;
+    }
+
+    .first-table td:nth-child(2) {
+        padding-left: 0.2em;
+    }
+    
+    .first-table td:nth-child(3) {
+        padding-left: 0.2em;
+    }
+
+    .first-table td:nth-child(4) {
+        padding-left: 0.2em;
+        cursor: pointer;
+    }
+
+    .first-table td:nth-child(5) {
+        padding-left: 0.2em;
+        cursor: pointer;
+    }
+
+    .second-table td:nth-child(2) {
+        padding-left: 0.2em;
+    }
+    
+    .second-table td:nth-child(3) {
+        padding-left: 0.2em;
+    }
+
+    .second-table td:nth-child(4) {
+        padding-left: 0.2em;
+        cursor: pointer;
+    }
+
+    .second-table td:nth-child(4) button{
+       width: 95%;
     }
 
 }
