@@ -3,7 +3,7 @@ import { mount, shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NavBar, NotFound, Signup, Signin, History, Orders, Admin } from '../src/components';
+import { Footer, NavBar, NotFound, Signup, Signin, History, Orders, Admin} from '../src/components';
 import LandingPage, { Slide0, Slide1, Slide2 } from '../src/components/landingPage';
 
 require('browser-env')();
@@ -160,9 +160,8 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
 
     describe('<Orders />', () => {
       it('renders connected Orders Component', () => {
-        const wrapper = shallow(<Orders act={()=> 'clicked me'}/>);
+        const wrapper = shallow(<Orders children={() => {}} act={()=> 'clicked me'}/>);
         expect(wrapper.length).to.eql(1);
-        wrapper.find('.order-button').simulate('click');
       });
     });
 
