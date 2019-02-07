@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
+import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import { Footer, NavBar } from './index';
-import { ShowLocation } from '../../js/utils/index';
 import '../../public/styles/landingPageStyles.css';
 import placeorder from '../../public/images/place-order.png';
 import money from '../../public/images/money.png';
@@ -21,9 +21,10 @@ export const Slide0 = () => {
             </p>
             <br />
             <br />
-            <button className="get-started middle" onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signup')}>
+            <Link to='/Signup'><button className="get-started middle">
                 Get Started
             </button>
+            </Link>
         </div>
     );
 }
@@ -54,9 +55,10 @@ export const Slide1 = () => {
                     </div>
                 </div>
                 <br />
-                <button className="get-started middle" onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signup')}>
+                <Link to='/Signup'><button className="get-started middle">
                     Get Started
                 </button>
+                </Link>
         </div>
     );
 }
@@ -72,9 +74,9 @@ export const Slide2 = () => {
                             <p>Enjoy one of our delicious meal, <strong>Fruttie</strong> is for vegetarians who likes
                                 eating healthy meals, with an array of vegetables and fruits mixed together.
                         </p>
-                            <div className="grid">&#8358;400<button className="card-btn" onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signup')}>ORDER
+                        <Link to='/Signup'><div className="grid">&#8358;400<button className="card-btn">ORDER
                                     NOW
-                            </button></div>
+                            </button></div></Link>
                         </div>
                     </div><span className="show-break"><br /><br /></span>
                     <div className="grid-items">
@@ -84,9 +86,9 @@ export const Slide2 = () => {
                                 With
                                 sandwich-like packaging, you get it all in one, burger and sandwich alike.
                         </p>
-                            <div className="grid">&#8358;200<button className="card-btn" onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signup')}>ORDER
+                        <Link to='Signup'><div className="grid">&#8358;200<button className="card-btn">ORDER
                                     NOW
-                            </button></div>
+                            </button></div></Link>
                         </div>
                     </div><span className="show-break"><br /><br /></span>
                     <div className="grid-items">
@@ -96,9 +98,9 @@ export const Slide2 = () => {
                                 healthy
                                 and also enjoying while they are on it. Order it now.
                         </p>
-                            <div className="grid">&#8358;350<button className="card-btn" onClick={() => ShowLocation('https://fast-food-fast.herokuapp.com/Signup')}>ORDER
+                        <Link to='Signup'><div className="grid">&#8358;350<button className="card-btn">ORDER
                                     NOW
-                            </button></div>
+                            </button></div></Link>
                         </div>
                     </div>
                 </div>
@@ -118,10 +120,9 @@ class LandingPage extends Component {
                 </Helmet>
 
                 <NavBar
-                    link0={'https://fast-food-fast.herokuapp.com/'}
-                    link1={'https://fast-food-fast.herokuapp.com/Signup'}
-                    link2={'https://fast-food-fast.herokuapp.com/Signin'}
-                    anchor1Body={'Order a meal'}
+                    link0={'/'}
+                    link1={''}
+                    link2={'/Signin'}
                     buttonBody={'LOGIN'}
                     anchor3Body={'Order a meal'}
                     anchor4Body={'Login'}

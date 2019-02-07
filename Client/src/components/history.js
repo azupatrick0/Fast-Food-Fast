@@ -19,7 +19,9 @@ export class History extends Component {
     }
 
     componentDidMount() {
-        this.props.act(GetHistory());
+        const token = window.localStorage.getItem('token');
+        const id = window.localStorage.getItem('id');
+        this.props.act(GetHistory(token, id));
     }
 
     render() {
@@ -44,9 +46,9 @@ export class History extends Component {
                
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                 <NavBar
-                    link0={'https://fast-food-fast.herokuapp.com/Orders'}
-                    link1={'https://fast-food-fast.herokuapp.com/Orders'}
-                    link2={'https://fast-food-fast.herokuapp.com/History'}
+                    link0={'/Orders'}
+                    link1={'/Orders'}
+                    link2={'/History'}
                     anchor1Body={'Order a meal'}
                     anchor2Body={'Sign Out'} 
                     buttonBody={'HISTORY'}

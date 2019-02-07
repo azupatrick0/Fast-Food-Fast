@@ -1,7 +1,7 @@
 import React, { Fragment, Component } from 'react';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
-import { ShowLocation, ShowHideHamburger } from '../../js/utils/index';
+import { Redirect, Link } from 'react-router-dom';
+import { ShowHideHamburger } from '../../js/utils/index';
 import logo from '../../public/images/ffflogo.png';
 
 class NavBar extends Component {
@@ -25,21 +25,21 @@ class NavBar extends Component {
           <header>
             <nav>
               <div className="nav-bar">
-                <a href={this.props.link0} className="site-name">
+                <Link to={this.props.link0} className="site-name">
                   <img src={logo} alt="ffflogo" className="logo" /> <strong>Fast-Food-Fast</strong>
-                </a>
+                </Link>
                 <a href={this.props.link1} className="order">{this.props.anchor1Body}</a>
                 <a onClick={() => this.onLogout()} className="history">{this.props.anchor2Body}</a>
-                <button onClick={() => ShowLocation(this.props.link2)} className="signout">{this.props.buttonBody}</button>
+                <Link to={this.props.link2}><button className="signout">{this.props.buttonBody}</button></Link>
                 <a className="hamburger" onClick={() => ShowHideHamburger('.tab-modal')}>&#9776;</a>
                 <div className="tab-modal">
                   <div className="tab-modal-link">
-                    <a href={this.props.link1}>{this.props.anchor3Body}</a>
+                    <Link to={this.props.link1}>{this.props.anchor3Body}</Link>
                     <br />
                     <br />
                     <hr />
                     <br />
-                    <a href={this.props.link2}>{this.props.anchor4Body}</a>
+                    <Link to={this.props.link2}>{this.props.anchor4Body}</Link>
                     <br />
                     <br />
                     <hr />

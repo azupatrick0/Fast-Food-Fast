@@ -32,9 +32,9 @@ const ordersView = () => {
 					</Helmet>
 
 					<NavBar
-						link0={'https://fast-food-fast.herokuapp.com/Orders'}
-						link1={'https://fast-food-fast.herokuapp.com/History'}
-						link2={'https://fast-food-fast.herokuapp.com/Orders'}
+						link0={'/Orders'}
+						link1={'/History'}
+						link2={'/Orders'}
 						anchor1Body={'History'}
 						anchor2Body={'Sign Out'}
 						buttonBody={'ORDER'}
@@ -130,6 +130,56 @@ const ordersView = () => {
 											</tbody>
 										)}
 									</table>
+									<table className="third-table">
+										<tbody>
+											<tr>
+												<td><strong>Checkout</strong></td>
+											</tr>
+											<tr>
+												<td>
+													Delivery Location
+													<select className="location">
+														<option>Abuja</option>
+														<option>Lagos</option>
+														<option>Port Harcourt</option>
+													</select>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													Delivery Date &#10236;{' '}
+													<span className="date">{data.onDeliveryDate()}</span>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="radio" /> Pay on Delivery
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="radio" /> Pay with debit card{' '}
+													<img src={debitCard} className="debit-card" alt="debit card" />
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<button
+														className="order-button"
+														onClick={() => {
+															data.onReady();
+															setTimeout(() => {
+																data.onOrderAMeal();
+															}, 1000);
+														}}
+													>
+														<span className="orderValue">Order</span>{' '}
+														<span className="orderSpinner" />
+													</button>
+												</td>
+											</tr>
+										</tbody>
+									</table>
 								</div>
 								<div className="spinner" ref={data.spinner} />
 								<div className="flex-items">
@@ -182,58 +232,7 @@ const ordersView = () => {
 										)}
 									</table>
 								</div>
-								<div className="flex-items">
-									<p>
-										<strong>Checkout</strong>
-									</p>
-									<table className="third-table">
-										<tbody>
-											<tr>
-												<td>
-													Delivery Location
-													<select className="location">
-														<option>Abuja</option>
-														<option>Lagos</option>
-														<option>Port Harcourt</option>
-													</select>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													Delivery Date &#10236;{' '}
-													<span className="date">{data.onDeliveryDate()}</span>
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<input type="radio" name="radio" /> Pay on Delivery
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<input type="radio" name="radio" /> Pay with debit card{' '}
-													<img src={debitCard} className="debit-card" alt="debit card" />
-												</td>
-											</tr>
-											<tr>
-												<td>
-													<button
-														className="order-button"
-														onClick={() => {
-															data.onReady();
-															setTimeout(() => {
-																data.onOrderAMeal();
-															}, 1000);
-														}}
-													>
-														<span className="orderValue">Order</span>{' '}
-														<span className="orderSpinner" />
-													</button>
-												</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+								
 							</div>
 						</div>
 					</div>

@@ -86,11 +86,11 @@ export class Orders extends Component {
                         });
                     }
                 })
-            }
             this.props.act(MakeOrder(cart, token, name));
+            document.querySelector('.spinner').style.display = 'block';
+            window.location.href = 'https://fast-food-fast.herokuapp.com/history'
+            }
         }
-        document.querySelector('.spinner').style.display = 'block';
-        window.location.href = 'https://fast-food-fast.herokuapp.com/history'
     }
 
     onShowCart() {
