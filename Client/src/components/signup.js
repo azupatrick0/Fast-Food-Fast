@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Helmet from 'react-helmet';
 import PropTypes from 'prop-types';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import '../../public/styles/signupStyles.css';
 import logo from '../../public/images/ffflogo.png';
@@ -91,7 +91,7 @@ export class Signup extends Component {
                         <span className="feedback4" ref={this.feedback4}>{this.props.error}</span>
                         <div className="signup-properties">
                             <p> Already have an account?
-                        <a href="https://fast-food-fast.herokuapp.com/Signin">Sign in</a>
+                        <Link to="/Signin">Sign in</Link>
                             </p>
                         </div>
                     </div>
