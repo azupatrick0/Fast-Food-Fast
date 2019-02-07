@@ -194,9 +194,9 @@ export class Admin extends Component {
                 <div className="modal feedback" ref={this.feedback2}><p>{this.props.errorMenu}</p> <button onClick={() => this.feedback2.current.style.display = 'none'}>Ok</button></div>
                 <div className="modal feedback" ref={this.feedback}><p>{this.props.error || this.props.addedToMenuError || this.props.deletedFromMenuError}</p> <button onClick={() => this.feedback.current.style.display = 'none'}>Ok</button></div>
                     <NavBar
-                        link0={'https://fast-food-fast.herokuapp.com/Admin'}
-                        link1={'https://fast-food-fast.herokuapp.com/Admin'}
-                        link2={'https://fast-food-fast.herokuapp.com/Admin'}
+                        link0={'/Admin'}
+                        link1={'/Admin'}
+                        link2={'/Admin'}
                         anchor1Body={'Orders'}
                         anchor2Body={'Sign Out'}
                         buttonBody={'ADMIN'}

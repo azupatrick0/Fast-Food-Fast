@@ -7,10 +7,7 @@ import {
     GET_HISTORY_ERROR
 } from './actionTypes';
 
-const token = window.localStorage.getItem('token');
-const id = window.localStorage.getItem('id');
-
-const GetHistory = () => (dispatch) => {
+const GetHistory = (token, id) => (dispatch) => {
     dispatch({
         type: START_LOADING
     });
