@@ -19,7 +19,6 @@ import {
     DeletedMenuReducer
 } from './reducers/index';
 
-
 const rootReducer = combineReducers({
     signup: SignupReducer,
     signin: SigninReducer,

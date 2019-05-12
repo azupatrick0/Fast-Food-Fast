@@ -55,7 +55,6 @@ export class Signin extends Component {
                     <link rel="shortcut icon" type="image/png" href='../../public/images/ffflogo.png' />
                 </Helmet>
                 <div className="slide-signup flex">
-
                     <div className="app-description">
                         <a href="https://fast-food-fast.herokuapp.com/">
                             <img src={logo} alt="ffflogo" className="logo" /><strong>Fast-Food-Fast</strong>

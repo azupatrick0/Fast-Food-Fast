@@ -288,6 +288,10 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
 				error: {}
 			});
 			expect(state).to.eql({
+				name: '',
+				email: '',
+				password: '',
+				role: '',
 				status: 'ERROR',
 				error: 'An error occured while signing you in, please try again'
 			});
@@ -308,6 +312,10 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
 			});
 
 			expect(state).to.eql({
+				name: '',
+				email: '',
+				password: '',
+				role: '',
 				status: 'FAILED',
 				error: 'Email or password incorrect'
 			});
@@ -333,8 +341,11 @@ describe('Fast-Food-Fast Client Reducers Test Suite', () => {
 			});
 			expect(state).to.eql({
 				name: 'Azu Patrick',
+				email: '',
+				password: '',
 				role: 'user',
 				status: 'SUCCESS',
+				error: ''
 			});
 		});
 
