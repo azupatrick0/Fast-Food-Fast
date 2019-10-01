@@ -1,7 +1,7 @@
 import SignupAUser from './SignupActions';
 import SigninAUser from './SigninActions';
-import GetMenu from './GetMenuActions';
-import MakeOrder from './MakeOrderActions';
+import getMenu from './GetMenuActions';
+import makeOrder from './MakeOrderActions';
 import GetHistory from './GetHistoryActions';
 import GetAllOrders from './GetAllOrders';
 import AcceptOrders from './AcceptOrders';
@@ -15,8 +15,8 @@ import DeleteMenu from './DeleteMenuActions';
 export {
     SignupAUser,
     SigninAUser,
-    GetMenu,
-    MakeOrder,
+    getMenu,
+    makeOrder,
     GetHistory,
     GetAllOrders,
     AcceptOrders,

@@ -1,5 +1,7 @@
-// Import database
+import uuid from 'uuidv4';
 import db from '../db/index';
+
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 class orders {
   // Place an order
@@ -38,6 +40,77 @@ class orders {
           message: 'Your order has been processed, thank you.',
           orderDetails: result.rows[0],
         },
+      });
+    });
+  }
+
+  // Charge a user
+  static checkout(req, res) {
+    const {
+      token: {
+        id,
+        email,
+        card: {
+          name,
+          address_city,
+          address_country,
+          address_line1,
+          address_line2,
+          address_zip
+        }
+      },
+      totalAmount
+    } = req.body;
+
+    stripe.customers.create({
+      email,
+      source: id
+    }, (err, customer) => {
+      if(err) {
+        return res.status(500).json({
+          status: 'error',
+          data: {
+            message: 'Customer could not be created',
+            error: err
+          },
+        });
+      }
+      stripe.charges.create({
+        amount: Number(totalAmount) * 100,
+        currency: 'usd',
+        customer: customer.id,
+        description: 'Charge for ordered meals',
+        receipt_email: email,
+        shipping: {
+          name,
+          address: {
+            line1: address_line1,
+            line2: address_line2,
+            city: address_city,
+            country: address_country,
+            postal_code: address_zip
+          }
+        }
+      },{
+        idempotency_key: uuid()
+      }, (err, charge) => {
+        if (err) {
+          return res.status(400).json({
+            status: 'error',
+            data: {
+              message: 'Charge not Successful',
+              error: err
+            },
+          });
+        } else {
+          return res.status(201).json({
+            status: 'success',
+            data: {
+              message: 'Charge Succesful',
+              charge
+            },
+          });
+        }
       });
     });
   }

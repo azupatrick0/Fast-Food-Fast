@@ -10,7 +10,8 @@ import { menu, orders, users, homePage, notFoundPage } from './routes/index';
 const app = express();
 
 // Port
-const port = process.env.PORT || 3000;
+// eslint-disable-next-line no-undef
+const port = process.env.PORT || 4004;
 
 // Middlewares
 app.use(bodyParser.json());

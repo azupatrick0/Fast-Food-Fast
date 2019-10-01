@@ -17,7 +17,12 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        use: ['babel-loader'],
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env']
+          }
+        },
       },
       {
         test: /\.css$/,
@@ -42,6 +47,8 @@ module.exports = {
     new webpack.DefinePlugin({
       'process.env.BASE_URL_DEV': JSON.stringify(process.env.BASE_URL_DEV),
       'process.env.BASE_URL_PROD': JSON.stringify(process.env.BASE_URL_PROD),
+      'process.env.SECRET_KEY': JSON.stringify(process.env.SECRET_KEY),
+      'process.env.LOGGED_OUT': JSON.stringify(process.env.LOGGED_OUT)
     }),
     new HtmlWebpackPlugin({
       template: './Client/src/index.html',
