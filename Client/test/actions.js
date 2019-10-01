@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import { expect } from 'chai';
 import moxios from 'moxios';
 import fetchMock from 'fetch-mock';
-import { SignupAUser, SigninAUser, GetMenu, GetHistory, GetAllOrders, AcceptOrders, DeclineOrders, CompleteOrders, UpdateMenu, PopulateMenu, DeleteMenu, CloudinaryImageUpload } from '../src/actions/index';
+import { SignupAUser, SigninAUser, getMenu, GetHistory, GetAllOrders, AcceptOrders, DeclineOrders, CompleteOrders, UpdateMenu, PopulateMenu, DeleteMenu, CloudinaryImageUpload } from '../src/actions/index';
 import {
     USER_SIGNUP_SUCCESS,
     USER_SIGNUP_FAILED,
@@ -324,7 +324,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
 
             }]
 
-            store.dispatch(GetMenu(token)).then(() => {
+            store.dispatch(getMenu(token)).then(() => {
                 expect(store.getActions()).to.eql(expected)
             })
         })
@@ -341,7 +341,7 @@ describe('Fast-Food-Fast Actions Test Suite', () => {
 
             }]
 
-            store.dispatch(GetMenu(token)).then(() => {
+            store.dispatch(getMenu(token)).then(() => {
                 expect(store.getActions()).to.eql(expected)
             })
         })
