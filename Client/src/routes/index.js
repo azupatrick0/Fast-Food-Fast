@@ -1,21 +1,27 @@
-import React from 'react';
+/* eslint-disable react/no-did-mount-set-state */
+import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch, browserHistory } from 'react-router-dom';
-import { NotFound, LandingPage, SignupConnected, SigninConnected, ordersView, HistoryConnected, AdminConnected } from '../components/index';
+import Authentication from '../../js/utils/Authentication';
+import { NotFound, LandingPage, SignupConnected, SigninConnected, Orders, HistoryConnected, AdminConnected } from '../components/index';
 
-const Routes = () => (
-    <BrowserRouter history={browserHistory}>
+class Routes extends Component {
+
+  render() {
+    const isAuthenticated = localStorage.getItem('token') !== null ? Authentication(localStorage.getItem('token')) : false;
+    return (
+      <BrowserRouter history={browserHistory}>
         <Switch>
-                <Route path='/' exact component={LandingPage} />
-                <Route path='/index' exact component={LandingPage} />
-                <Route path='/index.html' exact component={LandingPage} />
-                <Route path='/signup' exact component={SignupConnected} />
-                <Route path='/signin' exact component={SigninConnected} />
-                <Route path='/orders' exact component={ordersView} />
-                <Route path='/history' exact component={HistoryConnected} />
-                <Route path='/admin' exact component={AdminConnected} />
-                <Route component={NotFound} />
+          <Route path='/' exact render={props => <LandingPage {...props} isAuthenticated={isAuthenticated} />} />
+          <Route path='/signup' exact render={props => <SignupConnected {...props} isAuthenticated={isAuthenticated} />} />
+          <Route path='/signin' exact render={props => <SigninConnected {...props} isAuthenticated={isAuthenticated} />} />
+          <Route path='/orders' exact render={props => <Orders {...props} isAuthenticated={isAuthenticated} />} />
+          <Route path='/history' exact render={props => <HistoryConnected {...props} isAuthenticated={isAuthenticated} />} />
+          <Route path='/admin' exact render={props => <AdminConnected {...props} isAuthenticated={isAuthenticated} />} />
+          <Route component={NotFound} />
         </Switch>
-    </BrowserRouter>
-);
+      </BrowserRouter>
+    );
+  }
+}
 
 export default Routes;
