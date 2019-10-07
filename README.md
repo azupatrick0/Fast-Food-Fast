@@ -22,13 +22,7 @@ Fast-Food-Fast is a food delivery service app for a restaurant. Built for Andela
   * Mocha/Chai
   * Eslint
   * Babel
-## Pivotal Tracker Page 
-[Link](https://www.pivotaltracker.com/n/projects/2193822)
-## Pivotal Tracker Page React Redux
-[Link](https://www.pivotaltracker.com/n/projects/2234035)
-## Heroku API Page
-[Link](https://fast-food-fast.herokuapp.com/api/v1)
-## Heroku UI Page
+## App Link
 [Link](https://fast-food-fast.herokuapp.com/index.html)
 ## Documentation
 [Link](https://fastfoodfast10.docs.apiary.io)
