@@ -89,9 +89,6 @@ body {
     width: 100%;
     padding: 0;
     margin: 0;
-    background: url('../images/fast-food-fast-1.png') no-repeat 0 -15em;
-    background-size: cover;
-    background-attachment: fixed;
 }
 
 body p {
@@ -394,7 +391,8 @@ select:focus {
     font-size: 24px;
 }
 
-.slide0 {
+.slide0-admin {
+    background: url('../images/fast-food-fast-1.png') no-repeat 0 -15em;
     background-size: cover;
     background-attachment: fixed;
     height: 90vh; 
@@ -536,7 +534,7 @@ tr:nth-child(even) {
         width: 100%;
         padding: 0;
         margin: 0;
-        background: url('../images/fast-food-fast-1.png') no-repeat 0 -10em;
+        background: url('../images/fast-food-fast-1.jpg') no-repeat 0 -10em;
         background-size: cover;
         background-attachment: fixed;
     }
@@ -640,7 +638,7 @@ tr:nth-child(even) {
         width: 100%;
         padding: 0;
         margin: 0;
-        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background: url('../images/fast-food-fast-1.jpg') no-repeat 0 -1em;
         background-size: cover;
         background-attachment: fixed;
     }
@@ -770,7 +768,7 @@ tr:nth-child(even) {
         width: 100%;
         padding: 0;
         margin: 0;
-        background: url('../images/fast-food-fast-1.png') no-repeat 0 -1em;
+        background: url('../images/fast-food-fast-1.jpg') no-repeat 0 -1em;
         background-size: cover;
         background-attachment: fixed;
     }
