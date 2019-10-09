@@ -7,7 +7,7 @@ import { NavBar } from '../components/index';
 import '../../public/styles/historyStyles.css';
 import {
   GetAllOrders,
-  GetMenu,
+  getMenu,
   AcceptOrders,
   DeclineOrders,
   CompleteOrders,
@@ -62,7 +62,7 @@ export class Admin extends Component {
     }, 1800);
 
     setTimeout(() => {
-      this.props.act(GetMenu(token));
+      this.props.act(getMenu(token));
     }, 2800);
   }
 
@@ -85,7 +85,7 @@ export class Admin extends Component {
     }, 1800);
 
     setTimeout(() => {
-      this.props.act(GetMenu(token));
+      this.props.act(getMenu(token));
     }, 2800);
   }
 
@@ -109,7 +109,7 @@ export class Admin extends Component {
     if (deleteItem != null) {
       this.props.act(DeleteMenu(itemId, role, token));
       setTimeout(() => {
-        this.props.act(GetMenu(token));
+        this.props.act(getMenu(token));
       }, 2800);
     }
   }
@@ -161,7 +161,7 @@ export class Admin extends Component {
 
   onGetMenu() {
     const token = window.localStorage.getItem('token');
-    this.props.act(GetMenu(token));
+    this.props.act(getMenu(token));
   }
 
   onGetOrders() {
@@ -377,7 +377,6 @@ export class Admin extends Component {
                     <button type='button' defaultValue='' onClick={() => this.feedback6.current.style.display = 'none'}>Cancel</button>
                   </div>
                 </form>
-
               }
             </div>
 

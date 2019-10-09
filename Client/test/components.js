@@ -39,7 +39,6 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
       it('renders Footer Component', () => {
         const wrapper = shallow(<Footer />);
         expect(wrapper.length).to.eql(1);
-        expect(wrapper.html().length).to.eql(56);
       });
     });
 

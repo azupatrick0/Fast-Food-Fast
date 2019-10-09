@@ -1,6 +1,6 @@
 /* eslint-disable react/no-did-mount-set-state */
 import React, { Component, Fragment, createRef } from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -17,25 +17,22 @@ import debitCard from '../../public/images/debit_card.png';
 import { NavBar } from '../components/index';
 
 export class Orders extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      clicked: false,
-      cart: [],
-      quantity: 1,
-      meal: null,
-      imgurl: null,
-      disabled: false,
-      statusOrder: undefined,
-      errorOrder: undefined,
-      loading: false,
-      payOnDelivery: false,
-      totalAmount: 0,
-      redirect: false,
-      visible: false
-    };
-    this.quantity = createRef();
-  }
+  state = {
+    clicked: false,
+    cart: [],
+    quantity: 1,
+    meal: null,
+    imgurl: null,
+    disabled: false,
+    statusOrder: undefined,
+    errorOrder: undefined,
+    loading: false,
+    payOnDelivery: false,
+    totalAmount: 0,
+    visible: false
+  };
+
+  quantity = createRef();
 
   static getDerivedStateFromProps(props, state) {
     if (
@@ -44,12 +41,10 @@ export class Orders extends Component {
       props.statusOrder !== 'NOTLOADING' &&
       props.statusOrder !== state.statusOrder
     ) {
-      toast.success('Order placed successfully');
       localStorage.removeItem('cart');
       return Object.assign({}, state, {
         statusOrder: 'SUCCESS',
-        loading: false,
-        redirect: true
+        loading: false
       });
     } else if (
       props.errorOrder &&
@@ -57,7 +52,6 @@ export class Orders extends Component {
       props.errorOrder !== 'NOTLOADING' &&
       props.errorOrder !== state.errorOrder
     ) {
-      toast.success('An error occured while placing your order, please try again');
       return Object.assign({}, state, {
         errorOrder: 'ERROR',
         loading: false
@@ -90,30 +84,21 @@ export class Orders extends Component {
             clicked: true
           });
         });
-
-      // Pay on delivery
-      this.state.payOnDelivery === true && new Promise.resolve(resolve => {
-        resolve(this.orderAMeal())
-      }).then(() => toast.success('Order made successfully')).then(() => this.setState({
-        loading: false,
-        visible: false,
-        payOnDelivery: false
-      }));
     }
   }
 
-  getMealItem(id) {
+  getMealItem = (id) => {
     const { mealData } = this.props;
     return mealData.filter((eachMealItem) => eachMealItem.id === Number(id));
   }
 
-  isMealInState(id) {
+  isMealInState = (id) => {
     const { cart } = this.state;
     return cart.filter(eachMealItem =>
       Number(eachMealItem.menuid) === Number(id));
   }
 
-  addToCart(id) {
+  addToCart = (id) => {
     if (this.isMealInState(id).length < 1) {
       const getMealItem = this.getMealItem(id);
       const mealStateChanged = new Promise((resolve) =>
@@ -159,7 +144,7 @@ export class Orders extends Component {
     }
   }
 
-  changeAmount(event, id) {
+  changeAmount = (event, id) => {
     this.state.cart.filter((eachMealItem) => {
       const previousQuantity = eachMealItem.quantity;
       if (eachMealItem.menuid === id) {
@@ -187,7 +172,7 @@ export class Orders extends Component {
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
   }
 
-  deleteMeal(id) {
+  deleteMeal = (id) => {
     const newCart = this.state.cart.filter((eachMealItem) => {
       if (eachMealItem.menuid === id) {
         // Update total amount and cart then store to localstorage
@@ -208,7 +193,7 @@ export class Orders extends Component {
     });
   }
 
-  deliveryDate() {
+  deliveryDate = () => {
     let day = new Date().getDate();
     day += 1;
     let month = new Date().getMonth();
@@ -218,64 +203,57 @@ export class Orders extends Component {
     return date;
   }
 
-  processCardPayment(token) {
-    function getTotalAmount() {
-      let totalAmount = 0;
-      JSON.parse(localStorage.getItem('cart')).map(eachMealItem => {
-        totalAmount += Number(eachMealItem.amount);
-      });
-      if (totalAmount > 0) {
-        return totalAmount;
-      }
+  processCardPayment = async (token) => {
+  const { cart, totalAmount } = this.state;
+    if (cart.length === 0) {
+      toast.error('Cart cannot be empty');
+    } else {
+      // This is where we make a request to the API to process stripe payment
+      // Token reresents information about a user's purchase
+      await Axios.post(`${process.env.BASE_URL_PROD}/api/v1/orders/checkout`, { token, totalAmount });
+      await this.orderAMeal();
     }
-    // This is where we make a request to the API to process stripe payment
-    // Token reresents information about a user purchase
-    Axios.post(`${process.env.BASE_URL_PROD}/api/v1/orders/checkout`, { token, totalAmount: getTotalAmount() })
-      .then(() => {
-        new Promise.resolve(resolve => {
-          resolve(window.scrollTo({
-            behavior: "smooth",
-            top: 0
-          }))
-        }).then(() => this.orderAMeal())
-          .then(() => toast.success('Order made successfully'))
-          .then(() => setTimeout(() => location.href = '/history', 2000));
-      });
   }
 
-  payOnDelivery() {
-    this.setState({
-      visible: true
-    });
-  }
-
-  orderAMeal() {
+  payOnDelivery = () => {
     const { cart } = this.state;
-    const { makeOrder } = this.props;
     if (cart.length === 0) {
       toast.error('Cart cannot be empty');
     } else {
       this.setState({
-        loading: true
+        visible: true
       });
-      cart.map((mealObject) => {
-        if (Object.keys(mealObject).length !== 0) {
-          Object.assign(mealObject, {
-            location: document.querySelector('.location').value
-          });
-        }
-      });
-      makeOrder(cart, localStorage.getItem('token'), localStorage.getItem('name'));
     }
+  }
+
+  isCartEmpty = () => {
+    const { cart } = this.state;
+    if (cart.length === 0) {
+      toast.error('Cart cannot be empty');
+    } else {
+      document.querySelector('.pay-with-card').click();
+    }
+  }
+
+  orderAMeal = async () => {
+    const { cart } = this.state;
+    const { makeOrder, history } = this.props;
+    this.setState({
+      loading: true
+    });
+    cart.map((mealObject) => {
+      if (Object.keys(mealObject).length !== 0) {
+        Object.assign(mealObject, {
+          location: document.querySelector('.location').value
+        });
+      }
+    });
+    await makeOrder(cart, localStorage.getItem('token'), localStorage.getItem('name'), history);
   }
 
   render() {
     const { status, statusOrder, mealData, isAuthenticated } = this.props;
-    const { clicked, cart, loading, totalAmount, redirect, visible } = this.state;
-
-    if (redirect) {
-      <Redirect to='/history' />
-    }
+    const { clicked, cart, loading, totalAmount, visible } = this.state;
 
     if (!isAuthenticated) {
       return <Redirect to='/signin' />
@@ -284,7 +262,7 @@ export class Orders extends Component {
     return (
       <Fragment>
         <ToastContainer position={toast.POSITION.TOP_CENTER} />
-        <Modal text={'Are you sure you want to pay on delivery'} visible={visible} state={this} />
+        <Modal text={'Are you sure you want to pay on delivery'} visible={visible} that={this} />
         <Helmet>
           <title>Fast-Food-Fast | Order a meal</title>
           <link rel="shortcut icon" type="image/png" href="../../public/images/ffflogo.png" />
@@ -301,7 +279,7 @@ export class Orders extends Component {
                 link2={'/Orders'}
                 anchor1Body={'History'}
                 anchor2Body={'Sign Out'}
-                buttonBody={isAuthenticated? `Hello ${localStorage.getItem('name')}`: 'ORDER'}
+                buttonBody={isAuthenticated ? `Hello ${localStorage.getItem('name')}` : 'ORDER'}
                 anchor3Body={'History'}
                 anchor4Body={'Order a meal'}
                 anchor5Body={'Sign Out'}
@@ -401,6 +379,9 @@ export class Orders extends Component {
                               <td>
                                 <strong>CHECKOUT</strong>
                               </td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td>
@@ -411,46 +392,58 @@ export class Orders extends Component {
                                   <option>Port Harcourt</option>
                                 </select>
                               </td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
                             </tr>
                             <tr>
                               <td>
                                 Delivery Date &#10236;{' '}
                                 <span className="date">{this.deliveryDate()}</span>
                               </td>
+                              <td></td>
+                              <td></td>
+                              <td></td>
                             </tr>
                             <tr>
+                              <td>Pay on Delivery</td>
+                              <td></td>
                               <td>
-                                Pay on Delivery
                                 <button
-                                  className='pay-on-delivery__button'
+                                  className='button__orders-checkout'
                                   onClick={() => this.payOnDelivery()}
                                 >
-                                  <span className="orderValue">{loading ? 'Ordering...' : 'Order'}</span>{' '}
+                                  <span>{loading ? 'Ordering...' : 'Order'}</span>{' '}
                                 </button>
                               </td>
+                              <td></td>
                             </tr>
                             <tr>
+                              <td>Pay with card{' '}</td>
+                              <td><img src={debitCard} className="debit-card" alt="debit card" /></td>
                               <td>
-                                Pay with card{' '}
-                                <img src={debitCard} className="debit-card" alt="debit card" />
+                              <button className='button__orders-checkout' onClick={this.isCartEmpty}>
+                                <span>{loading ? 'Ordering...' : 'Order'}</span>{' '}
+                              </button>
                                 <StripeCheckout
+                                  amount={totalAmount * 100} // To cents
+                                  token={this.processCardPayment}
+                                  stripeKey="pk_test_Bqf0lYovyQYmwm6bVaACKuh200TLpCem6F"
                                   name="Fast Food Fast"
                                   description="Delcious Meals"
                                   panelLabel="Pay"
-                                  amount={totalAmount * 100} // To cents
                                   currency="USD"
-                                  stripeKey="pk_test_Bqf0lYovyQYmwm6bVaACKuh200TLpCem6F"
                                   shippingAddress
                                   billingAddress
                                   zipCode={false}
                                   bitcoin={true}
-                                  token={this.processCardPayment}
                                 >
-                                  <button>
+                                  <button className='button__orders-checkout pay-with-card' hidden>
                                     Order
-                                </button>
-                                </StripeCheckout>
+                                  </button>
+                                  </StripeCheckout>
                               </td>
+                              <td></td>
                             </tr>
                           </tbody>
                         </table>
@@ -533,7 +526,8 @@ Orders.propTypes = {
   getMenu: PropTypes.func,
   mealData: PropTypes.array,
   makeOrder: PropTypes.func,
-  isAuthenticated: PropTypes.bool
+  isAuthenticated: PropTypes.bool,
+  history: PropTypes.object
 };
 
 const mapStateToProps = ({ getmenu, makeorder }) => ({
@@ -548,4 +542,4 @@ const mapStateToProps = ({ getmenu, makeorder }) => ({
 export default connect(mapStateToProps, {
   getMenu,
   makeOrder
-})(Orders);
+})(withRouter(Orders));

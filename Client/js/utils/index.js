@@ -3,5 +3,5 @@ import CloseModal from './CloseModal';
 
 export {
     ShowHideHamburger,
-    CloseModal
+    CloseModal,
 };

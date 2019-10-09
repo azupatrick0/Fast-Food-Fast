@@ -10,6 +10,7 @@ import Orders from './orders';
 import ordersView from './ordersView'
 import HistoryConnected, { History } from './history';
 import AdminConnected, { Admin } from './admin';
+import SimpleLoader from './SimpleLoader';
 
 export {
     Footer,
@@ -25,5 +26,6 @@ export {
     History,
     HistoryConnected,
     Admin,
-    AdminConnected
+    AdminConnected,
+    SimpleLoader
 };

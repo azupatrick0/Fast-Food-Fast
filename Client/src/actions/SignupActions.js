@@ -1,10 +1,13 @@
 import Axios from 'axios';
 import { toast } from 'react-toastify';
-import { USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILED, USER_SIGNUP_ERROR } from './actionTypes';
+import { USER_SIGNUP_SUCCESS, USER_SIGNUP_FAILED, USER_SIGNUP_ERROR, START_LOADING } from './actionTypes';
 
 toast.configure();
 
 const SignupAUser = (userDetails) => (dispatch) => {
+  dispatch({
+    type: START_LOADING
+  });
   return Axios.post(`${process.env.BASE_URL_PROD}/api/v1/auth/signup`, {
     name: userDetails.name,
     email: userDetails.email,

@@ -1,10 +1,15 @@
 import Axios from 'axios';
 import { toast } from 'react-toastify';
-import { USER_SIGNIN_SUCCESS, USER_SIGNIN_FAILED, USER_SIGNIN_ERROR } from './actionTypes';
+import { USER_SIGNIN_SUCCESS, USER_SIGNIN_FAILED, USER_SIGNIN_ERROR, START_LOADING } from './actionTypes';
+
+toast.configure();
 
 toast.configure();
 
 const SigninAUser = (userDetails) => (dispatch) => {
+  dispatch({
+    type: START_LOADING
+  });
   return Axios.post(`${process.env.BASE_URL_PROD}/api/v1/auth/login`, {
     email: userDetails.email,
     password: userDetails.password,

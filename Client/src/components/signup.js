@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import '../../public/styles/signupStyles.css';
 import logo from '../../public/images/ffflogo.png';
 import { SignupAUser } from '../actions/index';
+import { SimpleLoader } from './index';
 
 export class Signup extends Component {
   constructor(props) {
@@ -22,20 +23,35 @@ export class Signup extends Component {
     }
   }
 
-  onHandleFormChange(e) {
+  handleName(e) {
     this.setState({
-      [e.target.name]: e.target.value,
-    })
+      name: e.target.value,
+      nameError: ''
+    });
+  }
+
+  handleEMail(e) {
+    this.setState({
+      email: e.target.value,
+      emailError: ''
+    });
+  }
+
+  handlePassword(e) {
+    this.setState({
+      password: e.target.value,
+      passwordError: ''
+    });
   }
 
   onClickButton(e) {
     // Number 13 is the "Enter" key on the keyboard
     if (e.keyCode === 13) {
-      this.onHandleSignup();
+      this.handleSignup();
     }
   }
 
-  onHandleSignup() {
+  handleSignup() {
     const { email, password, name } = this.state;
 
     if (!(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))) {
@@ -44,7 +60,7 @@ export class Signup extends Component {
       });
     } else if (!password || password.length < 6) {
       this.setState({
-        passwordError: 'Password must be more 6 or more characters'
+        passwordError: 'Password must be 6 or more characters'
       });
     } else if (!name || name.length < 3) {
       this.setState({
@@ -61,13 +77,14 @@ export class Signup extends Component {
         password,
         role
       }
+      const { SignupAUser } = this.props;
       SignupAUser(userData);
     }
     
   }
   render() {
     const { signupBtnClicked, emailError, passwordError, nameError } = this.state;
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, status, error } = this.props;
 
     if (isAuthenticated) {
       return <Redirect to='/orders' />
@@ -98,21 +115,21 @@ export class Signup extends Component {
             <br />
 
             <form action="#" method="POST" className="form" onKeyUp={(e) => this.onClickButton(e)}>
-              <input type="text" className="signupName" name="name" value={this.state.name} placeholder="Name" onChange={(e) => this.onHandleFormChange(e)} />
-              <span className="feedback2">{nameError}</span>
+              <input type="text" className="signupName" name="name" value={this.state.name} placeholder="Name" onChange={(e) => this.handleName(e)} />
+              <span className={nameError && "feedback"}>{nameError}</span>
               <br /><br />
-              <input type="email" className="signupEmail" name="email" value={this.state.email} placeholder="Email" onChange={(e) => this.onHandleFormChange(e)} />
-              <span className="feedback2">{emailError}</span>
+              <input type="email" className="signupEmail" name="email" value={this.state.email} placeholder="Email" onChange={(e) => this.handleEMail(e)} />
+              <span className={emailError && "feedback"}>{emailError}</span>
               <br /><br />
-              <input type="password" className="signupPassword" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.onHandleFormChange(e)} />
-              <span className="feedback2">{passwordError}</span>
+              <input type="password" className="signupPassword" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.handlePassword(e)} />
+              <span className={passwordError && "feedback"}>{passwordError}</span>
               <br /><br />
               <input type="hidden" className="signupRole" name="signupRole" value="user" />
             </form>
-            <button className="signup" onClick={() => this.onHandleSignup()}><span className="signupText">{signupBtnClicked ? 'Loading...' : 'Sign Up'}</span></button>
+            <button className="signup" onClick={() => this.handleSignup()}><span className="signupText">{signupBtnClicked && status === 'LOADING' && !error ? <SimpleLoader fontSize={20} color={'white'} /> : 'Sign up'}</span></button>
             <div className="signup-properties">
               <p> Already have an account?
-                <Link to="/Signin">Sign in</Link>
+                <Link to="/Signin">&nbsp;Sign in</Link>
               </p>
             </div>
           </div>

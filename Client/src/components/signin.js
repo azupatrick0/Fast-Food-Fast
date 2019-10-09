@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import '../../public/styles/signupStyles.css';
 import logo from '../../public/images/ffflogo.png';
 import { SigninAUser } from '../actions/index';
+import { SimpleLoader } from './index';
 
 export class Signin extends Component {
   constructor(props) {
@@ -13,35 +14,44 @@ export class Signin extends Component {
     this.state = {
       email: '',
       password: '',
-      emailError: '',
       passwordError: '',
+      emailError: '',
       signinBtnClicked: false
     }
   }
 
-  onHandleFormChange(e) {
+  handleEMail(e) {
     this.setState({
-      [e.target.name]: e.target.value,
-    })
+      email: e.target.value,
+      emailError: ''
+    });
   }
+
+  handlePassword(e) {
+    this.setState({
+      password: e.target.value,
+      passwordError: ''
+    });
+  }
+
 
   onClickButton(e) {
     // Number 13 is the "Enter" key on the keyboard
     if (e.keyCode === 13) {
-      this.onHandleSignin();
+      this.handleSignin();
     }
   }
 
-  onHandleSignin() {
+  handleSignin() {
     const { email, password } = this.state;
 
     if (!(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email))) {
       this.setState({
         emailError: 'Not a valid email address'
       });
-    } else if (!password || password.length < 6) {
+    } else if (!password) {
       this.setState({
-        passwordError: 'Password must be more 6 or more characters'
+        passwordError: 'Password cannot be empty'
       });
     } else {
       this.setState({
@@ -58,11 +68,7 @@ export class Signin extends Component {
   }
   render() {
     const { signinBtnClicked, emailError, passwordError } = this.state;
-    const { isAuthenticated } = this.props;
-
-    if (this.props.status === 'FAILED' || this.props.status === 'ERROR') {
-      this.feedback4.current.style.display = 'block';
-    }
+    const { isAuthenticated, error, status } = this.props;
 
     if (isAuthenticated) {
       return <Redirect to='/orders' />
@@ -92,17 +98,17 @@ export class Signin extends Component {
             <br />
 
             <form action="#" method="POST" className="form" onKeyUp={(e) => this.onClickButton(e)}>
-              <input type="email" className="signupEmail" name="email" value={this.state.email} placeholder="Email" onChange={(e) => this.onHandleFormChange(e)} />
-              <span className="feedback2">{emailError}</span>
+              <input type="email" className="signupEmail" name="email" value={this.state.email} placeholder="Email" onChange={(e) => this.handleEMail(e)} />
+              <span className={emailError && "feedback"}>{emailError}</span>
               <br /><br />
-              <input type="password" className="signupPassword" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.onHandleFormChange(e)} />
-              <span className="feedback2">{passwordError}</span>
+              <input type="password" className="signupPassword" name="password" value={this.state.password} placeholder="Password" onChange={(e) => this.handlePassword(e)} />
+              <span className={passwordError && "feedback"}>{passwordError}</span>
               <br /><br />
             </form>
-            <button className="signup" onClick={() => this.onHandleSignin()}>{signinBtnClicked ? 'Loading...' : 'Sign in'}</button>
+            <button className="signup" onClick={() => this.handleSignin()}>{signinBtnClicked && status === 'LOADING' && !error ? <SimpleLoader fontSize={20} color={'white'} /> : 'Sign in'}</button>
             <div className="signup-properties">
               <p> Don't have an account?
-                <Link to="/Signup">Sign up</Link>
+                <Link to="/Signup">&nbsp;Sign up</Link>
               </p>
             </div>
           </div>

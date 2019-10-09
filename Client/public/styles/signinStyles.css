@@ -64,36 +64,11 @@ button:hover {
 }
 
 .feedback {
-	display: none;
 	background-color: plum;
-	padding: 0.3em 0 0 0.4em;
+	padding: 0.3em;
 	border-radius: 3px;
-	height: 5vh;
 	font-size: 18px;
 	font-family: Arial, Helvetica, sans-serif;
-}
-
-.feedback2 {
-	display: none;
-	background-color: rgb(236, 83, 236);
-	position: relative;
-	top: 1em;
-	padding: 0.3em 0 0 0.4em;
-	border-radius: 3px;
-	height: 5vh;
-	font-size: 18px;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-.feedback3 {
-	display: none;
-	background-color: plum;
-	padding: 0.3em 0 0 0.4em;
-	border-radius: 3px;
-	height: 5vh;
-	font-size: 18px;
-	font-family: Arial, Helvetica, sans-serif;
-	margin-left: 10%;
 }
 
 .flex {
@@ -282,8 +257,7 @@ p {
 		font-size: 28px;
 	}
 
-	.feedback,
-	.feedback2 {
+	.feedback {
 		height: 10vh;
 	}
 

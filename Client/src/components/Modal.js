@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Modal = ({ text, visible, state }) => (
+const Modal = ({ text, visible, that }) => (
   <div>
     {
       visible && <div className="modal-orders feedback-orders">
@@ -9,12 +9,17 @@ const Modal = ({ text, visible, state }) => (
           <p>{text}</p>
           <br/>
           <div className="modal-orders__button-flex">
-            <button onClick={() => state.setState({
+            <button onClick={() => that.setState({
               visible: false
             })}>Cancel</button>
-            <button onClick={() => {state.setState({
-              payOnDelivery: true
-            }); console.log('clicked', state.state);}}>Proceed</button>
+            <button onClick={() => {
+              that.setState({
+                payOnDelivery: true,
+                loading: false,
+                visible: false
+              });
+              that.orderAMeal();
+            }}>Proceed</button>
           </div>
         </div>
       </div>
@@ -25,7 +30,7 @@ const Modal = ({ text, visible, state }) => (
 Modal.propTypes = {
   text: PropTypes.string,
   visible: PropTypes.bool,
-  state: PropTypes.any
+  that: PropTypes.any
 };
 
 export default Modal;

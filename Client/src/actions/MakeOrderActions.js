@@ -1,7 +1,10 @@
 import Axios from 'axios';
-import { START_LOADING, STOP_LOADING, ORDER_MEAL_SUCCESS, ORDER_MEAL_FAILED, ORDER_MEAL_ERROR } from './actionTypes';
+import { toast } from 'react-toastify';
+import { START_LOADING, STOP_LOADING, ORDER_MEAL_SUCCESS, ORDER_MEAL_ERROR } from './actionTypes';
 
-const makeOrder = (cart, token, name) => (dispatch) => {
+toast.configure();
+
+const makeOrder = (cart, token, name, history) => (dispatch) => {
   cart.map(order => {
     dispatch({
       type: START_LOADING
@@ -20,12 +23,9 @@ const makeOrder = (cart, token, name) => (dispatch) => {
         dispatch({
           type: STOP_LOADING
         });
-        if (response.data.status === 'fail') {
-          dispatch({
-            type: ORDER_MEAL_FAILED,
-            payload: 'Failed to authenticate user token'
-          });
-        } else if (response.data.status === 'success') {
+        if (response.data.status === 'success') {
+          toast.success('Order made successfully');
+          setTimeout(() => history.push('/history'), 2000);
           dispatch({
             type: ORDER_MEAL_SUCCESS,
             payload: 'Your order has been processed, thank you'
