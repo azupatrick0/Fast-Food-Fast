@@ -1,4 +1,3 @@
-// Import modules
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
@@ -122,5 +121,4 @@ class users {
   }
 }
 
-// Export users
 export default users;

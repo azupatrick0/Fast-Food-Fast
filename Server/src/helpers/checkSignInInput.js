@@ -5,16 +5,14 @@ const checkSignInInput = (req, res, next) => {
     password,
   } = req.body;
 
-  if (email === '' || email === null || email === undefined) {
-    // Quantity field empty
+  if (!email) {
     return res.status(400).json({
       status: 'fail',
       data: {
         message: 'email cannot be empty',
       },
     });
-  } else if (password === '' || password === null || password === undefined || password < 6) {
-    // Price field empty
+  } else if (!password || password < 6) {
     return res.status(400).json({
       status: 'fail',
       data: {
@@ -22,9 +20,7 @@ const checkSignInInput = (req, res, next) => {
       },
     });
   }
-  // Call the next middleware
   return next();
 };
 
-// Export checkSignInInput
 export default checkSignInInput;

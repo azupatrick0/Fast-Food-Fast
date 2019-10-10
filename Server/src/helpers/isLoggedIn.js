@@ -10,7 +10,7 @@ const isLoggedIn = (req, res, next) => {
   // Decode token
   jwt.verify(token, process.env.SECRET_KEY, (err) => {
     // If there is no token, forbid the user from accessing the routes
-    if (token === '' || token === null || token === undefined) {
+    if (!token) {
       return res.status(401).json({
         status: 'fail',
         data: {
@@ -26,10 +26,8 @@ const isLoggedIn = (req, res, next) => {
         },
       });
     }
-    // Call the next middleware
     return next();
   });
 };
 
-// Export isLoggedIn
 export default isLoggedIn;

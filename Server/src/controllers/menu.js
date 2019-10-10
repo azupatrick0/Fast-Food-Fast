@@ -1,7 +1,5 @@
-// Import database
 import db from '../db';
 
-// Add fast food items
 class menu {
   static addFoodItem(req, res) {
     // New item Details
@@ -38,7 +36,6 @@ class menu {
   }
 
   static editFoodItems(req, res) {
-    // Item id
     const {
       itemId,
     } = req.params;
@@ -76,7 +73,6 @@ class menu {
   }
 
   static removeFoodItems(req, res) {
-    // Item id
     const {
       itemId,
     } = req.params;
@@ -140,5 +136,4 @@ class menu {
   }
 }
 
-// Export menu
 export default menu;

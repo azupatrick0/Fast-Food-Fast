@@ -64,17 +64,17 @@ button:hover {
 	color: red;
 }
 
-.grid {
+.grid__landing-page {
 	display: grid;
 	grid-template-columns: auto auto auto;
 }
 
-.grid-items {
+.grid-items__landing-page {
 	margin-left: 25%;
 	margin-right: 25%;
 }
 
-.grid-items p {
+.grid-items__landing-page p {
 	font-size: 18px;
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -436,9 +436,6 @@ p {
 		font-size: 33px;
 	}
 
-	.slide1-landing-page {
-		height: 60em;
-	}
 	.slide1-landing-page .grid {
 		width: 100%;
 		margin: 0 auto;
@@ -532,7 +529,7 @@ p {
 		color: red;
 	}
 
-	.grid {
+	.grid__landing-page {
 		display: block;
 	}
 
@@ -575,9 +572,6 @@ p {
 		font-size: 25px;
 	}
 
-	.slide1-landing-page {
-		height: 60em;
-	}
 	.slide1-landing-page .grid {
 		width: 100%;
 		margin: 0 auto;

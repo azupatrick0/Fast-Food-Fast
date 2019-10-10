@@ -4,8 +4,7 @@ const checkStatusInput = (req, res, next) => {
     status,
   } = req.body;
 
-  if (status === '' || status === null || status === undefined) {
-    // status field empty
+  if (!status) {
     return res.status(400).json({
       status: 'fail',
       data: {
@@ -13,7 +12,6 @@ const checkStatusInput = (req, res, next) => {
       },
     });
   } else if ((status !== 'complete') && (status !== 'new') && (status !== 'processing') && (status !== 'cancelled')) {
-    // status not valid
     return res.status(400).json({
       status: 'fail',
       data: {
@@ -21,9 +19,7 @@ const checkStatusInput = (req, res, next) => {
       },
     });
   }
-  // Call the next middleware
   return next();
 };
 
-// Export checkStatusInput
 export default checkStatusInput;

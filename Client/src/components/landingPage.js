@@ -46,8 +46,8 @@ export const Slide1 = ({ isAuthenticated }) => {
         <strong>How it Works</strong>
       </div>
       <br />
-      <div className="grid">
-        <div className="grid-items animated bounceInUp">
+      <div className="grid__landing-page">
+        <div className="grid-items__landing-page animated bounceInUp">
           <img src={placeorder} alt="place-order" />
           <br />
           <span className="card">
@@ -61,7 +61,7 @@ export const Slide1 = ({ isAuthenticated }) => {
 						</p>
           </span>
         </div>
-        <div className="grid-items animated bounceInUp">
+        <div className="grid-items__landing-page animated bounceInUp">
           <img src={money} alt="money" />
           <br />
           <span className="card">
@@ -76,7 +76,7 @@ export const Slide1 = ({ isAuthenticated }) => {
 						</p>
           </span>
         </div>
-        <div className="grid-items animated bounceInUp">
+        <div className="grid-items__landing-page animated bounceInUp">
           <img src={fruit} alt="fruit" />
           <br />
           <span className="card">

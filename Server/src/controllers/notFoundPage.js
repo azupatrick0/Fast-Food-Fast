@@ -1,7 +1,5 @@
-// 404, page not found
 class notFoundPage {
   static notFound(req, res) {
-    // Page not found
     return res.status(404).json({
       status: 'fail',
       data: {
@@ -11,5 +9,4 @@ class notFoundPage {
   }
 }
 
-// Export notFoundPage
 export default notFoundPage;

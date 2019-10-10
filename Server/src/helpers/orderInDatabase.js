@@ -1,8 +1,6 @@
-// Import module
 import db from '../db/index';
 
 const orderInDatabase = (req, res, next) => {
-  // Order id
   const {
     orderId,
   } = req.params;
@@ -14,7 +12,6 @@ const orderInDatabase = (req, res, next) => {
 
   db.query(query, (err, result) => {
     if (err) {
-      console.log(err);
       return res.status(500).json({
         status: 'fail',
         error: {
@@ -32,10 +29,8 @@ const orderInDatabase = (req, res, next) => {
         },
       });
     }
-    // Call the next middleware
     return next();
   });
 };
 
-// Export orderInDatabase
 export default orderInDatabase;

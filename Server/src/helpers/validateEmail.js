@@ -1,5 +1,4 @@
 const validateEmail = (req, res, next) => {
-  // User email
   const {
     email,
   } = req.body;
@@ -13,9 +12,7 @@ const validateEmail = (req, res, next) => {
       },
     });
   }
-  // Call the next middleware
   return next();
 };
 
-// Export validateEmail
 export default validateEmail;

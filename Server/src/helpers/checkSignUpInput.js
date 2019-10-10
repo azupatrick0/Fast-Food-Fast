@@ -7,32 +7,28 @@ const checkSignUpInput = (req, res, next) => {
     role,
   } = req.body;
 
-  if (name === '' || name === null || name === undefined || name < 3) {
-    // Name field empty
+  if (!name || name < 3) {
     return res.status(400).json({
       status: 'fail',
       data: {
         message: 'name cannot be less than 3 characters',
       },
     });
-  } else if (email === '' || email === null || email === undefined) {
-    // Quantity field empty
+  } else if (!email) {
     return res.status(400).json({
       status: 'fail',
       data: {
         message: 'email cannot be empty',
       },
     });
-  } else if (password === '' || password === null || password === undefined || password < 6) {
-    // Price field empty
+  } else if (!password || password < 6) {
     return res.status(400).json({
       status: 'fail',
       data: {
         message: 'password cannot be less than 6 characters',
       },
     });
-  } else if (role === '' || role === null || role === undefined) {
-    // Location field empty
+  } else if (!role) {
     return res.status(400).json({
       status: 'fail',
       data: {
@@ -48,9 +44,7 @@ const checkSignUpInput = (req, res, next) => {
       },
     });
   }
-  // Call the next middleware
   return next();
 };
 
-// Export checkSignUpInput
 export default checkSignUpInput;
