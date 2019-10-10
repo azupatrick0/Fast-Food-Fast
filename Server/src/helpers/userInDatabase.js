@@ -1,8 +1,6 @@
-// Import module
 import db from '../db/index';
 
 const userInDatabase = (req, res, next) => {
-  // User email
   const {
     email,
   } = req.body;
@@ -13,7 +11,6 @@ const userInDatabase = (req, res, next) => {
   };
   db.query(query, (err, result) => {
     if (err) {
-      console.log(err);
       return res.status(500).json({
         status: 'fail',
         data: {
@@ -31,10 +28,8 @@ const userInDatabase = (req, res, next) => {
         },
       });
     }
-    // Call the next middleware
     return next();
   });
 };
 
-// Export userInDatabase
 export default userInDatabase;

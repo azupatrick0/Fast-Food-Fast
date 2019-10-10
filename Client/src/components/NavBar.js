@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ShowHideHamburger } from '../../js/utils/index';
 import logo from '../../public/images/ffflogo.png';
 
-class NavBar extends Component {
+export class NavBar extends Component {
   constructor(props) {
     super(props);
     this.state = {

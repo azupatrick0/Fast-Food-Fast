@@ -1,4 +1,3 @@
-// Import module
 import db from '../db/index';
 
 const oneItemInDatabase = (req, res, next) => {
@@ -22,10 +21,8 @@ const oneItemInDatabase = (req, res, next) => {
         },
       });
     }
-    // Call the next middleware
     return next();
   });
 };
 
-// Export oneItemInDatabase
 export default oneItemInDatabase;

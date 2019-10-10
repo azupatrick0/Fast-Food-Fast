@@ -3,12 +3,41 @@ import { shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NavBar, NotFound, Signup, Signin, History, Orders, Admin} from '../src/components';
+import { Footer, NotFound, Signup, Signin, History, Admin} from '../src/components';
+import { Orders } from '../src/components/orders';
+import { NavBar } from '../src/components/NavBar';
+import Modal from '../src/components/Modal';
 import LandingPage from '../src/components/landingPage';
 
 require('browser-env')();
 
 configure({ adapter: new Adapter() });
+
+const modalProps = {
+  text: 'A modal',
+  visible: true,
+  that: this
+}
+
+const ordersProps = {
+  status: 'SUCCESS',
+  error: 'An error occured',
+  statusOrder: 'SUCCESS',
+  errorOrder: 'An error occured',
+  orderResponse: 'order response',
+  getMenu: () => {},
+  mealData: [{
+    id: 1
+  },
+  {
+    id: 2
+  }],
+  makeOrder: () => {},
+  isAuthenticated: true,
+  history: {
+    push: ''
+  }
+}
 
 describe('Fast-Food-Fast Client Components Test Suite', () => {
   // FROM: https://www.npmjs.com/package/node-localstorage
@@ -58,25 +87,25 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
               anchor4Body={'Order a meal'}
               anchor5Body={'Sign Out'}
           />);
-        wrapper.find('.signout').simulate('click');
-        wrapper.find('.history').simulate('click');
-        wrapper.find('.signout-navbar').simulate('click');
         expect(wrapper.length).to.eql(1);
-        expect(wrapper.instance().props.link0).to.be.a('string');
-        expect(wrapper.instance().props.link1).to.be.a('string');
-        expect(wrapper.instance().props.link2).to.be.a('string');
-        expect(wrapper.instance().props.anchor1Body).to.be.a('string');
-        expect(wrapper.instance().props.buttonBody).to.be.a('string');
-        expect(wrapper.instance().props.anchor3Body).to.be.a('string');
-        expect(wrapper.instance().props.anchor4Body).to.be.a('string');
-        expect(wrapper.instance().props.link0.length).to.be.gt(0);
-        expect(wrapper.instance().props.link1.length).to.be.gt(0);
-        expect(wrapper.instance().props.link2.length).to.be.gt(0);
-        expect(wrapper.instance().props.anchor1Body.length).to.be.gt(0);
-        expect(wrapper.instance().props.buttonBody.length).to.be.gt(0);
-        expect(wrapper.instance().props.anchor3Body.length).to.be.gt(0);
-        expect(wrapper.instance().props.anchor4Body.length).to.be.gt(0);
       });
+
+      it('log out a user', async () => {
+        const wrapper = shallow(
+          <NavBar
+              link0={'/Orders'}
+              link1={'/History'}
+              link2={'/Orders'}
+              anchor1Body={'History'}
+              anchor2Body={'Sign Out'} 
+              buttonBody={'ORDER'}
+              anchor3Body={'History'}
+              anchor4Body={'Order a meal'}
+              anchor5Body={'Sign Out'}
+          />);
+        await wrapper.instance().onLogout();
+        expect(localStorage.getItem('token')).to.eql(null);
+      })
     });
 
     describe('<NotFound />', () => {
@@ -136,8 +165,14 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
 
     describe('<Orders />', () => {
       it('renders connected Orders Component', () => {
-        const wrapper = shallow(<Orders children={() => {}} act={()=> 'clicked me'}/>);
+        const wrapper = shallow(<Orders {...ordersProps}/>);
         expect(wrapper.length).to.eql(1);
+      });
+
+      it('should get a meal item', () => {
+        const wrapper = shallow(<Orders {...ordersProps}/>);
+        const response = wrapper.instance().getMealItem(1);
+        expect(response).to.eql([ordersProps.mealData[0]])
       });
     });
 
@@ -145,9 +180,13 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
       it('renders connected Admin Component', () => {
         const wrapper = shallow(<Admin act={()=> 'clicked me'}/>);
         expect(wrapper.length).to.eql(1);
-        wrapper.find('.add').simulate('click');
-        wrapper.find('.get-menu').simulate('click');
-        wrapper.find('.get-orders').simulate('click');
+      });
+    });
+
+    describe('<Modal />', () => {
+      it('renders connected Modal Component', () => {
+        const wrapper = shallow(<Modal {...modalProps} />);
+        expect(wrapper.length).to.eql(1);
       });
     });
   });

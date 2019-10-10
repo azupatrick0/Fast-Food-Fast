@@ -1,6 +1,5 @@
 // Checks if user is an admin
 const isAdmin = (req, res, next) => {
-  // Get user role
   const { role } = req.query;
 
   // User not an admin
@@ -12,9 +11,7 @@ const isAdmin = (req, res, next) => {
       },
     });
   }
-  // Call the next middleware
   return next();
 };
 
-// Export isAdmin
 export default isAdmin;

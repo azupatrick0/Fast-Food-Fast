@@ -194,7 +194,6 @@ class orders {
 
   // Get a specific order
   static specificOrder(req, res) {
-    // Request id
     const requestId = req.params.orderId;
 
     const query = {
@@ -270,5 +269,4 @@ class orders {
   }
 }
 
-// Export orders
 export default orders;

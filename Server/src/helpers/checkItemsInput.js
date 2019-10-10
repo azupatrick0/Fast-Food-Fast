@@ -5,16 +5,14 @@ const checkItemsInput = (req, res, next) => {
     price,
   } = req.body;
 
-  if (meal === '' || meal === null || meal === undefined) {
-    // Meal field empty
+  if (!meal) {
     return res.status(400).json({
       status: 'fail',
       data: {
         message: 'meal cannot be empty',
       },
     });
-  } else if (!(Number.isInteger(+price)) || price === '' || price === null || price === undefined) {
-    // Price field empty
+  } else if (!(Number.isInteger(+price)) || !price) {
     return res.status(400).json({
       status: 'fail',
       data: {
@@ -22,9 +20,7 @@ const checkItemsInput = (req, res, next) => {
       },
     });
   }
-  // Call the next middleware
   return next();
 };
 
-// Export checkItemsInput
 export default checkItemsInput;
