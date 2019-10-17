@@ -23,15 +23,15 @@ const GetHistory = (token, id) => (dispatch) => {
         });
       }
     }).catch((error) => {
-      if (error.response.status === 401) {
+      if (error.response && error.response.status === 401) {
         dispatch({
           type: GET_HISTORY_FAILED,
-          payload: 'Failed to authenticate user token'
+          payload: 'You are not logged in, please login'
         });
-      } else if (error.response.status === 404) {
+      } else if (error.response && error.response.status === 404) {
         dispatch({
           type: GET_HISTORY_FAILED,
-          payload: 'User have no history of ordered meals'
+          payload: 'You have no history of ordered meals yet, make an'
         });
       }
       else

@@ -24,6 +24,8 @@ Fast-Food-Fast is a food delivery service app for a restaurant.
   * Mocha/Chai
   * Eslint
   * Babel
+  * Testcafe
+  * Stripe
 ## App Link
 [Link](https://fast-food-fast.herokuapp.com/index.html)
 ## Documentation

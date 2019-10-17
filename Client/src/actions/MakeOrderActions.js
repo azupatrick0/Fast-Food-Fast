@@ -1,8 +1,5 @@
 import Axios from 'axios';
-import { toast } from 'react-toastify';
 import { START_LOADING, STOP_LOADING, ORDER_MEAL_SUCCESS, ORDER_MEAL_ERROR } from './actionTypes';
-
-toast.configure();
 
 const makeOrder = (cart, token, name, history) => (dispatch) => {
   cart.map(order => {
@@ -24,7 +21,6 @@ const makeOrder = (cart, token, name, history) => (dispatch) => {
           type: STOP_LOADING
         });
         if (response.data.status === 'success') {
-          toast.success('Order made successfully');
           setTimeout(() => history.push('/history'), 2000);
           dispatch({
             type: ORDER_MEAL_SUCCESS,
