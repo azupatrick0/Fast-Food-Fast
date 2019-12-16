@@ -7,9 +7,8 @@ import LandingPage from './landingPage';
 import SignupConnected, { Signup } from './signup';
 import SigninConnected, { Signin } from './signin';
 import Orders from './orders';
-import ordersView from './ordersView'
+import ordersView from './ordersView';
 import HistoryConnected, { History } from './history';
-import AdminConnected, { Admin } from './admin';
 import SimpleLoader from './SimpleLoader';
 
 export {
@@ -25,7 +24,5 @@ export {
     ordersView,
     History,
     HistoryConnected,
-    Admin,
-    AdminConnected,
     SimpleLoader
 };

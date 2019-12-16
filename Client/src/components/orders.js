@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import StripeCheckout from 'react-stripe-checkout';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import '../../public/styles/orderStyles.css';
 import { getMenu, makeOrder } from '../actions/index';
@@ -15,6 +15,8 @@ import Loader from './Loader';
 import Modal from '../components/Modal';
 import debitCard from '../../public/images/debit_card.png';
 import { NavBar } from '../components/index';
+
+toast.configure();
 
 export class Orders extends Component {
   state = {
@@ -41,6 +43,7 @@ export class Orders extends Component {
       props.statusOrder !== 'NOTLOADING' &&
       props.statusOrder !== state.statusOrder
     ) {
+      toast.success('Order made successfully');
       localStorage.removeItem('cart');
       return Object.assign({}, state, {
         statusOrder: 'SUCCESS',
@@ -67,21 +70,20 @@ export class Orders extends Component {
       getMenu(token);
       // Load cart in case a user closes browser that have items already in cart
       const itemsInCart = JSON.parse(localStorage.getItem('cart'));
-      const totalAmountInCart = JSON.parse(localStorage.getItem('amount'));
       const stateChanged =
         itemsInCart !== null &&
         new Promise((resolve) =>
           resolve(
             this.setState({
               cart: itemsInCart,
-              totalAmount: totalAmountInCart
             })
           )
         );
       itemsInCart !== null &&
         stateChanged.then(() => {
           this.setState({
-            clicked: true
+            clicked: true,
+            totalAmount: this.computeTotalAmount()
           });
         });
     }
@@ -136,7 +138,6 @@ export class Orders extends Component {
           });
           // store to localstorage
           localStorage.setItem('cart', JSON.stringify(this.state.cart));
-          localStorage.setItem('amount', JSON.stringify(this.state.totalAmount));
         });
       });
     } else {
@@ -146,31 +147,28 @@ export class Orders extends Component {
 
   changeAmount = (event, id) => {
     this.state.cart.filter((eachMealItem) => {
-      const previousQuantity = eachMealItem.quantity;
       if (eachMealItem.menuid === id) {
         eachMealItem.amount = event.target.value * this.getMealItem(id)[0].price;
         eachMealItem.quantity = event.target.value;
-        if (previousQuantity > event.target.value) {
-          // Update total amount then store to localstorage
-          new Promise((resolve) =>
-            resolve(this.setState({
-              totalAmount: this.state.totalAmount - this.getMealItem(id)[0].price
-            }))).then(() => localStorage.setItem('amount', JSON.stringify(this.state.totalAmount)));
-        } else {
-          // Update total amount then store to localstorage
-          new Promise((resolve) =>
-            resolve(this.setState({
-              totalAmount: this.state.totalAmount + this.getMealItem(id)[0].price
-            }))).then(() => localStorage.setItem('amount', JSON.stringify(this.state.totalAmount)));
-        }
       }
     });
     this.setState({
-      cart: this.state.cart
+      cart: this.state.cart,
+      totalAmount: this.computeTotalAmount()
     });
     // store to localstorage
     localStorage.setItem('cart', JSON.stringify(this.state.cart));
   }
+
+  computeTotalAmount = () => {
+    let total = 0;
+    const totalAmount = this.state.cart.map(eachMealItem => {
+      total += Number(eachMealItem.amount);
+      return total;
+    });
+    return totalAmount[totalAmount.length - 1];
+  }
+  
 
   deleteMeal = (id) => {
     const newCart = this.state.cart.filter((eachMealItem) => {
@@ -261,7 +259,6 @@ export class Orders extends Component {
 
     return (
       <Fragment>
-        <ToastContainer position={toast.POSITION.TOP_CENTER} />
         <Modal text={'Are you sure you want to pay on delivery'} visible={visible} that={this} />
         <Helmet>
           <title>Fast-Food-Fast | Order a meal</title>

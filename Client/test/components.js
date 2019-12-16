@@ -3,7 +3,9 @@ import { shallow, configure } from 'enzyme';
 import { expect } from 'chai';
 import Adapter from 'enzyme-adapter-react-16';
 import Routes from '../src/routes/index';
-import { Footer, NotFound, Signup, Signin, History, Admin} from '../src/components';
+import { Footer, NotFound, Signup, Signin } from '../src/components';
+// eslint-disable-next-line import/no-named-as-default
+import History from '../src/components/history';
 import { Orders } from '../src/components/orders';
 import { NavBar } from '../src/components/NavBar';
 import Modal from '../src/components/Modal';
@@ -27,16 +29,26 @@ const ordersProps = {
   orderResponse: 'order response',
   getMenu: () => {},
   mealData: [{
-    id: 1
+    id: 1,
+    price: 200
   },
   {
-    id: 2
+    id: 2,
+    price: 400
   }],
   makeOrder: () => {},
   isAuthenticated: true,
   history: {
     push: ''
   }
+}
+
+const historyProps = {
+  status: 'SUICCESS',
+  error: '',
+  history: [{meal: 'burger'}],
+  isAuthenticated: true,
+  GetHistory: () => {}
 }
 
 describe('Fast-Food-Fast Client Components Test Suite', () => {
@@ -158,7 +170,7 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
 
     describe('<History />', () => {
       it('renders connected History Component', () => {
-        const wrapper = shallow(<History act={()=> 'clicked me'}/>);
+        const wrapper = shallow(<History {...historyProps}/>);
         expect(wrapper.length).to.eql(1);   
       });
     });
@@ -174,12 +186,35 @@ describe('Fast-Food-Fast Client Components Test Suite', () => {
         const response = wrapper.instance().getMealItem(1);
         expect(response).to.eql([ordersProps.mealData[0]])
       });
-    });
 
-    describe('<Admin />', () => {
-      it('renders connected Admin Component', () => {
-        const wrapper = shallow(<Admin act={()=> 'clicked me'}/>);
-        expect(wrapper.length).to.eql(1);
+      it('should compute total amount', () => {
+        const wrapper = shallow(<Orders {...ordersProps}/>);
+        wrapper.setState({
+          cart: [
+            { meal: 'vegetables', amount: 200 },
+            { meal: 'burger', amount: 400 }
+          ]
+        });
+        const total = wrapper.instance().computeTotalAmount();
+        expect(total).to.eql(600)
+      });
+
+      it('should change total amount', () => {
+        const wrapper = shallow(<Orders {...ordersProps}/>);
+        wrapper.setState({
+          cart: [
+            { menuid: 1, meal: 'vegetables', amount: 200, quantity: 1 },
+            { menuid: 2, meal: 'burger', amount: 400, quantity: 1 }
+          ]
+        });
+        const event = {
+          target: {
+            value: 2
+          }
+        };
+        wrapper.instance().changeAmount(event, 1);
+        
+        expect(wrapper.instance().state.totalAmount).to.eql(800)
       });
     });
 

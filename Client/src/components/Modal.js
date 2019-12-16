@@ -9,10 +9,10 @@ const Modal = ({ text, visible, that }) => (
           <p>{text}</p>
           <br/>
           <div className="modal-orders__button-flex">
-            <button onClick={() => that.setState({
+            <button className="cancel-order" onClick={() => that.setState({
               visible: false
             })}>Cancel</button>
-            <button onClick={() => {
+            <button className="make-order" onClick={() => {
               that.setState({
                 payOnDelivery: true,
                 loading: false,
