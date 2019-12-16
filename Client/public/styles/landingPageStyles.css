@@ -1,0 +1,639 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+	color: red;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+a:hover {
+	color: rgba(243, 38, 38, 0.7);
+	cursor: pointer;
+}
+
+.blur-landing-page {
+  background-color: rgba(0, 255, 255, 0.45);
+  padding-bottom: 25%;
+	width: 100%;
+}
+
+body {
+	width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+body p {
+	color: white;
+	font-size: 40px;
+	font-family: cursive;
+}
+
+button {
+	background-color: rgb(230, 73, 73);
+	color: white;
+	border-radius: 5px;
+	width: 30%;
+	height: 45px;
+	margin: 0 auto;
+	outline: none;
+	font-size: 14px;
+	border: 0;
+	cursor: pointer;
+}
+
+button:active {
+	transform: translateY(3px);
+	border-radius: 5px;
+}
+
+button:hover {
+	opacity: 0.7;
+	border: 0;
+	color: white;
+}
+
+.centre {
+	text-align: center;
+	font-size: 40px;
+	font-family: 'Ubuntu Condensed', sans-serif;
+	color: red;
+}
+
+.grid__landing-page {
+	display: grid;
+	grid-template-columns: auto auto auto;
+}
+
+.grid-items__landing-page {
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+.grid-items__landing-page p {
+	font-size: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+footer {
+	text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	color: red;
+	background-color: white;
+	position: absolute;
+	left: 0;
+	height: 10vh;
+	width: 100%;
+	padding-top: 20px;
+}
+
+form {
+	margin-left: 10%;
+}
+
+.get-started {
+	background-color: rgb(230, 73, 73);
+	color: white;
+	border-radius: 5px;
+	width: 20%;
+	height: 45px;
+	margin: 0 auto;
+	outline: none;
+	font-size: 20px;
+	border: 0;
+}
+
+.hamburger {
+	display: none;
+	width: 8%;
+}
+
+.history {
+	font-size: 20px;
+	margin-left: 3%;
+	color: white;
+}
+
+.history:hover {
+	color: red;
+}
+
+img {
+	height: 80px;
+	width: 6em;
+}
+
+.login {
+	width: 10%;
+	font-size: 20px;
+	color: white;
+}
+
+.logo {
+	height: 25px;
+	width: 3%;
+}
+
+.middle {
+	margin-left: 41%;
+}
+
+.nav-bar {
+	font-size: 14px;
+	color: red;
+	background-color: transparent;
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 10vh;
+	width: 100%;
+	padding: 0.44em 0 1.25em 0.44em;
+	text-align: center;
+}
+
+.nav-bar button {
+	margin-left: 3%;
+}
+
+.order {
+	margin-left: 35%;
+	font-size: 20px;
+	color: white;
+}
+
+.order:hover {
+	color: red;
+}
+
+p {
+	font-size: 20px;
+}
+
+.show-break {
+	display: none;
+}
+
+.site-name {
+	font-size: 24px;
+}
+
+.slide0-landing-page {
+  background: url('../images/fast-food-fast-1.jpg') no-repeat 0 0.2px;
+	background-size: cover;
+  background-attachment: fixed;
+  /* padding-bottom: 25%; */
+  width: 100%;
+}
+
+.slide0-landing-page p {
+	font-family: 'Ubuntu Condensed', sans-serif;
+	padding: 16% 0 0 0;
+	margin: 0;
+	text-align: center;
+	font-size: 40px;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+}
+
+.slide1-landing-page {
+	background-color: white;
+	padding-bottom: 5%;
+	width: 100%;
+	margin: 0;
+}
+
+.slide1-landing-page p {
+	font-family: 'Ubuntu Condensed', sans-serif;
+	padding: 1% 0 0 0;
+	color: black;
+	margin: 0;
+}
+
+.slide1-landing-page .card {
+	font-size: 25px;
+	font-family: Arial, Helvetica, sans-serif;
+	color: gray;
+}
+
+.sub-description {
+	font-size: 26px;
+	color: white;
+}
+
+.sub-description2 {
+	color: rgb(209, 138, 5);
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.tab-modal {
+	display: none;
+}
+
+.text-small {
+	font-size: 17px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.up-arrow {
+	position: absolute;
+	right: 2em;
+	bottom: 0.1em;
+	font-size: 50px;
+	color: rgba(99, 87, 87, 0.7);
+}
+
+/* High resolution tablets */
+@media (max-width: 1024px) {
+	body {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+
+	.centre {
+		text-align: center;
+		font-size: 40px;
+		font-family: 'Ubuntu Condensed', sans-serif;
+		color: red;
+	}
+
+	.card {
+		margin: -0.2em 0 0 0.8%;
+	}
+
+	.card-btn {
+		width: 50%;
+	}
+
+	.hamburger {
+		display: inline;
+		position: absolute;
+		left: 84%;
+		padding: 0;
+		font-size: 30px;
+	}
+
+	.history,
+	.login,
+	.order {
+		display: none;
+	}
+
+	.img-big {
+		height: 350px;
+		width: 35em;
+		border-radius: 5px 5px 0 0;
+	}
+
+	.middle {
+		margin-left: 40%;
+	}
+
+	.nav-bar {
+		text-align: unset;
+	}
+
+	.show-break {
+		display: block;
+	}
+
+	.slide0-landing-page p {
+		font-size: 40px;
+		padding-top: 23%;
+	}
+
+	.slide1-landing-page p {
+		padding: 0 0 2.2em 0;
+		margin: 0;
+		width: 100%;
+	}
+
+	.slide1-landing-page .grid {
+		width: 100%;
+		margin: 0 auto;
+		padding: 0;
+	}
+
+	.slide1-landing-page .grid-items {
+		width: 33%;
+		text-align: center;
+	}
+
+	.slide1-landing-page .grid-items .card {
+		width: 100%;
+		font-size: 25px;
+		font-family: Arial, Helvetica, sans-serif;
+		background-color: white;
+		color: gray;
+		padding: 0.1em 0 0.2em 0.1em;
+	}
+
+	.slide1-landing-page .grid-items .text-small {
+		width: 100%;
+		height: 200px;
+		border-radius: 5px 5px 0 0;
+	}
+
+	.sub-description {
+		font-size: 21px;
+	}
+
+	.sub-description2 {
+		font-size: 23px;
+	}
+
+	.tab-modal {
+		background-color: rgba(93, 81, 134, 0.5);
+		position: fixed;
+		top: 4.5em;
+		right: 0;
+		height: 43vh;
+		width: 40%;
+	}
+
+	.tab-modal-link {
+		margin-top: 10%;
+		padding-top: 15px;
+		text-align: center;
+	}
+
+	.tab-modal-link a {
+		color: rgb(252, 227, 6);
+		font-size: 20px;
+		font-family: 'Ubuntu Condensed', sans-serif;
+	}
+
+	.tab-modal-link a:hover {
+		color: white;
+		padding: 0.2em;
+	}
+
+	.card {
+		width: 22.4em;
+	}
+}
+
+/*Low resolution Tablets*/
+@media (max-width: 768px) {
+	body {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+
+	.centre {
+		text-align: center;
+		font-size: 40px;
+		font-family: 'Ubuntu Condensed', sans-serif;
+		color: red;
+	}
+
+	.card-btn {
+		width: 40%;
+	}
+
+	.grid {
+		display: block;
+	}
+
+	.get-started {
+		width: 40%;
+	}
+
+	.hamburger {
+		display: inline;
+		position: absolute;
+		left: 84%;
+		padding: 0;
+		font-size: 30px;
+	}
+
+	.history,
+	.login,
+	.order {
+		display: none;
+	}
+
+	.logo {
+		width: 6%;
+	}
+
+	.middle {
+		margin-left: 32%;
+	}
+
+	.nav-bar {
+		text-align: unset;
+	}
+
+	.slide0-landing-page p {
+		padding: 30% 0 0 8%;
+		font-size: 33px;
+	}
+
+	.slide1-landing-page .grid {
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 3% 0 3%;
+	}
+
+	.slide1-landing-page .grid-items {
+		width: 97%;
+		text-align: center;
+	}
+
+	.slide1-landing-page .grid-items .card {
+		width: 100%;
+		font-size: 25px;
+		font-family: Arial, Helvetica, sans-serif;
+		background-color: white;
+		color: gray;
+		padding: 0.1em 0 0.2em 0.1em;
+	}
+
+	.slide1-landing-page .grid-items .text-small {
+		width: 100%;
+		height: 200px;
+		border-radius: 5px 5px 0 0;
+	}
+
+	.tab-modal {
+		background-color: rgba(93, 81, 134, 0.5);
+		position: fixed;
+		top: 4.5em;
+		right: 0;
+		height: 43vh;
+		width: 40%;
+	}
+
+	.tab-modal-link {
+		margin-top: 10%;
+		padding-top: 15px;
+		text-align: center;
+	}
+
+	.tab-modal-link a {
+		color: rgb(252, 227, 6);
+		font-size: 20px;
+		font-family: 'Ubuntu Condensed', sans-serif;
+	}
+
+	.tab-modal-link a:hover {
+		color: white;
+		padding: 0.2em;
+	}
+
+	.show-break {
+		display: block;
+	}
+
+	.sub-description {
+		font-size: 19px;
+	}
+
+	.sub-description2 {
+		font-size: 21px;
+	}
+
+	.up-arrow {
+		right: 1em;
+		bottom: 0;
+	}
+}
+/*SmartPhones*/
+@media (max-width: 480px) {
+	body {
+		width: 100%;
+		padding: 0;
+		margin: 0;
+	}
+
+	.card {
+		width: 15.1em;
+		margin: -0.2em 0 0 0.7%;
+	}
+
+	.card-btn {
+		width: 50%;
+	}
+
+	.centre {
+		text-align: center;
+		font-size: 40px;
+		font-family: 'Ubuntu Condensed', sans-serif;
+		color: red;
+	}
+
+	.grid__landing-page {
+		display: block;
+	}
+
+	.get-started {
+		width: 40%;
+	}
+
+	.hamburger {
+		display: inline;
+		position: absolute;
+		left: 84%;
+		padding: 0;
+		font-size: 25px;
+	}
+
+	.history,
+	.login,
+	.order {
+		display: none;
+	}
+
+	.logo {
+		width: 8%;
+	}
+
+	.middle {
+		margin-left: 32%;
+	}
+
+	.nav-bar {
+		text-align: unset;
+	}
+
+	.show-break {
+		display: block;
+	}
+
+	.slide0-landing-page p {
+		padding: 45% 0 0 0;
+		font-size: 25px;
+	}
+
+	.slide1-landing-page .grid {
+		width: 100%;
+		margin: 0 auto;
+		padding: 0 3% 0 3%;
+	}
+
+	.slide1-landing-page .grid-items {
+		width: 97%;
+		text-align: center;
+	}
+
+	.slide1-landing-page .grid-items .card {
+		width: 100%;
+		font-size: 25px;
+		font-family: Arial, Helvetica, sans-serif;
+		background-color: white;
+		color: gray;
+		padding: 0.1em 0 0.2em 0.1em;
+	}
+
+	.slide1-landing-page .grid-items .text-small {
+		width: 100%;
+		height: 200px;
+		border-radius: 5px 5px 0 0;
+	}
+
+	.sub-description {
+		font-size: 17px;
+	}
+
+	.sub-description2 {
+		font-size: 19px;
+	}
+
+	.tab-modal {
+		background-color: rgba(93, 81, 134, 0.5);
+		position: fixed;
+		top: 4.5em;
+		right: 0;
+		height: 43vh;
+		width: 40%;
+	}
+
+	.tab-modal-link {
+		margin-top: 10%;
+		padding-top: 15px;
+		text-align: center;
+	}
+
+	.tab-modal-link a {
+		color: rgb(252, 227, 6);
+		font-size: 20px;
+		font-family: 'Ubuntu Condensed', sans-serif;
+	}
+
+	.tab-modal-link a:hover {
+		color: white;
+		padding: 0.2em;
+	}
+
+	.up-arrow {
+		right: 0.5em;
+		bottom: 0;
+	}
+}

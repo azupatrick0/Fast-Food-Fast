@@ -1,0 +1,20 @@
+{ 
+    "extends": [
+        "airbnb-base",
+        "eslint:recommended",
+        "plugin:react/recommended"
+    ],
+    "env": {
+        "mocha": true,
+        "browser": true
+    },
+    "plugins": ["react"],
+    "parser": "babel-eslint",
+    "rules": {   
+        "react/jsx-uses-react": "error",   
+        "react/jsx-uses-vars": "error",
+        "no-console": "off",
+        "import/no-unresolved": "off",
+        "import/extensions": "off"
+   }
+}
