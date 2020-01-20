@@ -7,7 +7,6 @@ import LandingPage from './landingPage';
 import SignupConnected, { Signup } from './signup';
 import SigninConnected, { Signin } from './signin';
 import Orders from './orders';
-import ordersView from './ordersView';
 import HistoryConnected, { History } from './history';
 import SimpleLoader from './SimpleLoader';
 
@@ -21,7 +20,6 @@ export {
     Signin,
     SigninConnected,
     Orders,
-    ordersView,
     History,
     HistoryConnected,
     SimpleLoader
