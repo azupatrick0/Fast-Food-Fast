@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/azupatrick0/Fast-Food-Fast.svg?branch=develop)](https://travis-ci.org/azupatrick0/Fast-Food-Fast)
+## Build Status
+
+![CI](https://github.com/azupatrick0/fastfood-fast/actions/workflows/test.yml/badge.svg)
 [![Coverage Status](https://coveralls.io/repos/github/azupatrick0/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/azupatrick0/Fast-Food-Fast?branch=develop)
 # Fast-Food-Fast
 ## Description

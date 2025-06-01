@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 // Create orders table in the database
-db.query(sqlQuery, (err, result) => {
+db.query(sqlQuery, (err) => {
   if (err) {
     console.error('Error creating menu table:', err.message);
     return;

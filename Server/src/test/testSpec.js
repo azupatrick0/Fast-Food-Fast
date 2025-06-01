@@ -1,8 +1,10 @@
-import chai from 'chai';
+import chai, { expect } from 'chai';
 import chaiHttp from 'chai-http';
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import app from '../index';
+import checkInput from '../helpers/checkInput';
+import checkSignUpInput from '../helpers/checkSignUpInput';
 
 dotenv.config();
 chai.use(chaiHttp);
@@ -948,7 +950,7 @@ describe('Fast-Food-Fast Test Suite', () => {
 
   // ==== Docs ==== //
   describe(' GET /api/v1/docs', () => {
-    it('should return API documenetation on visit to /api/v1/docs', (done) => {
+    it('should return API documentation on visit to /api/v1/docs', (done) => {
       chai.request(app)
         .get('/api/v1/docs')
         .end((err, res) => {
@@ -1000,4 +1002,205 @@ describe('Fast-Food-Fast Test Suite', () => {
         });
     });
   });
+
+
+  describe('checkInput Middleware', () => {
+    let req, res, next;
+
+    beforeEach(() => {
+      req = { body: {} };
+      res = {
+        statusCode: null,
+        responseData: null,
+        status(code) {
+          this.statusCode = code;
+          return this;
+        },
+        json(data) {
+          this.responseData = data;
+        },
+      };
+      next = () => {
+        res.nextCalled = true;
+      };
+    });
+
+    it('should return 400 if menuid is missing (line 20)', () => {
+      req.body = { userid: '1', name: 'Burger', quantity: 2, amount: 1000, location: 'Lagos' };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('menu id cannot be empty');
+      expect(res.nextCalled).to.be.undefined;
+    });
+
+    it('should return 400 if userid is missing (line 27)', () => {
+      req.body = { menuid: '1', name: 'Burger', quantity: 2, amount: 1000, location: 'Lagos' };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('user id cannot be empty');
+      expect(res.nextCalled).to.be.undefined;
+    });
+
+    it('should return 400 if name is missing (line 34)', () => {
+      req.body = { menuid: '1', userid: '2', quantity: 2, amount: 1000, location: 'Lagos' };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('name cannot be empty');
+      expect(res.nextCalled).to.be.undefined;
+    });
+
+    it('should return 400 if quantity is missing (line 41)', () => {
+      req.body = { menuid: '1', userid: '2', name: 'Burger', amount: 1000, location: 'Lagos' };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('quantity cannot be empty');
+      expect(res.nextCalled).to.be.undefined;
+    });
+
+    it('should return 400 if amount is not an integer (line 48)', () => {
+      req.body = { menuid: '1', userid: '2', name: 'Burger', quantity: 1, amount: 'abc', location: 'Lagos' };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('amount must be an integer');
+      expect(res.nextCalled).to.be.undefined;
+    });
+
+    it('should call next() if all fields are valid', () => {
+      req.body = { menuid: '1', userid: '2', name: 'Burger', quantity: 1, amount: 1000, location: 'Lagos' };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.be.null;
+      expect(res.responseData).to.be.null;
+      expect(res.nextCalled).to.be.true;
+    });
+
+    it('should return 400 if location is missing or empty', () => {
+      req.body = {
+        menuid: '1',
+        userid: '2',
+        name: 'Burger',
+        quantity: 1,
+        amount: 100,
+        location: ''
+      };
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('location cannot be empty');
+      expect(res.nextCalled).to.be.undefined;
+
+      // Also test when location is undefined (missing)
+      res.statusCode = null;
+      res.responseData = null;
+      res.nextCalled = undefined;
+
+      delete req.body.location;
+
+      checkInput(req, res, next);
+
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('location cannot be empty');
+      expect(res.nextCalled).to.be.undefined;
+    });
+  });
+
+  describe('checkSignUpInput middleware', () => {
+    let req, res, next;
+
+    beforeEach(() => {
+      req = { body: {} };
+      res = {
+        statusCode: null,
+        responseData: null,
+        status(code) {
+          this.statusCode = code;
+          return this;
+        },
+        json(data) {
+          this.responseData = data;
+          return this;
+        },
+      };
+      next = () => {
+        next.called = true;
+      };
+      next.called = false;
+    });
+
+    it('should return 400 if name is missing or less than 3 chars (line 18)', () => {
+      req.body.name = '';
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('name cannot be less than 3 characters');
+      expect(next.called).to.be.false;
+
+      res.statusCode = null; res.responseData = null;
+      req.body.name = 'ab';  // length 2
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('name cannot be less than 3 characters');
+      expect(next.called).to.be.false;
+    });
+
+    it('should return 400 if email is missing (line 25)', () => {
+      req.body = { name: 'John', email: '' };
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('email cannot be empty');
+      expect(next.called).to.be.false;
+    });
+
+    it('should return 400 if password is missing or less than 6 chars (line 32)', () => {
+      req.body = { name: 'John', email: 'john@example.com', password: '' };
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('password cannot be less than 6 characters');
+      expect(next.called).to.be.false;
+
+      res.statusCode = null; res.responseData = null;
+      req.body.password = '12345'; // 5 chars
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('password cannot be less than 6 characters');
+      expect(next.called).to.be.false;
+    });
+
+    it('should return 400 if role is missing (line 40)', () => {
+      req.body = { name: 'John', email: 'john@example.com', password: '123456' };
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('role cannot be undefined');
+      expect(next.called).to.be.false;
+    });
+
+    it('should return 400 if role is invalid (line 44)', () => {
+      req.body = { name: 'John', email: 'john@example.com', password: '123456', role: 'manager' };
+      checkSignUpInput(req, res, next);
+      expect(res.statusCode).to.equal(400);
+      expect(res.responseData.data.message).to.equal('role can only be {admin or user}');
+      expect(next.called).to.be.false;
+    });
+
+    it('should call next() if all inputs are valid', () => {
+      req.body = { name: 'John', email: 'john@example.com', password: '123456', role: 'user' };
+      checkSignUpInput(req, res, next);
+      expect(next.called).to.be.true;
+    });
+  });
+
+
+
+
 });
