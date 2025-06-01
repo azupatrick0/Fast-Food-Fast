@@ -9,7 +9,7 @@ let connectionString;
 // Get environment
 if (process.env.NODE_ENV === 'test') {
   // Test Database connection string
-  connectionString = process.env.DATABASE_TEST;
+  connectionString = process.env.DATABASE_TEST_URL;
 } else if (process.env.NODE_ENV === 'development') {
   // Development Database connection string
   connectionString = process.env.DATABASE_DEVELOPMENT;
