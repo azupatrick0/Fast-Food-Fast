@@ -1024,7 +1024,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       };
     });
 
-    it('should return 400 if menuid is missing (line 20)', () => {
+    it('should return 400 if menuid is missing', () => {
       req.body = { userid: '1', name: 'Burger', quantity: 2, amount: 1000, location: 'Lagos' };
 
       checkInput(req, res, next);
@@ -1034,7 +1034,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(res.nextCalled).to.be.undefined;
     });
 
-    it('should return 400 if userid is missing (line 27)', () => {
+    it('should return 400 if userid is missing', () => {
       req.body = { menuid: '1', name: 'Burger', quantity: 2, amount: 1000, location: 'Lagos' };
 
       checkInput(req, res, next);
@@ -1044,7 +1044,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(res.nextCalled).to.be.undefined;
     });
 
-    it('should return 400 if name is missing (line 34)', () => {
+    it('should return 400 if name is missing', () => {
       req.body = { menuid: '1', userid: '2', quantity: 2, amount: 1000, location: 'Lagos' };
 
       checkInput(req, res, next);
@@ -1054,7 +1054,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(res.nextCalled).to.be.undefined;
     });
 
-    it('should return 400 if quantity is missing (line 41)', () => {
+    it('should return 400 if quantity is missing', () => {
       req.body = { menuid: '1', userid: '2', name: 'Burger', amount: 1000, location: 'Lagos' };
 
       checkInput(req, res, next);
@@ -1064,7 +1064,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(res.nextCalled).to.be.undefined;
     });
 
-    it('should return 400 if amount is not an integer (line 48)', () => {
+    it('should return 400 if amount is not an integer', () => {
       req.body = { menuid: '1', userid: '2', name: 'Burger', quantity: 1, amount: 'abc', location: 'Lagos' };
 
       checkInput(req, res, next);
@@ -1138,8 +1138,8 @@ describe('Fast-Food-Fast Test Suite', () => {
       next.called = false;
     });
 
-    it('should return 400 if name is missing or less than 3 chars (line 18)', () => {
-      req.body = { name: '', email: 'aaa@aaa.aaa', role: 'user' };
+    it('should return 400 if name is missing or less than 3 chars', () => {
+      req.body = { name: '', email: 'aaa@aaa.aaa', role: 'user', password: 'Password345@'};
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
       expect(res.responseData.data.message).to.equal('name cannot be less than 3 characters');
@@ -1153,15 +1153,15 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(next.called).to.be.false;
     });
 
-    it('should return 400 if email is missing (line 25)', () => {
-      req.body = { name: 'John', email: '' };
+    it('should return 400 if email is missing', () => {
+      req.body = { name: 'Ada', email: '', role: 'user', password: 'Password345@'};
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
       expect(res.responseData.data.message).to.equal('email cannot be empty');
       expect(next.called).to.be.false;
     });
 
-    it('should return 400 if password is missing or less than 6 chars (line 32)', () => {
+    it('should return 400 if password is missing or less than 6 chars', () => {
       req.body = { name: 'John', email: 'john@example.com', password: '', role: 'user' };
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
@@ -1176,7 +1176,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(next.called).to.be.false;
     });
 
-    it('should return 400 if role is missing (line 40)', () => {
+    it('should return 400 if role is missing', () => {
       req.body = { name: 'John', email: 'john@example.com', password: '123456' };
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
@@ -1184,7 +1184,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(next.called).to.be.false;
     });
 
-    it('should return 400 if role is invalid (line 44)', () => {
+    it('should return 400 if role is invalid', () => {
       req.body = { name: 'John', email: 'john@example.com', password: '123456', role: 'manager' };
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
@@ -1198,8 +1198,4 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(next.called).to.be.true;
     });
   });
-
-
-
-
 });
