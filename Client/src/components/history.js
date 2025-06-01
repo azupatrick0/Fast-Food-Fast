@@ -75,9 +75,7 @@ export const History = ({ status, error, history, isAuthenticated, GetHistory })
                       </td>
                     </tr>
                   )
-                  ) : <tr>
-                      <td>No History of ordered meals yet</td>
-                    </tr>
+                  ) : ''
                   }
                 </tbody>
               </table>

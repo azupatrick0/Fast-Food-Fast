@@ -7,7 +7,7 @@ const checkSignUpInput = (req, res, next) => {
     role,
   } = req.body;
 
-  if (!name || name < 3) {
+  if (!name || name.length < 3) {
     return res.status(400).json({
       status: 'fail',
       data: {
@@ -21,7 +21,7 @@ const checkSignUpInput = (req, res, next) => {
         message: 'email cannot be empty',
       },
     });
-  } else if (!password || password < 6) {
+  } else if (!password || password.length < 6) {
     return res.status(400).json({
       status: 'fail',
       data: {

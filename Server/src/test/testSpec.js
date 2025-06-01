@@ -1145,8 +1145,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(res.responseData.data.message).to.equal('name cannot be less than 3 characters');
       expect(next.called).to.be.false;
 
-      res.statusCode = null; res.responseData = null;
-      req.body.name = 'ab';  // length 2
+      req.body = { name: 'ab', email: 'aaa@aaa.aaa', role: 'user', password: 'Password345@'};
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
       expect(res.responseData.data.message).to.equal('name cannot be less than 3 characters');
@@ -1168,8 +1167,7 @@ describe('Fast-Food-Fast Test Suite', () => {
       expect(res.responseData.data.message).to.equal('password cannot be less than 6 characters');
       expect(next.called).to.be.false;
 
-      res.statusCode = null; res.responseData = null;
-      req.body.password = '12345'; // 5 chars
+      req.body = { name: 'John', email: 'john@example.com', password: '12345', role: 'user' };
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
       expect(res.responseData.data.message).to.equal('password cannot be less than 6 characters');
