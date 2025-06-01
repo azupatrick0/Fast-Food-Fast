@@ -6,7 +6,7 @@ const getMenu = (token) => (dispatch) => {
   dispatch({
     type: START_LOADING
   });
-  return Axios.get(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/menu?token=${token}`)
+  return Axios.get(`/api/v1/menu?token=${token}`)
     .then((response) => {
       dispatch({
         type: STOP_LOADING

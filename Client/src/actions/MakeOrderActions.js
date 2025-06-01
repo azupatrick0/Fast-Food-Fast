@@ -6,7 +6,7 @@ const makeOrder = (cart, token, name, history) => (dispatch) => {
     dispatch({
       type: START_LOADING
     });
-    return Axios.post(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/orders?token=${token}`, {
+    return Axios.post(`/api/v1/orders?token=${token}`, {
       menuid: order.menuid,
       meal: order.meal,
       imgurl: order.imgurl,

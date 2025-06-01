@@ -6,7 +6,7 @@ import {
 } from './actionTypes';
 
 const UpdateMenu = (itemId, role, token, meal, price, imgurl) => (dispatch) => {
-  return Axios.put(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/menu/${itemId}?role=${role}&token=${token}`, {
+  return Axios.put(`/api/v1/menu/${itemId}?role=${role}&token=${token}`, {
     meal,
     price,
     imgurl

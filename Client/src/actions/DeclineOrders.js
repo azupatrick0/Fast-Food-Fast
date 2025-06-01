@@ -11,7 +11,7 @@ const DeclineOrders = (role, token, val) => (dispatch) => {
   dispatch({
     type: START_LOADING
   });
-  return Axios.put(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/orders/${val}?role=${role}&&token=${token}`, {
+  return Axios.put(`/api/v1/orders/${val}?role=${role}&&token=${token}`, {
     status: 'cancelled',
   })
     .then((response) => {
