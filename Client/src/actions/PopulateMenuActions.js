@@ -6,7 +6,7 @@ import {
 } from './actionTypes';
 
 const PopulateMenu = (role, token, meal, price, imgurl) => (dispatch) => {
-  return Axios.post(`${process.env.BASE_URL_PROD}/api/v1/menu?role=${role}&token=${token}`, {
+  return Axios.post(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/menu?role=${role}&token=${token}`, {
     meal,
     price,
     imgurl

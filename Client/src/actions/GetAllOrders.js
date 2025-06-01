@@ -11,7 +11,7 @@ const GetAllOrders = (role, token) => (dispatch) => {
   dispatch({
     type: START_LOADING
   });
-  return Axios.get(`${process.env.BASE_URL_PROD}/api/v1/orders/?role=${role}&token=${token}`)
+  return Axios.get(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/orders/?role=${role}&token=${token}`)
     .then((response) => {
       dispatch({
         type: STOP_LOADING

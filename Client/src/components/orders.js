@@ -208,7 +208,7 @@ export class Orders extends Component {
     } else {
       // This is where we make a request to the API to process stripe payment
       // Token reresents information about a user's purchase
-      await Axios.post(`${process.env.BASE_URL_PROD}/api/v1/orders/checkout`, { token, totalAmount });
+      await Axios.post(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/orders/checkout`, { token, totalAmount });
       await this.orderAMeal();
     }
   }

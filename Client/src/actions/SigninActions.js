@@ -10,7 +10,7 @@ const SigninAUser = (userDetails) => (dispatch) => {
   dispatch({
     type: START_LOADING
   });
-  return Axios.post(`${process.env.BASE_URL_PROD}/api/v1/auth/login`, {
+  return Axios.post(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/auth/login`, {
     email: userDetails.email,
     password: userDetails.password,
   }).then((response) => {

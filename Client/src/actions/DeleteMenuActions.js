@@ -7,7 +7,7 @@ import {
 } from './actionTypes';
 
 const DeleteMenu = (itemId, role, token) => (dispatch) => {
-  return Axios.delete(`${process.env.BASE_URL_PROD}/api/v1/menu/items/${itemId}?role=${role}&token=${token}`)
+  return Axios.delete(`${process.env.REACT_APP_BASE_URL_PROD}/api/v1/menu/items/${itemId}?role=${role}&token=${token}`)
     .then((response) => {
       if (response.status === 200) {
         dispatch({

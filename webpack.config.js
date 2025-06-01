@@ -45,8 +45,8 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.BASE_URL_DEV': JSON.stringify(process.env.BASE_URL_DEV),
-      'process.env.BASE_URL_PROD': JSON.stringify(process.env.BASE_URL_PROD),
+      'process.env.BASE_URL_DEV': JSON.stringify(process.env.REACT_APP_BASE_URL_DEV),
+      'process.env.BASE_URL_PROD': JSON.stringify(process.env.REACT_APP_BASE_URL_PROD),
       'process.env.SECRET_KEY': JSON.stringify(process.env.SECRET_KEY),
       'process.env.LOGGED_OUT': JSON.stringify(process.env.LOGGED_OUT)
     }),
