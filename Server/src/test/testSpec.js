@@ -1003,7 +1003,6 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
   });
 
-
   describe('checkInput Middleware', () => {
     let req, res, next;
 
@@ -1140,7 +1139,7 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
 
     it('should return 400 if name is missing or less than 3 chars (line 18)', () => {
-      req.body.name = '';
+      req.body = { name: '', email: 'aaa@aaa.aaa', role: 'user' };
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
       expect(res.responseData.data.message).to.equal('name cannot be less than 3 characters');
@@ -1163,7 +1162,7 @@ describe('Fast-Food-Fast Test Suite', () => {
     });
 
     it('should return 400 if password is missing or less than 6 chars (line 32)', () => {
-      req.body = { name: 'John', email: 'john@example.com', password: '' };
+      req.body = { name: 'John', email: 'john@example.com', password: '', role: 'user' };
       checkSignUpInput(req, res, next);
       expect(res.statusCode).to.equal(400);
       expect(res.responseData.data.message).to.equal('password cannot be less than 6 characters');

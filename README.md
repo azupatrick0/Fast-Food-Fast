@@ -29,7 +29,7 @@ Fast-Food-Fast is a food delivery service app for a restaurant.
   * Testcafe
   * Stripe
 ## App Link
-[Link](https://fast-food-fast.herokuapp.com/index.html)
+[Link](https://web-production-de7cb.up.railway.app)
 ## Documentation
 [Link](https://fastfoodfast10.docs.apiary.io)
 
