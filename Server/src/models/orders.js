@@ -24,17 +24,13 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 // Create orders table in the database
-db.query(sqlQuery, (err, res) => {
+db.query(sqlQuery, (err, result) => {
   if (err) {
-    console.log(err);
-    return res.status(500).json({
-      status: 'fail',
-      error: {
-        message: 'An error occured while trying to create the orders table, please try again',
-      },
-    });
+    console.error('Error creating menu table:', err.message);
+    return;
   }
-  // Orders table created
+  // Menu table created
   console.log('Connection successful, orders table created');
+
   return true;
 });

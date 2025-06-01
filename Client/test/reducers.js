@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 import {
 	SignupReducer,
 	SigninReducer,

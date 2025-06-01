@@ -15,16 +15,13 @@ if (process.env.NODE_ENV === 'test') {
 }
 
 // Create users table in the database
-db.query(sqlQuery, (err, res) => {
+db.query(sqlQuery, (err, result) => {
   if (err) {
-    return res.status(500).json({
-      status: 'fail',
-      error: {
-        message: 'An error occured while trying to create the users table, please try again',
-      },
-    });
+    console.error('Error creating menu table:', err.message);
+    return;
   }
-  // Users table created
+  // Menu table created
   console.log('Connection successful, users table created');
+
   return true;
 });

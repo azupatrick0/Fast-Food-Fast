@@ -32,7 +32,7 @@ Fast-Food-Fast is a food delivery service app for a restaurant.
 [Link](https://fastfoodfast10.docs.apiary.io)
 
 ## Installation
- * Ensure you have node 8.x.x installed.
+ * Ensure you have node 18.x.x installed.
  
  * Install node modules with the command
  
@@ -44,7 +44,7 @@ Fast-Food-Fast is a food delivery service app for a restaurant.
    
  * Check API index with Postman
  
-   * http://localhost:3000/api/v1
+   * http://localhost:4004/api/v1
    
  * Run test with
  
