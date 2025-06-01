@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Fast-Food-Fast​ is a food delivery service app for a restaurant.",
   "scripts": {
-    "start": "npm run start:webpack:prod && npm run build && node ./Server/dist/index.js ",
+    "start": "npm run start:webpack:prod && npm-run-all --serial create-table-users-prod create-table-items-prod create-table-orders-prod npm run build && node ./Server/dist/index.js ",
     "start:dev": "cross-env NODE_ENV=development npm run start:webpack:dev & npm-run-all --serial create-table-users-dev create-table-items-dev create-table-orders-dev start-server",
     "start-server": "nodemon --exec babel-node ./Server/src/index.js",
     "start:webpack:dev": "webpack --mode development --watch",
@@ -22,7 +22,7 @@
     "create-table-users-test": "cross-env NODE_ENV=test babel-node ./Server/src/models/users.js",
     "create-table-items-test": "cross-env NODE_ENV=test babel-node ./Server/src/models/menu.js",
     "create-table-orders-test": "cross-env NODE_ENV=test babel-node ./Server/src/models/orders.js",
-     "create-table-users-prod": "cross-env NODE_ENV=production babel-node ./Server/src/models/users.js",
+    "create-table-users-prod": "cross-env NODE_ENV=production babel-node ./Server/src/models/users.js",
     "create-table-items-prod": "cross-env NODE_ENV=production babel-node ./Server/src/models/menu.js",
     "create-table-orders-prod": "cross-env NODE_ENV=production babel-node ./Server/src/models/orders.js"
   },
