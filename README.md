@@ -1,6 +1,6 @@
 ## Build Status
 
-![CI](https://github.com/azupatrick0/fastfood-fast/actions/workflows/test.yml/badge.svg)
+[![Tests Status](https://github.com/azupatrick0/Fast-Food-Fast/actions/workflows/test.yml/badge.svg)](https://github.com/azupatrick0/Fast-Food-Fast/actions/workflows/test.yml)
 [![Coverage Status](https://coveralls.io/repos/github/azupatrick0/Fast-Food-Fast/badge.svg?branch=develop)](https://coveralls.io/github/azupatrick0/Fast-Food-Fast?branch=develop)
 # Fast-Food-Fast
 ## Description
