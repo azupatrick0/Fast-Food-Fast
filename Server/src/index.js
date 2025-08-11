@@ -7,7 +7,7 @@ import { menu, orders, users, homePage, notFoundPage } from './routes/index';
 
 const app = express();
 
-const port = process.env.PORT || 4004;
+const port = process.env.PORT || 5980;
 
 // Middlewares
 app.use(bodyParser.json());
